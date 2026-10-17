@@ -7,7 +7,7 @@
 - [x] 1.3 Add the `kinovea` binary crate with `--version` output taken from `Cargo.toml` and an integration test in `rust/kinovea/tests/cli.rs` that spawns the binary and checks exit 0 and the version string; verify the test passes.
 - [x] 1.4 Write `kinovea-fixtures` with `fixtures_root()`, `Manifest` (commit, ffmpeg_version, case_sha256) parsed from `manifest.json`, `approx_eq(a, b, tol)`; write failing tests first for manifest parsing and for a missing-fixture error message naming the path, then implement; verify `cargo test -p kinovea-fixtures` passes.
 - [x] 1.5 Add `rust/justfile` (or `Makefile`) target `verify` running `cargo fmt --all --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace`; verify `just verify` exits 0 on the clean tree and exits non-zero after injecting an unused variable in a scratch test.
-- [ ] 1.6 Commit `rust/Cargo.lock` and add `rust/target/` to `.gitignore`; verify `git status` shows no build output.
+- [x] 1.6 Commit `rust/Cargo.lock` and add `rust/target/` to `.gitignore`; verify `git status` shows no build output.
 
 ## 2. Continuous integration and quality gates
 
@@ -28,7 +28,7 @@
 - [x] 4.3 Implement area `kva`: load each of `Tools/XML/Schema/samples/*.kva` through `MetadataSerializer`, re-serialize, and write `roundtrip.kva`; add three cases; verify fixtures exist for `minimal`, `simple`, `complete` and the round trip is deterministic.
 - [x] 4.4 Implement area `kinematics`: link `Kinovea.Tests/Kinematics/*.cs` via `<Compile Include>` to synthesize trajectories with given seed, run `LinearKinematics` and `AngularKinematics` with Butterworth filtering, write `series.csv` with `R` formatting; add two cases (linear, circular); verify output columns are documented in `tests/cases/kinematics/README.md` and the run is deterministic.
 - [x] 4.5 Implement area `timecode`: format a fixed list of timestamps with every `TimecodeFormat` and frame rates 25, 29.97, 60, write `timecodes.csv`; verify the fixture matches the expectations encoded in `Kinovea.Tests/Time/TimecodeFormatTest.cs`.
-- [ ] 4.6 Confirm the Windows CI build still passes with the new project and that `Installer/kinovea.nsi` and the portable archive exclude `Kinovea.FixtureGen.exe`; verify by reading the NSIS file list and the workflow run artifacts.
+- [x] 4.6 Confirm the Windows CI build still passes with the new project and that `Installer/kinovea.nsi` and the portable archive exclude `Kinovea.FixtureGen.exe`; verify by reading the NSIS file list and the workflow run artifacts.
 
 ## 5. Linux driver and documentation
 
