@@ -1,0 +1,152 @@
+{
+  "name": "kinovea-harness",
+  "private": true,
+  "description": "Agent harness tooling for Kinovea (linters only; the app itself is a .NET solution)",
+  "scripts": {
+    "lint:lines": "linelens check --fail",
+    "lint:dupes": "dupelens check --fail",
+    "lint:secrets": "secretlens check --fail",
+    "lint:tests": "testlens check --fail",
+    "lint": "npm run lint:lines && npm run lint:dupes && npm run lint:secrets && npm run lint:tests"
+  },
+  "devDependencies": {
+    "@open_harness/open-harness": "^0.3.7"
+  },
+  "linelens": {
+    "default": {
+      "maxLines": 150
+    },
+    "rules": [
+      {
+        "pattern": "**/*.Designer.cs",
+        "skip": true
+      }
+    ],
+    "exclude": [
+      "node_modules",
+      ".git",
+      "Refs",
+      "packages",
+      "bin",
+      "obj",
+      "openspec",
+      ".agents",
+      ".claude",
+      ".hermes",
+      ".agent",
+      "Installer",
+      "Tools",
+      "VideoTests",
+      "**/Languages/**",
+      "**/*.resx",
+      "**/*.Designer.cs",
+      "**/*.resources",
+      "rust/target",
+      "tests/fixtures"
+    ]
+  },
+  "dupelens": {
+    "default": {
+      "minTokens": 50,
+      "minLines": 5
+    },
+    "rules": [
+      {
+        "pattern": "**/*.Designer.cs",
+        "skip": true
+      }
+    ],
+    "exclude": [
+      "node_modules",
+      ".git",
+      "Refs",
+      "packages",
+      "bin",
+      "obj",
+      "openspec",
+      ".agents",
+      ".claude",
+      ".hermes",
+      ".agent",
+      "Installer",
+      "Tools",
+      "VideoTests",
+      "**/Languages/**",
+      "**/*.resx",
+      "**/*.Designer.cs",
+      "**/*.resources",
+      "rust/target",
+      "tests/fixtures"
+    ]
+  },
+  "secretlens": {
+    "allowlist": [
+      "example",
+      "placeholder",
+      "changeme"
+    ],
+    "exclude": [
+      "node_modules",
+      ".git",
+      "Refs",
+      "packages",
+      "bin",
+      "obj",
+      "openspec",
+      ".agents",
+      ".claude",
+      ".hermes",
+      ".agent",
+      "Installer",
+      "Tools",
+      "VideoTests",
+      "**/Languages/**",
+      "**/*.resx",
+      "**/*.Designer.cs",
+      "**/*.resources",
+      "*.lock",
+      "*.pfx",
+      "*.snk",
+      "*.png",
+      "*.ico",
+      "**/*.csproj",
+      "**/app.config",
+      "**/packages.config",
+      "rust/target",
+      "tests/fixtures"
+    ]
+  },
+  "testlens": {
+    "language": "rust",
+    "exclude": [
+      "node_modules",
+      ".git",
+      "Refs",
+      "packages",
+      "bin",
+      "obj",
+      "openspec",
+      ".agents",
+      ".claude",
+      ".hermes",
+      ".agent",
+      "Installer",
+      "Tools",
+      "VideoTests",
+      "**/Languages/**",
+      "**/*.resx",
+      "**/*.Designer.cs",
+      "**/*.resources",
+      "Kinovea.Tests",
+      "rust/target",
+      "tests/fixtures"
+    ],
+    "notest": [
+      "**/*.Designer.cs",
+      "**/AssemblyInfo.cs",
+      "**/Program.cs",
+      "**/Resources.cs",
+      "**/Settings.cs"
+    ]
+  }
+}

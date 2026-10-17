@@ -387,3 +387,6 @@ Installer/build-*.txt
 /signing-input/
 /Kinovea-Signing.zip
 /signing-output/
+
+# Rust workspace build output
+rust/target/

@@ -1,0 +1,12 @@
+# Local quality gates for agents (run before commit, not in CI).
+pre-commit:
+  parallel: true
+  commands:
+    linelens:
+      run: npx linelens check --fail --no-color
+    dupelens:
+      run: npx dupelens check --fail --no-color
+    secretlens:
+      run: npx secretlens check --fail --no-color
+    testlens:
+      run: npx testlens check --fail --no-color
