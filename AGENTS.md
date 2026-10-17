@@ -10,7 +10,7 @@ Deeper reading: `architecture.md` (assemblies and how they fit), `localization.m
 .agent/init.sh          # idempotent: checks tools, installs linters, runs quick checks
 ```
 
-The app itself cannot be built on Linux/macOS. Only the harness (linters, OpenSpec) runs here.
+The C# app cannot be built on Linux. The Rust port (`rust/`), the harness and the oracle driver run here.
 
 ## Critical commands
 
@@ -20,12 +20,14 @@ The app itself cannot be built on Linux/macOS. Only the harness (linters, OpenSp
 | Native deps | `./Refs/get-dependencies.ps1` | downloads FFmpeg 8.1.2 into `Refs/FFmpeg` |
 | Build | `msbuild Kinovea.VS2019.sln /p:Platform=x64 /p:Configuration=Release` | same as CI |
 | Installer | `makensis Installer\Kinovea.nsi` | NSIS 3.11, after a Release build |
-| Tests | none automated | see "Tests" below |
+| Rust verify | `cd rust && make verify` | fmt + clippy (deny warnings) + `cargo test --workspace` |
+| Fixtures | `tools/oracle/fixtures.sh [--verify]` | builds the C# oracle on the `windows` ssh host, pulls `tests/fixtures/` |
+| Tests (C#) | none automated | see "Tests" below |
 | Lint (all) | `npm run lint` | runs the four open-harness checks with `--fail` |
 | Lint (one) | `npx linelens check` / `dupelens` / `secretlens` / `testlens` | report only |
 | Type check | n/a | compilation is the type check; run in CI |
 
-CI: `.github/workflows/build.yml` builds on `windows-latest` for every push/PR to `master`.
+CI: `.github/workflows/build.yml` builds the C# solution on `windows-latest`; `rust.yml` runs the Rust verify on `ubuntu-latest`. Both on every push/PR to `master`.
 `VERSION` lives in both workflow files (currently `2026.1.0`).
 
 ## Tech stack (verified from project files)
@@ -34,6 +36,7 @@ CI: `.github/workflows/build.yml` builds on `windows-latest` for every push/PR t
 - One C++/CLI project: `Kinovea.Video.FFMpeg/PlayerServer` (FFmpeg 8.1.2 bindings, also handles saving).
 - Key NuGet: log4net 2.0.14, OpenCvSharp4 4.10.0, MathNet.Numerics 5.0.0, Newtonsoft.Json 13.0.3,
   OxyPlot 1.0.0, SharpVectors 1.8.5, DocumentFormat.OpenXml 3.0.2, NAudio 2.2.1, ObjectListView 2.9.1.
+- Rust port: stable 1.93.1 pinned in `rust/rust-toolchain.toml`, Cargo workspace of 11 crates (see `rust/Cargo.toml`). Target: Linux only.
 - Harness: Node 22 (linters only, `package.json` is not an app manifest), OpenSpec CLI, Lefthook.
 
 ## Structure
@@ -46,6 +49,8 @@ CI: `.github/workflows/build.yml` builds on `windows-latest` for every push/PR t
 - `Kinovea.Camera*/` — camera managers; machine-vision ones (Basler, Baumer, Daheng, IDS, GenICam) are discovered dynamically.
 - `Kinovea.Tests/` — manual test console (not in the `.sln`). `VideoTests/` — legacy, .NET 2.0, not in the `.sln`.
 - `Refs/` — vendored native SDKs. `Installer/` — NSIS + signing scripts. `Tools/` — XSLT, drawing tools, helpers.
+- `rust/` — Cargo workspace: `kinovea-{core,geometry,kinematics,measurement,metadata,render,video,tracking,export,fixtures}` + `kinovea` bin. Tests live next to sources as `src/<file>_test.rs` (what `testlens` recognizes).
+- `Kinovea.FixtureGen/` — C# console that generates parity fixtures. `tests/cases/` inputs, `tests/fixtures/` generated outputs (see `tests/README.md`). `tools/oracle/` — provision/build/pull scripts for the Windows host.
 - `openspec/` — spec-driven changes. `.agent/` — this harness (init, progress log, features).
 
 ## Code style
@@ -60,7 +65,8 @@ CI: `.github/workflows/build.yml` builds on `windows-latest` for every push/PR t
 
 - `Kinovea.Tests/Program.cs` toggles test routines by (un)commenting calls. No test framework, no CI test step.
 - Adding automated tests is a decision for the human (TODO). Until then, verify changes by building in CI and by manual runs on Windows.
-- `testlens` is configured for C# (`testlens.json`, which takes precedence over the `package.json` key) and reports ~745 untested sources. Treat it as information, not a gate to satisfy blindly.
+- Rust: TDD. Write the failing test first (`src/<file>_test.rs`, or `tests/<name>_test.rs` for integration), then the code. Parity tests read `tests/fixtures/` through `kinovea-fixtures`.
+- `testlens` is configured for Rust (`testlens.json`, which takes precedence over the `package.json` key). The C# baseline (~745 untested sources) is frozen in `.agent/progress.md`.
 
 ## Operating rules
 
@@ -68,7 +74,8 @@ CI: `.github/workflows/build.yml` builds on `windows-latest` for every push/PR t
 2. Use OpenSpec for any feature or non-trivial change: `/opsx:propose` → `/opsx:apply` → `/opsx:archive`. Change names: kebab-case with `add-`/`update-`/`remove-`/`refactor-`/`fix-` prefix.
 3. Keep diffs scoped to the task. Do not restyle, reformat, or "clean up" unrelated code: many files exceed 150 lines and dupelens flags legacy duplication; that is pre-existing.
 4. Commits: atomic, `feat:` / `fix:` / `refactor:` prefix, no `Co-Authored-By` trailer. Commit only when the human asks.
-5. You cannot compile here. State clearly what was and was not verified; push and let CI build when the human approves.
+5. The C# side cannot compile here: use `tools/oracle/fixtures.sh` (builds on the Windows host) or CI. State clearly what was and was not verified.
+6. Never hand-edit `tests/fixtures/`; change a case or `Kinovea.FixtureGen` and regenerate. Fixtures must all come from one commit (a Rust test enforces it).
 
 ## Quality gates (lefthook pre-commit, parallel)
 
@@ -79,7 +86,7 @@ Baseline findings are recorded in `.agent/progress.md`; the gates currently fail
 ## Boundaries
 
 - **Always**: keep `.gitignore` honoured (`bin/`, `obj/`, `packages/`, `node_modules/`), keep English `.resx` in sync when adding UI strings, update `architecture.md` when adding an assembly.
-- **Ask first**: new NuGet/native dependencies, changes to `Kinovea.targets`, `.github/workflows/*`, `Installer/`, `Refs/`, version bumps, anything in `Kinovea.Video.FFMpeg` (C++/CLI).
+- **Ask first**: new crates or NuGet/native dependencies, changes to `Kinovea.targets`, `.github/workflows/*`, `Installer/`, `Refs/`, version bumps, anything in `Kinovea.Video.FFMpeg` (C++/CLI).
 - **Never**: commit secrets or signing keys (`*.pfx`), edit translated `.resx`, edit `openspec/changes/archive/`, run `git push --force`.
 
 ## Recurring errors
