@@ -72,6 +72,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinovea.Camera.Baumer", "Ki
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinovea.Camera.GenICam", "Kinovea.Camera.GenICam\Kinovea.Camera.GenICam.csproj", "{8EB42BF8-6F1F-45D9-A993-4CD9B5168D10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinovea.FixtureGen", "Kinovea.FixtureGen\Kinovea.FixtureGen.csproj", "{A3C7E1D2-5F4B-4E8A-9C21-7B6D0E3F1A55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -197,6 +199,12 @@ Global
 		{8EB42BF8-6F1F-45D9-A993-4CD9B5168D10}.Debug|x64.Build.0 = Debug|x64
 		{8EB42BF8-6F1F-45D9-A993-4CD9B5168D10}.DebugExternals|x64.ActiveCfg = Debug|x64
 		{8EB42BF8-6F1F-45D9-A993-4CD9B5168D10}.Release|x64.ActiveCfg = Release|x64
+		{A3C7E1D2-5F4B-4E8A-9C21-7B6D0E3F1A55}.Debug|x64.ActiveCfg = Debug|x64
+		{A3C7E1D2-5F4B-4E8A-9C21-7B6D0E3F1A55}.Debug|x64.Build.0 = Debug|x64
+		{A3C7E1D2-5F4B-4E8A-9C21-7B6D0E3F1A55}.DebugExternals|x64.ActiveCfg = Debug|x64
+		{A3C7E1D2-5F4B-4E8A-9C21-7B6D0E3F1A55}.DebugExternals|x64.Build.0 = Debug|x64
+		{A3C7E1D2-5F4B-4E8A-9C21-7B6D0E3F1A55}.Release|x64.ActiveCfg = Release|x64
+		{A3C7E1D2-5F4B-4E8A-9C21-7B6D0E3F1A55}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

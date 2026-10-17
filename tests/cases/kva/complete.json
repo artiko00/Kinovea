@@ -1,0 +1,5 @@
+{
+  "area": "kva",
+  "seed": 0,
+  "inputs": { "kva": "Tools/XML/Schema/samples/complete.kva" }
+}

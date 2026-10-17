@@ -1,0 +1,5 @@
+{
+  "area": "kinematics",
+  "seed": 7,
+  "inputs": { "kind": "circular", "fps": 60, "frames": 180, "imageWidth": 1280, "imageHeight": 720, "radius": 200, "angularSpeed": 1.5, "noise": 0.3 }
+}

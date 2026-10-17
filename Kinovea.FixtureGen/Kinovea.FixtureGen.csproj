@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProjectGuid>{A3C7E1D2-5F4B-4E8A-9C21-7B6D0E3F1A55}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kinovea.FixtureGen</RootNamespace>
+    <AssemblyName>Kinovea.FixtureGen</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.14\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Areas\IFixtureArea.cs" />
+    <Compile Include="Areas\KinematicsArea.cs" />
+    <Compile Include="Areas\KvaArea.cs" />
+    <Compile Include="Areas\TimecodeArea.cs" />
+    <Compile Include="FixtureCase.cs" />
+    <Compile Include="Oracle.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\Kinovea.Tests\Kinematics\KinematicsTestData.cs">
+      <Link>Linked\KinematicsTestData.cs</Link>
+    </Compile>
+    <Compile Include="..\Kinovea.Tests\Kinematics\MovingObject.cs">
+      <Link>Linked\MovingObject.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kinovea.ScreenManager\Kinovea.ScreenManager.csproj">
+      <Project>{25C4B2FB-CA90-4E2E-8046-106FCF36CB81}</Project>
+      <Name>Kinovea.ScreenManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kinovea.Services\Kinovea.Services.csproj">
+      <Project>{8AA92254-A016-4A84-925C-F5B07E02F8A8}</Project>
+      <Name>Kinovea.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kinovea.Video.FFMpeg\PlayerServer\PlayerServer.vcxproj">
+      <Project>{F80DBE6D-D394-4811-B5E6-7528F849C71A}</Project>
+      <Name>Kinovea.Video.FFMpeg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kinovea.Video\Kinovea.Video.csproj">
+      <Project>{4CBB8462-00A7-4814-AD3B-07C82EEEB0DE}</Project>
+      <Name>Kinovea.Video</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- Runtime payload: same native dependencies and data folders as Kinovea.exe (see ..\Kinovea.targets),
+       plus an empty AppData folder so Software.Initialize uses portable, isolated settings. -->
+  <ItemGroup>
+    <OracleNative Include="..\Refs\FFmpeg\ffmpeg-8.1.2-full_build-shared\bin\*.dll" />
+    <OracleNative Include="..\Refs\Microsoft\$(Platform)\*" />
+    <OracleNative Include="..\Refs\TurboJpeg\$(Platform)\turbojpeg.dll" />
+    <OracleNative Include="..\packages\OpenCvSharp4.runtime.win.4.10.0.20240616\runtimes\win-x64\native\OpenCvSharpExtern.dll" />
+    <OracleXslt Include="..\Tools\XML\Kva to Kva\*.xsl;..\Tools\XML\Preferences\*.xsl" />
+    <OracleTools Include="..\Tools\DrawingTools\**\*.xml" />
+  </ItemGroup>
+  <Target Name="CopyOraclePayload" AfterTargets="Build">
+    <Copy SourceFiles="@(OracleNative)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(OracleXslt)" DestinationFolder="$(TargetDir)xslt" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(OracleTools)" DestinationFolder="$(TargetDir)DrawingTools\%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <MakeDir Directories="$(TargetDir)AppData" />
+  </Target>
+</Project>
