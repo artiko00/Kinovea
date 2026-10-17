@@ -1,0 +1,16 @@
+[package]
+name = "kinovea"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "kinovea"
+path = "src/main.rs"
+
+[dependencies]
+
+[lints]
+workspace = true
