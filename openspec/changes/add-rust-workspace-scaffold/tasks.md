@@ -11,7 +11,7 @@
 
 ## 2. Continuous integration and quality gates
 
-- [ ] 2.1 Add `.github/workflows/rust.yml` on `ubuntu-latest` with `dtolnay/rust-toolchain@stable` reading `rust/rust-toolchain.toml`, `Swatinem/rust-cache`, and the three verify commands with `working-directory: rust`; verify with `act` locally or by pushing a branch and observing the job pass.
+- [x] 2.1 Add `.github/workflows/rust.yml` on `ubuntu-latest` with `dtolnay/rust-toolchain@stable` reading `rust/rust-toolchain.toml`, `Swatinem/rust-cache`, and the three verify commands with `working-directory: rust`; verify with `act` locally or by pushing a branch and observing the job pass.
 - [x] 2.2 Switch `testlens.json` language to `rust`, add `rust/target` and `tests/fixtures` to the exclude lists of the four linters in `package.json` and `testlens.json`; verify `npx testlens check` reports no Rust file (all have tests) and `npx linelens check` scans no file under `rust/target`.
 - [x] 2.3 Add a test in `kinovea-fixtures` that asserts every `tests/fixtures/**/manifest.json` shares the same `commit`; verify it passes with zero fixtures and fails when two manifests with different commits are placed in a temp dir.
 
@@ -38,7 +38,7 @@
 
 ## 6. Integration check
 
-- [ ] 6.1 From a fresh clone on Linux run `cd rust && just verify` and `tools/oracle/fixtures.sh --verify`; verify both exit 0 and `git status` is clean afterwards.
+- [x] 6.1 From a fresh clone on Linux run `cd rust && just verify` and `tools/oracle/fixtures.sh --verify`; verify both exit 0 and `git status` is clean afterwards.
 
 ## Workflow follow-up
 

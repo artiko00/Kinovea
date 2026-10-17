@@ -44,5 +44,6 @@ Chronological. Newest entry last. Never delete entries; correct a wrong decision
   - Windows checkout had CRLF `tests/cases/*.json`, breaking the sha256 contract. Fixed with `.gitattributes` (LF for cases, `-text` for fixtures) and LF-normalized hashing in FixtureGen.
   - Pre-commit lefthook gates fail on the legacy C# baseline; commits in this change were made with `LEFTHOOK=0`. Decision still pending (see previous entry).
   - `Kinovea.Tests` is not in the .sln; FixtureGen links `KinematicsTestData.cs` and `MovingObject.cs` from it.
-- Pending: see tasks.md of the change for CI run (needs push) and fresh-clone check.
+- secretlens: the 4 baseline hits were variable references (`.Password`, `tbPassword.Text`, `localizationToken`); allowlisted in `package.json` so `npm run lint:secrets` is green. linelens/dupelens baseline unchanged.
+- Verified: `rust.yml` green on PR #1; fresh clone `make verify` + `fixtures.sh --verify` green; `git status` clean.
 - Next: `add-core-types-and-units`, starting with `tests/fixtures/timecode/formats/*.csv` as red tests.

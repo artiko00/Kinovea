@@ -83,7 +83,10 @@
     "allowlist": [
       "example",
       "placeholder",
-      "changeme"
+      "changeme",
+      ".Password",
+      "tbPassword.Text",
+      "localizationToken"
     ],
     "exclude": [
       "node_modules",
