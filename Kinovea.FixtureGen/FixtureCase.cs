@@ -33,8 +33,11 @@ namespace Kinovea.FixtureGen
 
         private static FixtureCase Load(string file)
         {
-            byte[] bytes = File.ReadAllBytes(file);
-            JObject root = JObject.Parse(System.Text.Encoding.UTF8.GetString(bytes));
+            // Normalize line endings so the checksum matches the LF file in the repository
+            // regardless of the host's git autocrlf setting.
+            string text = File.ReadAllText(file, System.Text.Encoding.UTF8).Replace("\r\n", "\n");
+            byte[] bytes = new System.Text.UTF8Encoding(false).GetBytes(text);
+            JObject root = JObject.Parse(text);
             return new FixtureCase
             {
                 Area = (string)root["area"] ?? "",

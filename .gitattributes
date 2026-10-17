@@ -1,0 +1,4 @@
+# Parity oracle: cases are hashed by the generator and fixtures are compared byte for byte.
+tests/cases/** text eol=lf
+tests/fixtures/** -text
+tools/oracle/*.sh text eol=lf
