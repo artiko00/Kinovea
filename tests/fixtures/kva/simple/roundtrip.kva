@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+  <FormatVersion>2.1</FormatVersion>
+  <Producer>Kinovea.0.0</Producer>
+  <OriginalFilename />
+  <FullPath />
+  <ByteLength>0</ByteLength>
+  <ImageSize>512;384</ImageSize>
+  <Aspect>Auto</Aspect>
+  <Rotation>Rotate0</Rotation>
+  <Mirror>false</Mirror>
+  <Demosaicing>None</Demosaicing>
+  <Deinterlacing>false</Deinterlacing>
+  <StabilizationTrack>00000000-0000-0000-0000-000000000000</StabilizationTrack>
+  <BackgroundColor>0;255;255;255</BackgroundColor>
+  <AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+  <CaptureFramerate>25</CaptureFramerate>
+  <VideoFramerate>25</VideoFramerate>
+  <FirstTimeStamp>0</FirstTimeStamp>
+  <SelectionStart>0</SelectionStart>
+  <SelectionEnd>0</SelectionEnd>
+  <TimeOrigin>0</TimeOrigin>
+  <Calibration>
+    <CalibrationLine>
+      <Length>100</Length>
+      <Segment>
+        <A>256;192</A>
+        <B>356;192</B>
+      </Segment>
+      <Origin>0;100</Origin>
+      <Offset>0;0</Offset>
+      <Axis>LineHorizontal</Axis>
+    </CalibrationLine>
+    <CalibrationDrawingId>00000000-0000-0000-0000-000000000000</CalibrationDrawingId>
+    <Unit Abbreviation="px">Pixels</Unit>
+  </Calibration>
+  <Keyframes>
+    <Keyframe id="00000000-0000-4000-8000-000000000001">
+      <Timestamp>0</Timestamp>
+      <Name>0:00:00:00</Name>
+      <Color>51;152;255</Color>
+      <Drawings>
+        <Angle id="00000000-0000-4000-8000-000000000002" name="Angle 1">
+          <PointO>0;0</PointO>
+          <PointA>0;0</PointA>
+          <PointB>0;0</PointB>
+          <ReferenceTimestamp>0</ReferenceTimestamp>
+          <Signed>true</Signed>
+          <CCW>true</CCW>
+          <Supplementary>false</Supplementary>
+          <ShowCircle>false</ShowCircle>
+          <DrawingStyle>
+            <Color Key="line color">
+              <Value>255;255;0;0</Value>
+            </Color>
+            <FontSize Key="font size">
+              <Value>12</Value>
+            </FontSize>
+            <Int Key="DecimalPlaces">
+              <Value>0</Value>
+            </Int>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </Angle>
+      </Drawings>
+    </Keyframe>
+  </Keyframes>
+  <CoordinateSystem id="00000000-0000-4000-8000-000000000003" name="">
+    <Position>0;0</Position>
+    <ReferenceTimestamp>-1</ReferenceTimestamp>
+    <Visible>false</Visible>
+    <ShowGrid>true</ShowGrid>
+    <ShowGraduations>true</ShowGraduations>
+    <DrawingStyle>
+      <Color Key="line color">
+        <Value>255;255;0;0</Value>
+      </Color>
+    </DrawingStyle>
+  </CoordinateSystem>
+  <TestGrid id="00000000-0000-4000-8000-000000000004" name="">
+    <Visible>false</Visible>
+    <ShowHorizontalAxis>true</ShowHorizontalAxis>
+    <ShowVerticalAxis>true</ShowVerticalAxis>
+    <ShowFraming>true</ShowFraming>
+    <ShowThirds>false</ShowThirds>
+    <DrawingStyle>
+      <Color Key="color">
+        <Value>255;255;0;0</Value>
+      </Color>
+    </DrawingStyle>
+  </TestGrid>
+  <Trackability />
+  <VideoFilters />
+</KinoveaVideoAnalysis>

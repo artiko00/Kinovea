@@ -29,3 +29,20 @@ Chronological. Newest entry last. Never delete entries; correct a wrong decision
   - Add this repo's .hermes/skills to ~/.hermes/config.yaml (skills.external_dirs) if Hermes is used.
   - Optionally add the `update` workflow to the OpenSpec profile (`openspec config profile core`).
 - Next steps: first feature via `/opsx:propose <add-...>`; record it in .agent/features.json once acceptance criteria exist.
+
+## 2026-10-17 — add-rust-workspace-scaffold (apply)
+
+- Agent: Claude Code (Fable 5.1), host Linux. Human approved every task up front (including host provisioning) and was away.
+- Mission context: full migration of Kinovea to Rust, Linux-only, TDD, `egui` for the UI, end goal an MCP server that annotates skeletons headlessly. Roadmap (21 changes) lives in the OpenSpec exploration; this is change 00.
+- Done:
+  - `rust/` Cargo workspace: 10 lib crates + `kinovea` bin, stable 1.93.1 pinned, clippy deny, `make verify` (fmt + clippy + test). Tests sit next to sources as `src/<file>_test.rs` because that is the only Rust layout `testlens` recognizes (`tests/foo_test.rs` and inline `#[cfg(test)]` are not).
+  - `.github/workflows/rust.yml` (ubuntu-latest). Linters now target Rust; C# baseline frozen below.
+  - Windows oracle host `windows` (192.168.0.138): installed VS Build Tools 2022 (MSBuild 17.14, .NET 4.8 targeting, MSVC v143, C++/CLI) and NuGet via winget over SSH. `tools/oracle/provision.ps1` (check/install), `build.ps1` (clone/bundle, restore, FFmpeg cache, Release x64), `fixtures.sh` (Linux driver, ships a git bundle when HEAD is not on origin/master).
+  - `Kinovea.FixtureGen` (C#, in the .sln): areas `kva` (round-trip of the 3 samples), `kinematics` (linear, circular with angular series, Winter gait data), `timecode` (all formats × 3 frame rates). Output to `tests/fixtures/`, manifest with commit, FFmpeg version, case sha256.
+- Gotchas found:
+  - The original KVA importer mints a fresh Guid for every element without an id (all three 2.0 samples). Fixtures replace Guids by order of appearance (`00000000-0000-4000-8000-<n>`) to be deterministic.
+  - Windows checkout had CRLF `tests/cases/*.json`, breaking the sha256 contract. Fixed with `.gitattributes` (LF for cases, `-text` for fixtures) and LF-normalized hashing in FixtureGen.
+  - Pre-commit lefthook gates fail on the legacy C# baseline; commits in this change were made with `LEFTHOOK=0`. Decision still pending (see previous entry).
+  - `Kinovea.Tests` is not in the .sln; FixtureGen links `KinematicsTestData.cs` and `MovingObject.cs` from it.
+- Pending: see tasks.md of the change for CI run (needs push) and fresh-clone check.
+- Next: `add-core-types-and-units`, starting with `tests/fixtures/timecode/formats/*.csv` as red tests.

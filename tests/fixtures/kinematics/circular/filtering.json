@@ -1,0 +1,7 @@
+{
+  "best_fit_circle": { "cx": -0.045329868793487549, "cy": -0.018199991434812546, "radius": 200.0008544921875 },
+  "can_filter": true,
+  "fps": 60,
+  "x_cutoff_index": 10,
+  "y_cutoff_index": 9
+}
