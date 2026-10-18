@@ -63,8 +63,11 @@ graph LR
     C08 --> C10
     C04 --> C11[11 camera motion lens filters]
     C10 --> C11
+    C06 --> C11
     C05 --> C12[12 importers exporters]
     C03 --> C12
+    C06 --> C12
+    C08 --> C12
     C06 --> C13[13 mcp server]
     C08 --> C13
     C12 --> C13
@@ -78,10 +81,16 @@ graph LR
     C15 --> C17
     C14 --> C18[18 i18n fluent]
     C16 --> C19[19 linux packaging]
+    C06 --> C19
     C17 --> C19
     C18 --> C19
     C19 --> C20[20 remove dotnet]
 ```
+
+## Archive order constraints
+
+- 15 modifies `ui/screen-manager`, created by 14: archive 14 before 15.
+- 20 modifies `tooling/parity-oracle` and `tooling/rust-workspace`; it is archived last, after the human signs the parity checklist.
 
 ## Cross-cutting rules
 

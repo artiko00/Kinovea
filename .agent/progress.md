@@ -54,3 +54,11 @@ Chronological. Newest entry last. Never delete entries; correct a wrong decision
 - Done: every legacy C# project directory (`Kinovea`, `Kinovea.Camera*`, `Kinovea.FileBrowser`, `Kinovea.Pipeline`, `Kinovea.ScreenManager`, `Kinovea.Services`, `Kinovea.Tests`, `Kinovea.Updater`, `Kinovea.Video*`), plus `Installer`, `Tools`, `VideoTests`, `Refs`, is excluded in all four linter blocks of `package.json` and in `testlens.json`. Removed the C#-only skip rules, `.resx`/`Languages` excludes and the secretlens allowlist entries that only existed for legacy code. `Kinovea.FixtureGen/` stays linted (new code).
 - Result: `npm run lint` green (33 files scanned by each linter, 0 findings). The lefthook pre-commit gate is usable again; `LEFTHOOK=0` is no longer needed.
 - Rule: when a legacy directory is deleted, remove its exclude entry so it cannot be recreated unnoticed.
+
+## 2026-10-18 — migration roadmap and changes 01–20 proposed
+
+- Agent: Claude Code (Fable 5.1), under a `/goal` to create the changes that migrate the whole repo to Rust and end in an MCP server.
+- Done: archived `add-rust-workspace-scaffold` (main specs `tooling/*` created). `openspec/roadmap.md` lists the 21 changes with the dependency graph, archive-order constraints and cross-cutting rules (capability paths, crate decisions, parity, legacy retirement). Changes 01–20 authored in parallel by six forks; `openspec validate --all --strict` passes (22 items), 380 tasks in total, nothing implemented.
+- Discoveries recorded in the artifacts: the KVA writer emits FormatVersion 2.1; both kinematics smoothing preferences default to `true`, so the existing kinematics fixtures include the moving-average pass; no `Fraction` type exists in `Kinovea.Services`; `ProjectiveMapper.Backward` has a typo the port reproduces; the host FFmpeg is 9.0 while CI Ubuntu 24.04 ships 6.1 (08 pins the floor at 6.1).
+- Pending human decisions: every new crate and dependency is flagged "requires approval" in the designs; workflow edits (apt packages, GUI libs, release.yml) likewise; `kinovea-export` rename to `kinovea-io`; Flatpak id; optional `add-pose-estimation` change (13 accepts external keypoints only).
+- Next: review PR, archive nothing yet, start `/opsx:apply add-core-types-and-units`.
