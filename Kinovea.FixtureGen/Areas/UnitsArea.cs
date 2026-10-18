@@ -22,73 +22,74 @@ namespace Kinovea.FixtureGen.Areas
 
             WriteAbbreviations(Path.Combine(outDir, "abbreviations.csv"));
 
+            Table2<LengthUnit, SpeedUnit>(outDir, "velocity.csv", "length_unit", "speed_unit", magnitudes,
+                (m, lu, su) => UnitHelper.ConvertVelocity((float)m, lu, su));
+            Table2<LengthUnit, AccelerationUnit>(outDir, "acceleration.csv", "length_unit", "acceleration_unit", magnitudes,
+                (m, lu, au) => UnitHelper.ConvertAcceleration((float)m, lu, au));
+            Table2<SpeedUnit, LengthUnit>(outDir, "length_from_speed.csv", "speed_unit", "length_unit", magnitudes,
+                (m, su, lu) => UnitHelper.ConvertForLengthUnit((float)m, su, lu));
+            Table1<AngularVelocityUnit>(outDir, "angular_velocity.csv", magnitudes, (m, u) => UnitHelper.ConvertAngularVelocity(m, u));
+            Table1<AngularAccelerationUnit>(outDir, "angular_acceleration.csv", magnitudes, (m, u) => UnitHelper.ConvertAngularAcceleration((float)m, u));
+            Table1<CadenceUnit>(outDir, "frequency.csv", magnitudes, (m, u) => UnitHelper.ConvertFrequency((float)m, u));
+
             List<IList<string>> rows = new List<IList<string>>();
-            foreach (double m in magnitudes)
-                foreach (LengthUnit lu in Enum.GetValues(typeof(LengthUnit)))
-                    foreach (SpeedUnit su in Enum.GetValues(typeof(SpeedUnit)))
-                        rows.Add(new[] { Oracle.R(m), lu.ToString(), su.ToString(), Oracle.R(UnitHelper.ConvertVelocity((float)m, lu, su)) });
-            Oracle.WriteCsv(Path.Combine(outDir, "velocity.csv"), new[] { "input", "length_unit", "speed_unit", "output" }, rows);
-
-            rows = new List<IList<string>>();
-            foreach (double m in magnitudes)
-                foreach (LengthUnit lu in Enum.GetValues(typeof(LengthUnit)))
-                    foreach (AccelerationUnit au in Enum.GetValues(typeof(AccelerationUnit)))
-                        rows.Add(new[] { Oracle.R(m), lu.ToString(), au.ToString(), Oracle.R(UnitHelper.ConvertAcceleration((float)m, lu, au)) });
-            Oracle.WriteCsv(Path.Combine(outDir, "acceleration.csv"), new[] { "input", "length_unit", "acceleration_unit", "output" }, rows);
-
-            rows = new List<IList<string>>();
-            foreach (double m in magnitudes)
-                foreach (SpeedUnit su in Enum.GetValues(typeof(SpeedUnit)))
-                    foreach (LengthUnit lu in Enum.GetValues(typeof(LengthUnit)))
-                        rows.Add(new[] { Oracle.R(m), su.ToString(), lu.ToString(), Oracle.R(UnitHelper.ConvertForLengthUnit((float)m, su, lu)) });
-            Oracle.WriteCsv(Path.Combine(outDir, "length_from_speed.csv"), new[] { "input", "speed_unit", "length_unit", "output" }, rows);
-
-            rows = new List<IList<string>>();
-            foreach (double m in magnitudes)
-                foreach (AngularVelocityUnit u in Enum.GetValues(typeof(AngularVelocityUnit)))
-                    rows.Add(new[] { Oracle.R(m), u.ToString(), Oracle.R(UnitHelper.ConvertAngularVelocity(m, u)) });
-            Oracle.WriteCsv(Path.Combine(outDir, "angular_velocity.csv"), new[] { "input", "unit", "output" }, rows);
-
-            rows = new List<IList<string>>();
-            foreach (double m in magnitudes)
-                foreach (AngularAccelerationUnit u in Enum.GetValues(typeof(AngularAccelerationUnit)))
-                    rows.Add(new[] { Oracle.R(m), u.ToString(), Oracle.R(UnitHelper.ConvertAngularAcceleration((float)m, u)) });
-            Oracle.WriteCsv(Path.Combine(outDir, "angular_acceleration.csv"), new[] { "input", "unit", "output" }, rows);
-
-            rows = new List<IList<string>>();
-            foreach (double m in magnitudes)
-                foreach (CadenceUnit u in Enum.GetValues(typeof(CadenceUnit)))
-                    rows.Add(new[] { Oracle.R(m), u.ToString(), Oracle.R(UnitHelper.ConvertFrequency((float)m, u)) });
-            Oracle.WriteCsv(Path.Combine(outDir, "frequency.csv"), new[] { "input", "unit", "output" }, rows);
-
-            rows = new List<IList<string>>();
             foreach (List<string> ps in pixelSizes)
             {
-                float w1 = float.Parse(ps[0], CultureInfo.InvariantCulture);
-                float w2 = float.Parse(ps[1], CultureInfo.InvariantCulture);
-                float p1 = float.Parse(ps[2], CultureInfo.InvariantCulture);
-                float p2 = float.Parse(ps[3], CultureInfo.InvariantCulture);
+                float[] v = new float[4];
+                for (int i = 0; i < 4; i++)
+                    v[i] = float.Parse(ps[i], CultureInfo.InvariantCulture);
                 LengthUnit lu = (LengthUnit)Enum.Parse(typeof(LengthUnit), ps[4]);
-                rows.Add(new[] { Oracle.R(w1), Oracle.R(w2), Oracle.R(p1), Oracle.R(p2), lu.ToString(), Oracle.Csv(UnitHelper.GetPixelSize(w1, w2, p1, p2, lu)) });
+                string text = UnitHelper.GetPixelSize(v[0], v[1], v[2], v[3], lu);
+                rows.Add(new[] { Oracle.R(v[0]), Oracle.R(v[1]), Oracle.R(v[2]), Oracle.R(v[3]), lu.ToString(), Oracle.Csv(text) });
             }
             Oracle.WriteCsv(Path.Combine(outDir, "pixel_size.csv"), new[] { "world1", "world2", "pixel1", "pixel2", "unit", "output" }, rows);
+        }
+
+        /// <summary>
+        /// Conversion table over every magnitude and every value of one unit enum.
+        /// </summary>
+        private static void Table1<T>(string outDir, string file, List<double> magnitudes, Func<double, T, double> convert)
+        {
+            List<IList<string>> rows = new List<IList<string>>();
+            foreach (double m in magnitudes)
+                foreach (T u in Enum.GetValues(typeof(T)))
+                    rows.Add(new[] { Oracle.R(m), u.ToString(), Oracle.R(convert(m, u)) });
+            Oracle.WriteCsv(Path.Combine(outDir, file), new[] { "input", "unit", "output" }, rows);
+        }
+
+        /// <summary>
+        /// Conversion table over every magnitude and the cross product of two unit enums.
+        /// </summary>
+        private static void Table2<TA, TB>(string outDir, string file, string colA, string colB, List<double> magnitudes, Func<double, TA, TB, double> convert)
+        {
+            List<IList<string>> rows = new List<IList<string>>();
+            foreach (double m in magnitudes)
+                foreach (TA a in Enum.GetValues(typeof(TA)))
+                    foreach (TB b in Enum.GetValues(typeof(TB)))
+                        rows.Add(new[] { Oracle.R(m), a.ToString(), b.ToString(), Oracle.R(convert(m, a, b)) });
+            Oracle.WriteCsv(Path.Combine(outDir, file), new[] { "input", colA, colB, "output" }, rows);
+        }
+
+        private static void Abbreviations<T>(List<IList<string>> rows, string kind, Func<T, string> abbreviation)
+        {
+            foreach (T u in Enum.GetValues(typeof(T)))
+                rows.Add(new[] { kind, u.ToString(), abbreviation(u) });
         }
 
         private static void WriteAbbreviations(string path)
         {
             List<IList<string>> rows = new List<IList<string>>();
-            foreach (LengthUnit u in Enum.GetValues(typeof(LengthUnit))) rows.Add(new[] { "Length", u.ToString(), UnitHelper.LengthAbbreviation(u) });
-            foreach (SpeedUnit u in Enum.GetValues(typeof(SpeedUnit))) rows.Add(new[] { "Speed", u.ToString(), UnitHelper.SpeedAbbreviation(u) });
-            foreach (AccelerationUnit u in Enum.GetValues(typeof(AccelerationUnit))) rows.Add(new[] { "Acceleration", u.ToString(), UnitHelper.AccelerationAbbreviation(u) });
-            foreach (AngleUnit u in Enum.GetValues(typeof(AngleUnit))) rows.Add(new[] { "Angle", u.ToString(), UnitHelper.AngleAbbreviation(u) });
-            foreach (AngularVelocityUnit u in Enum.GetValues(typeof(AngularVelocityUnit))) rows.Add(new[] { "AngularVelocity", u.ToString(), UnitHelper.AngularVelocityAbbreviation(u) });
-            foreach (AngularAccelerationUnit u in Enum.GetValues(typeof(AngularAccelerationUnit))) rows.Add(new[] { "AngularAcceleration", u.ToString(), UnitHelper.AngularAccelerationAbbreviation(u) });
-            foreach (CadenceUnit u in Enum.GetValues(typeof(CadenceUnit))) rows.Add(new[] { "Cadence", u.ToString(), UnitHelper.FrequencyAbbreviation(u) });
+            Abbreviations<LengthUnit>(rows, "Length", UnitHelper.LengthAbbreviation);
+            Abbreviations<SpeedUnit>(rows, "Speed", UnitHelper.SpeedAbbreviation);
+            Abbreviations<AccelerationUnit>(rows, "Acceleration", UnitHelper.AccelerationAbbreviation);
+            Abbreviations<AngleUnit>(rows, "Angle", UnitHelper.AngleAbbreviation);
+            Abbreviations<AngularVelocityUnit>(rows, "AngularVelocity", UnitHelper.AngularVelocityAbbreviation);
+            Abbreviations<AngularAccelerationUnit>(rows, "AngularAcceleration", UnitHelper.AngularAccelerationAbbreviation);
+            Abbreviations<CadenceUnit>(rows, "Cadence", UnitHelper.FrequencyAbbreviation);
             foreach (TimecodeFormat u in Enum.GetValues(typeof(TimecodeFormat)))
             {
-                if (u == TimecodeFormat.Unknown || u == TimecodeFormat.NumberOfTimeCodeFormats)
-                    continue;
-                rows.Add(new[] { "Time", u.ToString(), UnitHelper.TimeAbbreviation(u) });
+                if (u != TimecodeFormat.Unknown && u != TimecodeFormat.NumberOfTimeCodeFormats)
+                    rows.Add(new[] { "Time", u.ToString(), UnitHelper.TimeAbbreviation(u) });
             }
             Oracle.WriteCsv(path, new[] { "kind", "unit", "abbreviation" }, rows);
         }

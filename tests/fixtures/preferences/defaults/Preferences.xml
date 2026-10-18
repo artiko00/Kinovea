@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaPreferences>
+  <FormatVersion>3.0</FormatVersion>
+  <General>
+    <Culture />
+    <EnableDebugLog>false</EnableDebugLog>
+    <EnableAllLanguages>false</EnableAllLanguages>
+    <PreferencesPage>0</PreferencesPage>
+    <Pointer>::default</Pointer>
+  </General>
+  <FileExplorer>
+    <MaxRecentFiles>10</MaxRecentFiles>
+    <MaxRecentCapturedFiles>10</MaxRecentCapturedFiles>
+    <ThumbnailSize>Medium</ThumbnailSize>
+    <FilePropertyVisibility>
+      <Size>true</Size>
+      <Framerate>true</Framerate>
+      <Duration>true</Duration>
+      <CreationTime>false</CreationTime>
+      <HasKva>true</HasKva>
+    </FilePropertyVisibility>
+    <LastReplayFolder />
+    <FileSortAxis>Name</FileSortAxis>
+    <FileSortAscending>true</FileSortAscending>
+    <UseDriveIcons>true</UseDriveIcons>
+  </FileExplorer>
+  <Player>
+    <DecimalPlaces>2</DecimalPlaces>
+    <TimecodeFormat>ClassicTime</TimecodeFormat>
+    <SpeedUnit>MetersPerSecond</SpeedUnit>
+    <AccelerationUnit>MetersPerSecondSquared</AccelerationUnit>
+    <AngleUnit>Degree</AngleUnit>
+    <AngularVelocityUnit>DegreesPerSecond</AngularVelocityUnit>
+    <AngularAccelerationUnit>DegreesPerSecondSquared</AngularAccelerationUnit>
+    <CustomLengthUnit />
+    <CustomLengthAbbreviation />
+    <CadenceUnit>Hertz</CadenceUnit>
+    <CSVDecimalSeparator>System</CSVDecimalSeparator>
+    <ExportSpace>WorldSpace</ExportSpace>
+    <ExportImagesInDocuments>true</ExportImagesInDocuments>
+    <AspectRatio>Auto</AspectRatio>
+    <DeinterlaceByDefault>false</DeinterlaceByDefault>
+    <InteractiveFrameTracker>true</InteractiveFrameTracker>
+    <WorkingZoneMemory>1024</WorkingZoneMemory>
+    <ShowCacheInTimeline>false</ShowCacheInTimeline>
+    <SyncLockSpeed>true</SyncLockSpeed>
+    <SyncByMotion>false</SyncByMotion>
+    <ImageFormat>JPG</ImageFormat>
+    <VideoFormat>MKV</VideoFormat>
+    <InfoFading>
+      <Enabled>true</Enabled>
+      <UseDefault>true</UseDefault>
+      <AlwaysVisible>false</AlwaysVisible>
+      <MasterFactor>1</MasterFactor>
+      <OpaqueFrames>1</OpaqueFrames>
+      <Frames>20</Frames>
+    </InfoFading>
+    <EnablePixelFiltering>true</EnablePixelFiltering>
+    <DrawOnPlay>true</DrawOnPlay>
+    <MaxRecentColors>12</MaxRecentColors>
+    <TrackingParameters>
+      <Algorithm>Correlation</Algorithm>
+      <SearchWindow>100;100</SearchWindow>
+      <BlockWindow>20;20</BlockWindow>
+      <SimilarityThreshold>0.5</SimilarityThreshold>
+      <TemplateUpdateThreshold>0.8</TemplateUpdateThreshold>
+      <UseMask>false</UseMask>
+      <HSVRange>0;360;0;255;0;255</HSVRange>
+      <Dilate>0</Dilate>
+      <Erode>0</Erode>
+    </TrackingParameters>
+    <EnableFiltering>true</EnableFiltering>
+    <EnableCustomToolsDebugMode>false</EnableCustomToolsDebugMode>
+    <DetectImageSequences>true</DetectImageSequences>
+    <PreloadKeyframes>20</PreloadKeyframes>
+    <PlaybackKVA />
+    <ExportProfile>
+      <Name>Default</Name>
+      <Container>MP4</Container>
+      <Codec>H264</Codec>
+      <EncodingQuality>High</EncodingQuality>
+      <EncodingSpeed>Medium</EncodingSpeed>
+      <GOPSize>12</GOPSize>
+    </ExportProfile>
+    <Kinogram>
+      <TileCount>18</TileCount>
+      <Rows>3</Rows>
+      <CropSize>400;600</CropSize>
+      <CropPositions />
+      <AutoInterpolate>true</AutoInterpolate>
+      <LeftToRight>true</LeftToRight>
+      <BorderColor>44;44;44</BorderColor>
+      <BorderVisible>true</BorderVisible>
+      <LabelColor>0;0;0</LabelColor>
+      <LabelSize>8</LabelSize>
+      <MeasureLabelType>None</MeasureLabelType>
+    </Kinogram>
+    <LensCalibration>
+      <MaxImages>12</MaxImages>
+      <PatternSize>10;7</PatternSize>
+      <MaxIterations>30</MaxIterations>
+    </LensCalibration>
+    <CameraMotion>
+      <StepByStep>true</StepByStep>
+      <FeatureType>SIFT</FeatureType>
+      <FeaturesPerFrame>2048</FeaturesPerFrame>
+      <RansacReprojThreshold>1.25</RansacReprojThreshold>
+      <UseDistanceThreshold>true</UseDistanceThreshold>
+      <DistanceThresholdNormalized>0.1</DistanceThresholdNormalized>
+      <UseDistanceRatioTest>true</UseDistanceRatioTest>
+      <MinTrackLength>6</MinTrackLength>
+    </CameraMotion>
+    <KeyframePresets>
+      <KeyframePreset>
+        <Name />
+        <Color>51;152;255</Color>
+      </KeyframePreset>
+      <KeyframePreset>
+        <Name />
+        <Color>51;255;255</Color>
+      </KeyframePreset>
+      <KeyframePreset>
+        <Name />
+        <Color>152;255;51</Color>
+      </KeyframePreset>
+      <KeyframePreset>
+        <Name />
+        <Color>255;255;51</Color>
+      </KeyframePreset>
+      <KeyframePreset>
+        <Name />
+        <Color>255;152;51</Color>
+      </KeyframePreset>
+      <KeyframePreset>
+        <Name />
+        <Color>255;51;51</Color>
+      </KeyframePreset>
+      <KeyframePreset>
+        <Name />
+        <Color>255;51;255</Color>
+      </KeyframePreset>
+      <KeyframePreset>
+        <Name />
+        <Color>152;51;255</Color>
+      </KeyframePreset>
+      <KeyframePreset>
+        <Name />
+        <Color>51;51;255</Color>
+      </KeyframePreset>
+      <KeyframePreset>
+        <Name />
+        <Color>152;152;152</Color>
+      </KeyframePreset>
+    </KeyframePresets>
+    <PandocPath />
+    <SideBySideHorizontal>true</SideBySideHorizontal>
+    <EnableFrameSkipping>true</EnableFrameSkipping>
+    <TimelineJumpSmallSize>0.5</TimelineJumpSmallSize>
+    <TimelineJumpSmallUnit>Second</TimelineJumpSmallUnit>
+    <TimelineJumpLargeSize>10</TimelineJumpLargeSize>
+    <TimelineJumpLargeUnit>SnapPercent</TimelineJumpLargeUnit>
+    <SpeedLabelFactor>true</SpeedLabelFactor>
+    <SpeedLabelFramerate>false</SpeedLabelFramerate>
+    <SpeedLabelInterval>false</SpeedLabelInterval>
+    <LoopPlayback>true</LoopPlayback>
+    <EnableHardwareDecoding>true</EnableHardwareDecoding>
+    <EnablePreviewScaling>true</EnablePreviewScaling>
+    <EnableHardwareScaling>true</EnableHardwareScaling>
+  </Player>
+  <Capture>
+    <CapturePathConfiguration>
+      <CaptureFolders>
+        <CaptureFolder>
+          <Id>00000000-0000-4000-8000-000000000001</Id>
+          <ShortName>Capture A</ShortName>
+          <Path>{MyDocuments}\Capture\Capture A</Path>
+        </CaptureFolder>
+        <CaptureFolder>
+          <Id>00000000-0000-4000-8000-000000000002</Id>
+          <ShortName>Capture B</ShortName>
+          <Path>{MyDocuments}\Capture\Capture B</Path>
+        </CaptureFolder>
+      </CaptureFolders>
+      <DefaultFileName>%dateb%-%time%</DefaultFileName>
+      <ImageFormat>JPG</ImageFormat>
+      <VideoFormat>MP4</VideoFormat>
+      <CaptureCodec>MJPEG</CaptureCodec>
+      <EncodingQuality>Good</EncodingQuality>
+    </CapturePathConfiguration>
+    <DisplaySynchronizationFramerate>25.000</DisplaySynchronizationFramerate>
+    <CaptureRecordingMode>Delay</CaptureRecordingMode>
+    <VerboseStats>false</VerboseStats>
+    <SaveUncompressedVideo>false</SaveUncompressedVideo>
+    <EncodingQuality>Good</EncodingQuality>
+    <MemoryBuffer>768</MemoryBuffer>
+    <PhotofinishConfiguration>
+      <ThresholdHeight>16</ThresholdHeight>
+      <ConsolidationHeight>2</ConsolidationHeight>
+      <OutputHeight>1000</OutputHeight>
+      <Waterfall>true</Waterfall>
+      <WaterfallFlushHeight>100</WaterfallFlushHeight>
+    </PhotofinishConfiguration>
+    <CaptureAutomationConfiguration>
+      <EnableAudioTrigger>false</EnableAudioTrigger>
+      <AudioInputDevice>00000000-0000-0000-0000-000000000000</AudioInputDevice>
+      <AudioTriggerThreshold>0.900</AudioTriggerThreshold>
+      <EnableUDPTrigger>false</EnableUDPTrigger>
+      <UDPPort>8875</UDPPort>
+      <AudioQuietPeriod>0.000</AudioQuietPeriod>
+      <TriggerAction>RecordVideo</TriggerAction>
+      <EnableAutoNumbering>true</EnableAutoNumbering>
+      <IgnoreOverwriteWarning>false</IgnoreOverwriteWarning>
+      <DefaultTriggerArmed>true</DefaultTriggerArmed>
+    </CaptureAutomationConfiguration>
+    <EnableFramerateReplacement>true</EnableFramerateReplacement>
+    <HighspeedRecordingFramerateThreshold>150.000</HighspeedRecordingFramerateThreshold>
+    <HighspeedRecordingFramerateOutput>30.000</HighspeedRecordingFramerateOutput>
+    <SlowspeedRecordingFramerateThreshold>1.000</SlowspeedRecordingFramerateThreshold>
+    <SlowspeedRecordingFramerateOutput>30.000</SlowspeedRecordingFramerateOutput>
+    <ExportFlags>DefaultCaptureRecording</ExportFlags>
+    <CaptureKVA />
+    <ContextEnabled>true</ContextEnabled>
+    <ContextString />
+  </Capture>
+  <Keyboard>
+    <Hotkeys>
+      <Category name="FileExplorer">
+        <Hotkey name="LaunchSelected" key="Return" />
+        <Hotkey name="RenameSelected" key="None" />
+        <Hotkey name="DeleteSelected" key="Delete" />
+      </Category>
+      <Category name="ThumbnailViewerContainer">
+        <Hotkey name="IncreaseSize" key="Add, Control" />
+        <Hotkey name="DecreaseSize" key="Subtract, Control" />
+      </Category>
+      <Category name="ThumbnailViewerFiles">
+        <Hotkey name="LaunchSelected" key="Return" />
+        <Hotkey name="RenameSelected" key="F2" />
+        <Hotkey name="DeleteSelected" key="Delete" />
+        <Hotkey name="Refresh" key="F5" />
+      </Category>
+      <Category name="ThumbnailViewerCamera">
+        <Hotkey name="LaunchSelected" key="Return" />
+        <Hotkey name="RenameSelected" key="F2" />
+        <Hotkey name="Refresh" key="F5" />
+      </Category>
+      <Category name="DualPlayer">
+        <Hotkey name="TogglePlay" key="Space" />
+        <Hotkey name="GotoPreviousImage" key="Left" />
+        <Hotkey name="GotoNextImage" key="Right" />
+        <Hotkey name="GotoFirstImage" key="Home" />
+        <Hotkey name="GotoLastImage" key="End" />
+        <Hotkey name="GotoPreviousKeyframe" key="Left, Control" />
+        <Hotkey name="GotoNextKeyframe" key="Right, Control" />
+        <Hotkey name="GotoSyncPoint" key="F8" />
+        <Hotkey name="ToggleSyncMerge" key="F9" />
+        <Hotkey name="AddKeyframe" key="Insert" />
+      </Category>
+      <Category name="PlayerScreen">
+        <Hotkey name="ResetViewport" key="Escape" />
+        <Hotkey name="Close" key="F4, Control" />
+        <Hotkey name="TogglePlay" key="Space" />
+        <Hotkey name="IncreaseSpeed10" key="Up" />
+        <Hotkey name="DecreaseSpeed10" key="Down" />
+        <Hotkey name="IncreaseSpeed1" key="Up, Shift" />
+        <Hotkey name="DecreaseSpeed1" key="Down, Shift" />
+        <Hotkey name="GotoPreviousImage" key="Left" />
+        <Hotkey name="GotoNextImage" key="Right" />
+        <Hotkey name="GotoFirstImage" key="Home" />
+        <Hotkey name="GotoLastImage" key="End" />
+        <Hotkey name="GotoPreviousImageForceLoop" key="Left, Shift" />
+        <Hotkey name="LargeJumpBackward" key="PageUp" />
+        <Hotkey name="LargeJumpForward" key="Next" />
+        <Hotkey name="SmallJumpBackward" key="PageUp, Shift" />
+        <Hotkey name="SmallJumpForward" key="Next, Shift" />
+        <Hotkey name="GotoPreviousKeyframe" key="Left, Control" />
+        <Hotkey name="GotoNextKeyframe" key="Right, Control" />
+        <Hotkey name="GotoSyncPoint" key="F8" />
+        <Hotkey name="IncreaseSyncAlpha" key="Add, Alt" />
+        <Hotkey name="DecreaseSyncAlpha" key="Subtract, Alt" />
+        <Hotkey name="ToggleSyncMerge" key="F9" />
+        <Hotkey name="IncreaseZoom" key="Add, Control" />
+        <Hotkey name="DecreaseZoom" key="Subtract, Control" />
+        <Hotkey name="ResetZoom" key="NumPad0, Control" />
+        <Hotkey name="AddKeyframe" key="Insert" />
+        <Hotkey name="DeleteKeyframe" key="Delete, Control" />
+        <Hotkey name="Preset1" key="NumPad1, Control" />
+        <Hotkey name="Preset2" key="NumPad2, Control" />
+        <Hotkey name="Preset3" key="NumPad3, Control" />
+        <Hotkey name="Preset4" key="NumPad4, Control" />
+        <Hotkey name="Preset5" key="NumPad5, Control" />
+        <Hotkey name="Preset6" key="NumPad6, Control" />
+        <Hotkey name="Preset7" key="NumPad7, Control" />
+        <Hotkey name="Preset8" key="NumPad8, Control" />
+        <Hotkey name="Preset9" key="NumPad9, Control" />
+        <Hotkey name="Preset10" key="None" />
+        <Hotkey name="CutDrawing" key="X, Control" />
+        <Hotkey name="CopyDrawing" key="C, Control" />
+        <Hotkey name="PasteDrawing" key="V, Control" />
+        <Hotkey name="PasteInPlaceDrawing" key="None" />
+        <Hotkey name="DeleteDrawing" key="Delete" />
+        <Hotkey name="ValidateDrawing" key="Return" />
+        <Hotkey name="CopyImage" key="C, Shift, Control" />
+        <Hotkey name="CopyTime" key="None" />
+        <Hotkey name="ToggleDrawingsVisibility" key="None" />
+        <Hotkey name="ChronometerStartStop" key="F5" />
+        <Hotkey name="ChronometerSplit" key="F6" />
+        <Hotkey name="CadenceBeat" key="F7" />
+        <Hotkey name="StartAllTracking" key="None" />
+      </Category>
+      <Category name="DualCapture">
+        <Hotkey name="ToggleGrabbing" key="Space" />
+        <Hotkey name="ToggleRecording" key="Return, Control" />
+        <Hotkey name="TakeSnapshot" key="Return, Shift" />
+      </Category>
+      <Category name="CaptureScreen">
+        <Hotkey name="ResetViewport" key="Escape" />
+        <Hotkey name="OpenConfiguration" key="F12" />
+        <Hotkey name="Close" key="F4, Control" />
+        <Hotkey name="ToggleGrabbing" key="Space" />
+        <Hotkey name="ToggleRecording" key="Return, Control" />
+        <Hotkey name="TakeSnapshot" key="Return, Shift" />
+        <Hotkey name="ToggleArmCaptureTrigger" key="None" />
+        <Hotkey name="GotoPreviousImage" key="Left" />
+        <Hotkey name="GotoNextImage" key="Right" />
+        <Hotkey name="GotoFirstImage" key="Home" />
+        <Hotkey name="GotoLastImage" key="End" />
+        <Hotkey name="BackwardRound10Percent" key="PageUp" />
+        <Hotkey name="ForwardRound10Percent" key="Next" />
+        <Hotkey name="BackwardRound1Percent" key="PageUp, Shift" />
+        <Hotkey name="ForwardRound1Percent" key="Next, Shift" />
+        <Hotkey name="ToggleDelayedDisplay" key="Home, Alt" />
+        <Hotkey name="IncreaseDelayOneSecond" key="Up" />
+        <Hotkey name="DecreaseDelayOneSecond" key="Down" />
+        <Hotkey name="IncreaseDelayOneFrame" key="Up, Control" />
+        <Hotkey name="DecreaseDelayOneFrame" key="Down, Control" />
+        <Hotkey name="IncreaseDelayHalfSecond" key="Up, Shift" />
+        <Hotkey name="DecreaseDelayHalfSecond" key="Down, Shift" />
+      </Category>
+    </Hotkeys>
+  </Keyboard>
+</KinoveaPreferences>
