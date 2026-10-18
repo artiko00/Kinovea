@@ -47,3 +47,10 @@ Chronological. Newest entry last. Never delete entries; correct a wrong decision
 - secretlens: the 4 baseline hits were variable references (`.Password`, `tbPassword.Text`, `localizationToken`); allowlisted in `package.json` so `npm run lint:secrets` is green. linelens/dupelens baseline unchanged.
 - Verified: `rust.yml` green on PR #1; fresh clone `make verify` + `fixtures.sh --verify` green; `git status` clean.
 - Next: `add-core-types-and-units`, starting with `tests/fixtures/timecode/formats/*.csv` as red tests.
+
+## 2026-10-18 — lefthook scoped to new code
+
+- Agent: Claude Code (Fable 5.1). Human decision: the gates only consider new code; legacy C# will be deleted project by project as the Rust port replaces it.
+- Done: every legacy C# project directory (`Kinovea`, `Kinovea.Camera*`, `Kinovea.FileBrowser`, `Kinovea.Pipeline`, `Kinovea.ScreenManager`, `Kinovea.Services`, `Kinovea.Tests`, `Kinovea.Updater`, `Kinovea.Video*`), plus `Installer`, `Tools`, `VideoTests`, `Refs`, is excluded in all four linter blocks of `package.json` and in `testlens.json`. Removed the C#-only skip rules, `.resx`/`Languages` excludes and the secretlens allowlist entries that only existed for legacy code. `Kinovea.FixtureGen/` stays linted (new code).
+- Result: `npm run lint` green (33 files scanned by each linter, 0 findings). The lefthook pre-commit gate is usable again; `LEFTHOOK=0` is no longer needed.
+- Rule: when a legacy directory is deleted, remove its exclude entry so it cannot be recreated unnoticed.
