@@ -14,11 +14,20 @@ pub struct Rectangle {
     pub filled: bool,
 }
 
-pub(crate) const CORNER_NAMES: [&str; 4] = ["PointUpperLeft", "PointUpperRight", "PointLowerRight", "PointLowerLeft"];
+pub(crate) const CORNER_NAMES: [&str; 4] = [
+    "PointUpperLeft",
+    "PointUpperRight",
+    "PointLowerRight",
+    "PointLowerLeft",
+];
 
 impl Rectangle {
     pub fn new(quad: Quadrilateral) -> Self {
-        Rectangle { header: Header::new("", default_style("Rectangle")), quad, filled: false }
+        Rectangle {
+            header: Header::new("", default_style("Rectangle")),
+            quad,
+            filled: false,
+        }
     }
 }
 
@@ -61,6 +70,9 @@ impl KvaDrawing for Rectangle {
     }
 
     fn content_hash(&self) -> i32 {
-        self.quad.hash_code() ^ i32::from(self.filled) ^ self.header.style.content_hash() ^ self.header.fading.content_hash()
+        self.quad.hash_code()
+            ^ i32::from(self.filled)
+            ^ self.header.style.content_hash()
+            ^ self.header.fading.content_hash()
     }
 }

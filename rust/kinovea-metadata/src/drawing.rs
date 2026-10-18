@@ -3,9 +3,18 @@
 mod angle;
 #[cfg(test)]
 mod angle_test;
+mod chrono;
+mod chrono_multi;
+#[cfg(test)]
+mod chrono_multi_test;
+#[cfg(test)]
+mod chrono_test;
 mod circle;
 #[cfg(test)]
 mod circle_test;
+mod counter;
+#[cfg(test)]
+mod counter_test;
 mod crossmark;
 #[cfg(test)]
 mod crossmark_test;
@@ -15,20 +24,47 @@ mod label_test;
 mod line;
 #[cfg(test)]
 mod line_test;
+mod media;
+#[cfg(test)]
+mod media_test;
 mod paths;
 #[cfg(test)]
 mod paths_test;
+mod plane;
+#[cfg(test)]
+mod plane_test;
 mod rectangle;
 #[cfg(test)]
 mod rectangle_test;
+mod time_segment;
+#[cfg(test)]
+mod time_segment_test;
+mod track;
+#[cfg(test)]
+mod track_test;
+pub mod tracking_parameters;
+#[cfg(test)]
+mod tracking_parameters_test;
 
 pub use angle::Angle;
+pub use chrono::Chrono;
+pub use chrono_multi::{ChronoColumn, ChronoMulti, ChronoSection};
 pub use circle::Circle;
+pub use counter::Counter;
 pub use crossmark::CrossMark;
 pub use label::Label;
 pub use line::Line;
+pub use media::{Bitmap, Svg};
 pub use paths::{Pencil, Polyline, TimePolyline};
+pub use plane::{DistortionGrid, Plane};
 pub use rectangle::Rectangle;
+pub use time_segment::TimeSegment;
+pub use track::{KeyframeLabel, Track};
+
+mod any;
+#[cfg(test)]
+mod any_test;
+pub use any::Drawing;
 
 use crate::fading::Fading;
 use crate::ids::new_id;
@@ -50,7 +86,13 @@ pub struct Header {
 
 impl Header {
     pub fn new(name: &str, style: StyleElements) -> Self {
-        Header { id: new_id(), name: name.to_owned(), reference_timestamp: -1, style, fading: Fading::default() }
+        Header {
+            id: new_id(),
+            name: name.to_owned(),
+            reference_timestamp: -1,
+            style,
+            fading: Fading::default(),
+        }
     }
 
     /// Reads the `id` and `name` attributes of a drawing element.
@@ -90,97 +132,9 @@ pub trait KvaDrawing: Sized {
 /// Full drawing element: `<Name id="…" name="…">children</Name>`.
 pub fn element<D: KvaDrawing>(d: &D, filter: Filter, refs: RefValue) -> Element {
     let mut e = Element::new(D::KVA_NAME);
-    e.attributes.push(("id".into(), crate::ids::id_text(d.header().id)));
+    e.attributes
+        .push(("id".into(), crate::ids::id_text(d.header().id)));
     e.attributes.push(("name".into(), d.header().name.clone()));
     e.children = d.write_kva(filter, refs);
     e
-}
-
-/// Every attached drawing kind.
-#[derive(Debug, Clone, PartialEq)]
-pub enum Drawing {
-    Line(Line),
-    Angle(Angle),
-    CrossMark(CrossMark),
-    Circle(Circle),
-    Rectangle(Rectangle),
-    Pencil(Pencil),
-    Polyline(Polyline),
-    TimePolyline(TimePolyline),
-    Label(Label),
-}
-
-macro_rules! dispatch {
-    ($self:expr, |$d:ident| $body:expr) => {
-        match $self {
-            Drawing::Line($d) => $body,
-            Drawing::Angle($d) => $body,
-            Drawing::CrossMark($d) => $body,
-            Drawing::Circle($d) => $body,
-            Drawing::Rectangle($d) => $body,
-            Drawing::Pencil($d) => $body,
-            Drawing::Polyline($d) => $body,
-            Drawing::TimePolyline($d) => $body,
-            Drawing::Label($d) => $body,
-        }
-    };
-}
-
-impl Drawing {
-    /// Reads a drawing element by its name; `None` for unknown kinds.
-    pub fn read_kva(e: &Element, scale: Scale, map: TimestampMapper) -> Option<Drawing> {
-        Some(match e.name.as_str() {
-            Line::KVA_NAME => Drawing::Line(Line::read_kva(e, scale, map)),
-            Angle::KVA_NAME => Drawing::Angle(Angle::read_kva(e, scale, map)),
-            CrossMark::KVA_NAME => Drawing::CrossMark(CrossMark::read_kva(e, scale, map)),
-            Circle::KVA_NAME => Drawing::Circle(Circle::read_kva(e, scale, map)),
-            Rectangle::KVA_NAME => Drawing::Rectangle(Rectangle::read_kva(e, scale, map)),
-            Pencil::KVA_NAME => Drawing::Pencil(Pencil::read_kva(e, scale, map)),
-            Polyline::KVA_NAME => Drawing::Polyline(Polyline::read_kva(e, scale, map)),
-            TimePolyline::KVA_NAME => Drawing::TimePolyline(TimePolyline::read_kva(e, scale, map)),
-            Label::KVA_NAME => Drawing::Label(Label::read_kva(e, scale, map)),
-            _ => return None,
-        })
-    }
-
-    pub fn kva_name(&self) -> &'static str {
-        dispatch!(self, |d| kva_name_of(d))
-    }
-
-    pub fn header(&self) -> &Header {
-        dispatch!(self, |d| d.header())
-    }
-
-    pub fn header_mut(&mut self) -> &mut Header {
-        dispatch!(self, |d| d.header_mut())
-    }
-
-    pub fn id(&self) -> Uuid {
-        self.header().id
-    }
-
-    pub fn to_element(&self, filter: Filter, refs: RefValue) -> Element {
-        dispatch!(self, |d| element(d, filter, refs))
-    }
-
-    pub fn trackable_points(&self) -> Vec<(String, PointF)> {
-        dispatch!(self, |d| d.trackable_points())
-    }
-
-    pub fn set_trackable_point(&mut self, key: &str, value: PointF) {
-        dispatch!(self, |d| d.set_trackable_point(key, value))
-    }
-
-    pub fn content_hash(&self) -> i32 {
-        dispatch!(self, |d| d.content_hash())
-    }
-
-    /// Planes are appended to a keyframe while every other kind is inserted first.
-    pub fn is_plane(&self) -> bool {
-        false
-    }
-}
-
-fn kva_name_of<D: KvaDrawing>(_: &D) -> &'static str {
-    D::KVA_NAME
 }

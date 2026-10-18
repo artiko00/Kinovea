@@ -16,12 +16,18 @@ fn fragment_round_trips_with_registered_points() {
     let e = Element::parse(FRAGMENT).unwrap();
     let line = Line::read_kva(&e, Scale::IDENTITY, &identity);
     assert_eq!(line.header.name, "Line 3");
-    assert_eq!((line.a, line.b), (PointF::new(267.0, 122.0), PointF::new(277.0, 38.0)));
+    assert_eq!(
+        (line.a, line.b),
+        (PointF::new(267.0, 122.0), PointF::new(277.0, 38.0))
+    );
     assert_eq!(line.header.reference_timestamp, 205705);
     assert_eq!(line.measure_label_type, MeasureLabelType::None);
     assert_eq!(line.trackable_points().len(), 2);
     let refs = |_: Uuid, key: &str| if key == "a" { line.a } else { line.b };
-    assert_eq!(body(element(&line, Filter::KVA, &refs).to_document()), FRAGMENT);
+    assert_eq!(
+        body(element(&line, Filter::KVA, &refs).to_document()),
+        FRAGMENT
+    );
     assert!((line.length() - 84.593).abs() < 1e-2);
 }
 

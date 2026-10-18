@@ -28,6 +28,11 @@ pub struct MeasureLabel {
 }
 
 impl MeasureLabel {
+    /// `MiniLabel(attach, …)`: the label sits 20 px left and 50 px above its attach point.
+    pub fn new(attach: PointF) -> Self {
+        MeasureLabel { position: attach.translate(-20.0, -50.0), timestamp: 0, attach }
+    }
+
     pub fn read_kva(e: &Element, scale: Scale) -> MeasureLabel {
         let mut label = MeasureLabel::default();
         for c in &e.children {

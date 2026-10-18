@@ -75,7 +75,8 @@ impl Element {
                 }
                 Event::Text(text) => {
                     // Whitespace between elements is layout, not content (`IgnoreWhitespace`).
-                    let text = text.unescape().map_err(err)?;
+                    // XML line-ending normalization, as `XmlReader` does.
+                    let text = text.unescape().map_err(err)?.replace("\r\n", "\n").replace('\r', "\n");
                     if let Some(current) = stack.last_mut().filter(|_| !text.trim().is_empty()) {
                         current.text.push_str(&text);
                     }

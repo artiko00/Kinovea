@@ -19,9 +19,14 @@ pub struct Line {
 
 impl Line {
     pub fn new(a: PointF, b: PointF) -> Self {
-        let mut label = MeasureLabel::default();
-        label.set_attach(middle_point(a, b));
-        Line { header: Header::new("", default_style("Line")), a, b, measure_label_type: MeasureLabelType::None, label }
+        let label = MeasureLabel::new(middle_point(a, b));
+        Line {
+            header: Header::new("", default_style("Line")),
+            a,
+            b,
+            measure_label_type: MeasureLabelType::None,
+            label,
+        }
     }
 
     /// Length in pixels.
@@ -42,7 +47,7 @@ impl KvaDrawing for Line {
     }
 
     fn read_kva(e: &Element, scale: Scale, _map: TimestampMapper) -> Self {
-        let mut d = Line::new(PointF::EMPTY, PointF::EMPTY);
+        let mut d = Line::new(PointF::EMPTY, PointF::new(10.0, 0.0));
         d.header.read_attributes(e);
         for c in &e.children {
             match c.name.as_str() {
@@ -67,9 +72,14 @@ impl KvaDrawing for Line {
             let b = refs(self.header.id, "b");
             out.push(point_leaf("Start", a));
             out.push(point_leaf("End", b));
-            out.push(Element::leaf("ReferenceTimestamp", &self.header.reference_timestamp.to_string()));
+            out.push(Element::leaf(
+                "ReferenceTimestamp",
+                &self.header.reference_timestamp.to_string(),
+            ));
             out.push(Element::leaf("ExtraData", self.measure_label_type.name()));
-            out.push(measure_label_block(self.label.write_kva_attached(middle_point(a, b))));
+            out.push(measure_label_block(
+                self.label.write_kva_attached(middle_point(a, b)),
+            ));
         }
         push_style_and_fading(&mut out, filter, &self.header.style, &self.header.fading);
         out
@@ -89,6 +99,10 @@ impl KvaDrawing for Line {
     }
 
     fn content_hash(&self) -> i32 {
-        self.a.hash_code() ^ self.b.hash_code() ^ self.header.style.content_hash() ^ self.header.fading.content_hash() ^ (self.measure_label_type as i32)
+        self.a.hash_code()
+            ^ self.b.hash_code()
+            ^ self.header.style.content_hash()
+            ^ self.header.fading.content_hash()
+            ^ (self.measure_label_type as i32)
     }
 }

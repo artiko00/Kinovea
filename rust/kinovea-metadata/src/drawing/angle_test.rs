@@ -9,14 +9,25 @@ const FRAGMENT: &str = "<Angle id=\"00000000-0000-4000-8000-000000000002\" name=
 
 #[test]
 fn fragment_round_trips_and_angle_is_measured() {
-    let angle = Angle::read_kva(&Element::parse(FRAGMENT).unwrap(), Scale::IDENTITY, &identity);
+    let angle = Angle::read_kva(
+        &Element::parse(FRAGMENT).unwrap(),
+        Scale::IDENTITY,
+        &identity,
+    );
     let refs = |_: Uuid, key: &str| match key {
         "o" => angle.o,
         "a" => angle.a,
         _ => angle.b,
     };
-    assert_eq!(body(element(&angle, Filter::KVA, &refs).to_document()), FRAGMENT);
-    assert!((angle.value() + std::f32::consts::FRAC_PI_2).abs() < 1e-5, "{}", angle.value());
+    assert_eq!(
+        body(element(&angle, Filter::KVA, &refs).to_document()),
+        FRAGMENT
+    );
+    assert!(
+        (angle.value() + std::f32::consts::FRAC_PI_2).abs() < 1e-5,
+        "{}",
+        angle.value()
+    );
     let mut unsigned = angle.clone();
     unsigned.signed = false;
     assert!((unsigned.value() - 3.0 * std::f32::consts::FRAC_PI_2).abs() < 1e-4);
@@ -30,8 +41,18 @@ fn fragment_round_trips_and_angle_is_measured() {
 
 #[test]
 fn trackable_points_and_hash() {
-    let mut a = Angle::new(PointF::new(0.0, 0.0), PointF::new(1.0, 0.0), PointF::new(0.0, 1.0));
-    assert_eq!(a.trackable_points().iter().map(|(k, _)| k.as_str()).collect::<Vec<_>>(), ["o", "a", "b"]);
+    let mut a = Angle::new(
+        PointF::new(0.0, 0.0),
+        PointF::new(1.0, 0.0),
+        PointF::new(0.0, 1.0),
+    );
+    assert_eq!(
+        a.trackable_points()
+            .iter()
+            .map(|(k, _)| k.as_str())
+            .collect::<Vec<_>>(),
+        ["o", "a", "b"]
+    );
     let h = a.content_hash();
     a.set_trackable_point("b", PointF::new(5.0, 5.0));
     assert_ne!(a.content_hash(), h);

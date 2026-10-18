@@ -9,11 +9,25 @@ const FRAGMENT: &str = "<Circle id=\"00000000-0000-4000-8000-000000000013\" name
 
 #[test]
 fn fragment_round_trips_and_radius_scales_by_the_smaller_factor() {
-    let circle = Circle::read_kva(&Element::parse(FRAGMENT).unwrap(), Scale::IDENTITY, &identity);
-    assert_eq!((circle.center, circle.radius), (PointF::new(347.0, 184.0), 169));
+    let circle = Circle::read_kva(
+        &Element::parse(FRAGMENT).unwrap(),
+        Scale::IDENTITY,
+        &identity,
+    );
+    assert_eq!(
+        (circle.center, circle.radius),
+        (PointF::new(347.0, 184.0), 169)
+    );
     let refs = |_: Uuid, _: &str| PointF::EMPTY;
-    assert_eq!(body(element(&circle, Filter::KVA, &refs).to_document()), FRAGMENT);
-    let half = Circle::read_kva(&Element::parse(FRAGMENT).unwrap(), Scale { x: 0.5, y: 0.25 }, &identity);
+    assert_eq!(
+        body(element(&circle, Filter::KVA, &refs).to_document()),
+        FRAGMENT
+    );
+    let half = Circle::read_kva(
+        &Element::parse(FRAGMENT).unwrap(),
+        Scale { x: 0.5, y: 0.25 },
+        &identity,
+    );
     assert_eq!(half.radius, 42);
     assert_eq!(half.center, PointF::new(173.5, 46.0));
     assert!(circle.trackable_points().is_empty());

@@ -36,3 +36,9 @@ fn text_content_keeps_inner_and_edge_spaces_but_drops_layout_whitespace() {
     assert_eq!(root.text, "");
     assert_eq!(root.children.len(), 2);
 }
+
+#[test]
+fn carriage_returns_in_text_are_normalized_to_newlines() {
+    let root = crate::preferences::dom::Element::parse("<R><A>one\r\ntwo\rthree</A></R>").unwrap();
+    assert_eq!(root.child_text("A"), Some("one\ntwo\nthree"));
+}

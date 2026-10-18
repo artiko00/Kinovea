@@ -21,9 +21,16 @@ pub struct Circle {
 
 impl Circle {
     pub fn new(center: PointF, radius: i32) -> Self {
-        let mut label = MeasureLabel::default();
-        label.set_attach(center);
-        Circle { header: Header::new("", default_style("Circle")), center, radius, measure_label_type: MeasureLabelType::None, show_center: false, filled: false, label }
+        let label = MeasureLabel::new(center);
+        Circle {
+            header: Header::new("", default_style("Circle")),
+            center,
+            radius,
+            measure_label_type: MeasureLabelType::None,
+            show_center: false,
+            filled: false,
+            label,
+        }
     }
 }
 
@@ -66,7 +73,10 @@ impl KvaDrawing for Circle {
             out.push(Element::leaf("Radius", &self.radius.to_string()));
             out.push(Element::leaf("ExtraData", self.measure_label_type.name()));
             out.push(measure_label_block(self.label.write_kva()));
-            out.push(Element::leaf("ShowCenter", &write_boolean(self.show_center)));
+            out.push(Element::leaf(
+                "ShowCenter",
+                &write_boolean(self.show_center),
+            ));
             out.push(Element::leaf("Filled", &write_boolean(self.filled)));
         }
         push_style_and_fading(&mut out, filter, &self.header.style, &self.header.fading);
@@ -74,6 +84,11 @@ impl KvaDrawing for Circle {
     }
 
     fn content_hash(&self) -> i32 {
-        self.center.hash_code() ^ self.radius ^ i32::from(self.show_center) << 1 ^ i32::from(self.filled) << 2 ^ self.header.style.content_hash() ^ self.header.fading.content_hash()
+        self.center.hash_code()
+            ^ self.radius
+            ^ i32::from(self.show_center) << 1
+            ^ i32::from(self.filled) << 2
+            ^ self.header.style.content_hash()
+            ^ self.header.fading.content_hash()
     }
 }

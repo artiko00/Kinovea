@@ -9,6 +9,7 @@ rust-version.workspace = true
 [dependencies]
 kinovea-core = { path = "../kinovea-core" }
 kinovea-geometry = { path = "../kinovea-geometry" }
+kinovea-measurement = { path = "../kinovea-measurement" }
 uuid.workspace = true
 
 [dev-dependencies]

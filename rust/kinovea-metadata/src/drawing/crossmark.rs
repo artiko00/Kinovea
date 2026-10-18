@@ -19,9 +19,14 @@ pub struct CrossMark {
 
 impl CrossMark {
     pub fn new(center: PointF) -> Self {
-        let mut label = MeasureLabel::default();
-        label.set_attach(center);
-        CrossMark { header: Header::new("", default_style("CrossMark")), center, measure_label_type: MeasureLabelType::None, show_as_dot: false, label }
+        let label = MeasureLabel::new(center);
+        CrossMark {
+            header: Header::new("", default_style("CrossMark")),
+            center,
+            measure_label_type: MeasureLabelType::None,
+            show_as_dot: false,
+            label,
+        }
     }
 }
 
@@ -61,7 +66,10 @@ impl KvaDrawing for CrossMark {
         if filter.core {
             let p = refs(self.header.id, "0");
             out.push(point_leaf("CenterPoint", p));
-            out.push(Element::leaf("ReferenceTimestamp", &self.header.reference_timestamp.to_string()));
+            out.push(Element::leaf(
+                "ReferenceTimestamp",
+                &self.header.reference_timestamp.to_string(),
+            ));
             out.push(Element::leaf("ExtraData", self.measure_label_type.name()));
             out.push(Element::leaf("ShowAsDot", &write_boolean(self.show_as_dot)));
             out.push(measure_label_block(self.label.write_kva_attached(p)));
@@ -82,6 +90,10 @@ impl KvaDrawing for CrossMark {
     }
 
     fn content_hash(&self) -> i32 {
-        self.center.hash_code() ^ i32::from(self.show_as_dot) ^ self.header.style.content_hash() ^ self.header.fading.content_hash() ^ (self.measure_label_type as i32)
+        self.center.hash_code()
+            ^ i32::from(self.show_as_dot)
+            ^ self.header.style.content_hash()
+            ^ self.header.fading.content_hash()
+            ^ (self.measure_label_type as i32)
     }
 }

@@ -9,12 +9,23 @@ const FRAGMENT: &str = "<Rectangle id=\"00000000-0000-4000-8000-000000000001\" n
 
 #[test]
 fn fragment_round_trips_and_scales() {
-    let r = Rectangle::read_kva(&Element::parse(FRAGMENT).unwrap(), Scale::IDENTITY, &identity);
+    let r = Rectangle::read_kva(
+        &Element::parse(FRAGMENT).unwrap(),
+        Scale::IDENTITY,
+        &identity,
+    );
     assert!(r.filled);
     assert_eq!(r.quad.c(), PointF::new(110.0, 70.0));
     let refs = |_: Uuid, _: &str| PointF::EMPTY;
-    assert_eq!(body(element(&r, Filter::KVA, &refs).to_document()), FRAGMENT);
-    let half = Rectangle::read_kva(&Element::parse(FRAGMENT).unwrap(), Scale { x: 0.5, y: 0.5 }, &identity);
+    assert_eq!(
+        body(element(&r, Filter::KVA, &refs).to_document()),
+        FRAGMENT
+    );
+    let half = Rectangle::read_kva(
+        &Element::parse(FRAGMENT).unwrap(),
+        Scale { x: 0.5, y: 0.5 },
+        &identity,
+    );
     assert_eq!(half.quad.a(), PointF::new(5.0, 10.0));
     let mut unfilled = r.clone();
     unfilled.filled = false;

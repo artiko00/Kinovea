@@ -21,7 +21,16 @@ pub struct Angle {
 
 impl Angle {
     pub fn new(o: PointF, a: PointF, b: PointF) -> Self {
-        Angle { header: Header::new("", default_style("Angle")), o, a, b, signed: true, counter_clockwise: true, supplementary: false, show_circle: false }
+        Angle {
+            header: Header::new("", default_style("Angle")),
+            o,
+            a,
+            b,
+            signed: true,
+            counter_clockwise: true,
+            supplementary: false,
+            show_circle: false,
+        }
     }
 
     /// Oriented angle in radians with the drawing's options, in pixel space.
@@ -32,8 +41,16 @@ impl Angle {
             a = b;
             b = c;
         }
-        let angle = if self.counter_clockwise { kinovea_geometry::helpers::angle_at(self.o, a, b) } else { kinovea_geometry::helpers::angle_at(self.o, b, a) };
-        if !self.signed && angle < 0.0 { (std::f64::consts::TAU + f64::from(angle)) as f32 } else { angle }
+        let angle = if self.counter_clockwise {
+            kinovea_geometry::helpers::angle_at(self.o, a, b)
+        } else {
+            kinovea_geometry::helpers::angle_at(self.o, b, a)
+        };
+        if !self.signed && angle < 0.0 {
+            (std::f64::consts::TAU + f64::from(angle)) as f32
+        } else {
+            angle
+        }
     }
 }
 
@@ -76,18 +93,31 @@ impl KvaDrawing for Angle {
             out.push(point_leaf("PointO", refs(self.header.id, "o")));
             out.push(point_leaf("PointA", refs(self.header.id, "a")));
             out.push(point_leaf("PointB", refs(self.header.id, "b")));
-            out.push(Element::leaf("ReferenceTimestamp", &self.header.reference_timestamp.to_string()));
+            out.push(Element::leaf(
+                "ReferenceTimestamp",
+                &self.header.reference_timestamp.to_string(),
+            ));
             out.push(Element::leaf("Signed", &write_boolean(self.signed)));
             out.push(Element::leaf("CCW", &write_boolean(self.counter_clockwise)));
-            out.push(Element::leaf("Supplementary", &write_boolean(self.supplementary)));
-            out.push(Element::leaf("ShowCircle", &write_boolean(self.show_circle)));
+            out.push(Element::leaf(
+                "Supplementary",
+                &write_boolean(self.supplementary),
+            ));
+            out.push(Element::leaf(
+                "ShowCircle",
+                &write_boolean(self.show_circle),
+            ));
         }
         push_style_and_fading(&mut out, filter, &self.header.style, &self.header.fading);
         out
     }
 
     fn trackable_points(&self) -> Vec<(String, PointF)> {
-        vec![("o".into(), self.o), ("a".into(), self.a), ("b".into(), self.b)]
+        vec![
+            ("o".into(), self.o),
+            ("a".into(), self.a),
+            ("b".into(), self.b),
+        ]
     }
 
     fn set_trackable_point(&mut self, key: &str, value: PointF) {
@@ -100,7 +130,15 @@ impl KvaDrawing for Angle {
     }
 
     fn content_hash(&self) -> i32 {
-        let flags = i32::from(self.signed) | i32::from(self.counter_clockwise) << 1 | i32::from(self.supplementary) << 2 | i32::from(self.show_circle) << 3;
-        self.o.hash_code() ^ self.a.hash_code() ^ self.b.hash_code() ^ flags ^ self.header.style.content_hash() ^ self.header.fading.content_hash()
+        let flags = i32::from(self.signed)
+            | i32::from(self.counter_clockwise) << 1
+            | i32::from(self.supplementary) << 2
+            | i32::from(self.show_circle) << 3;
+        self.o.hash_code()
+            ^ self.a.hash_code()
+            ^ self.b.hash_code()
+            ^ flags
+            ^ self.header.style.content_hash()
+            ^ self.header.fading.content_hash()
     }
 }

@@ -1,4 +1,5 @@
 //! Text label with optional background, arrow and circle (`DrawingText`, KVA `Label`).
+//! The arrow end defaults to 50 px up-left of the position, as the original constructor.
 
 use super::{Header, KvaDrawing, RefValue};
 use crate::kva_io::*;
@@ -21,7 +22,15 @@ pub struct Label {
 
 impl Label {
     pub fn new(text: &str, position: PointF) -> Self {
-        Label { header: Header::new("", default_style("Label")), text: text.to_owned(), position, background_visible: true, arrow_visible: false, circle_visible: false, arrow_end: PointF::EMPTY }
+        Label {
+            header: Header::new("", default_style("Label")),
+            text: text.to_owned(),
+            position,
+            background_visible: true,
+            arrow_visible: false,
+            circle_visible: false,
+            arrow_end: position.translate(-50.0, -50.0),
+        }
     }
 }
 
@@ -61,9 +70,18 @@ impl KvaDrawing for Label {
         if filter.core {
             out.push(Element::leaf("Text", &self.text));
             out.push(point_leaf("Position", self.position));
-            out.push(Element::leaf("BackgroundVisible", &write_boolean(self.background_visible)));
-            out.push(Element::leaf("ArrowVisible", &write_boolean(self.arrow_visible)));
-            out.push(Element::leaf("CircleVisible", &write_boolean(self.circle_visible)));
+            out.push(Element::leaf(
+                "BackgroundVisible",
+                &write_boolean(self.background_visible),
+            ));
+            out.push(Element::leaf(
+                "ArrowVisible",
+                &write_boolean(self.arrow_visible),
+            ));
+            out.push(Element::leaf(
+                "CircleVisible",
+                &write_boolean(self.circle_visible),
+            ));
             out.push(point_leaf("ArrowEnd", self.arrow_end));
         }
         push_style_and_fading(&mut out, filter, &self.header.style, &self.header.fading);
@@ -71,7 +89,14 @@ impl KvaDrawing for Label {
     }
 
     fn content_hash(&self) -> i32 {
-        let flags = i32::from(self.background_visible) | i32::from(self.arrow_visible) << 1 | i32::from(self.circle_visible) << 2;
-        self.position.hash_code() ^ self.arrow_end.hash_code() ^ flags ^ (self.text.len() as i32) ^ self.header.style.content_hash() ^ self.header.fading.content_hash()
+        let flags = i32::from(self.background_visible)
+            | i32::from(self.arrow_visible) << 1
+            | i32::from(self.circle_visible) << 2;
+        self.position.hash_code()
+            ^ self.arrow_end.hash_code()
+            ^ flags
+            ^ (self.text.len() as i32)
+            ^ self.header.style.content_hash()
+            ^ self.header.fading.content_hash()
     }
 }

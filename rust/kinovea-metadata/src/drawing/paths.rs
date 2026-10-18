@@ -15,7 +15,10 @@ pub struct Pencil {
 
 impl Pencil {
     pub fn new(points: Vec<PointF>) -> Self {
-        Pencil { header: Header::new("", default_style("Pencil")), points }
+        Pencil {
+            header: Header::new("", default_style("Pencil")),
+            points,
+        }
     }
 }
 
@@ -35,7 +38,12 @@ impl KvaDrawing for Pencil {
         d.header.read_attributes(e);
         for c in &e.children {
             if c.name == "PointList" {
-                d.points = c.children.iter().filter(|p| p.name == "Point").map(|p| read_point(p, scale)).collect();
+                d.points = c
+                    .children
+                    .iter()
+                    .filter(|p| p.name == "Point")
+                    .map(|p| read_point(p, scale))
+                    .collect();
             } else {
                 read_style_or_fading(c, &mut d.header.style, &mut d.header.fading);
             }
@@ -47,8 +55,13 @@ impl KvaDrawing for Pencil {
         let mut out = Vec::new();
         if filter.core {
             let mut list = Element::new("PointList");
-            list.attributes.push(("Count".into(), self.points.len().to_string()));
-            list.children = self.points.iter().map(|p| point_leaf("Point", *p)).collect();
+            list.attributes
+                .push(("Count".into(), self.points.len().to_string()));
+            list.children = self
+                .points
+                .iter()
+                .map(|p| point_leaf("Point", *p))
+                .collect();
             out.push(list);
         }
         push_style_and_fading(&mut out, filter, &self.header.style, &self.header.fading);
@@ -56,7 +69,9 @@ impl KvaDrawing for Pencil {
     }
 
     fn content_hash(&self) -> i32 {
-        self.points.iter().fold(0, |h, p| h ^ p.hash_code()) ^ self.header.style.content_hash() ^ self.header.fading.content_hash()
+        self.points.iter().fold(0, |h, p| h ^ p.hash_code())
+            ^ self.header.style.content_hash()
+            ^ self.header.fading.content_hash()
     }
 }
 
@@ -79,7 +94,8 @@ impl KeyedPoints {
 
     fn write(&self) -> Element {
         let mut list = Element::new("PointList");
-        list.attributes.push(("Count".into(), self.0.len().to_string()));
+        list.attributes
+            .push(("Count".into(), self.0.len().to_string()));
         for (key, p) in &self.0 {
             let mut e = point_leaf("Point", *p);
             e.attributes.push(("key".into(), key.clone()));
