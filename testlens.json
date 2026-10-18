@@ -1,0 +1,29 @@
+{
+  "language": "rust",
+  "exclude": [
+    "node_modules",
+    ".git",
+    "Refs",
+    "packages",
+    "bin",
+    "obj",
+    "openspec",
+    ".agents",
+    ".claude",
+    ".hermes",
+    ".agent",
+    "Installer",
+    "Tools",
+    "VideoTests",
+    "Kinovea.Tests",
+    "rust/target",
+    "tests/fixtures"
+  ],
+  "notest": [
+    "*.Designer.cs",
+    "AssemblyInfo.cs",
+    "Program.cs",
+    "Resources.cs",
+    "Settings.cs"
+  ]
+}

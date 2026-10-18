@@ -1,0 +1,811 @@
+framerate,milliseconds,frames,format,symbol,output
+25,0,0,ClassicTime,0,0.00
+25,0,0,ClassicTime,1,0.00
+25,0,0,Frames,0,0
+25,0,0,Frames,1,0
+25,0,0,Milliseconds,0,0
+25,0,0,Milliseconds,1,0 ms
+25,0,0,Microseconds,0,0
+25,0,0,Microseconds,1,0 µs
+25,0,0,TenThousandthOfHours,0,0:00
+25,0,0,TenThousandthOfHours,1,0:00
+25,0,0,HundredthOfMinutes,0,0:00
+25,0,0,HundredthOfMinutes,1,0:00
+25,0,0,TimeAndFrames,0,0.00 (0)
+25,0,0,TimeAndFrames,1,0.00 (0)
+25,0,0,Normalized,0,0.000000
+25,0,0,Normalized,1,0.000000
+25,0,0,Timestamps,0,0
+25,0,0,Timestamps,1,0
+25,1,0,ClassicTime,0,0.00
+25,1,0,ClassicTime,1,0.00
+25,1,0,Frames,0,0
+25,1,0,Frames,1,0
+25,1,0,Milliseconds,0,1
+25,1,0,Milliseconds,1,1 ms
+25,1,0,Microseconds,0,1000
+25,1,0,Microseconds,1,1000 µs
+25,1,0,TenThousandthOfHours,0,0:00
+25,1,0,TenThousandthOfHours,1,0:00
+25,1,0,HundredthOfMinutes,0,0:00
+25,1,0,HundredthOfMinutes,1,0:00
+25,1,0,TimeAndFrames,0,0.00 (0)
+25,1,0,TimeAndFrames,1,0.00 (0)
+25,1,0,Normalized,0,0.000000
+25,1,0,Normalized,1,0.000000
+25,1,0,Timestamps,0,0
+25,1,0,Timestamps,1,0
+25,10,0,ClassicTime,0,0.01
+25,10,0,ClassicTime,1,0.01
+25,10,0,Frames,0,0
+25,10,0,Frames,1,0
+25,10,0,Milliseconds,0,10
+25,10,0,Milliseconds,1,10 ms
+25,10,0,Microseconds,0,10000
+25,10,0,Microseconds,1,10000 µs
+25,10,0,TenThousandthOfHours,0,0:02
+25,10,0,TenThousandthOfHours,1,0:02
+25,10,0,HundredthOfMinutes,0,0:01
+25,10,0,HundredthOfMinutes,1,0:01
+25,10,0,TimeAndFrames,0,0.01 (0)
+25,10,0,TimeAndFrames,1,0.01 (0)
+25,10,0,Normalized,0,0.000000
+25,10,0,Normalized,1,0.000000
+25,10,0,Timestamps,0,0
+25,10,0,Timestamps,1,0
+25,999,25,ClassicTime,0,1.00
+25,999,25,ClassicTime,1,1.00
+25,999,25,Frames,0,25
+25,999,25,Frames,1,25
+25,999,25,Milliseconds,0,999
+25,999,25,Milliseconds,1,999 ms
+25,999,25,Microseconds,0,999000
+25,999,25,Microseconds,1,999000 µs
+25,999,25,TenThousandthOfHours,0,2:77
+25,999,25,TenThousandthOfHours,1,2:77
+25,999,25,HundredthOfMinutes,0,1:66
+25,999,25,HundredthOfMinutes,1,1:66
+25,999,25,TimeAndFrames,0,1.00 (25)
+25,999,25,TimeAndFrames,1,1.00 (25)
+25,999,25,Normalized,0,0.000028
+25,999,25,Normalized,1,0.000028
+25,999,25,Timestamps,0,25
+25,999,25,Timestamps,1,25
+25,1000,25,ClassicTime,0,1.00
+25,1000,25,ClassicTime,1,1.00
+25,1000,25,Frames,0,25
+25,1000,25,Frames,1,25
+25,1000,25,Milliseconds,0,1000
+25,1000,25,Milliseconds,1,1000 ms
+25,1000,25,Microseconds,0,1000000
+25,1000,25,Microseconds,1,1000000 µs
+25,1000,25,TenThousandthOfHours,0,2:77
+25,1000,25,TenThousandthOfHours,1,2:77
+25,1000,25,HundredthOfMinutes,0,1:66
+25,1000,25,HundredthOfMinutes,1,1:66
+25,1000,25,TimeAndFrames,0,1.00 (25)
+25,1000,25,TimeAndFrames,1,1.00 (25)
+25,1000,25,Normalized,0,0.000028
+25,1000,25,Normalized,1,0.000028
+25,1000,25,Timestamps,0,25
+25,1000,25,Timestamps,1,25
+25,1001,25,ClassicTime,0,1.00
+25,1001,25,ClassicTime,1,1.00
+25,1001,25,Frames,0,25
+25,1001,25,Frames,1,25
+25,1001,25,Milliseconds,0,1001
+25,1001,25,Milliseconds,1,1001 ms
+25,1001,25,Microseconds,0,1001000
+25,1001,25,Microseconds,1,1001000 µs
+25,1001,25,TenThousandthOfHours,0,2:78
+25,1001,25,TenThousandthOfHours,1,2:78
+25,1001,25,HundredthOfMinutes,0,1:66
+25,1001,25,HundredthOfMinutes,1,1:66
+25,1001,25,TimeAndFrames,0,1.00 (25)
+25,1001,25,TimeAndFrames,1,1.00 (25)
+25,1001,25,Normalized,0,0.000028
+25,1001,25,Normalized,1,0.000028
+25,1001,25,Timestamps,0,25
+25,1001,25,Timestamps,1,25
+25,1009,25,ClassicTime,0,1.01
+25,1009,25,ClassicTime,1,1.01
+25,1009,25,Frames,0,25
+25,1009,25,Frames,1,25
+25,1009,25,Milliseconds,0,1009
+25,1009,25,Milliseconds,1,1009 ms
+25,1009,25,Microseconds,0,1009000
+25,1009,25,Microseconds,1,1009000 µs
+25,1009,25,TenThousandthOfHours,0,2:80
+25,1009,25,TenThousandthOfHours,1,2:80
+25,1009,25,HundredthOfMinutes,0,1:68
+25,1009,25,HundredthOfMinutes,1,1:68
+25,1009,25,TimeAndFrames,0,1.01 (25)
+25,1009,25,TimeAndFrames,1,1.01 (25)
+25,1009,25,Normalized,0,0.000028
+25,1009,25,Normalized,1,0.000028
+25,1009,25,Timestamps,0,25
+25,1009,25,Timestamps,1,25
+25,9999,250,ClassicTime,0,10.00
+25,9999,250,ClassicTime,1,10.00
+25,9999,250,Frames,0,250
+25,9999,250,Frames,1,250
+25,9999,250,Milliseconds,0,9999
+25,9999,250,Milliseconds,1,9999 ms
+25,9999,250,Microseconds,0,9999000
+25,9999,250,Microseconds,1,9999000 µs
+25,9999,250,TenThousandthOfHours,0,27:77
+25,9999,250,TenThousandthOfHours,1,27:77
+25,9999,250,HundredthOfMinutes,0,16:66
+25,9999,250,HundredthOfMinutes,1,16:66
+25,9999,250,TimeAndFrames,0,10.00 (250)
+25,9999,250,TimeAndFrames,1,10.00 (250)
+25,9999,250,Normalized,0,0.000278
+25,9999,250,Normalized,1,0.000278
+25,9999,250,Timestamps,0,250
+25,9999,250,Timestamps,1,250
+25,59999,1500,ClassicTime,0,1:00.00
+25,59999,1500,ClassicTime,1,1:00.00
+25,59999,1500,Frames,0,1500
+25,59999,1500,Frames,1,1500
+25,59999,1500,Milliseconds,0,59999
+25,59999,1500,Milliseconds,1,59999 ms
+25,59999,1500,Microseconds,0,59999000
+25,59999,1500,Microseconds,1,59999000 µs
+25,59999,1500,TenThousandthOfHours,0,166:66
+25,59999,1500,TenThousandthOfHours,1,166:66
+25,59999,1500,HundredthOfMinutes,0,99:99
+25,59999,1500,HundredthOfMinutes,1,99:99
+25,59999,1500,TimeAndFrames,0,1:00.00 (1500)
+25,59999,1500,TimeAndFrames,1,1:00.00 (1500)
+25,59999,1500,Normalized,0,0.001667
+25,59999,1500,Normalized,1,0.001667
+25,59999,1500,Timestamps,0,1500
+25,59999,1500,Timestamps,1,1500
+25,60000,1500,ClassicTime,0,1:00.00
+25,60000,1500,ClassicTime,1,1:00.00
+25,60000,1500,Frames,0,1500
+25,60000,1500,Frames,1,1500
+25,60000,1500,Milliseconds,0,60000
+25,60000,1500,Milliseconds,1,60000 ms
+25,60000,1500,Microseconds,0,60000000
+25,60000,1500,Microseconds,1,60000000 µs
+25,60000,1500,TenThousandthOfHours,0,166:66
+25,60000,1500,TenThousandthOfHours,1,166:66
+25,60000,1500,HundredthOfMinutes,0,100:00
+25,60000,1500,HundredthOfMinutes,1,100:00
+25,60000,1500,TimeAndFrames,0,1:00.00 (1500)
+25,60000,1500,TimeAndFrames,1,1:00.00 (1500)
+25,60000,1500,Normalized,0,0.001667
+25,60000,1500,Normalized,1,0.001667
+25,60000,1500,Timestamps,0,1500
+25,60000,1500,Timestamps,1,1500
+25,60100,1502,ClassicTime,0,1:00.10
+25,60100,1502,ClassicTime,1,1:00.10
+25,60100,1502,Frames,0,1502
+25,60100,1502,Frames,1,1502
+25,60100,1502,Milliseconds,0,60100
+25,60100,1502,Milliseconds,1,60100 ms
+25,60100,1502,Microseconds,0,60100000
+25,60100,1502,Microseconds,1,60100000 µs
+25,60100,1502,TenThousandthOfHours,0,166:94
+25,60100,1502,TenThousandthOfHours,1,166:94
+25,60100,1502,HundredthOfMinutes,0,100:16
+25,60100,1502,HundredthOfMinutes,1,100:16
+25,60100,1502,TimeAndFrames,0,1:00.10 (1502)
+25,60100,1502,TimeAndFrames,1,1:00.10 (1502)
+25,60100,1502,Normalized,0,0.001669
+25,60100,1502,Normalized,1,0.001669
+25,60100,1502,Timestamps,0,1502
+25,60100,1502,Timestamps,1,1502
+25,60999,1525,ClassicTime,0,1:01.00
+25,60999,1525,ClassicTime,1,1:01.00
+25,60999,1525,Frames,0,1525
+25,60999,1525,Frames,1,1525
+25,60999,1525,Milliseconds,0,60999
+25,60999,1525,Milliseconds,1,60999 ms
+25,60999,1525,Microseconds,0,60999000
+25,60999,1525,Microseconds,1,60999000 µs
+25,60999,1525,TenThousandthOfHours,0,169:44
+25,60999,1525,TenThousandthOfHours,1,169:44
+25,60999,1525,HundredthOfMinutes,0,101:66
+25,60999,1525,HundredthOfMinutes,1,101:66
+25,60999,1525,TimeAndFrames,0,1:01.00 (1525)
+25,60999,1525,TimeAndFrames,1,1:01.00 (1525)
+25,60999,1525,Normalized,0,0.001694
+25,60999,1525,Normalized,1,0.001694
+25,60999,1525,Timestamps,0,1525
+25,60999,1525,Timestamps,1,1525
+25,3599999,90000,ClassicTime,0,1:00:00.00
+25,3599999,90000,ClassicTime,1,1:00:00.00
+25,3599999,90000,Frames,0,90000
+25,3599999,90000,Frames,1,90000
+25,3599999,90000,Milliseconds,0,3599999
+25,3599999,90000,Milliseconds,1,3599999 ms
+25,3599999,90000,Microseconds,0,-2147483648
+25,3599999,90000,Microseconds,1,-2147483648 µs
+25,3599999,90000,TenThousandthOfHours,0,9999:99
+25,3599999,90000,TenThousandthOfHours,1,9999:99
+25,3599999,90000,HundredthOfMinutes,0,5999:99
+25,3599999,90000,HundredthOfMinutes,1,5999:99
+25,3599999,90000,TimeAndFrames,0,1:00:00.00 (90000)
+25,3599999,90000,TimeAndFrames,1,1:00:00.00 (90000)
+25,3599999,90000,Normalized,0,0.100000
+25,3599999,90000,Normalized,1,0.100000
+25,3599999,90000,Timestamps,0,90000
+25,3599999,90000,Timestamps,1,90000
+25,3600000,90000,ClassicTime,0,1:00:00.00
+25,3600000,90000,ClassicTime,1,1:00:00.00
+25,3600000,90000,Frames,0,90000
+25,3600000,90000,Frames,1,90000
+25,3600000,90000,Milliseconds,0,3600000
+25,3600000,90000,Milliseconds,1,3600000 ms
+25,3600000,90000,Microseconds,0,-2147483648
+25,3600000,90000,Microseconds,1,-2147483648 µs
+25,3600000,90000,TenThousandthOfHours,0,10000:00
+25,3600000,90000,TenThousandthOfHours,1,10000:00
+25,3600000,90000,HundredthOfMinutes,0,6000:00
+25,3600000,90000,HundredthOfMinutes,1,6000:00
+25,3600000,90000,TimeAndFrames,0,1:00:00.00 (90000)
+25,3600000,90000,TimeAndFrames,1,1:00:00.00 (90000)
+25,3600000,90000,Normalized,0,0.100000
+25,3600000,90000,Normalized,1,0.100000
+25,3600000,90000,Timestamps,0,90000
+25,3600000,90000,Timestamps,1,90000
+25,36000000,900000,ClassicTime,0,10:00:00.00
+25,36000000,900000,ClassicTime,1,10:00:00.00
+25,36000000,900000,Frames,0,900000
+25,36000000,900000,Frames,1,900000
+25,36000000,900000,Milliseconds,0,36000000
+25,36000000,900000,Milliseconds,1,36000000 ms
+25,36000000,900000,Microseconds,0,-2147483648
+25,36000000,900000,Microseconds,1,-2147483648 µs
+25,36000000,900000,TenThousandthOfHours,0,100000:00
+25,36000000,900000,TenThousandthOfHours,1,100000:00
+25,36000000,900000,HundredthOfMinutes,0,60000:00
+25,36000000,900000,HundredthOfMinutes,1,60000:00
+25,36000000,900000,TimeAndFrames,0,10:00:00.00 (900000)
+25,36000000,900000,TimeAndFrames,1,10:00:00.00 (900000)
+25,36000000,900000,Normalized,0,1.000000
+25,36000000,900000,Normalized,1,1.000000
+25,36000000,900000,Timestamps,0,900000
+25,36000000,900000,Timestamps,1,900000
+29.97,0,0,ClassicTime,0,0.00
+29.97,0,0,ClassicTime,1,0.00
+29.97,0,0,Frames,0,0
+29.97,0,0,Frames,1,0
+29.97,0,0,Milliseconds,0,0
+29.97,0,0,Milliseconds,1,0 ms
+29.97,0,0,Microseconds,0,0
+29.97,0,0,Microseconds,1,0 µs
+29.97,0,0,TenThousandthOfHours,0,0:00
+29.97,0,0,TenThousandthOfHours,1,0:00
+29.97,0,0,HundredthOfMinutes,0,0:00
+29.97,0,0,HundredthOfMinutes,1,0:00
+29.97,0,0,TimeAndFrames,0,0.00 (0)
+29.97,0,0,TimeAndFrames,1,0.00 (0)
+29.97,0,0,Normalized,0,0.0000000
+29.97,0,0,Normalized,1,0.0000000
+29.97,0,0,Timestamps,0,0
+29.97,0,0,Timestamps,1,0
+29.97,1,0,ClassicTime,0,0.00
+29.97,1,0,ClassicTime,1,0.00
+29.97,1,0,Frames,0,0
+29.97,1,0,Frames,1,0
+29.97,1,0,Milliseconds,0,1
+29.97,1,0,Milliseconds,1,1 ms
+29.97,1,0,Microseconds,0,1000
+29.97,1,0,Microseconds,1,1000 µs
+29.97,1,0,TenThousandthOfHours,0,0:00
+29.97,1,0,TenThousandthOfHours,1,0:00
+29.97,1,0,HundredthOfMinutes,0,0:00
+29.97,1,0,HundredthOfMinutes,1,0:00
+29.97,1,0,TimeAndFrames,0,0.00 (0)
+29.97,1,0,TimeAndFrames,1,0.00 (0)
+29.97,1,0,Normalized,0,0.0000000
+29.97,1,0,Normalized,1,0.0000000
+29.97,1,0,Timestamps,0,0
+29.97,1,0,Timestamps,1,0
+29.97,10,0,ClassicTime,0,0.01
+29.97,10,0,ClassicTime,1,0.01
+29.97,10,0,Frames,0,0
+29.97,10,0,Frames,1,0
+29.97,10,0,Milliseconds,0,10
+29.97,10,0,Milliseconds,1,10 ms
+29.97,10,0,Microseconds,0,10000
+29.97,10,0,Microseconds,1,10000 µs
+29.97,10,0,TenThousandthOfHours,0,0:02
+29.97,10,0,TenThousandthOfHours,1,0:02
+29.97,10,0,HundredthOfMinutes,0,0:01
+29.97,10,0,HundredthOfMinutes,1,0:01
+29.97,10,0,TimeAndFrames,0,0.01 (0)
+29.97,10,0,TimeAndFrames,1,0.01 (0)
+29.97,10,0,Normalized,0,0.0000000
+29.97,10,0,Normalized,1,0.0000000
+29.97,10,0,Timestamps,0,0
+29.97,10,0,Timestamps,1,0
+29.97,999,30,ClassicTime,0,1.00
+29.97,999,30,ClassicTime,1,1.00
+29.97,999,30,Frames,0,30
+29.97,999,30,Frames,1,30
+29.97,999,30,Milliseconds,0,999
+29.97,999,30,Milliseconds,1,999 ms
+29.97,999,30,Microseconds,0,999000
+29.97,999,30,Microseconds,1,999000 µs
+29.97,999,30,TenThousandthOfHours,0,2:77
+29.97,999,30,TenThousandthOfHours,1,2:77
+29.97,999,30,HundredthOfMinutes,0,1:66
+29.97,999,30,HundredthOfMinutes,1,1:66
+29.97,999,30,TimeAndFrames,0,1.00 (30)
+29.97,999,30,TimeAndFrames,1,1.00 (30)
+29.97,999,30,Normalized,0,0.0000278
+29.97,999,30,Normalized,1,0.0000278
+29.97,999,30,Timestamps,0,30
+29.97,999,30,Timestamps,1,30
+29.97,1000,30,ClassicTime,0,1.00
+29.97,1000,30,ClassicTime,1,1.00
+29.97,1000,30,Frames,0,30
+29.97,1000,30,Frames,1,30
+29.97,1000,30,Milliseconds,0,1000
+29.97,1000,30,Milliseconds,1,1000 ms
+29.97,1000,30,Microseconds,0,1000000
+29.97,1000,30,Microseconds,1,1000000 µs
+29.97,1000,30,TenThousandthOfHours,0,2:77
+29.97,1000,30,TenThousandthOfHours,1,2:77
+29.97,1000,30,HundredthOfMinutes,0,1:66
+29.97,1000,30,HundredthOfMinutes,1,1:66
+29.97,1000,30,TimeAndFrames,0,1.00 (30)
+29.97,1000,30,TimeAndFrames,1,1.00 (30)
+29.97,1000,30,Normalized,0,0.0000278
+29.97,1000,30,Normalized,1,0.0000278
+29.97,1000,30,Timestamps,0,30
+29.97,1000,30,Timestamps,1,30
+29.97,1001,30,ClassicTime,0,1.00
+29.97,1001,30,ClassicTime,1,1.00
+29.97,1001,30,Frames,0,30
+29.97,1001,30,Frames,1,30
+29.97,1001,30,Milliseconds,0,1001
+29.97,1001,30,Milliseconds,1,1001 ms
+29.97,1001,30,Microseconds,0,1001000
+29.97,1001,30,Microseconds,1,1001000 µs
+29.97,1001,30,TenThousandthOfHours,0,2:78
+29.97,1001,30,TenThousandthOfHours,1,2:78
+29.97,1001,30,HundredthOfMinutes,0,1:66
+29.97,1001,30,HundredthOfMinutes,1,1:66
+29.97,1001,30,TimeAndFrames,0,1.00 (30)
+29.97,1001,30,TimeAndFrames,1,1.00 (30)
+29.97,1001,30,Normalized,0,0.0000278
+29.97,1001,30,Normalized,1,0.0000278
+29.97,1001,30,Timestamps,0,30
+29.97,1001,30,Timestamps,1,30
+29.97,1009,30,ClassicTime,0,1.01
+29.97,1009,30,ClassicTime,1,1.01
+29.97,1009,30,Frames,0,30
+29.97,1009,30,Frames,1,30
+29.97,1009,30,Milliseconds,0,1009
+29.97,1009,30,Milliseconds,1,1009 ms
+29.97,1009,30,Microseconds,0,1009000
+29.97,1009,30,Microseconds,1,1009000 µs
+29.97,1009,30,TenThousandthOfHours,0,2:80
+29.97,1009,30,TenThousandthOfHours,1,2:80
+29.97,1009,30,HundredthOfMinutes,0,1:68
+29.97,1009,30,HundredthOfMinutes,1,1:68
+29.97,1009,30,TimeAndFrames,0,1.01 (30)
+29.97,1009,30,TimeAndFrames,1,1.01 (30)
+29.97,1009,30,Normalized,0,0.0000278
+29.97,1009,30,Normalized,1,0.0000278
+29.97,1009,30,Timestamps,0,30
+29.97,1009,30,Timestamps,1,30
+29.97,9999,300,ClassicTime,0,10.00
+29.97,9999,300,ClassicTime,1,10.00
+29.97,9999,300,Frames,0,300
+29.97,9999,300,Frames,1,300
+29.97,9999,300,Milliseconds,0,9999
+29.97,9999,300,Milliseconds,1,9999 ms
+29.97,9999,300,Microseconds,0,9999000
+29.97,9999,300,Microseconds,1,9999000 µs
+29.97,9999,300,TenThousandthOfHours,0,27:77
+29.97,9999,300,TenThousandthOfHours,1,27:77
+29.97,9999,300,HundredthOfMinutes,0,16:66
+29.97,9999,300,HundredthOfMinutes,1,16:66
+29.97,9999,300,TimeAndFrames,0,10.00 (300)
+29.97,9999,300,TimeAndFrames,1,10.00 (300)
+29.97,9999,300,Normalized,0,0.0002781
+29.97,9999,300,Normalized,1,0.0002781
+29.97,9999,300,Timestamps,0,300
+29.97,9999,300,Timestamps,1,300
+29.97,59999,1798,ClassicTime,0,1:00.00
+29.97,59999,1798,ClassicTime,1,1:00.00
+29.97,59999,1798,Frames,0,1798
+29.97,59999,1798,Frames,1,1798
+29.97,59999,1798,Milliseconds,0,59999
+29.97,59999,1798,Milliseconds,1,59999 ms
+29.97,59999,1798,Microseconds,0,59999000
+29.97,59999,1798,Microseconds,1,59999000 µs
+29.97,59999,1798,TenThousandthOfHours,0,166:66
+29.97,59999,1798,TenThousandthOfHours,1,166:66
+29.97,59999,1798,HundredthOfMinutes,0,99:99
+29.97,59999,1798,HundredthOfMinutes,1,99:99
+29.97,59999,1798,TimeAndFrames,0,1:00.00 (1798)
+29.97,59999,1798,TimeAndFrames,1,1:00.00 (1798)
+29.97,59999,1798,Normalized,0,0.0016665
+29.97,59999,1798,Normalized,1,0.0016665
+29.97,59999,1798,Timestamps,0,1798
+29.97,59999,1798,Timestamps,1,1798
+29.97,60000,1798,ClassicTime,0,1:00.00
+29.97,60000,1798,ClassicTime,1,1:00.00
+29.97,60000,1798,Frames,0,1798
+29.97,60000,1798,Frames,1,1798
+29.97,60000,1798,Milliseconds,0,60000
+29.97,60000,1798,Milliseconds,1,60000 ms
+29.97,60000,1798,Microseconds,0,60000000
+29.97,60000,1798,Microseconds,1,60000000 µs
+29.97,60000,1798,TenThousandthOfHours,0,166:66
+29.97,60000,1798,TenThousandthOfHours,1,166:66
+29.97,60000,1798,HundredthOfMinutes,0,100:00
+29.97,60000,1798,HundredthOfMinutes,1,100:00
+29.97,60000,1798,TimeAndFrames,0,1:00.00 (1798)
+29.97,60000,1798,TimeAndFrames,1,1:00.00 (1798)
+29.97,60000,1798,Normalized,0,0.0016665
+29.97,60000,1798,Normalized,1,0.0016665
+29.97,60000,1798,Timestamps,0,1798
+29.97,60000,1798,Timestamps,1,1798
+29.97,60100,1801,ClassicTime,0,1:00.10
+29.97,60100,1801,ClassicTime,1,1:00.10
+29.97,60100,1801,Frames,0,1801
+29.97,60100,1801,Frames,1,1801
+29.97,60100,1801,Milliseconds,0,60100
+29.97,60100,1801,Milliseconds,1,60100 ms
+29.97,60100,1801,Microseconds,0,60100000
+29.97,60100,1801,Microseconds,1,60100000 µs
+29.97,60100,1801,TenThousandthOfHours,0,166:94
+29.97,60100,1801,TenThousandthOfHours,1,166:94
+29.97,60100,1801,HundredthOfMinutes,0,100:16
+29.97,60100,1801,HundredthOfMinutes,1,100:16
+29.97,60100,1801,TimeAndFrames,0,1:00.10 (1801)
+29.97,60100,1801,TimeAndFrames,1,1:00.10 (1801)
+29.97,60100,1801,Normalized,0,0.0016693
+29.97,60100,1801,Normalized,1,0.0016693
+29.97,60100,1801,Timestamps,0,1801
+29.97,60100,1801,Timestamps,1,1801
+29.97,60999,1828,ClassicTime,0,1:01.00
+29.97,60999,1828,ClassicTime,1,1:01.00
+29.97,60999,1828,Frames,0,1828
+29.97,60999,1828,Frames,1,1828
+29.97,60999,1828,Milliseconds,0,60999
+29.97,60999,1828,Milliseconds,1,60999 ms
+29.97,60999,1828,Microseconds,0,60999000
+29.97,60999,1828,Microseconds,1,60999000 µs
+29.97,60999,1828,TenThousandthOfHours,0,169:44
+29.97,60999,1828,TenThousandthOfHours,1,169:44
+29.97,60999,1828,HundredthOfMinutes,0,101:66
+29.97,60999,1828,HundredthOfMinutes,1,101:66
+29.97,60999,1828,TimeAndFrames,0,1:01.00 (1828)
+29.97,60999,1828,TimeAndFrames,1,1:01.00 (1828)
+29.97,60999,1828,Normalized,0,0.0016943
+29.97,60999,1828,Normalized,1,0.0016943
+29.97,60999,1828,Timestamps,0,1828
+29.97,60999,1828,Timestamps,1,1828
+29.97,3599999,107892,ClassicTime,0,1:00:00.00
+29.97,3599999,107892,ClassicTime,1,1:00:00.00
+29.97,3599999,107892,Frames,0,107892
+29.97,3599999,107892,Frames,1,107892
+29.97,3599999,107892,Milliseconds,0,3599999
+29.97,3599999,107892,Milliseconds,1,3599999 ms
+29.97,3599999,107892,Microseconds,0,-2147483648
+29.97,3599999,107892,Microseconds,1,-2147483648 µs
+29.97,3599999,107892,TenThousandthOfHours,0,9999:99
+29.97,3599999,107892,TenThousandthOfHours,1,9999:99
+29.97,3599999,107892,HundredthOfMinutes,0,5999:99
+29.97,3599999,107892,HundredthOfMinutes,1,5999:99
+29.97,3599999,107892,TimeAndFrames,0,1:00:00.00 (107892)
+29.97,3599999,107892,TimeAndFrames,1,1:00:00.00 (107892)
+29.97,3599999,107892,Normalized,0,0.1000000
+29.97,3599999,107892,Normalized,1,0.1000000
+29.97,3599999,107892,Timestamps,0,107892
+29.97,3599999,107892,Timestamps,1,107892
+29.97,3600000,107892,ClassicTime,0,1:00:00.00
+29.97,3600000,107892,ClassicTime,1,1:00:00.00
+29.97,3600000,107892,Frames,0,107892
+29.97,3600000,107892,Frames,1,107892
+29.97,3600000,107892,Milliseconds,0,3600000
+29.97,3600000,107892,Milliseconds,1,3600000 ms
+29.97,3600000,107892,Microseconds,0,-2147483648
+29.97,3600000,107892,Microseconds,1,-2147483648 µs
+29.97,3600000,107892,TenThousandthOfHours,0,10000:00
+29.97,3600000,107892,TenThousandthOfHours,1,10000:00
+29.97,3600000,107892,HundredthOfMinutes,0,6000:00
+29.97,3600000,107892,HundredthOfMinutes,1,6000:00
+29.97,3600000,107892,TimeAndFrames,0,1:00:00.00 (107892)
+29.97,3600000,107892,TimeAndFrames,1,1:00:00.00 (107892)
+29.97,3600000,107892,Normalized,0,0.1000000
+29.97,3600000,107892,Normalized,1,0.1000000
+29.97,3600000,107892,Timestamps,0,107892
+29.97,3600000,107892,Timestamps,1,107892
+29.97,36000000,1078920,ClassicTime,0,10:00:00.00
+29.97,36000000,1078920,ClassicTime,1,10:00:00.00
+29.97,36000000,1078920,Frames,0,1078920
+29.97,36000000,1078920,Frames,1,1078920
+29.97,36000000,1078920,Milliseconds,0,36000000
+29.97,36000000,1078920,Milliseconds,1,36000000 ms
+29.97,36000000,1078920,Microseconds,0,-2147483648
+29.97,36000000,1078920,Microseconds,1,-2147483648 µs
+29.97,36000000,1078920,TenThousandthOfHours,0,100000:00
+29.97,36000000,1078920,TenThousandthOfHours,1,100000:00
+29.97,36000000,1078920,HundredthOfMinutes,0,60000:00
+29.97,36000000,1078920,HundredthOfMinutes,1,60000:00
+29.97,36000000,1078920,TimeAndFrames,0,10:00:00.00 (1078920)
+29.97,36000000,1078920,TimeAndFrames,1,10:00:00.00 (1078920)
+29.97,36000000,1078920,Normalized,0,1.0000000
+29.97,36000000,1078920,Normalized,1,1.0000000
+29.97,36000000,1078920,Timestamps,0,1078920
+29.97,36000000,1078920,Timestamps,1,1078920
+60,0,0,ClassicTime,0,0.00
+60,0,0,ClassicTime,1,0.00
+60,0,0,Frames,0,0
+60,0,0,Frames,1,0
+60,0,0,Milliseconds,0,0
+60,0,0,Milliseconds,1,0 ms
+60,0,0,Microseconds,0,0
+60,0,0,Microseconds,1,0 µs
+60,0,0,TenThousandthOfHours,0,0:00
+60,0,0,TenThousandthOfHours,1,0:00
+60,0,0,HundredthOfMinutes,0,0:00
+60,0,0,HundredthOfMinutes,1,0:00
+60,0,0,TimeAndFrames,0,0.00 (0)
+60,0,0,TimeAndFrames,1,0.00 (0)
+60,0,0,Normalized,0,0.0000000
+60,0,0,Normalized,1,0.0000000
+60,0,0,Timestamps,0,0
+60,0,0,Timestamps,1,0
+60,1,0,ClassicTime,0,0.00
+60,1,0,ClassicTime,1,0.00
+60,1,0,Frames,0,0
+60,1,0,Frames,1,0
+60,1,0,Milliseconds,0,1
+60,1,0,Milliseconds,1,1 ms
+60,1,0,Microseconds,0,1000
+60,1,0,Microseconds,1,1000 µs
+60,1,0,TenThousandthOfHours,0,0:00
+60,1,0,TenThousandthOfHours,1,0:00
+60,1,0,HundredthOfMinutes,0,0:00
+60,1,0,HundredthOfMinutes,1,0:00
+60,1,0,TimeAndFrames,0,0.00 (0)
+60,1,0,TimeAndFrames,1,0.00 (0)
+60,1,0,Normalized,0,0.0000000
+60,1,0,Normalized,1,0.0000000
+60,1,0,Timestamps,0,0
+60,1,0,Timestamps,1,0
+60,10,1,ClassicTime,0,0.01
+60,10,1,ClassicTime,1,0.01
+60,10,1,Frames,0,1
+60,10,1,Frames,1,1
+60,10,1,Milliseconds,0,10
+60,10,1,Milliseconds,1,10 ms
+60,10,1,Microseconds,0,10000
+60,10,1,Microseconds,1,10000 µs
+60,10,1,TenThousandthOfHours,0,0:02
+60,10,1,TenThousandthOfHours,1,0:02
+60,10,1,HundredthOfMinutes,0,0:01
+60,10,1,HundredthOfMinutes,1,0:01
+60,10,1,TimeAndFrames,0,0.01 (1)
+60,10,1,TimeAndFrames,1,0.01 (1)
+60,10,1,Normalized,0,0.0000005
+60,10,1,Normalized,1,0.0000005
+60,10,1,Timestamps,0,1
+60,10,1,Timestamps,1,1
+60,999,60,ClassicTime,0,1.00
+60,999,60,ClassicTime,1,1.00
+60,999,60,Frames,0,60
+60,999,60,Frames,1,60
+60,999,60,Milliseconds,0,999
+60,999,60,Milliseconds,1,999 ms
+60,999,60,Microseconds,0,999000
+60,999,60,Microseconds,1,999000 µs
+60,999,60,TenThousandthOfHours,0,2:77
+60,999,60,TenThousandthOfHours,1,2:77
+60,999,60,HundredthOfMinutes,0,1:66
+60,999,60,HundredthOfMinutes,1,1:66
+60,999,60,TimeAndFrames,0,1.00 (60)
+60,999,60,TimeAndFrames,1,1.00 (60)
+60,999,60,Normalized,0,0.0000278
+60,999,60,Normalized,1,0.0000278
+60,999,60,Timestamps,0,60
+60,999,60,Timestamps,1,60
+60,1000,60,ClassicTime,0,1.00
+60,1000,60,ClassicTime,1,1.00
+60,1000,60,Frames,0,60
+60,1000,60,Frames,1,60
+60,1000,60,Milliseconds,0,1000
+60,1000,60,Milliseconds,1,1000 ms
+60,1000,60,Microseconds,0,1000000
+60,1000,60,Microseconds,1,1000000 µs
+60,1000,60,TenThousandthOfHours,0,2:77
+60,1000,60,TenThousandthOfHours,1,2:77
+60,1000,60,HundredthOfMinutes,0,1:66
+60,1000,60,HundredthOfMinutes,1,1:66
+60,1000,60,TimeAndFrames,0,1.00 (60)
+60,1000,60,TimeAndFrames,1,1.00 (60)
+60,1000,60,Normalized,0,0.0000278
+60,1000,60,Normalized,1,0.0000278
+60,1000,60,Timestamps,0,60
+60,1000,60,Timestamps,1,60
+60,1001,60,ClassicTime,0,1.00
+60,1001,60,ClassicTime,1,1.00
+60,1001,60,Frames,0,60
+60,1001,60,Frames,1,60
+60,1001,60,Milliseconds,0,1001
+60,1001,60,Milliseconds,1,1001 ms
+60,1001,60,Microseconds,0,1001000
+60,1001,60,Microseconds,1,1001000 µs
+60,1001,60,TenThousandthOfHours,0,2:78
+60,1001,60,TenThousandthOfHours,1,2:78
+60,1001,60,HundredthOfMinutes,0,1:66
+60,1001,60,HundredthOfMinutes,1,1:66
+60,1001,60,TimeAndFrames,0,1.00 (60)
+60,1001,60,TimeAndFrames,1,1.00 (60)
+60,1001,60,Normalized,0,0.0000278
+60,1001,60,Normalized,1,0.0000278
+60,1001,60,Timestamps,0,60
+60,1001,60,Timestamps,1,60
+60,1009,61,ClassicTime,0,1.01
+60,1009,61,ClassicTime,1,1.01
+60,1009,61,Frames,0,61
+60,1009,61,Frames,1,61
+60,1009,61,Milliseconds,0,1009
+60,1009,61,Milliseconds,1,1009 ms
+60,1009,61,Microseconds,0,1009000
+60,1009,61,Microseconds,1,1009000 µs
+60,1009,61,TenThousandthOfHours,0,2:80
+60,1009,61,TenThousandthOfHours,1,2:80
+60,1009,61,HundredthOfMinutes,0,1:68
+60,1009,61,HundredthOfMinutes,1,1:68
+60,1009,61,TimeAndFrames,0,1.01 (61)
+60,1009,61,TimeAndFrames,1,1.01 (61)
+60,1009,61,Normalized,0,0.0000282
+60,1009,61,Normalized,1,0.0000282
+60,1009,61,Timestamps,0,61
+60,1009,61,Timestamps,1,61
+60,9999,600,ClassicTime,0,10.00
+60,9999,600,ClassicTime,1,10.00
+60,9999,600,Frames,0,600
+60,9999,600,Frames,1,600
+60,9999,600,Milliseconds,0,9999
+60,9999,600,Milliseconds,1,9999 ms
+60,9999,600,Microseconds,0,9999000
+60,9999,600,Microseconds,1,9999000 µs
+60,9999,600,TenThousandthOfHours,0,27:77
+60,9999,600,TenThousandthOfHours,1,27:77
+60,9999,600,HundredthOfMinutes,0,16:66
+60,9999,600,HundredthOfMinutes,1,16:66
+60,9999,600,TimeAndFrames,0,10.00 (600)
+60,9999,600,TimeAndFrames,1,10.00 (600)
+60,9999,600,Normalized,0,0.0002778
+60,9999,600,Normalized,1,0.0002778
+60,9999,600,Timestamps,0,600
+60,9999,600,Timestamps,1,600
+60,59999,3600,ClassicTime,0,1:00.00
+60,59999,3600,ClassicTime,1,1:00.00
+60,59999,3600,Frames,0,3600
+60,59999,3600,Frames,1,3600
+60,59999,3600,Milliseconds,0,59999
+60,59999,3600,Milliseconds,1,59999 ms
+60,59999,3600,Microseconds,0,59999000
+60,59999,3600,Microseconds,1,59999000 µs
+60,59999,3600,TenThousandthOfHours,0,166:66
+60,59999,3600,TenThousandthOfHours,1,166:66
+60,59999,3600,HundredthOfMinutes,0,99:99
+60,59999,3600,HundredthOfMinutes,1,99:99
+60,59999,3600,TimeAndFrames,0,1:00.00 (3600)
+60,59999,3600,TimeAndFrames,1,1:00.00 (3600)
+60,59999,3600,Normalized,0,0.0016667
+60,59999,3600,Normalized,1,0.0016667
+60,59999,3600,Timestamps,0,3600
+60,59999,3600,Timestamps,1,3600
+60,60000,3600,ClassicTime,0,1:00.00
+60,60000,3600,ClassicTime,1,1:00.00
+60,60000,3600,Frames,0,3600
+60,60000,3600,Frames,1,3600
+60,60000,3600,Milliseconds,0,60000
+60,60000,3600,Milliseconds,1,60000 ms
+60,60000,3600,Microseconds,0,60000000
+60,60000,3600,Microseconds,1,60000000 µs
+60,60000,3600,TenThousandthOfHours,0,166:66
+60,60000,3600,TenThousandthOfHours,1,166:66
+60,60000,3600,HundredthOfMinutes,0,100:00
+60,60000,3600,HundredthOfMinutes,1,100:00
+60,60000,3600,TimeAndFrames,0,1:00.00 (3600)
+60,60000,3600,TimeAndFrames,1,1:00.00 (3600)
+60,60000,3600,Normalized,0,0.0016667
+60,60000,3600,Normalized,1,0.0016667
+60,60000,3600,Timestamps,0,3600
+60,60000,3600,Timestamps,1,3600
+60,60100,3606,ClassicTime,0,1:00.10
+60,60100,3606,ClassicTime,1,1:00.10
+60,60100,3606,Frames,0,3606
+60,60100,3606,Frames,1,3606
+60,60100,3606,Milliseconds,0,60100
+60,60100,3606,Milliseconds,1,60100 ms
+60,60100,3606,Microseconds,0,60100000
+60,60100,3606,Microseconds,1,60100000 µs
+60,60100,3606,TenThousandthOfHours,0,166:94
+60,60100,3606,TenThousandthOfHours,1,166:94
+60,60100,3606,HundredthOfMinutes,0,100:16
+60,60100,3606,HundredthOfMinutes,1,100:16
+60,60100,3606,TimeAndFrames,0,1:00.10 (3606)
+60,60100,3606,TimeAndFrames,1,1:00.10 (3606)
+60,60100,3606,Normalized,0,0.0016694
+60,60100,3606,Normalized,1,0.0016694
+60,60100,3606,Timestamps,0,3606
+60,60100,3606,Timestamps,1,3606
+60,60999,3660,ClassicTime,0,1:01.00
+60,60999,3660,ClassicTime,1,1:01.00
+60,60999,3660,Frames,0,3660
+60,60999,3660,Frames,1,3660
+60,60999,3660,Milliseconds,0,60999
+60,60999,3660,Milliseconds,1,60999 ms
+60,60999,3660,Microseconds,0,60999000
+60,60999,3660,Microseconds,1,60999000 µs
+60,60999,3660,TenThousandthOfHours,0,169:44
+60,60999,3660,TenThousandthOfHours,1,169:44
+60,60999,3660,HundredthOfMinutes,0,101:66
+60,60999,3660,HundredthOfMinutes,1,101:66
+60,60999,3660,TimeAndFrames,0,1:01.00 (3660)
+60,60999,3660,TimeAndFrames,1,1:01.00 (3660)
+60,60999,3660,Normalized,0,0.0016944
+60,60999,3660,Normalized,1,0.0016944
+60,60999,3660,Timestamps,0,3660
+60,60999,3660,Timestamps,1,3660
+60,3599999,216000,ClassicTime,0,1:00:00.00
+60,3599999,216000,ClassicTime,1,1:00:00.00
+60,3599999,216000,Frames,0,216000
+60,3599999,216000,Frames,1,216000
+60,3599999,216000,Milliseconds,0,3599999
+60,3599999,216000,Milliseconds,1,3599999 ms
+60,3599999,216000,Microseconds,0,-2147483648
+60,3599999,216000,Microseconds,1,-2147483648 µs
+60,3599999,216000,TenThousandthOfHours,0,9999:99
+60,3599999,216000,TenThousandthOfHours,1,9999:99
+60,3599999,216000,HundredthOfMinutes,0,5999:99
+60,3599999,216000,HundredthOfMinutes,1,5999:99
+60,3599999,216000,TimeAndFrames,0,1:00:00.00 (216000)
+60,3599999,216000,TimeAndFrames,1,1:00:00.00 (216000)
+60,3599999,216000,Normalized,0,0.1000000
+60,3599999,216000,Normalized,1,0.1000000
+60,3599999,216000,Timestamps,0,216000
+60,3599999,216000,Timestamps,1,216000
+60,3600000,216000,ClassicTime,0,1:00:00.00
+60,3600000,216000,ClassicTime,1,1:00:00.00
+60,3600000,216000,Frames,0,216000
+60,3600000,216000,Frames,1,216000
+60,3600000,216000,Milliseconds,0,3600000
+60,3600000,216000,Milliseconds,1,3600000 ms
+60,3600000,216000,Microseconds,0,-2147483648
+60,3600000,216000,Microseconds,1,-2147483648 µs
+60,3600000,216000,TenThousandthOfHours,0,10000:00
+60,3600000,216000,TenThousandthOfHours,1,10000:00
+60,3600000,216000,HundredthOfMinutes,0,6000:00
+60,3600000,216000,HundredthOfMinutes,1,6000:00
+60,3600000,216000,TimeAndFrames,0,1:00:00.00 (216000)
+60,3600000,216000,TimeAndFrames,1,1:00:00.00 (216000)
+60,3600000,216000,Normalized,0,0.1000000
+60,3600000,216000,Normalized,1,0.1000000
+60,3600000,216000,Timestamps,0,216000
+60,3600000,216000,Timestamps,1,216000
+60,36000000,2160000,ClassicTime,0,10:00:00.00
+60,36000000,2160000,ClassicTime,1,10:00:00.00
+60,36000000,2160000,Frames,0,2160000
+60,36000000,2160000,Frames,1,2160000
+60,36000000,2160000,Milliseconds,0,36000000
+60,36000000,2160000,Milliseconds,1,36000000 ms
+60,36000000,2160000,Microseconds,0,-2147483648
+60,36000000,2160000,Microseconds,1,-2147483648 µs
+60,36000000,2160000,TenThousandthOfHours,0,100000:00
+60,36000000,2160000,TenThousandthOfHours,1,100000:00
+60,36000000,2160000,HundredthOfMinutes,0,60000:00
+60,36000000,2160000,HundredthOfMinutes,1,60000:00
+60,36000000,2160000,TimeAndFrames,0,10:00:00.00 (2160000)
+60,36000000,2160000,TimeAndFrames,1,10:00:00.00 (2160000)
+60,36000000,2160000,Normalized,0,1.0000000
+60,36000000,2160000,Normalized,1,1.0000000
+60,36000000,2160000,Timestamps,0,2160000
+60,36000000,2160000,Timestamps,1,2160000
