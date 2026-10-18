@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using Kinovea.ScreenManager;
@@ -115,6 +116,41 @@ namespace Kinovea.FixtureGen
         {
             string text = File.ReadAllText(path, Encoding.UTF8);
             WriteText(path, text);
+        }
+
+        private static readonly Regex guidRegex = new Regex("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}");
+
+        /// <summary>
+        /// Replaces every GUID by a stable id in order of first appearance so files produced by
+        /// code calling Guid.NewGuid() are deterministic. The empty GUID is left untouched.
+        /// </summary>
+        public static void NormalizeIds(string path)
+        {
+            Dictionary<string, string> map = new Dictionary<string, string>();
+            string text = File.ReadAllText(path, Utf8NoBom);
+            text = guidRegex.Replace(text, m =>
+            {
+                if (m.Value == "00000000-0000-0000-0000-000000000000")
+                    return m.Value;
+                string stable;
+                if (!map.TryGetValue(m.Value, out stable))
+                {
+                    stable = "00000000-0000-4000-8000-" + (map.Count + 1).ToString("D12", Culture);
+                    map[m.Value] = stable;
+                }
+                return stable;
+            });
+            WriteText(path, text);
+        }
+
+        /// <summary>
+        /// Replaces the user's Documents folder by a fixed token so paths are host independent.
+        /// </summary>
+        public static void NormalizeUserPaths(string path)
+        {
+            string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string text = File.ReadAllText(path, Utf8NoBom);
+            WriteText(path, text.Replace(documents, "{MyDocuments}"));
         }
 
         public static string R(double value)

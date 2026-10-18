@@ -35,6 +35,8 @@ namespace Kinovea.FixtureGen.Areas
             string output = Path.Combine(outDir, "Preferences.xml");
             File.Copy(prefsFile, output, true);
             Oracle.NormalizeTextFile(output);
+            Oracle.NormalizeIds(output);
+            Oracle.NormalizeUserPaths(output);
 
             File.Delete(prefsFile);
             PreferencesManager.Initialize();
