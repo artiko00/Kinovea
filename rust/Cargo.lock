@@ -168,6 +168,9 @@ dependencies = [
 [[package]]
 name = "kinovea-geometry"
 version = "0.1.0"
+dependencies = [
+ "kinovea-fixtures",
+]
 
 [[package]]
 name = "kinovea-kinematics"

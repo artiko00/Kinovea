@@ -71,3 +71,12 @@ Chronological. Newest entry last. Never delete entries; correct a wrong decision
 - Gotchas: `.NET` `(int)Math.Round` overflow is reproduced for `Microseconds`; `.NET Framework` `float.ToString()` (7 significant digits, `1E-05` style) is reimplemented in `units_precision::format_f32_default`; capture folders had fresh GUIDs and the user's Documents path, normalised by the oracle; open-harness' 150-line limit forced the preferences split and the `xml_fields!`/`xml_struct!` macros.
 - Dependencies added (flagged in design): `quick-xml`, `uuid`. Deviations recorded in the change design.
 - Verified: `cd rust && make verify` green; `npm run lint` green; `fixtures.sh --verify` deterministic.
+
+## 2026-10-18 — add-geometry-core (apply)
+
+- Agent: Claude Code (Fable 5.1). Human asked to archive `add-core-types-and-units` and continue with the next change. PR #3 merged, change archived (specs `core/*` created), roadmap item 01 ticked.
+- Done in `rust/kinovea-geometry`: `PointF`/`SizeF`/`RectangleF`, `Vector`, `Vector3`, `Matrix3x3` (+ `rotations`), Numerical Recipes `svdcmp` (`svd/`), `helpers` (GeometryHelper + MathHelper, split in `lines`/`snapping`), `Quadrilateral` (+ `ops`), shapes, Liang-Barsky clipping, `ProjectiveMapper` (+ `ellipse`), `fit_circle`. 72 unit tests, 9 parity tests. New oracle area `geometry` (`Kinovea.FixtureGen/Areas/GeometryArea*.cs`, 5 cases) producing 1 270 fixture rows; `fixtures.sh --verify` deterministic.
+- Parity: clipping (1e-3), helper angles/points and quad ops (1e-4 scaled by magnitude), homography points/ellipse/homogeneous vectors (1e-3, rotation 1e-4), SVD values and vectors (1e-9, vectors up to sign), circle fit vs `kinematics/circular` `best_fit_circle` (1e-3). All green on first run.
+- Gotchas: the proposal's clipping scenario for (250,250)–(500,1750) was wrong (the original tester marks it "not visible"); `svd.svdcmp` is `internal`, reached by reflection to keep doubles, and has a 1-based loop bug the port does not reproduce; `(float)(π/4)` widens above `Math.PI/4` so `Ellipse.Vertical` is true at exactly π/4 and a circle gets rotation π/2; `QuadrilateralF.GetHashCode` collapses small coordinates (same hash for 4×2 and 2×4), reproduced as stable-only.
+- Not done: `proptest` not added (dependency approval pending); property checks run as seeded loops (`lib_test::Rng`). Recorded in the change design and tasks.
+- Verified: `cd rust && make verify` green; `npm run lint` green; `tools/oracle/fixtures.sh --verify` green.

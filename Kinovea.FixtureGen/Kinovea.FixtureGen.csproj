@@ -51,6 +51,9 @@
     <Compile Include="Areas\TimecodeArea.cs" />
     <Compile Include="Areas\UnitsArea.cs" />
     <Compile Include="Areas\PreferencesArea.cs" />
+    <Compile Include="Areas\GeometryArea.cs" />
+    <Compile Include="Areas\GeometryArea.Homography.cs" />
+    <Compile Include="Areas\GeometryArea.Helpers.cs" />
     <Compile Include="FixtureCase.cs" />
     <Compile Include="Oracle.cs" />
     <Compile Include="Program.cs" />

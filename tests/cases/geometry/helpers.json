@@ -1,0 +1,5 @@
+{
+  "area": "geometry",
+  "seed": 3,
+  "inputs": { "kind": "helpers", "count": 30 }
+}

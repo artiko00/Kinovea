@@ -1,0 +1,5 @@
+{
+  "area": "geometry",
+  "seed": 1,
+  "inputs": { "kind": "clipping", "window": [500, 500, 1000, 1000], "count": 50 }
+}

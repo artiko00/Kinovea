@@ -8,5 +8,8 @@ rust-version.workspace = true
 
 [dependencies]
 
+[dev-dependencies]
+kinovea-fixtures = { path = "../kinovea-fixtures" }
+
 [lints]
 workspace = true

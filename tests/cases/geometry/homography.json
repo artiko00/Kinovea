@@ -1,0 +1,5 @@
+{
+  "area": "geometry",
+  "seed": 2,
+  "inputs": { "kind": "homography", "count": 20, "points": 10 }
+}

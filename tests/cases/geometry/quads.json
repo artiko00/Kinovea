@@ -1,0 +1,5 @@
+{
+  "area": "geometry",
+  "seed": 4,
+  "inputs": { "kind": "quads", "count": 20 }
+}

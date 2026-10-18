@@ -13,9 +13,13 @@ Given a rectangle and two points, the system SHALL return whether the primitive 
 - **WHEN** the line from (250, 1750) to (1750, 250) is clipped against the rectangle (500, 500, 1000×1000)
 - **THEN** it is visible with endpoints (500, 1500) and (1500, 500) within 1e-3
 
-#### Scenario: Fully outside segment
+#### Scenario: Line missing the window
 - **WHEN** the segment (250, 250)–(500, 1750) is clipped against the same rectangle
-- **THEN** it is reported invisible as a segment but visible as an infinite line
+- **THEN** it is reported invisible both as a segment and as an infinite line (the original tester labels it "line not visible")
+
+#### Scenario: Segment partly outside
+- **WHEN** the segment (250, 1500)–(1750, 0) is clipped against the same rectangle
+- **THEN** it is visible as a segment and as an infinite line with the same clipped endpoints
 
 #### Scenario: Parallel to an edge
 - **WHEN** the vertical line x = 250 is clipped

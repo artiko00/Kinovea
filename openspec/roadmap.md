@@ -11,7 +11,7 @@ Progress is tracked here: tick a change when it is archived.
 
 Phase A, foundations
 - [x] 00 `add-rust-workspace-scaffold` (archived 2026-10-18)
-- [ ] 01 `add-core-types-and-units`
+- [x] 01 `add-core-types-and-units` (archived 2026-10-18)
 - [ ] 02 `add-geometry-core`
 - [ ] 03 `add-kinematics-filtering`
 - [ ] 04 `add-calibration-and-lens-distortion`
