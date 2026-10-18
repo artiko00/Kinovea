@@ -1,0 +1,5 @@
+{
+  "area": "kinematics",
+  "seed": 42,
+  "inputs": { "kind": "linear", "fps": 100, "frames": 120, "imageWidth": 1920, "imageHeight": 1080, "speedX": 3.5, "speedY": -1.25, "noise": 0.4, "smoothing": false }
+}
