@@ -66,7 +66,7 @@ CI: `.github/workflows/build.yml` builds the C# solution on `windows-latest`; `r
 - `Kinovea.Tests/Program.cs` toggles test routines by (un)commenting calls. No test framework, no CI test step.
 - Adding automated tests is a decision for the human (TODO). Until then, verify changes by building in CI and by manual runs on Windows.
 - Rust: TDD. Write the failing test first (`src/<file>_test.rs`, or `tests/<name>_test.rs` for integration), then the code. Parity tests read `tests/fixtures/` through `kinovea-fixtures`.
-- `testlens` is configured for Rust (`testlens.json`, which takes precedence over the `package.json` key). The C# baseline (~745 untested sources) is frozen in `.agent/progress.md`.
+- `testlens` is configured for Rust (`testlens.json`, which takes precedence over the `package.json` key). Legacy C# directories are excluded from every linter.
 
 ## Operating rules
 
@@ -81,7 +81,7 @@ CI: `.github/workflows/build.yml` builds the C# solution on `windows-latest`; `r
 
 `npx linelens check --fail` · `npx dupelens check --fail` · `npx secretlens check --fail` · `npx testlens check --fail`
 Config: `package.json` keys `linelens`, `dupelens`, `secretlens`, `testlens` plus `testlens.json`.
-Baseline findings are recorded in `.agent/progress.md`; the gates currently fail on legacy code (TODO: human decision).
+Scope: new code only. Every legacy C# project directory is listed in the `exclude` arrays; when a legacy directory is deleted during the migration, drop its entry. Do not add legacy directories back.
 
 ## Boundaries
 

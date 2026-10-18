@@ -1,4 +1,6 @@
 # Local quality gates for agents (run before commit, not in CI).
+# Scope: new code only (rust/, tests/, tools/, Kinovea.FixtureGen/, harness). Legacy C# directories
+# are excluded in package.json and testlens.json; drop an entry there when its directory is deleted.
 pre-commit:
   parallel: true
   commands:
