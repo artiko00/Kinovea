@@ -61,7 +61,6 @@ impl Element {
     /// Parses a document and returns its root element.
     pub fn parse(xml: &str) -> Result<Element, XmlError> {
         let mut reader = Reader::from_str(xml);
-        reader.config_mut().trim_text(true);
         let mut stack: Vec<Element> = Vec::new();
         let err = |e: quick_xml::Error| XmlError(e.to_string());
         loop {
@@ -75,8 +74,9 @@ impl Element {
                     }
                 }
                 Event::Text(text) => {
+                    // Whitespace between elements is layout, not content (`IgnoreWhitespace`).
                     let text = text.unescape().map_err(err)?;
-                    if let Some(current) = stack.last_mut() {
+                    if let Some(current) = stack.last_mut().filter(|_| !text.trim().is_empty()) {
                         current.text.push_str(&text);
                     }
                 }

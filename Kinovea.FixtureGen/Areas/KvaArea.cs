@@ -24,6 +24,11 @@ namespace Kinovea.FixtureGen.Areas
                 throw new FileNotFoundException("KVA input not found", source);
 
             Metadata metadata = new Metadata(new HistoryStack(), TimecodeBuilder);
+            // The player registers every trackable drawing with the trackability manager when it
+            // is added (PlayerScreen.AddTrackableDrawing); without it the writer serializes the
+            // trackable points as 0;0. The drawing's own reference timestamp stands in for the
+            // current video position so the output is deterministic.
+            metadata.TrackableDrawingAdded += (s, e) => metadata.TrackabilityManager.Add(e.Value, e.Value.ReferenceTimestamp);
             ApplyVideoContext(metadata, source);
 
             MetadataSerializer serializer = new MetadataSerializer();

@@ -195,6 +195,12 @@ dependencies = [
 [[package]]
 name = "kinovea-metadata"
 version = "0.1.0"
+dependencies = [
+ "kinovea-core",
+ "kinovea-fixtures",
+ "kinovea-geometry",
+ "uuid",
+]
 
 [[package]]
 name = "kinovea-render"

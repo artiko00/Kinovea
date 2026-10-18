@@ -28,3 +28,11 @@ fn malformed_input_is_an_error() {
     assert!(Element::parse("<Root><A></Root>").is_err());
     assert!(Element::parse("").is_err());
 }
+
+#[test]
+fn text_content_keeps_inner_and_edge_spaces_but_drops_layout_whitespace() {
+    let root = crate::preferences::dom::Element::parse("<R>\n  <A> a  b </A>\n  <B>x</B>\n</R>").unwrap();
+    assert_eq!(root.child_text("A"), Some(" a  b "));
+    assert_eq!(root.text, "");
+    assert_eq!(root.children.len(), 2);
+}
