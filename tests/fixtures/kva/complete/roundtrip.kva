@@ -691,12 +691,12 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
       <Color>51;152;255</Color>
       <Drawings>
         <Line id="00000000-0000-4000-8000-000000000009" name="Line 3">
-          <Start>0;0</Start>
-          <End>0;0</End>
+          <Start>267;122</Start>
+          <End>277;38</End>
           <ReferenceTimestamp>205705</ReferenceTimestamp>
           <ExtraData>None</ExtraData>
           <MeasureLabel>
-            <SpacePosition>-287;-130</SpacePosition>
+            <SpacePosition>-15;-50</SpacePosition>
             <TimePosition>0</TimePosition>
           </MeasureLabel>
           <DrawingStyle>
@@ -726,12 +726,12 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
           </InfosFading>
         </Line>
         <Line id="00000000-0000-4000-8000-000000000010" name="Line 2">
-          <Start>0;0</Start>
-          <End>0;0</End>
+          <Start>598;253</Start>
+          <End>237;252</End>
           <ReferenceTimestamp>205705</ReferenceTimestamp>
           <ExtraData>None</ExtraData>
           <MeasureLabel>
-            <SpacePosition>-432.5;-302.5</SpacePosition>
+            <SpacePosition>-15;-50</SpacePosition>
             <TimePosition>0</TimePosition>
           </MeasureLabel>
           <DrawingStyle>
@@ -761,12 +761,12 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
           </InfosFading>
         </Line>
         <Line id="00000000-0000-4000-8000-000000000011" name="Line 1">
-          <Start>0;0</Start>
-          <End>0;0</End>
+          <Start>654;60</Start>
+          <End>592;135</End>
           <ReferenceTimestamp>205705</ReferenceTimestamp>
           <ExtraData>None</ExtraData>
           <MeasureLabel>
-            <SpacePosition>-638;-147.5</SpacePosition>
+            <SpacePosition>-15;-50</SpacePosition>
             <TimePosition>0</TimePosition>
           </MeasureLabel>
           <DrawingStyle>
@@ -909,12 +909,12 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
       <Color>51;152;255</Color>
       <Drawings>
         <CrossMark id="00000000-0000-4000-8000-000000000017" name="Marker 4">
-          <CenterPoint>0;0</CenterPoint>
+          <CenterPoint>243;54</CenterPoint>
           <ReferenceTimestamp>318318</ReferenceTimestamp>
           <ExtraData>None</ExtraData>
           <ShowAsDot>false</ShowAsDot>
           <MeasureLabel>
-            <SpacePosition>-263;-104</SpacePosition>
+            <SpacePosition>-20;-50</SpacePosition>
             <TimePosition>0</TimePosition>
           </MeasureLabel>
           <DrawingStyle>
@@ -935,12 +935,12 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
           </InfosFading>
         </CrossMark>
         <CrossMark id="00000000-0000-4000-8000-000000000018" name="Marker 3">
-          <CenterPoint>0;0</CenterPoint>
+          <CenterPoint>260;53</CenterPoint>
           <ReferenceTimestamp>318318</ReferenceTimestamp>
           <ExtraData>None</ExtraData>
           <ShowAsDot>false</ShowAsDot>
           <MeasureLabel>
-            <SpacePosition>-280;-103</SpacePosition>
+            <SpacePosition>-20;-50</SpacePosition>
             <TimePosition>0</TimePosition>
           </MeasureLabel>
           <DrawingStyle>
@@ -961,12 +961,12 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
           </InfosFading>
         </CrossMark>
         <CrossMark id="00000000-0000-4000-8000-000000000019" name="Marker 2">
-          <CenterPoint>0;0</CenterPoint>
+          <CenterPoint>242;79</CenterPoint>
           <ReferenceTimestamp>318318</ReferenceTimestamp>
           <ExtraData>None</ExtraData>
           <ShowAsDot>false</ShowAsDot>
           <MeasureLabel>
-            <SpacePosition>-262;-129</SpacePosition>
+            <SpacePosition>-20;-50</SpacePosition>
             <TimePosition>0</TimePosition>
           </MeasureLabel>
           <DrawingStyle>
@@ -987,12 +987,12 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
           </InfosFading>
         </CrossMark>
         <CrossMark id="00000000-0000-4000-8000-000000000020" name="Marker 1">
-          <CenterPoint>0;0</CenterPoint>
+          <CenterPoint>259;79</CenterPoint>
           <ReferenceTimestamp>318318</ReferenceTimestamp>
           <ExtraData>None</ExtraData>
           <ShowAsDot>false</ShowAsDot>
           <MeasureLabel>
-            <SpacePosition>-279;-129</SpacePosition>
+            <SpacePosition>-20;-50</SpacePosition>
             <TimePosition>0</TimePosition>
           </MeasureLabel>
           <DrawingStyle>
@@ -1020,9 +1020,9 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
       <Color>51;152;255</Color>
       <Drawings>
         <Angle id="00000000-0000-4000-8000-000000000022" name="Angle 3">
-          <PointO>0;0</PointO>
-          <PointA>0;0</PointA>
-          <PointB>0;0</PointB>
+          <PointO>297;71</PointO>
+          <PointA>297;107</PointA>
+          <PointB>297;21</PointB>
           <ReferenceTimestamp>369369</ReferenceTimestamp>
           <Signed>true</Signed>
           <CCW>true</CCW>
@@ -1049,9 +1049,9 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
           </InfosFading>
         </Angle>
         <Angle id="00000000-0000-4000-8000-000000000023" name="Angle 2">
-          <PointO>0;0</PointO>
-          <PointA>0;0</PointA>
-          <PointB>0;0</PointB>
+          <PointO>400;94</PointO>
+          <PointA>465;94</PointA>
+          <PointB>400;44</PointB>
           <ReferenceTimestamp>369369</ReferenceTimestamp>
           <Signed>true</Signed>
           <CCW>true</CCW>
@@ -1078,9 +1078,9 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
           </InfosFading>
         </Angle>
         <Angle id="00000000-0000-4000-8000-000000000024" name="Angle 1">
-          <PointO>0;0</PointO>
-          <PointA>0;0</PointA>
-          <PointB>0;0</PointB>
+          <PointO>530;76</PointO>
+          <PointA>489;76</PointA>
+          <PointB>530;26</PointB>
           <ReferenceTimestamp>369369</ReferenceTimestamp>
           <Signed>true</Signed>
           <CCW>true</CCW>
@@ -1253,6 +1253,103 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
       </Color>
     </DrawingStyle>
   </TestGrid>
-  <Trackability />
+  <Trackability>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000011" name="Line 1">
+      <TrackablePoint key="a">
+        <ReferenceTimestamp>205705</ReferenceTimestamp>
+        <ReferenceValue>654;60</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="b">
+        <ReferenceTimestamp>205705</ReferenceTimestamp>
+        <ReferenceValue>592;135</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000010" name="Line 2">
+      <TrackablePoint key="a">
+        <ReferenceTimestamp>205705</ReferenceTimestamp>
+        <ReferenceValue>598;253</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="b">
+        <ReferenceTimestamp>205705</ReferenceTimestamp>
+        <ReferenceValue>237;252</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000009" name="Line 3">
+      <TrackablePoint key="a">
+        <ReferenceTimestamp>205705</ReferenceTimestamp>
+        <ReferenceValue>267;122</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="b">
+        <ReferenceTimestamp>205705</ReferenceTimestamp>
+        <ReferenceValue>277;38</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000020" name="Marker 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>318318</ReferenceTimestamp>
+        <ReferenceValue>259;79</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000019" name="Marker 2">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>318318</ReferenceTimestamp>
+        <ReferenceValue>242;79</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000018" name="Marker 3">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>318318</ReferenceTimestamp>
+        <ReferenceValue>260;53</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000017" name="Marker 4">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>318318</ReferenceTimestamp>
+        <ReferenceValue>243;54</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000024" name="Angle 1">
+      <TrackablePoint key="o">
+        <ReferenceTimestamp>369369</ReferenceTimestamp>
+        <ReferenceValue>530;76</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="a">
+        <ReferenceTimestamp>369369</ReferenceTimestamp>
+        <ReferenceValue>489;76</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="b">
+        <ReferenceTimestamp>369369</ReferenceTimestamp>
+        <ReferenceValue>530;26</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000023" name="Angle 2">
+      <TrackablePoint key="o">
+        <ReferenceTimestamp>369369</ReferenceTimestamp>
+        <ReferenceValue>400;94</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="a">
+        <ReferenceTimestamp>369369</ReferenceTimestamp>
+        <ReferenceValue>465;94</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="b">
+        <ReferenceTimestamp>369369</ReferenceTimestamp>
+        <ReferenceValue>400;44</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000022" name="Angle 3">
+      <TrackablePoint key="o">
+        <ReferenceTimestamp>369369</ReferenceTimestamp>
+        <ReferenceValue>297;71</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="a">
+        <ReferenceTimestamp>369369</ReferenceTimestamp>
+        <ReferenceValue>297;107</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="b">
+        <ReferenceTimestamp>369369</ReferenceTimestamp>
+        <ReferenceValue>297;21</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+  </Trackability>
   <VideoFilters />
 </KinoveaVideoAnalysis>
