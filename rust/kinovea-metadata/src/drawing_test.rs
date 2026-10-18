@@ -7,5 +7,8 @@ fn header_starts_with_a_fresh_id_and_the_given_name() {
     let b = Header::new("B", StyleElements::default());
     assert_ne!(a.id, b.id);
     assert_eq!(a.name, "A");
-    assert_eq!(a.reference_timestamp, -1, "unset until the drawing is placed");
+    assert_eq!(
+        a.reference_timestamp, -1,
+        "unset until the drawing is placed"
+    );
 }
