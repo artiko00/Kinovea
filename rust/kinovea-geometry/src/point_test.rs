@@ -1,4 +1,4 @@
-use crate::point::{PointF, SizeF};
+use crate::point::{PointF, Size, SizeF};
 use crate::vector::Vector;
 
 #[test]
@@ -27,4 +27,12 @@ fn hash_code_is_stable_and_distinguishes_points() {
     let p = PointF::new(1.5, -2.0);
     assert_eq!(p.hash_code(), PointF::new(1.5, -2.0).hash_code());
     assert_ne!(p.hash_code(), PointF::new(2.0, 1.5).hash_code());
+}
+
+#[test]
+fn integer_size_centre_uses_integer_division() {
+    let s = Size::new(1921, 1081);
+    assert_eq!(s.center(), PointF::new(960.0, 540.0));
+    assert!(Size::default().is_empty());
+    assert!(!s.is_empty());
 }

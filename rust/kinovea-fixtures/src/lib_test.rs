@@ -52,3 +52,15 @@ fn sha256_of_empty_input() {
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     );
 }
+
+#[test]
+fn assert_close_accepts_tolerance_and_nan_pairs() {
+    crate::assert_close(1.0, 1.0005, 1e-3, "close");
+    crate::assert_close(f64::NAN, f64::NAN, 0.0, "nan");
+}
+
+#[test]
+#[should_panic(expected = "want NaN")]
+fn assert_close_rejects_a_number_for_nan() {
+    crate::assert_close(1.0, f64::NAN, 0.0, "nan");
+}

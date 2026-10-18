@@ -37,14 +37,7 @@ pub fn scale(expected: &[String]) -> f64 {
 
 /// Absolute comparison; a NaN expectation requires a NaN result.
 pub fn assert_f(got: f64, want: f64, tol: f64, ctx: &str) {
-    if want.is_nan() {
-        assert!(got.is_nan(), "{ctx}: got {got}, want NaN");
-        return;
-    }
-    assert!(
-        kinovea_fixtures::approx_eq(got, want, tol),
-        "{ctx}: got {got}, want {want}"
-    );
+    kinovea_fixtures::assert_close(got, want, tol, ctx);
 }
 
 pub fn assert_pt(got: PointF, want: PointF, tol: f64, ctx: &str) {

@@ -11,6 +11,14 @@ fn floats_parse_with_fallback_and_write_with_seven_significant_digits() {
     assert_eq!(write_float(1234.5678), "1234.568");
     assert_eq!(write_float(-0.000_012_5), "-1.25E-05");
     assert_eq!(format_f32_invariant(960.0), "960");
+    assert_eq!(format_f64_invariant(1920.0 / 6.16), "311.688311688312");
+    assert_eq!(
+        format_f64_invariant(863.636_363_636_363_6),
+        "863.636363636364"
+    );
+    assert_eq!(format_f64_invariant(0.000_012_5), "1.25E-05");
+    assert_eq!(format_f64_invariant(1e15), "1E+15");
+    assert_eq!(format_f64_invariant(-0.5), "-0.5");
 }
 
 #[test]

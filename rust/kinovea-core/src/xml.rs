@@ -3,6 +3,7 @@
 
 pub use crate::preferences::helpers::parse_bool as parse_boolean;
 pub use crate::units_precision::format_f32_default as format_f32_invariant;
+use crate::units_precision::format_significant;
 use crate::video_section::VideoSection;
 
 /// `XmlHelper.ParseFloat`: invariant culture, 0 when unreadable.
@@ -58,6 +59,11 @@ pub fn parse_point_reference(s: &str) -> i32 {
 /// `string.Format(Invariant, "{0}", float)`: 7 significant digits.
 pub fn write_float(value: f32) -> String {
     format_f32_invariant(value)
+}
+
+/// `string.Format(Invariant, "{0}", double)`: 15 significant digits.
+pub fn format_f64_invariant(value: f64) -> String {
+    format_significant(value, 15)
 }
 
 pub fn write_point_f(x: f32, y: f32) -> String {

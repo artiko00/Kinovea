@@ -4,33 +4,43 @@
 use crate::units::LengthUnit;
 
 /// `.NET Framework` `float.ToString()`: up to 7 significant digits, trailing zeros trimmed,
-/// scientific notation (`1E-05`) when the exponent is below -5 or at least 7.
+/// scientific notation (`1E-05`) when the exponent is below -4 or at least 7.
 pub fn format_f32_default(value: f32) -> String {
+    format_significant(f64::from(value), 7)
+}
+
+/// `.NET Framework` default number formatting with `digits` significant digits: trailing zeros
+/// trimmed, scientific notation when the exponent is below -4 or at least `digits`.
+pub fn format_significant(value: f64, digits: usize) -> String {
     if value == 0.0 {
         return "0".to_owned();
     }
-    let sci = format!("{:.6e}", f64::from(value));
+    let sci = format!("{:.*e}", digits - 1, value);
     let (mantissa, exponent) = sci.split_once('e').expect("exponent");
     let exponent: i32 = exponent.parse().expect("exponent value");
-    let digits: String = mantissa.chars().filter(|c| c.is_ascii_digit()).collect();
-    let digits = digits.trim_end_matches('0');
-    let digits = if digits.is_empty() { "0" } else { digits };
+    let all: String = mantissa.chars().filter(|c| c.is_ascii_digit()).collect();
+    let digits_str = all.trim_end_matches('0');
+    let digits_str = if digits_str.is_empty() {
+        "0"
+    } else {
+        digits_str
+    };
     let sign = if value < 0.0 { "-" } else { "" };
-    if (-4..7).contains(&exponent) {
+    if (-4..digits as i32).contains(&exponent) {
         let point = exponent + 1;
         if point <= 0 {
-            format!("{sign}0.{}{digits}", "0".repeat((-point) as usize))
-        } else if (point as usize) >= digits.len() {
+            format!("{sign}0.{}{digits_str}", "0".repeat((-point) as usize))
+        } else if (point as usize) >= digits_str.len() {
             format!(
-                "{sign}{digits}{}",
-                "0".repeat(point as usize - digits.len())
+                "{sign}{digits_str}{}",
+                "0".repeat(point as usize - digits_str.len())
             )
         } else {
-            let (int, frac) = digits.split_at(point as usize);
+            let (int, frac) = digits_str.split_at(point as usize);
             format!("{sign}{int}.{frac}")
         }
     } else {
-        let (first, rest) = digits.split_at(1);
+        let (first, rest) = digits_str.split_at(1);
         let frac = if rest.is_empty() {
             String::new()
         } else {

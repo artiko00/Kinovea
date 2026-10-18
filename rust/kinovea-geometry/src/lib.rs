@@ -36,7 +36,7 @@ modules!(
 pub use circle_fit::fit_circle;
 pub use clipping::{clip_infinite_line, clip_line, clip_segment};
 pub use matrix3x3::Matrix3x3;
-pub use point::{PointF, SizeF};
+pub use point::{PointF, Size, SizeF};
 pub use projective::ProjectiveMapper;
 pub use quadrilateral::Quadrilateral;
 pub use rect::RectangleF;

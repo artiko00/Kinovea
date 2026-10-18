@@ -54,3 +54,25 @@ impl SizeF {
         SizeF { width, height }
     }
 }
+
+/// Integer 2D size (`System.Drawing.Size`), used for image dimensions.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+pub struct Size {
+    pub width: i32,
+    pub height: i32,
+}
+
+impl Size {
+    pub const fn new(width: i32, height: i32) -> Self {
+        Size { width, height }
+    }
+
+    /// `Size.Center()` extension: integer division like the original.
+    pub fn center(self) -> PointF {
+        PointF::new((self.width / 2) as f32, (self.height / 2) as f32)
+    }
+
+    pub fn is_empty(self) -> bool {
+        self.width == 0 && self.height == 0
+    }
+}
