@@ -58,7 +58,7 @@ series. The KVA `Producer` element is fixed to `Kinovea.0.0` so it never churns.
 | Area | Case inputs | Outputs | Consumed by |
 |---|---|---|---|
 | `kva` | path to a sample KVA | `roundtrip.kva`, `summary.json` | `kinovea-metadata` (later) |
-| `kinematics` | synthetic trajectory parameters | `linear.csv`, `angular.csv`, `filtering.json`, `truth.csv` | `kinovea-kinematics` (later) |
+| `kinematics` | synthetic trajectory parameters, optional `filtering`/`smoothing` flags | `linear.csv`, `angular.csv`, `filtering.json`, `truth.csv` | `kinovea-kinematics` |
 | `timecode` | millisecond list, frame rates, precisions | `timecodes.csv`, `ms_to_timecode.csv` | `kinovea-core` |
 | `units` | magnitudes, pixel-size tuples | `abbreviations.csv`, `velocity.csv`, `acceleration.csv`, `length_from_speed.csv`, `angular_velocity.csv`, `angular_acceleration.csv`, `frequency.csv`, `pixel_size.csv` | `kinovea-core` |
 | `geometry` | `kind` (`clipping`, `homography`, `helpers`, `quads`, `svd`), `count`, `points`, `window` | `clipping/lines.csv`, `homography/{cases,points,vectors}.csv`, `helpers/{angles,points}.csv`, `quads/ops.csv`, `svd/cases.csv` | `kinovea-geometry` |

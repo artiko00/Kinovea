@@ -55,6 +55,16 @@ Series are `Vec<f64>`; per-sample arithmetic in `LinearKinematics` goes through 
 ### Legacy superseded
 `Kinovea.ScreenManager/Measurement/Kinematics/{Butterworth,MovingAverage,StatsHelper,FilteringResult,FilteredTrajectory,Kinematics,Component,TimeSeriesCollection,TimeSeriesPadder,LinearKinematics,AngularKinematics}.cs`, `Extensions.Subtract` in `Kinovea.ScreenManager/Extensions.cs`, `Kinovea.Tests/Kinematics/{KinematicsTestData,MovingObject,VideoSynthesizer}.cs` (data stays as a Rust test asset copied from the Winter fixture). Deleted in `remove-dotnet-solution`.
 
+### Deviations found while implementing
+- Cutoff indices are `Option<usize>` (`None` where the original stores −1) and the Butterworth entry point returns `Result<Filtered, TooFewSamples>`; `FilteredTrajectory::new` keeps raw coordinates when filtering is rejected instead of propagating the exception.
+- The cutoff loop accumulates `fc += step` like the original and therefore yields 100 or 101 results; the unit test accepts both and the fixtures pin the selected indices.
+- The parity tests re-enter the fixture's world coordinates through a `PixelContext` with a zero image size (`(x, −y)` maps back to `(x, y)` exactly), because the image-space samples of the generator are not stored and a round trip through a 1920×1080 centre would lose float bits.
+- `MovingAverage` copies only the non-sentinel samples into the padded buffer, so the sentinel positions (NaN after padding) come out finite after smoothing; the fixtures confirm this (`LinearSpeed[0]` is finite in `linear`) and the port reproduces it.
+- `AngularKinematics` pads velocities and accelerations when `Length <= 2` (not 4 as the linear code does) and reads neighbouring velocities from a zero-initialised `f32` array; both are kept.
+- `build_angular_kinematics` takes a slice `[origin, a, b]` and returns `Err(AngularError(n))` for any other length, mirroring the dictionary count check.
+- `KinematicsArea.cs` became a partial class (`KinematicsArea.Series.cs`) to stay under the 150-line limit; the preference flags are set through `PlayerPreferences` setters (which save the file) and restored in a `finally`.
+- `linear.rs` keeps `helpers.rs`-style splitting (`linear/smoothing.rs`); `time_series.rs` exposes the padder as `pad` and the collection via `Index<Kinematics>` that panics on a missing component, as the original throws.
+
 ## Risks / Trade-offs
 
 - [`Math.Pow(x, 2)` vs `x*x` and `Math.Tan` differences across runtimes] → use `powi(2)` and std `tan`; both are correctly rounded enough for 1e-6 relative; the fixtures are the arbiter.

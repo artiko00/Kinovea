@@ -12,26 +12,11 @@ namespace Kinovea.FixtureGen.Areas
     /// Synthesizes a trajectory with known ground truth, runs the original filtering and
     /// linear/angular kinematics, and writes the resulting time series.
     /// inputs: { "kind": "linear"|"circular"|"winter", "fps", "frames", "imageWidth", "imageHeight",
-    ///           "speedX", "speedY" (px/frame), "radius", "angularSpeed" (rad/s), "noise" (px, std-dev-ish) }
+    ///           "speedX", "speedY" (px/frame), "radius", "angularSpeed" (rad/s), "noise" (px, std-dev-ish),
+    ///           "filtering" and "smoothing" (player preferences, default true) }
     /// </summary>
-    public class KinematicsArea : IFixtureArea
+    public partial class KinematicsArea : IFixtureArea
     {
-        private static readonly Kinematics[] linearComponents =
-        {
-            Kinematics.XRaw, Kinematics.YRaw, Kinematics.X, Kinematics.Y,
-            Kinematics.LinearDistance, Kinematics.LinearHorizontalDisplacement, Kinematics.LinearVerticalDisplacement,
-            Kinematics.LinearSpeed, Kinematics.LinearHorizontalVelocity, Kinematics.LinearVerticalVelocity,
-            Kinematics.LinearAcceleration, Kinematics.LinearHorizontalAcceleration, Kinematics.LinearVerticalAcceleration,
-        };
-
-        private static readonly Kinematics[] angularComponents =
-        {
-            Kinematics.AngularPosition, Kinematics.AngularDisplacement, Kinematics.TotalAngularDisplacement,
-            Kinematics.AngularVelocity, Kinematics.TangentialVelocity,
-            Kinematics.AngularAcceleration, Kinematics.TangentialAcceleration, Kinematics.CentripetalAcceleration,
-            Kinematics.ResultantLinearAcceleration,
-        };
-
         public string Name { get { return "kinematics"; } }
 
         public void Generate(FixtureCase c, string outDir)
@@ -41,6 +26,25 @@ namespace Kinovea.FixtureGen.Areas
             int frames = c.Input("frames", 120);
             Size imageSize = new Size(c.Input("imageWidth", 1920), c.Input("imageHeight", 1080));
             Random random = new Random(c.Seed);
+            bool filtering = c.Input("filtering", true);
+            bool smoothing = c.Input("smoothing", true);
+            bool savedFiltering = PreferencesManager.PlayerPreferences.EnableFiltering;
+            bool savedSmoothing = PreferencesManager.PlayerPreferences.EnableHighSpeedDerivativesSmoothing;
+            PreferencesManager.PlayerPreferences.EnableFiltering = filtering;
+            PreferencesManager.PlayerPreferences.EnableHighSpeedDerivativesSmoothing = smoothing;
+            try
+            {
+                GenerateWithPreferences(c, outDir, kind, fps, frames, imageSize, random);
+            }
+            finally
+            {
+                PreferencesManager.PlayerPreferences.EnableFiltering = savedFiltering;
+                PreferencesManager.PlayerPreferences.EnableHighSpeedDerivativesSmoothing = savedSmoothing;
+            }
+        }
+
+        private static void GenerateWithPreferences(FixtureCase c, string outDir, string kind, double fps, int frames, Size imageSize, Random random)
+        {
 
             CalibrationHelper calibration = new CalibrationHelper();
             calibration.Initialize(imageSize, t => PointF.Empty, (t, type, id) => new QuadrilateralF(), id => false);
@@ -113,30 +117,6 @@ namespace Kinovea.FixtureGen.Areas
             legs["b"] = Trajectory(fixedLeg, calibration);
             TimeSeriesCollection angular = new AngularKinematics().BuildKinematics(legs, new AngleOptions(true, true, false), calibration);
             WriteSeries(Path.Combine(outDir, "angular.csv"), angular, angularComponents);
-        }
-
-        private static FilteredTrajectory Trajectory(List<TimedPoint> samples, CalibrationHelper calibration)
-        {
-            FilteredTrajectory t = new FilteredTrajectory();
-            t.Initialize(samples, calibration);
-            return t;
-        }
-
-        private static void WriteSeries(string path, TimeSeriesCollection tsc, Kinematics[] components)
-        {
-            List<string> header = new List<string> { "time" };
-            foreach (Kinematics k in components)
-                header.Add(k.ToString());
-
-            List<IList<string>> rows = new List<IList<string>>();
-            for (int i = 0; i < tsc.Length; i++)
-            {
-                List<string> row = new List<string> { tsc.Times[i].ToString(Oracle.Culture) };
-                foreach (Kinematics k in components)
-                    row.Add(Oracle.R(tsc[k][i]));
-                rows.Add(row);
-            }
-            Oracle.WriteCsv(path, header, rows);
         }
     }
 }

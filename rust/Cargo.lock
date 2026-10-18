@@ -175,6 +175,11 @@ dependencies = [
 [[package]]
 name = "kinovea-kinematics"
 version = "0.1.0"
+dependencies = [
+ "kinovea-core",
+ "kinovea-fixtures",
+ "kinovea-geometry",
+]
 
 [[package]]
 name = "kinovea-measurement"

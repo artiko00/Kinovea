@@ -20,3 +20,8 @@ Units follow the default preferences (pixels, degrees). Values are written with 
 
 Kinds: `linear` (constant velocity plus uniform noise from `seed`), `circular` (constant angular
 speed), `winter` (published gait data from Winter, "Biomechanics of Human Movement", 69.9 Hz, cm).
+
+Optional inputs `filtering` and `smoothing` (default `true`) set the player preferences
+`EnableFiltering` and `EnableHighSpeedDerivativesSmoothing` while the case runs: `linear-unsmoothed`
+(same inputs as `linear`, no moving-average pass), `nofilter` (raw coordinates only, cutoff indexes −1)
+and `short` (3 frames: derivatives are NaN).

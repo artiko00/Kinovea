@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Areas\IFixtureArea.cs" />
     <Compile Include="Areas\KinematicsArea.cs" />
+    <Compile Include="Areas\KinematicsArea.Series.cs" />
     <Compile Include="Areas\KvaArea.cs" />
     <Compile Include="Areas\TimecodeArea.cs" />
     <Compile Include="Areas\UnitsArea.cs" />
