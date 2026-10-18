@@ -2,7 +2,7 @@
 
 ## 1. Shared XML helpers (`rust/kinovea-core/src/xml.rs`)
 
-- [ ] 1.1 Write `rust/kinovea-core/src/xml_test.rs` (parse/write float, PointF `x;y`, SizeF, Size, boolean, 7-significant-digit float formatting cases such as `0.1`, `100`, `1234.5678` → `1234.568`); implement `xml.rs` with `parse_*`/`write_*` and `format_f32_invariant`; verify tests pass and `cd rust && make verify` is green.
+- [x] 1.1 Write `rust/kinovea-core/src/xml_test.rs` (parse/write float, PointF `x;y`, SizeF, Size, boolean, 7-significant-digit float formatting cases such as `0.1`, `100`, `1234.5678` → `1234.568`); implement `xml.rs` with `parse_*`/`write_*` and `format_f32_invariant`; verify tests pass and `cd rust && make verify` is green. (Points and sizes are returned as tuples: `kinovea-core` does not depend on `kinovea-geometry`.)
 
 ## 2. Lens distortion
 
