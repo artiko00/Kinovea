@@ -51,3 +51,13 @@ replaced, in order of first appearance, by `00000000-0000-4000-8000-<n>`: the or
 fresh ids for elements that lack one, so raw output would differ on every run. Rust tests compare with per-area tolerances
 (`kinovea_fixtures::approx_eq`): exact for text and integers, declared epsilon for floating point
 series. The KVA `Producer` element is fixed to `Kinovea.0.0` so it never churns.
+
+## Areas
+
+| Area | Case inputs | Outputs | Consumed by |
+|---|---|---|---|
+| `kva` | path to a sample KVA | `roundtrip.kva`, `summary.json` | `kinovea-metadata` (later) |
+| `kinematics` | synthetic trajectory parameters | `linear.csv`, `angular.csv`, `filtering.json`, `truth.csv` | `kinovea-kinematics` (later) |
+| `timecode` | millisecond list, frame rates, precisions | `timecodes.csv`, `ms_to_timecode.csv` | `kinovea-core` |
+| `units` | magnitudes, pixel-size tuples | `abbreviations.csv`, `velocity.csv`, `acceleration.csv`, `length_from_speed.csv`, `angular_velocity.csv`, `angular_acceleration.csv`, `frequency.csv`, `pixel_size.csv` | `kinovea-core` |
+| `preferences` | optional input `Preferences.xml` | `Preferences.xml` as saved by the original (GUIDs normalised, Documents folder replaced by `{MyDocuments}`) | `kinovea-core` |

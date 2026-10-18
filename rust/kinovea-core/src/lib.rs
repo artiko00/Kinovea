@@ -3,12 +3,19 @@
 #[cfg(test)]
 mod lib_test;
 
+pub mod preferences;
 pub mod timecode;
 mod timecode_format;
 #[cfg(test)]
 mod timecode_format_test;
 #[cfg(test)]
 mod timecode_test;
+pub mod timed_point;
+#[cfg(test)]
+mod timed_point_test;
+pub mod timestamp_mapper;
+#[cfg(test)]
+mod timestamp_mapper_test;
 pub mod units;
 pub mod units_convert;
 #[cfg(test)]
@@ -23,3 +30,9 @@ mod units_test;
 pub fn crate_name() -> &'static str {
     env!("CARGO_PKG_NAME")
 }
+pub mod version;
+#[cfg(test)]
+mod version_test;
+pub mod video_section;
+#[cfg(test)]
+mod video_section_test;

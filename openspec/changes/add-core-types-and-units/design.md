@@ -44,6 +44,13 @@ Decision requiring approval: add `quick-xml` (with `serialize` feature) to the w
 ### Legacy superseded
 `Kinovea.Services/TimeHelper.cs`, `Types/TimeCodeFormat.cs`, `Types/TimeCodeType.cs`, `Types/VideoSection.cs`, `Types/TimedPoint.cs`, `Types/Units/*.cs`, `ThreePartsVersion.cs`, `Preferences/{GeneralPreferences,PlayerPreferences,CapturePreferences,FileExplorerPreferences,PreferencesManager,PreferencesHelper,IPreferenceSerializer}.cs`, and `Kinovea.ScreenManager/Measurement/Calibration/UnitHelper.cs`. Deleted in `remove-dotnet-solution`.
 
+### Deviations found while implementing
+- `FormatVersion` is an element, not an attribute; the preferences root also carries a `Keyboard` section that the original always writes. It is kept as an opaque subtree and written back verbatim until the UI change models shortcuts.
+- `quick-xml` is used through a small element tree (`preferences/dom.rs`) instead of serde derive: the file mixes conditional lists, fixed element order and custom number formats, which a DOM handles directly. `uuid` (v4) is also added for capture folder ids; the final `add-kva-metadata-model` change needs both anyway.
+- `EnableHighSpeedDerivativesSmoothing` is never written or read by the original; it stays an in-memory field with default `true`.
+- The default capture folders embed the user's Documents folder and fresh GUIDs. The oracle replaces them by `{MyDocuments}` and stable ids; the Rust test canonicalises both sides the same way and treats `\` and `/` in paths as equal.
+- `Milliseconds`/`Microseconds` timecodes reproduce the `(int)` overflow of the original (`int.MinValue` above 2^31 µs), as the fixtures capture it.
+
 ## Risks / Trade-offs
 
 - [`.NET` `Math.Round` is banker's rounding; Rust `f64::round` is half-away-from-zero] → use `round_ties_even` where the original rounds (`MillisecondsToTimecode` centiseconds, `Milliseconds`/`Microseconds` formats); the fixture rows at `.5` boundaries catch regressions.

@@ -8,6 +8,8 @@ rust-version.workspace = true
 
 [dependencies]
 thiserror.workspace = true
+quick-xml.workspace = true
+uuid.workspace = true
 
 [dev-dependencies]
 kinovea-fixtures = { path = "../kinovea-fixtures" }
