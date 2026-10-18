@@ -30,7 +30,8 @@ Never edit `tests/fixtures/` by hand: change a case or the generator and regener
 
 Areas: `kva` (round-trip of a KVA file through the original serializer, see `tests/cases/kva`),
 `kinematics` (synthetic trajectories, see `tests/cases/kinematics/README.md`), `timecode`
-(every `TimecodeFormat` for a list of times and frame rates).
+(every `TimecodeFormat` for a list of times and frame rates), `units`, `preferences` and
+`geometry` (seeded inputs for the geometry toolbox; see the table below).
 
 ## Manifest
 
@@ -60,4 +61,5 @@ series. The KVA `Producer` element is fixed to `Kinovea.0.0` so it never churns.
 | `kinematics` | synthetic trajectory parameters | `linear.csv`, `angular.csv`, `filtering.json`, `truth.csv` | `kinovea-kinematics` (later) |
 | `timecode` | millisecond list, frame rates, precisions | `timecodes.csv`, `ms_to_timecode.csv` | `kinovea-core` |
 | `units` | magnitudes, pixel-size tuples | `abbreviations.csv`, `velocity.csv`, `acceleration.csv`, `length_from_speed.csv`, `angular_velocity.csv`, `angular_acceleration.csv`, `frequency.csv`, `pixel_size.csv` | `kinovea-core` |
+| `geometry` | `kind` (`clipping`, `homography`, `helpers`, `quads`, `svd`), `count`, `points`, `window` | `clipping/lines.csv`, `homography/{cases,points,vectors}.csv`, `helpers/{angles,points}.csv`, `quads/ops.csv`, `svd/cases.csv` | `kinovea-geometry` |
 | `preferences` | optional input `Preferences.xml` | `Preferences.xml` as saved by the original (GUIDs normalised, Documents folder replaced by `{MyDocuments}`) | `kinovea-core` |

@@ -34,6 +34,16 @@ Add `proptest` as a workspace dev-dependency. It is used for: homography forward
 ### Legacy superseded
 `Kinovea.ScreenManager/Measurement/Geometry/{Vector,Vector3,Matrix3x3,SVD,GeometryHelper,MathHelper,QuadrilateralF,SegmentF,Circle,Ellipse,NamedPoint,PointLinePosition,ClipResult,LiangBarsky,ProjectiveMapper}.cs`, `Measurement/Kinematics/CircleFitter.cs`, `Kinovea.Tests/ProjectiveGeometry/LineClippingTester.cs`. `AngleHelper.cs`, `SweepAngle.cs`, `AngleOptions.cs` move with the renderer. Deleted in `remove-dotnet-solution`.
 
+### Deviations found while implementing
+- `proptest` was not added: new dependencies need human approval and the user was absent. The property checks of D3 (homography round trips, rotation inverses, clipping endpoints, convexity invariance) run as seeded loops over a tiny xorshift generator in `lib_test.rs`. Swapping to `proptest` later only touches test files.
+- `svd.svdcmp` (internal) has a 1-based loop `for (j = 1; j <= m; j++)` in the cancellation branch that indexes past the matrix on rank-deficient inputs; the port uses `0..m`. The oracle reaches the routine through reflection so fixtures keep double precision (`Matrix3x3.SVD` would narrow to float); the fixture also records `U` and `V`, compared up to a common column sign.
+- The clipping spec scenario inherited from the proposal claimed the line (250, 250)–(500, 1750) is visible as an infinite line; the original tester labels it "line not visible" and the fixture confirms it never enters the window. The scenario was corrected.
+- `ProjectiveMapper` defaults to the identity (the original leaves the matrices null) and `update` returns `Err(DegenerateQuadrilateral)` when either quadrilateral is degenerate, keeping the previous mapping; the original returns silently for the image quad and would throw for the plane quad.
+- `Ellipse.Vertical` compares the `float` rotation widened to double against `Math.PI / 4`, so `(float)(π/4)` counts as vertical and a circle (a == c, b == 0) gets rotation π/2; both quirks are reproduced and tested.
+- `QuadrilateralF.Contains` used GDI+ `Region.IsVisible`; the port uses a half-plane test on the convex polygon with boundary points inside. The `contains` fixture rows agree on all seeded probes.
+- `helpers.rs` is split into `helpers/lines.rs` and `helpers/snapping.rs`, and `svd.rs` into `svd/accumulate.rs` and `svd/diagonalize.rs`, to stay under the 150-line limit.
+- `GeometryHelper.GetClosestPoint` takes the margin as `int`; the port keeps `i32`.
+
 ## Risks / Trade-offs
 
 - [`float` accumulation order differs between C# JIT and Rust] → tolerances are relative to single precision (1e-4 to 1e-3 in pixels); strict equality is never asserted on floats.
