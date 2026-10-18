@@ -19,7 +19,7 @@ namespace Kinovea.FixtureGen.Areas
             for (int i = 0; i < count; i++)
             {
                 PointF a = NextPoint(-500, 500), b = NextPoint(-500, 500), c = NextPoint(-500, 500), d = NextPoint(-500, 500);
-                angles.Add(Row(Pt(a), Pt(b), Pt(c), Pt(d), S(GeometryHelper.GetAngle(a, b, c, d), GeometryHelper.GetAngle(a, b, c))));
+                angles.Add(CsvRows.Row(CsvRows.Pt(a), CsvRows.Pt(b), CsvRows.Pt(c), CsvRows.Pt(d), CsvRows.S(GeometryHelper.GetAngle(a, b, c, d), GeometryHelper.GetAngle(a, b, c))));
 
                 float distance = NextF(0, 300), radians = NextF(-4, 4), alpha = NextF(-0.5, 1.5), degrees = NextF(-360, 360);
                 int subdivisions = 2 + i % 11, margin = i % 7, position = i % 6;
@@ -38,13 +38,13 @@ namespace Kinovea.FixtureGen.Areas
                 PointF end = rect.Center().Translate(c.X * 10, c.Y * 10);
                 Op(pts, "intersection", a, new PointF(rect.Width, rect.Height), end, d, 0, 0, GeometryHelper.IntersectionRectangleCenter(rect, end));
             }
-            Oracle.WriteCsv(Path.Combine(outDir, "angles.csv"), new[] { "ax", "ay", "bx", "by", "cx", "cy", "dx", "dy", "angle4", "angle3" }, angles);
-            Oracle.WriteCsv(Path.Combine(outDir, "points.csv"), new[] { "op", "ax", "ay", "bx", "by", "cx", "cy", "dx", "dy", "p1", "p2", "rx", "ry" }, pts);
+            Save(outDir, "angles.csv", angles, "ax", "ay", "bx", "by", "cx", "cy", "dx", "dy", "angle4", "angle3");
+            Save(outDir, "points.csv", pts, "op", "ax", "ay", "bx", "by", "cx", "cy", "dx", "dy", "p1", "p2", "rx", "ry");
         }
 
         private static void Op(List<IList<string>> rows, string op, PointF a, PointF b, PointF c, PointF d, float p1, float p2, PointF r)
         {
-            rows.Add(Row(S(op), Pt(a), Pt(b), Pt(c), Pt(d), S(p1, p2), Pt(r)));
+            rows.Add(CsvRows.Row(CsvRows.S(op), CsvRows.Pt(a), CsvRows.Pt(b), CsvRows.Pt(c), CsvRows.Pt(d), CsvRows.S(p1, p2), CsvRows.Pt(r)));
         }
 
         /// <summary>
@@ -69,24 +69,23 @@ namespace Kinovea.FixtureGen.Areas
                 QuadOp(rows, "translate", free, 0, p1, p2, q => q.Translate(p1, p2));
                 QuadOp(rows, "scale", free, 0, p1 / 10, p2 / 10, q => q.Scale(p1 / 10, p2 / 10));
                 RectangleF box = free.GetBoundingBox();
-                rows.Add(Row(S("bounding_box", 0, 0f, 0f), Quad(free), S(box.X, box.Y, box.Width, box.Height, 0f, 0f, 0f, 0f), Flags(free)));
+                rows.Add(CsvRows.Row(CsvRows.S("bounding_box", 0, 0f, 0f), CsvRows.Quad(free), CsvRows.S(box.X, box.Y, box.Width, box.Height, 0f, 0f, 0f, 0f), Flags(free)));
                 PointF probe = new PointF(NextF(0, 1000), NextF(0, 1000));
-                rows.Add(Row(S("contains", 0, probe.X, probe.Y), Quad(free), S(free.Contains(probe) ? 1f : 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f), Flags(free)));
+                rows.Add(CsvRows.Row(CsvRows.S("contains", 0, probe.X, probe.Y), CsvRows.Quad(free), CsvRows.S(free.Contains(probe) ? 1f : 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f), Flags(free)));
             }
-            Oracle.WriteCsv(Path.Combine(outDir, "ops.csv"),
-                new[] { "op", "anchor", "p1", "p2", "ax", "ay", "bx", "by", "cx", "cy", "dx", "dy", "oax", "oay", "obx", "oby", "ocx", "ocy", "odx", "ody", "convex", "axis_aligned" }, rows);
+            Save(outDir, "ops.csv", rows, "op", "anchor", "p1", "p2", "ax", "ay", "bx", "by", "cx", "cy", "dx", "dy", "oax", "oay", "obx", "oby", "ocx", "ocy", "odx", "ody", "convex", "axis_aligned");
         }
 
         private static void QuadOp(List<IList<string>> rows, string op, QuadrilateralF input, int anchor, float p1, float p2, Action<QuadrilateralF> apply)
         {
             QuadrilateralF q = input.Clone();
             apply(q);
-            rows.Add(Row(S(op, anchor, p1, p2), Quad(input), Quad(q), Flags(input)));
+            rows.Add(CsvRows.Row(CsvRows.S(op, anchor, p1, p2), CsvRows.Quad(input), CsvRows.Quad(q), Flags(input)));
         }
 
         private static string[] Flags(QuadrilateralF q)
         {
-            return S(q.IsConvex ? 1 : 0, q.IsAxisAlignedRectangle ? 1 : 0);
+            return CsvRows.S(q.IsConvex ? 1 : 0, q.IsAxisAlignedRectangle ? 1 : 0);
         }
     }
 }

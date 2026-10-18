@@ -32,6 +32,11 @@ namespace Kinovea.FixtureGen.Areas
             }
         }
 
+        private static void Save(string outDir, string file, List<IList<string>> rows, params string[] header)
+        {
+            Oracle.WriteCsv(Path.Combine(outDir, file), header, rows);
+        }
+
         private float NextF(double min, double max)
         {
             return (float)(min + random.NextDouble() * (max - min));
@@ -40,27 +45,6 @@ namespace Kinovea.FixtureGen.Areas
         private PointF NextPoint(double min, double max)
         {
             return new PointF(NextF(min, max), NextF(min, max));
-        }
-
-        private static string[] Pt(PointF p)
-        {
-            return new[] { Oracle.R(p.X), Oracle.R(p.Y) };
-        }
-
-        private static List<string> Row(params string[][] parts)
-        {
-            List<string> row = new List<string>();
-            foreach (string[] part in parts)
-                row.AddRange(part);
-            return row;
-        }
-
-        private static string[] S(params object[] values)
-        {
-            string[] out_ = new string[values.Length];
-            for (int i = 0; i < values.Length; i++)
-                out_[i] = values[i] is double ? Oracle.R((double)values[i]) : values[i] is float ? Oracle.R((float)values[i]) : Convert.ToString(values[i], Oracle.Culture);
-            return out_;
         }
 
         private void Clipping(FixtureCase c, string outDir, int count)
@@ -91,12 +75,12 @@ namespace Kinovea.FixtureGen.Areas
                 Add(rows, line, "ray_forward", LiangBarsky.ClipLine(window, line[0], line[1], 0, double.MaxValue));
                 Add(rows, line, "ray_backward", LiangBarsky.ClipLine(window, line[0], line[1], double.MinValue, 1));
             }
-            Oracle.WriteCsv(Path.Combine(outDir, "lines.csv"), new[] { "ax", "ay", "bx", "by", "mode", "visible", "ex", "ey", "xx", "xy" }, rows);
+            Save(outDir, "lines.csv", rows, "ax", "ay", "bx", "by", "mode", "visible", "ex", "ey", "xx", "xy");
         }
 
         private static void Add(List<IList<string>> rows, PointF[] line, string mode, ClipResult r)
         {
-            rows.Add(Row(Pt(line[0]), Pt(line[1]), S(mode, r.Visible ? 1 : 0), Pt(r.A), Pt(r.B)));
+            rows.Add(CsvRows.Row(CsvRows.Pt(line[0]), CsvRows.Pt(line[1]), CsvRows.S(mode, r.Visible ? 1 : 0), CsvRows.Pt(r.A), CsvRows.Pt(r.B)));
         }
 
         /// <summary>
@@ -122,9 +106,9 @@ namespace Kinovea.FixtureGen.Areas
                     }
                 object[] args = { a, null, null };
                 svdcmp.Invoke(null, args);
-                rows.Add(Row(S(i, m, n, string.Join(" ", values)), S(Flatten((double[])args[1]), Flatten(a), Flatten((double[,])args[2]))));
+                rows.Add(CsvRows.Row(CsvRows.S(i, m, n, string.Join(" ", values)), CsvRows.S(Flatten((double[])args[1]), Flatten(a), Flatten((double[,])args[2]))));
             }
-            Oracle.WriteCsv(Path.Combine(outDir, "cases.csv"), new[] { "case", "m", "n", "values", "w", "u", "v" }, rows);
+            Save(outDir, "cases.csv", rows, "case", "m", "n", "values", "w", "u", "v");
         }
 
         private static string Flatten(Array values)
