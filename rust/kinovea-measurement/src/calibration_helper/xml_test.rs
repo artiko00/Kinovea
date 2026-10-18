@@ -24,7 +24,7 @@ fn line_fragment_is_byte_exact() {
     let mut h = full_hd();
     h.calibrate_by_line(Uuid::parse_str(ID).unwrap(), 2.0, p(100.0, 500.0), p(300.0, 500.0), CalibrationAxis::LineHorizontal);
     h.set_length_unit(LengthUnit::Meters);
-    let want = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Calibration>\n  <CalibrationLine>\n    <Length>2</Length>\n    <Segment>\n      <A>100;500</A>\n      <B>300;500</B>\n    </Segment>\n    <Origin>0;2</Origin>\n    <Offset>0;0</Offset>\n    <Axis>LineHorizontal</Axis>\n  </CalibrationLine>\n  <CalibrationDrawingId>11111111-2222-3333-4444-555555555555</CalibrationDrawingId>\n  <Unit Abbreviation=\"m\">Meters</Unit>\n</Calibration>\n";
+    let want = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Calibration>\n  <CalibrationLine>\n    <Length>2</Length>\n    <Segment>\n      <A>100;500</A>\n      <B>300;500</B>\n    </Segment>\n    <Origin>0;2</Origin>\n    <Offset>0;0</Offset>\n    <Axis>LineHorizontal</Axis>\n  </CalibrationLine>\n  <CalibrationDrawingId>11111111-2222-3333-4444-555555555555</CalibrationDrawingId>\n  <Unit Abbreviation=\"m\">Meters</Unit>\n</Calibration>";
     assert_eq!(document(h.write_xml()), want);
 }
 
@@ -39,7 +39,7 @@ fn plane_with_distortion_fragment_and_round_trip_with_scale() {
     let text = document(h.write_xml());
     assert!(text.contains("  <CalibrationPlane>\n    <Size>4;3</Size>\n    <Quadrilateral>\n      <A>300;200</A>\n"));
     assert!(text.contains("  <Unit Abbreviation=\"cm\">Centimeters</Unit>\n  <CameraCalibration>\n    <Fx>1100</Fx>\n"));
-    assert!(text.contains("    <PixelsPerMM>311.688311688312</PixelsPerMM>\n    <Path />\n  </CameraCalibration>\n</Calibration>\n"));
+    assert!(text.contains("    <PixelsPerMM>311.688311688312</PixelsPerMM>\n    <Path />\n  </CameraCalibration>\n</Calibration>"));
 
     let root = Element::parse(&text).unwrap();
     let mut read = full_hd();

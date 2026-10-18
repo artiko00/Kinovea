@@ -19,7 +19,7 @@ fn plane_fragment_matches_the_expected_text() {
     c.initialize_plane(SizeF::new(4.0, 3.0), Quadrilateral::new(p(300.0, 200.0), p(1500.0, 240.0), p(1700.0, 900.0), p(100.0, 880.0)));
     c.offset = p(0.5, -0.25);
     let text = wrap("CalibrationPlane", c.write_plane_xml()).to_document();
-    let want = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<CalibrationPlane>\n  <Size>4;3</Size>\n  <Quadrilateral>\n    <A>300;200</A>\n    <B>1500;240</B>\n    <C>1700;900</C>\n    <D>100;880</D>\n  </Quadrilateral>\n  <Origin>0;3</Origin>\n  <Offset>0.5;-0.25</Offset>\n</CalibrationPlane>\n";
+    let want = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<CalibrationPlane>\n  <Size>4;3</Size>\n  <Quadrilateral>\n    <A>300;200</A>\n    <B>1500;240</B>\n    <C>1700;900</C>\n    <D>100;880</D>\n  </Quadrilateral>\n  <Origin>0;3</Origin>\n  <Offset>0.5;-0.25</Offset>\n</CalibrationPlane>";
     assert_eq!(text, want);
 }
 
@@ -28,7 +28,7 @@ fn line_fragment_matches_the_expected_text() {
     let mut c = CalibratorPlane::default();
     c.initialize_line(2.5, p(100.0, 500.0), p(300.0, 500.0), CalibrationAxis::LineVertical);
     let text = wrap("CalibrationLine", c.write_line_xml()).to_document();
-    let want = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<CalibrationLine>\n  <Length>2.5</Length>\n  <Segment>\n    <A>100;500</A>\n    <B>100;700</B>\n  </Segment>\n  <Origin>0;2.5</Origin>\n  <Offset>0;0</Offset>\n  <Axis>LineVertical</Axis>\n</CalibrationLine>\n";
+    let want = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<CalibrationLine>\n  <Length>2.5</Length>\n  <Segment>\n    <A>100;500</A>\n    <B>100;700</B>\n  </Segment>\n  <Origin>0;2.5</Origin>\n  <Offset>0;0</Offset>\n  <Axis>LineVertical</Axis>\n</CalibrationLine>";
     assert_eq!(text, want);
 }
 
