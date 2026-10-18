@@ -1,0 +1,13 @@
+{
+  "area": "calibration",
+  "seed": 0,
+  "inputs": {
+    "kind": "kva",
+    "imageWidth": 1920,
+    "imageHeight": 1080,
+    "drawingId": "11111111-2222-3333-4444-555555555555",
+    "line": { "length": 2, "a": [100, 500], "b": [300, 500], "axis": "LineHorizontal", "unit": "Meters" },
+    "plane": { "size": [4, 3], "quad": [300, 200, 1500, 240, 1700, 900, 100, 880], "origin": [900, 600], "offset": [0.5, -0.25], "unit": "Meters" },
+    "distortion": { "fx": 1100, "fy": 1090, "cx": 950, "cy": 530, "k1": -0.12, "k2": 0.03, "k3": 0, "p1": 0.0005, "p2": -0.0003 }
+  }
+}

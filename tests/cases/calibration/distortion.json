@@ -1,0 +1,12 @@
+{
+  "area": "calibration",
+  "seed": 13,
+  "inputs": {
+    "kind": "distortion",
+    "count": 60,
+    "imageWidth": 1920,
+    "imageHeight": 1080,
+    "parameters": { "fx": 1100, "fy": 1090, "cx": 950, "cy": 530, "k1": -0.12, "k2": 0.03, "k3": 0, "p1": 0.0005, "p2": -0.0003 },
+    "agisoft": "tests/cases/calibration/agisoft.xml"
+  }
+}

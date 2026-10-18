@@ -1,6 +1,6 @@
 use super::dom::Element;
 
-const DOC: &str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Root>\n  <A>1 &amp; 2</A>\n  <Empty />\n  <List>\n    <Item key=\"x\">v</Item>\n  </List>\n</Root>\n";
+const DOC: &str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Root>\n  <A>1 &amp; 2</A>\n  <Empty />\n  <List>\n    <Item key=\"x\">v</Item>\n  </List>\n</Root>";
 
 #[test]
 fn parse_then_write_is_identity() {
@@ -19,7 +19,7 @@ fn building_elements() {
     root.push_leaf("Culture", "").push_leaf("Flag", "true");
     assert_eq!(
         root.to_document(),
-        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Root>\n  <Culture />\n  <Flag>true</Flag>\n</Root>\n"
+        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Root>\n  <Culture />\n  <Flag>true</Flag>\n</Root>"
     );
 }
 

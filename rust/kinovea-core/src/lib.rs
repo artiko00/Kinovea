@@ -36,3 +36,6 @@ mod version_test;
 pub mod video_section;
 #[cfg(test)]
 mod video_section_test;
+pub mod xml;
+#[cfg(test)]
+mod xml_test;

@@ -89,3 +89,19 @@ Chronological. Newest entry last. Never delete entries; correct a wrong decision
 - Gotchas: the cutoff loop yields 100 or 101 results (accumulating `fc`); the moving average overwrites the NaN sentinels with finite values (fixture confirms); angular code pads accelerations at `Length <= 2`, linear at `<= 4`; parity replays world coordinates through a zero-size `PixelContext` so the raw columns match bit for bit; `PlayerPreferences` setters save the preferences file, so the oracle restores them in a `finally`.
 - Dependencies: none new (`kinovea-core`, `kinovea-geometry` internal). Deviations recorded in the change design.
 - Verified: `cd rust && make verify` green; `npm run lint` green; `tools/oracle/fixtures.sh --verify` deterministic.
+
+## 2026-10-18 — add-kinematics-filtering archived, add-calibration-and-lens-distortion started
+
+- Agent: Claude Code (Fable 5.1). PR #5 merged, change 03 archived (specs `kinematics/*`), roadmap item 03 ticked. Branch `feat/calibration-core`, draft PR #6.
+- Done: task 1.1 of change 04: `rust/kinovea-core/src/xml.rs` ports the numeric part of `XmlHelper` (parse/write float, point, size, boolean, int list, point reference, video section, timestamp). Points and sizes are tuples because `kinovea-core` does not depend on `kinovea-geometry`.
+- Next: tasks 2.x (lens distortion with the 5-iteration undistort), 3.x (calibrator plane), 4.x (calibration helper implementing `MeasurementContext`), 5 (camera pose), 6 (oracle area `calibration`), 7 (integration).
+- Verified: `cd rust && make verify` green; `npm run lint` green.
+
+## 2026-10-18 — add-calibration-and-lens-distortion (apply)
+
+- Agent: Claude Code (Fable 5.1), same `/goal`. Change 04 applied end to end on `feat/calibration-core` (PR #6).
+- Done in `rust/kinovea-measurement`: `Units`, `CalibrationAxis`, `CalibratorType`, `TrackedCalibrationSource` + `StaticSource`, `CalibratorPlane` (+ `quad`, `xml`), `CalibrationHelper` (+ `calibrate`, `transform`, `convert` with the `MeasurementContext` impl via `with_preferences`, `text`, `xml`), lens distortion (`parameters`, `undistort` with the 5-iteration OpenCV inverse, `helper`, `serializer` + Kinovea file import/export, `import_agisoft`), `compute_camera_position`. `kinovea-core::xml` (numeric `XmlHelper`, `format_f64_invariant`), `kinovea-geometry::Size`, `kinovea_fixtures::assert_close`. 53 unit tests + 16 parity/support tests.
+- Oracle: area `calibration` (`CalibrationArea*.cs`, `CsvRows.cs` shared with `GeometryArea`), 4 cases + `agisoft.xml`; 336 fixture rows and 4 XML files; `fixtures.sh --verify` deterministic.
+- Parity: transforms numeric 1e-3 (image side 1e-2) and texts exact for 5 calibrations × 25 rows; `kva/*.xml` byte-identical; distortion points/lines 1e-3 px against `Cv2.UndistortPoints`; Kinovea lens file round trip byte-identical; Agisoft parameters 1e-9; camera pose 1e-3 relative. Green on first run except the trailing newline: `.NET XmlWriter` writes none after the root end tag, so `Element::to_document` no longer appends it (preferences save now matches the original byte for byte too).
+- Gotchas: `ParseSegment` ignores its scale (origin scaled, segment not); `CameraCalibration` without `ImageSize` is not rescaled; OpenCV narrows the normalized undistorted point to float; `GetPointAtTime` with a non-empty drawing id and static callbacks puts the origin at image (0, 0), so oracle transforms use `Guid.Empty`; `float.Parse` precision loss when parsing doubles via `parse_float` (use f64 parse).
+- Verified: `cd rust && make verify` green; `npm run lint` green; `tools/oracle/fixtures.sh --verify` green.

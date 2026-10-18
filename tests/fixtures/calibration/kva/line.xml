@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Calibration>
+  <CalibrationLine>
+    <Length>2</Length>
+    <Segment>
+      <A>100;500</A>
+      <B>300;500</B>
+    </Segment>
+    <Origin>0;2</Origin>
+    <Offset>0;0</Offset>
+    <Axis>LineHorizontal</Axis>
+  </CalibrationLine>
+  <CalibrationDrawingId>11111111-2222-3333-4444-555555555555</CalibrationDrawingId>
+  <Unit Abbreviation="m">Meters</Unit>
+</Calibration>

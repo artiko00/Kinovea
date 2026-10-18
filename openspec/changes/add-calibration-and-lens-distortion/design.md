@@ -43,6 +43,18 @@ The fragment reader/writer uses `quick-xml` events (not serde) because element o
 ### Legacy superseded
 `Kinovea.ScreenManager/Measurement/Calibration/{CalibrationHelper,CalibratorPlane,CalibratorType,CalibrationAxis,CameraPoser}.cs`, `Measurement/LensDistortion/{DistortionParameters,DistortionHelper,DistortionSerializer,DistortionImporterKinovea,DistortionImporterAgisoft}.cs`, `Kinovea.Services/XmlHelper.cs` (numeric/point/size parts; colour and bitmap helpers move with the metadata model). `CameraCalibrator.cs` and `FormCalibrateDistortion.*` are superseded by changes 11 and 16. Deleted in `remove-dotnet-solution`.
 
+### Deviations found while implementing
+- `kinovea-core::xml` returns points and sizes as tuples because `kinovea-core` does not depend on `kinovea-geometry`; the integer `Size` type lives in `kinovea-geometry::point`. `format_f64_invariant` (15 significant digits) joins the 7-digit `float` formatter, both built on one `format_significant` helper.
+- The XML backend is the element tree of `kinovea-core::preferences::dom` (already byte-exact for `Preferences.xml`) rather than raw `quick-xml` events; the KVA fragment and the Kinovea lens file are produced through it.
+- The two player preferences do not belong to the calibration: `CalibrationHelper::with_preferences(filtering, smoothing)` returns the `CalibratedContext` that implements `MeasurementContext`.
+- `CalibrationHelper` owns a `Box<dyn TrackedCalibrationSource>` (the three callbacks of `Initialize`); `without_tracking` uses `StaticSource`. No `CalibrationChanged` event and no coordinate-system grid (renderer side).
+- Reading a `CalibrationLine` scales the origin but not the segment, as the original `ParseSegment` ignores its scale argument; reading a `CameraCalibration` without `ImageSize` keeps the intrinsics unscaled. Both are reproduced and tested.
+- OpenCV returns the undistorted normalized coordinates as `float` before scaling back; the port narrows at the same point. The 5-iteration inverse is not exact for strong coefficients at the image border, so the round-trip test uses the realistic parameters of `tests/cases/calibration/distortion.json`.
+- `import_kinovea` records the file path in `path` like the original; the byte-for-byte round trip clears it before exporting.
+- `CalibratorPlane::clone_calibrator` reproduces the original `Clone` (offset dropped, origin and axis kept). Cutoff of invalid plane updates (`size.IsEmpty`) is `width <= 0 || height <= 0`.
+- The oracle `transforms` cases use `Guid.Empty` as drawing id so `GetPointText` follows the static path; with a real id and the static callbacks the original would place the origin at image (0, 0).
+- `CsvRows` (FixtureGen) centralizes the CSV cell builders previously private to `GeometryArea`.
+
 ## Risks / Trade-offs
 
 - [OpenCV's iteration count or stopping rule differs from the assumed 5 iterations in the vendored version 4.10] → the parity test on `distortion/points.csv` fails loudly; the iteration count is a constant to adjust once, documented with the OpenCV source reference.

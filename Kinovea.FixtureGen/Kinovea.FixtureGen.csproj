@@ -55,7 +55,11 @@
     <Compile Include="Areas\GeometryArea.cs" />
     <Compile Include="Areas\GeometryArea.Homography.cs" />
     <Compile Include="Areas\GeometryArea.Helpers.cs" />
+    <Compile Include="Areas\CalibrationArea.cs" />
+    <Compile Include="Areas\CalibrationArea.Kva.cs" />
+    <Compile Include="Areas\CalibrationArea.Distortion.cs" />
     <Compile Include="FixtureCase.cs" />
+    <Compile Include="CsvRows.cs" />
     <Compile Include="Oracle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

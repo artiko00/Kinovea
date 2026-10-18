@@ -26,32 +26,21 @@ namespace Kinovea.FixtureGen.Areas
 
                 ProjectiveMapper mapper = new ProjectiveMapper(plane, image);
                 Ellipse e = mapper.Ellipse();
-                cases.Add(Row(S(i), Quad(plane), Quad(image), Pt(e.Center), S(e.SemiMajorAxis, e.SemiMinorAxis, e.Rotation)));
+                cases.Add(CsvRows.Row(CsvRows.S(i), CsvRows.Quad(plane), CsvRows.Quad(image), CsvRows.Pt(e.Center), CsvRows.S(e.SemiMajorAxis, e.SemiMinorAxis, e.Rotation)));
 
                 for (int j = 0; j < points; j++)
                 {
                     PointF p = new PointF(NextF(0, plane.B.X), NextF(0, plane.D.Y));
                     PointF q = new PointF(NextF(box.Left, box.Right), NextF(box.Top, box.Bottom));
-                    pts.Add(Row(S(i), Pt(p), Pt(mapper.Forward(p)), Pt(q), Pt(mapper.Backward(q))));
+                    pts.Add(CsvRows.Row(CsvRows.S(i), CsvRows.Pt(p), CsvRows.Pt(mapper.Forward(p)), CsvRows.Pt(q), CsvRows.Pt(mapper.Backward(q))));
 
                     Vector3 h = new Vector3(NextF(-5, 5), NextF(-5, 5), NextF(0.5, 2));
-                    vectors.Add(Row(S(i), V3(h), V3(mapper.Forward(h)), V3(mapper.Backward(h))));
+                    vectors.Add(CsvRows.Row(CsvRows.S(i), CsvRows.V3(h), CsvRows.V3(mapper.Forward(h)), CsvRows.V3(mapper.Backward(h))));
                 }
             }
-            Oracle.WriteCsv(Path.Combine(outDir, "cases.csv"),
-                new[] { "case", "p0x", "p0y", "p1x", "p1y", "p2x", "p2y", "p3x", "p3y", "i0x", "i0y", "i1x", "i1y", "i2x", "i2y", "i3x", "i3y", "ecx", "ecy", "ea", "eb", "erot" }, cases);
-            Oracle.WriteCsv(Path.Combine(outDir, "points.csv"), new[] { "case", "px", "py", "fx", "fy", "qx", "qy", "bx", "by" }, pts);
-            Oracle.WriteCsv(Path.Combine(outDir, "vectors.csv"), new[] { "case", "x", "y", "z", "fx", "fy", "fz", "bx", "by", "bz" }, vectors);
-        }
-
-        private static string[] Quad(QuadrilateralF q)
-        {
-            return Row(Pt(q.A), Pt(q.B), Pt(q.C), Pt(q.D)).ToArray();
-        }
-
-        private static string[] V3(Vector3 v)
-        {
-            return S(v.X, v.Y, v.Z);
+            Save(outDir, "cases.csv", cases, "case", "p0x", "p0y", "p1x", "p1y", "p2x", "p2y", "p3x", "p3y", "i0x", "i0y", "i1x", "i1y", "i2x", "i2y", "i3x", "i3y", "ecx", "ecy", "ea", "eb", "erot");
+            Save(outDir, "points.csv", pts, "case", "px", "py", "fx", "fy", "qx", "qy", "bx", "by");
+            Save(outDir, "vectors.csv", vectors, "case", "x", "y", "z", "fx", "fy", "fz", "bx", "by", "bz");
         }
     }
 }

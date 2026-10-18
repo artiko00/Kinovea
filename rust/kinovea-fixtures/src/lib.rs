@@ -110,6 +110,16 @@ pub fn approx_eq(a: f64, b: f64, tol: f64) -> bool {
     (a - b).abs() <= tol
 }
 
+/// Panics unless `got` is within `tol` of `want`; a NaN expectation requires a NaN result.
+/// `ctx` names the fixture row in the failure message.
+pub fn assert_close(got: f64, want: f64, tol: f64, ctx: &str) {
+    if want.is_nan() {
+        assert!(got.is_nan(), "{ctx}: got {got}, want NaN");
+        return;
+    }
+    assert!(approx_eq(got, want, tol), "{ctx}: got {got}, want {want}");
+}
+
 /// Lowercase hex SHA-256 of a byte slice, matching the generator's `case_sha256`.
 pub fn sha256_hex(bytes: &[u8]) -> String {
     use sha2::Digest;

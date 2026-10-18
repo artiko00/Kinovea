@@ -13,7 +13,7 @@ Phase A, foundations
 - [x] 00 `add-rust-workspace-scaffold` (archived 2026-10-18)
 - [x] 01 `add-core-types-and-units` (archived 2026-10-18)
 - [x] 02 `add-geometry-core` (archived 2026-10-18)
-- [ ] 03 `add-kinematics-filtering`
+- [x] 03 `add-kinematics-filtering` (archived 2026-10-18)
 - [ ] 04 `add-calibration-and-lens-distortion`
 - [ ] 05 `add-kva-metadata-model`
 - [ ] 06 `add-headless-renderer`

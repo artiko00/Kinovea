@@ -1,0 +1,5 @@
+{
+  "area": "calibration",
+  "seed": 17,
+  "inputs": { "kind": "pose", "count": 20, "imageWidth": 1920, "imageHeight": 1080 }
+}

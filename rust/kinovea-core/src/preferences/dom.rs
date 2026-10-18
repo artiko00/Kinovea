@@ -95,10 +95,12 @@ impl Element {
         }
     }
 
-    /// Serializes the element as a full document in the .NET `XmlWriter` style.
+    /// Serializes the element as a full document in the .NET `XmlWriter` style: declaration,
+    /// two-space indentation and no newline after the root end tag.
     pub fn to_document(&self) -> String {
         let mut out = String::from("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
         self.write(&mut out, 0);
+        out.pop();
         out
     }
 

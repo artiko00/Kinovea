@@ -1,0 +1,18 @@
+{
+  "area": "calibration",
+  "seed": 11,
+  "inputs": {
+    "kind": "transforms",
+    "count": 25,
+    "imageWidth": 1920,
+    "imageHeight": 1080,
+    "fps": 50,
+    "calibrations": [
+      { "name": "default" },
+      { "name": "line-h", "length": 2, "a": [100, 500], "b": [300, 500], "axis": "LineHorizontal", "unit": "Meters" },
+      { "name": "line-v", "length": 2, "a": [100, 500], "b": [100, 300], "axis": "LineVertical", "unit": "Meters" },
+      { "name": "plane", "size": [4, 3], "quad": [300, 200, 1500, 240, 1700, 900, 100, 880], "unit": "Meters" },
+      { "name": "plane-offset", "size": [400, 300], "quad": [300, 200, 1500, 240, 1700, 900, 100, 880], "origin": [900, 600], "offset": [12.5, -7.25], "unit": "Centimeters" }
+    ]
+  }
+}
