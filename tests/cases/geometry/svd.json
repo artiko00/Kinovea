@@ -1,0 +1,5 @@
+{
+  "area": "geometry",
+  "seed": 5,
+  "inputs": { "kind": "svd", "count": 20 }
+}

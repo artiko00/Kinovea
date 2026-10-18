@@ -19,6 +19,7 @@ namespace Kinovea.FixtureGen
             new TimecodeArea(),
             new UnitsArea(),
             new PreferencesArea(),
+            new GeometryArea(),
         }.ToDictionary(a => a.Name);
 
         public static int Main(string[] args)
