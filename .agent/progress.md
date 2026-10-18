@@ -62,3 +62,12 @@ Chronological. Newest entry last. Never delete entries; correct a wrong decision
 - Discoveries recorded in the artifacts: the KVA writer emits FormatVersion 2.1; both kinematics smoothing preferences default to `true`, so the existing kinematics fixtures include the moving-average pass; no `Fraction` type exists in `Kinovea.Services`; `ProjectiveMapper.Backward` has a typo the port reproduces; the host FFmpeg is 9.0 while CI Ubuntu 24.04 ships 6.1 (08 pins the floor at 6.1).
 - Pending human decisions: every new crate and dependency is flagged "requires approval" in the designs; workflow edits (apt packages, GUI libs, release.yml) likewise; `kinovea-export` rename to `kinovea-io`; Flatpak id; optional `add-pose-estimation` change (13 accepts external keypoints only).
 - Next: review PR, archive nothing yet, start `/opsx:apply add-core-types-and-units`.
+
+## 2026-10-18 — add-core-types-and-units (apply)
+
+- Agent: Claude Code (Fable 5.1). Human asked to merge PR #2 and apply the change end to end.
+- Done in `rust/kinovea-core`: timecode formats and rendering (`timecode.rs`, `timecode_format.rs`), units with abbreviations, conversions and calibration text (`units*.rs`), `VideoSection`, `TimedPoint`, `ThreePartsVersion`, `TimestampMapper`, and the full preferences model (`preferences/`, 19 modules under 150 lines each) with `Preferences::load/save` for format 3.0. New oracle areas `units` and `preferences` in `Kinovea.FixtureGen`; fixtures regenerated (all manifests share one commit).
+- Parity: 811 timecode rows, 60 ms→timecode rows, 1 600+ unit conversion rows and 12 pixel-size strings match byte for byte or within 1e-6; default `Preferences.xml` is element-wise equal to the oracle; the `modified` case round-trips and drops unknown elements.
+- Gotchas: `.NET` `(int)Math.Round` overflow is reproduced for `Microseconds`; `.NET Framework` `float.ToString()` (7 significant digits, `1E-05` style) is reimplemented in `units_precision::format_f32_default`; capture folders had fresh GUIDs and the user's Documents path, normalised by the oracle; open-harness' 150-line limit forced the preferences split and the `xml_fields!`/`xml_struct!` macros.
+- Dependencies added (flagged in design): `quick-xml`, `uuid`. Deviations recorded in the change design.
+- Verified: `cd rust && make verify` green; `npm run lint` green; `fixtures.sh --verify` deterministic.
