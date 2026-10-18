@@ -7,6 +7,10 @@ repository.workspace = true
 rust-version.workspace = true
 
 [dependencies]
+thiserror.workspace = true
+
+[dev-dependencies]
+kinovea-fixtures = { path = "../kinovea-fixtures" }
 
 [lints]
 workspace = true

@@ -49,6 +49,8 @@
     <Compile Include="Areas\KinematicsArea.cs" />
     <Compile Include="Areas\KvaArea.cs" />
     <Compile Include="Areas\TimecodeArea.cs" />
+    <Compile Include="Areas\UnitsArea.cs" />
+    <Compile Include="Areas\PreferencesArea.cs" />
     <Compile Include="FixtureCase.cs" />
     <Compile Include="Oracle.cs" />
     <Compile Include="Program.cs" />
