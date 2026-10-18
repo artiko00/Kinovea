@@ -89,3 +89,10 @@ Chronological. Newest entry last. Never delete entries; correct a wrong decision
 - Gotchas: the cutoff loop yields 100 or 101 results (accumulating `fc`); the moving average overwrites the NaN sentinels with finite values (fixture confirms); angular code pads accelerations at `Length <= 2`, linear at `<= 4`; parity replays world coordinates through a zero-size `PixelContext` so the raw columns match bit for bit; `PlayerPreferences` setters save the preferences file, so the oracle restores them in a `finally`.
 - Dependencies: none new (`kinovea-core`, `kinovea-geometry` internal). Deviations recorded in the change design.
 - Verified: `cd rust && make verify` green; `npm run lint` green; `tools/oracle/fixtures.sh --verify` deterministic.
+
+## 2026-10-18 — add-kinematics-filtering archived, add-calibration-and-lens-distortion started
+
+- Agent: Claude Code (Fable 5.1). PR #5 merged, change 03 archived (specs `kinematics/*`), roadmap item 03 ticked. Branch `feat/calibration-core`, draft PR #6.
+- Done: task 1.1 of change 04: `rust/kinovea-core/src/xml.rs` ports the numeric part of `XmlHelper` (parse/write float, point, size, boolean, int list, point reference, video section, timestamp). Points and sizes are tuples because `kinovea-core` does not depend on `kinovea-geometry`.
+- Next: tasks 2.x (lens distortion with the 5-iteration undistort), 3.x (calibrator plane), 4.x (calibration helper implementing `MeasurementContext`), 5 (camera pose), 6 (oracle area `calibration`), 7 (integration).
+- Verified: `cd rust && make verify` green; `npm run lint` green.
