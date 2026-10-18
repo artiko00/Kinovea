@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Calibration>
+  <CalibrationPlane>
+    <Size>4;3</Size>
+    <Quadrilateral>
+      <A>264.8459;181.7844</A>
+      <B>1522.23;228.1448</B>
+      <C>1753.826;926.0491</C>
+      <D>28.86083;908.928</D>
+    </Quadrilateral>
+    <Origin>1.961467;1.891533</Origin>
+    <Offset>0.5;-0.25</Offset>
+  </CalibrationPlane>
+  <CalibrationDrawingId>11111111-2222-3333-4444-555555555555</CalibrationDrawingId>
+  <Unit Abbreviation="m">Meters</Unit>
+  <CameraCalibration>
+    <Fx>1100</Fx>
+    <Fy>1090</Fy>
+    <Cx>950</Cx>
+    <Cy>530</Cy>
+    <K1>-0.12</K1>
+    <K2>0.03</K2>
+    <K3>0</K3>
+    <P1>0.0005</P1>
+    <P2>-0.0003</P2>
+    <PixelsPerMM>311.688311688312</PixelsPerMM>
+    <Path />
+  </CameraCalibration>
+</Calibration>

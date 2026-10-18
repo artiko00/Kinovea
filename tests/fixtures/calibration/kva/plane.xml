@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Calibration>
+  <CalibrationPlane>
+    <Size>4;3</Size>
+    <Quadrilateral>
+      <A>300;200</A>
+      <B>1500;240</B>
+      <C>1700;900</C>
+      <D>100;880</D>
+    </Quadrilateral>
+    <Origin>1.954776;1.908138</Origin>
+    <Offset>0.5;-0.25</Offset>
+  </CalibrationPlane>
+  <CalibrationDrawingId>11111111-2222-3333-4444-555555555555</CalibrationDrawingId>
+  <Unit Abbreviation="m">Meters</Unit>
+</Calibration>
