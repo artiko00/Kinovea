@@ -19,9 +19,9 @@
 
 ## 4. Trackability
 
-- [ ] 4.1 Write `src/trackable_point_test.rs` (reference set clears cache, camera transform computed once) then implement `src/trackable_point.rs` and the `CameraTransform` trait in `src/camera.rs` with a fake in tests; verify tests pass.
-- [ ] 4.2 Write `src/drawing_tracker_test.rs` with a fake `Trackable`: object tracking precedence, fallback to camera, none, bind and unbind tracks, trim; implement `src/drawing_tracker.rs` and the `Trackable` trait; verify tests pass.
-- [ ] 4.3 Write `src/manager_test.rs` (add, assign after load, forget changes the hash, any-tracking flag, trim) for the runtime over `kinovea_metadata::TrackabilityManager`; serialization is already covered by the KVA fixture tests of `kinovea-metadata` (check that the `Trackers` and `TrackerParameters` sections of `Tools/XML/Schema/samples/*.kva` round trip there, add a test if missing); implement `src/manager.rs`; verify tests pass.
+- [x] 4.1 Write `src/trackable_point_test.rs` (reference set clears cache, camera transform computed once) then implement `src/trackable_point.rs` and the `CameraTransform` trait in `src/camera.rs` with a fake in tests; verify tests pass.
+- [x] 4.2 Write `src/drawing_tracker_test.rs` with a fake `Trackable`: object tracking precedence, fallback to camera, none, bind and unbind tracks, trim; implement `src/drawing_tracker.rs` and the `Trackable` trait; verify tests pass.
+- [x] 4.3 Write `src/manager_test.rs` (add, assign after load, forget changes the hash, any-tracking flag, trim) for the runtime over `kinovea_metadata::TrackabilityManager`; serialization is already covered by the KVA fixture tests of `kinovea-metadata` (check that the `Trackers` and `TrackerParameters` sections of `Tools/XML/Schema/samples/*.kva` round trip there, add a test if missing); implement `src/manager.rs`; verify tests pass.
 
 ## 5. Oracle parity
 
