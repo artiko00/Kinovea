@@ -43,3 +43,7 @@ pub fn hit_test(d: &Drawing, p: PointF, ctx: &HitContext) -> Hit {
         _ => Hit::Miss,
     }
 }
+
+#[cfg(test)]
+#[path = "drawing_test.rs"]
+mod drawing_test;

@@ -125,3 +125,7 @@ pub fn evaluate() -> Vec<Judged> {
     }
     out
 }
+
+#[cfg(test)]
+#[path = "run_test.rs"]
+mod run_test;

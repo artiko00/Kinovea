@@ -23,6 +23,7 @@ fn kinds_without_a_port_are_reported() {
     assert!(is_ported(&Drawing::CrossMark(CrossMark::new(PointF::new(
         0.0, 0.0
     )))));
-    assert!(!is_ported(&Drawing::Svg(kinovea_metadata::drawing::Svg::new("x.svg"))
+    assert!(!is_ported(&Drawing::Svg(
+        kinovea_metadata::drawing::Svg::new("x.svg")
     )));
 }
