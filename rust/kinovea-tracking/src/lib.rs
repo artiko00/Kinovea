@@ -30,9 +30,17 @@ pub mod pixels;
 #[cfg(test)]
 mod pixels_test;
 
+pub mod synthetic;
+#[cfg(test)]
+mod synthetic_test;
+
 pub mod timeline;
 #[cfg(test)]
 mod timeline_test;
+
+pub mod tracker;
+#[cfg(test)]
+mod tracker_test;
 
 /// Returns the crate name as declared in `Cargo.toml`.
 pub fn crate_name() -> &'static str {
