@@ -22,6 +22,7 @@ namespace Kinovea.FixtureGen
             new GeometryArea(),
             new CalibrationArea(),
             new PostureArea(),
+            new VideoCacheArea(),
         }.ToDictionary(a => a.Name);
 
         public static int Main(string[] args)

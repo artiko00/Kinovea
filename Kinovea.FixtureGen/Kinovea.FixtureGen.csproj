@@ -54,6 +54,8 @@
     <Compile Include="Areas\KvaArea.Fuzz.cs" />
     <Compile Include="Areas\PostureArea.cs" />
     <Compile Include="Areas\PostureArea.Moves.cs" />
+    <Compile Include="Areas\VideoCacheArea.cs" />
+    <Compile Include="Areas\VideoCacheArea.Ops.cs" />
     <Compile Include="KvaFuzz.cs" />
     <Compile Include="KvaFuzz.Drawings.cs" />
     <Compile Include="Areas\TimecodeArea.cs" />
