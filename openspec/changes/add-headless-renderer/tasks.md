@@ -32,7 +32,7 @@
 ## 6. Hit testing
 
 - [x] 6.1 Write `src/hit_test.rs` (point box, path widening, single-point ellipse case, scale dependence) then implement `src/hit.rs`; verify tests pass.
-- [ ] 6.2 Implement per-drawing `hit_test(&Drawing, point, &HitContext) -> Hit` in `src/hit/*.rs` with unit tests per kind; add `tests/hits_test.rs` over `hits.csv` with the 99 percent and 2 px boundary rule; verify passes.
+- [x] 6.2 Implement per-drawing `hit_test(&Drawing, point, &HitContext) -> Hit` in `src/hit/*.rs` with unit tests per kind; add `tests/hits_test.rs` over `hits.csv` with the 99 percent and 2 px boundary rule; verify passes. Two explicit, staleness-checked lists (text metrics pending a font rasterizer; capped Pencil/posture deviations) are recorded in the design.
 
 ## 7. Integration
 
