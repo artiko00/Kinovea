@@ -32,10 +32,10 @@
 
 ## 6. Frame pipeline
 
-- [ ] 6.1 Write `src/pipeline/ring_buffer_test.rs` (power-of-two check, claim/commit, refused claim and drop count, inactive consumer, wait-for barrier with a thread) then implement `src/pipeline/ring_buffer.rs` with atomics only; verify tests pass.
-- [ ] 6.2 Write `src/pipeline/frequency_test.rs` (steady 50 Hz within 5 percent, window reset) then implement `src/pipeline/frequency.rs`; verify tests pass.
-- [ ] 6.3 Write `src/pipeline/consumer_test.rs` (started/active/position, deactivate and reactivate skipping slots, stop) then implement `src/pipeline/consumer.rs` (`FrameConsumer` trait + `BatchConsumer` runner) and `src/pipeline/producer.rs` (`FrameProducer` trait, `Frame`, `ImageDescriptor::compatible`); verify tests pass.
-- [ ] 6.4 Write `tests/pipeline_test.rs`: a scripted producer at 200 frames with a slow consumer and a fast consumer, asserting drop count, order of processed positions and measured frequency; implement `src/pipeline/mod.rs` (`FramePipeline::new`, `teardown`); verify the test passes.
+- [x] 6.1 Write `src/pipeline/ring_buffer_test.rs` (power-of-two check, claim/commit, refused claim and drop count, inactive consumer, wait-for barrier with a thread) then implement `src/pipeline/ring_buffer.rs` with atomics only; verify tests pass.
+- [x] 6.2 Write `src/pipeline/frequency_test.rs` (steady 50 Hz within 5 percent, window reset) then implement `src/pipeline/frequency.rs`; verify tests pass.
+- [x] 6.3 Write `src/pipeline/consumer_test.rs` (started/active/position, deactivate and reactivate skipping slots, stop) then implement `src/pipeline/consumer.rs` (`FrameConsumer` trait + `BatchConsumer` runner) and `src/pipeline/producer.rs` (`FrameProducer` trait, `Frame`, `ImageDescriptor::compatible`); verify tests pass.
+- [x] 6.4 Write `tests/pipeline_test.rs`: a scripted producer at 200 frames with a slow consumer and a fast consumer, asserting drop count, order of processed positions and measured frequency; implement `src/pipeline/mod.rs` (`FramePipeline::new`, `teardown`); verify the test passes.
 
 ## 7. Integration
 
