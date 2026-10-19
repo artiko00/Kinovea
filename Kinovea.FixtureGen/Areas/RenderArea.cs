@@ -41,7 +41,7 @@ namespace Kinovea.FixtureGen.Areas
                 foreach (long t in c.Input("timestamps", new long[0]))
                 {
                     using (Bitmap bmp = Render(metadata, scale, frame, t, fading.Enabled))
-                        bmp.Save(Path.Combine(outDir, t.ToString(Oracle.Culture) + ".png"), ImageFormat.Png);
+                        bmp.Save(Path.Combine(outDir, t.ToString(Oracle.Culture) + ".png"), System.Drawing.Imaging.ImageFormat.Png);
                 }
                 WriteHits(c, metadata, frame, fading.Enabled, outDir);
             }
