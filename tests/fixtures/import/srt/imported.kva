@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+  <FormatVersion>2.1</FormatVersion>
+  <Producer>Kinovea.0.0</Producer>
+  <OriginalFilename>srt</OriginalFilename>
+  <FullPath>srt.mp4</FullPath>
+  <ByteLength>0</ByteLength>
+  <ImageSize>1920;1080</ImageSize>
+  <Aspect>Auto</Aspect>
+  <Rotation>Rotate0</Rotation>
+  <Mirror>false</Mirror>
+  <Demosaicing>None</Demosaicing>
+  <Deinterlacing>false</Deinterlacing>
+  <StabilizationTrack>00000000-0000-0000-0000-000000000000</StabilizationTrack>
+  <BackgroundColor>0;255;255;255</BackgroundColor>
+  <AverageTimeStampsPerFrame>400</AverageTimeStampsPerFrame>
+  <CaptureFramerate>25</CaptureFramerate>
+  <VideoFramerate>25</VideoFramerate>
+  <FirstTimeStamp>0</FirstTimeStamp>
+  <SelectionStart>0</SelectionStart>
+  <SelectionEnd>0</SelectionEnd>
+  <TimeOrigin>0</TimeOrigin>
+  <Calibration>
+    <CalibrationLine>
+      <Length>100</Length>
+      <Segment>
+        <A>960;540</A>
+        <B>1060;540</B>
+      </Segment>
+      <Origin>0;100</Origin>
+      <Offset>0;0</Offset>
+      <Axis>LineHorizontal</Axis>
+    </CalibrationLine>
+    <CalibrationDrawingId>00000000-0000-0000-0000-000000000000</CalibrationDrawingId>
+    <Unit Abbreviation="px">Pixels</Unit>
+  </Calibration>
+  <Keyframes>
+    <Keyframe id="00000000-0000-4000-8000-000000000001">
+      <Timestamp>4800</Timestamp>
+      <Name>4800</Name>
+      <Color>51;152;255</Color>
+      <Drawings>
+        <Label id="00000000-0000-4000-8000-000000000002" name="Subtitle">
+          <Text>Hello world
+</Text>
+          <Position>200;810</Position>
+          <BackgroundVisible>true</BackgroundVisible>
+          <ArrowVisible>false</ArrowVisible>
+          <CircleVisible>false</CircleVisible>
+          <ArrowEnd>150;760</ArrowEnd>
+          <DrawingStyle>
+            <Color Key="back color">
+              <Value>255;0;0;0</Value>
+            </Color>
+            <FontSize Key="font size">
+              <Value>12</Value>
+            </FontSize>
+            <LineSize Key="LineSize">
+              <Value>2</Value>
+            </LineSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>false</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>19</OpaqueFrames>
+            <Frames>10</Frames>
+          </InfosFading>
+        </Label>
+      </Drawings>
+    </Keyframe>
+    <Keyframe id="00000000-0000-4000-8000-000000000003">
+      <Timestamp>20000</Timestamp>
+      <Name>20000</Name>
+      <Color>51;152;255</Color>
+      <Drawings>
+        <Label id="00000000-0000-4000-8000-000000000004" name="Subtitle">
+          <Text>Second
+line two
+</Text>
+          <Position>200;810</Position>
+          <BackgroundVisible>true</BackgroundVisible>
+          <ArrowVisible>false</ArrowVisible>
+          <CircleVisible>false</CircleVisible>
+          <ArrowEnd>150;760</ArrowEnd>
+          <DrawingStyle>
+            <Color Key="back color">
+              <Value>255;0;0;0</Value>
+            </Color>
+            <FontSize Key="font size">
+              <Value>12</Value>
+            </FontSize>
+            <LineSize Key="LineSize">
+              <Value>2</Value>
+            </LineSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>false</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>25</OpaqueFrames>
+            <Frames>10</Frames>
+          </InfosFading>
+        </Label>
+      </Drawings>
+    </Keyframe>
+    <Keyframe id="00000000-0000-4000-8000-000000000005">
+      <Timestamp>40000</Timestamp>
+      <Name>40000</Name>
+      <Color>51;152;255</Color>
+      <Drawings>
+        <Label id="00000000-0000-4000-8000-000000000006" name="Subtitle">
+          <Text>Third
+</Text>
+          <Position>200;810</Position>
+          <BackgroundVisible>true</BackgroundVisible>
+          <ArrowVisible>false</ArrowVisible>
+          <CircleVisible>false</CircleVisible>
+          <ArrowEnd>150;760</ArrowEnd>
+          <DrawingStyle>
+            <Color Key="back color">
+              <Value>255;0;0;0</Value>
+            </Color>
+            <FontSize Key="font size">
+              <Value>12</Value>
+            </FontSize>
+            <LineSize Key="LineSize">
+              <Value>2</Value>
+            </LineSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>false</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>38</OpaqueFrames>
+            <Frames>10</Frames>
+          </InfosFading>
+        </Label>
+      </Drawings>
+    </Keyframe>
+  </Keyframes>
+  <CoordinateSystem id="00000000-0000-4000-8000-000000000007" name="">
+    <Position>0;0</Position>
+    <ReferenceTimestamp>-1</ReferenceTimestamp>
+    <Visible>false</Visible>
+    <ShowGrid>true</ShowGrid>
+    <ShowGraduations>true</ShowGraduations>
+    <DrawingStyle>
+      <Color Key="line color">
+        <Value>255;255;0;0</Value>
+      </Color>
+    </DrawingStyle>
+  </CoordinateSystem>
+  <TestGrid id="00000000-0000-4000-8000-000000000008" name="">
+    <Visible>false</Visible>
+    <ShowHorizontalAxis>true</ShowHorizontalAxis>
+    <ShowVerticalAxis>true</ShowVerticalAxis>
+    <ShowFraming>true</ShowFraming>
+    <ShowThirds>false</ShowThirds>
+    <DrawingStyle>
+      <Color Key="color">
+        <Value>255;255;0;0</Value>
+      </Color>
+    </DrawingStyle>
+  </TestGrid>
+  <Trackability />
+  <VideoFilters />
+</KinoveaVideoAnalysis>

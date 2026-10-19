@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+  <FormatVersion>2.1</FormatVersion>
+  <Producer>Kinovea.0.0</Producer>
+  <OriginalFilename>openpose</OriginalFilename>
+  <FullPath>openpose.mp4</FullPath>
+  <ByteLength>0</ByteLength>
+  <ImageSize>1920;1080</ImageSize>
+  <Aspect>Auto</Aspect>
+  <Rotation>Rotate0</Rotation>
+  <Mirror>false</Mirror>
+  <Demosaicing>None</Demosaicing>
+  <Deinterlacing>false</Deinterlacing>
+  <StabilizationTrack>00000000-0000-0000-0000-000000000000</StabilizationTrack>
+  <BackgroundColor>0;255;255;255</BackgroundColor>
+  <AverageTimeStampsPerFrame>400</AverageTimeStampsPerFrame>
+  <CaptureFramerate>25</CaptureFramerate>
+  <VideoFramerate>25</VideoFramerate>
+  <FirstTimeStamp>0</FirstTimeStamp>
+  <SelectionStart>0</SelectionStart>
+  <SelectionEnd>0</SelectionEnd>
+  <TimeOrigin>0</TimeOrigin>
+  <Calibration>
+    <CalibrationLine>
+      <Length>100</Length>
+      <Segment>
+        <A>960;540</A>
+        <B>1060;540</B>
+      </Segment>
+      <Origin>0;100</Origin>
+      <Offset>0;0</Offset>
+      <Axis>LineHorizontal</Axis>
+    </CalibrationLine>
+    <CalibrationDrawingId>00000000-0000-0000-0000-000000000000</CalibrationDrawingId>
+    <Unit Abbreviation="px">Pixels</Unit>
+  </Calibration>
+  <Keyframes>
+    <Keyframe id="00000000-0000-4000-8000-000000000001">
+      <Timestamp>0</Timestamp>
+      <Name>0</Name>
+      <Color>51;152;255</Color>
+      <Drawings>
+        <GenericPosture id="00000000-0000-4000-8000-000000000002" name="OpenPose">
+          <ToolId>00000000-0000-4000-8000-000000000003</ToolId>
+          <Positions>
+            <Point>600;300</Point>
+            <Point>620;315</Point>
+            <Point>640;330</Point>
+            <Point>660;345</Point>
+            <Point>680;360</Point>
+            <Point>700;375</Point>
+            <Point>720;390</Point>
+            <Point>740;405</Point>
+            <Point>760;420</Point>
+            <Point>780;435</Point>
+            <Point>800;450</Point>
+            <Point>820;465</Point>
+            <Point>840;480</Point>
+            <Point>860;495</Point>
+            <Point>880;510</Point>
+            <Point>900;525</Point>
+            <Point>920;540</Point>
+            <Point>940;555</Point>
+            <Point>960;570</Point>
+            <Point>980;585</Point>
+            <Point>1000;600</Point>
+            <Point>1020;615</Point>
+            <Point>1040;630</Point>
+            <Point>1060;645</Point>
+            <Point>1080;660</Point>
+          </Positions>
+          <DrawingStyle>
+            <Color Key="line color">
+              <Value>255;0;153;153</Value>
+            </Color>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>false</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>0</Frames>
+          </InfosFading>
+        </GenericPosture>
+      </Drawings>
+    </Keyframe>
+    <Keyframe id="00000000-0000-4000-8000-000000000004">
+      <Timestamp>400</Timestamp>
+      <Name>400</Name>
+      <Color>51;152;255</Color>
+      <Drawings>
+        <GenericPosture id="00000000-0000-4000-8000-000000000005" name="OpenPose">
+          <ToolId>00000000-0000-4000-8000-000000000003</ToolId>
+          <Positions>
+            <Point>607;303</Point>
+            <Point>627;318</Point>
+            <Point>647;333</Point>
+            <Point>667;348</Point>
+            <Point>687;363</Point>
+            <Point>707;378</Point>
+            <Point>727;393</Point>
+            <Point>747;408</Point>
+            <Point>767;423</Point>
+            <Point>787;438</Point>
+            <Point>807;453</Point>
+            <Point>827;468</Point>
+            <Point>847;483</Point>
+            <Point>867;498</Point>
+            <Point>887;513</Point>
+            <Point>907;528</Point>
+            <Point>927;543</Point>
+            <Point>947;558</Point>
+            <Point>967;573</Point>
+            <Point>987;588</Point>
+            <Point>1007;603</Point>
+            <Point>1027;618</Point>
+            <Point>1047;633</Point>
+            <Point>1067;648</Point>
+            <Point>1087;663</Point>
+          </Positions>
+          <DrawingStyle>
+            <Color Key="line color">
+              <Value>255;0;153;153</Value>
+            </Color>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>false</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>0</Frames>
+          </InfosFading>
+        </GenericPosture>
+      </Drawings>
+    </Keyframe>
+    <Keyframe id="00000000-0000-4000-8000-000000000006">
+      <Timestamp>800</Timestamp>
+      <Name>800</Name>
+      <Color>51;152;255</Color>
+      <Drawings>
+        <GenericPosture id="00000000-0000-4000-8000-000000000007" name="OpenPose">
+          <ToolId>00000000-0000-4000-8000-000000000003</ToolId>
+          <Positions>
+            <Point>614;306</Point>
+            <Point>634;321</Point>
+            <Point>654;336</Point>
+            <Point>674;351</Point>
+            <Point>694;366</Point>
+            <Point>714;381</Point>
+            <Point>734;396</Point>
+            <Point>754;411</Point>
+            <Point>774;426</Point>
+            <Point>794;441</Point>
+            <Point>814;456</Point>
+            <Point>834;471</Point>
+            <Point>854;486</Point>
+            <Point>874;501</Point>
+            <Point>894;516</Point>
+            <Point>914;531</Point>
+            <Point>934;546</Point>
+            <Point>954;561</Point>
+            <Point>974;576</Point>
+            <Point>994;591</Point>
+            <Point>1014;606</Point>
+            <Point>1034;621</Point>
+            <Point>1054;636</Point>
+            <Point>1074;651</Point>
+            <Point>1094;666</Point>
+          </Positions>
+          <DrawingStyle>
+            <Color Key="line color">
+              <Value>255;0;153;153</Value>
+            </Color>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>false</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>0</Frames>
+          </InfosFading>
+        </GenericPosture>
+      </Drawings>
+    </Keyframe>
+  </Keyframes>
+  <CoordinateSystem id="00000000-0000-4000-8000-000000000008" name="">
+    <Position>0;0</Position>
+    <ReferenceTimestamp>-1</ReferenceTimestamp>
+    <Visible>false</Visible>
+    <ShowGrid>true</ShowGrid>
+    <ShowGraduations>true</ShowGraduations>
+    <DrawingStyle>
+      <Color Key="line color">
+        <Value>255;255;0;0</Value>
+      </Color>
+    </DrawingStyle>
+  </CoordinateSystem>
+  <TestGrid id="00000000-0000-4000-8000-000000000009" name="">
+    <Visible>false</Visible>
+    <ShowHorizontalAxis>true</ShowHorizontalAxis>
+    <ShowVerticalAxis>true</ShowVerticalAxis>
+    <ShowFraming>true</ShowFraming>
+    <ShowThirds>false</ShowThirds>
+    <DrawingStyle>
+      <Color Key="color">
+        <Value>255;255;0;0</Value>
+      </Color>
+    </DrawingStyle>
+  </TestGrid>
+  <Trackability>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000002" name="OpenPose">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>600;300</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="1">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>620;315</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="2">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>640;330</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="3">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>660;345</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="4">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>680;360</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="5">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>700;375</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="6">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>720;390</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="7">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>740;405</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="8">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>760;420</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="9">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>780;435</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="10">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>800;450</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="11">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>820;465</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="12">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>840;480</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="13">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>860;495</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="14">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>880;510</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="15">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>900;525</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="16">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>920;540</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="17">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>940;555</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="18">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>960;570</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="19">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>980;585</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="20">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1000;600</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="21">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1020;615</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="22">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1040;630</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="23">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1060;645</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="24">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1080;660</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000005" name="OpenPose">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>607;303</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="1">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>627;318</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="2">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>647;333</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="3">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>667;348</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="4">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>687;363</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="5">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>707;378</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="6">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>727;393</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="7">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>747;408</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="8">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>767;423</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="9">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>787;438</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="10">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>807;453</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="11">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>827;468</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="12">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>847;483</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="13">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>867;498</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="14">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>887;513</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="15">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>907;528</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="16">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>927;543</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="17">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>947;558</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="18">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>967;573</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="19">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>987;588</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="20">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1007;603</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="21">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1027;618</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="22">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1047;633</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="23">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1067;648</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="24">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1087;663</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000007" name="OpenPose">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>614;306</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="1">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>634;321</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="2">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>654;336</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="3">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>674;351</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="4">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>694;366</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="5">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>714;381</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="6">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>734;396</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="7">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>754;411</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="8">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>774;426</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="9">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>794;441</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="10">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>814;456</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="11">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>834;471</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="12">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>854;486</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="13">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>874;501</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="14">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>894;516</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="15">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>914;531</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="16">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>934;546</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="17">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>954;561</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="18">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>974;576</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="19">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>994;591</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="20">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1014;606</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="21">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1034;621</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="22">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1054;636</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="23">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1074;651</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="24">
+        <ReferenceTimestamp>-1</ReferenceTimestamp>
+        <ReferenceValue>1094;666</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+  </Trackability>
+  <VideoFilters />
+</KinoveaVideoAnalysis>

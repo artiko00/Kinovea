@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "producer": "Kinovea.0.0",
+    "fullPath": "minimal.mp4",
+    "originalFilename": "minimal",
+    "imageSize": {
+      "width": 640,
+      "height": 480
+    },
+    "captureFramerate": 25.0,
+    "videoFramerate": 25.0
+  },
+  "data": {
+    "keyframes": [],
+    "positions": [],
+    "distances": [],
+    "angles": [],
+    "times": [],
+    "timeseries": []
+  }
+}
