@@ -59,6 +59,10 @@ namespace Kinovea.FixtureGen.Areas
                 ApplyVideoContext(metadata, source);
             else
                 ApplyContext(metadata, context, videoPathForContext);
+            // What the player does once the video is open (FrameServerPlayer.Load): singletons go
+            // through AfterDrawingCreation (test grid scaled to the image, coordinate system
+            // registered for trackability). KVA files are loaded after that.
+            metadata.PostSetupVideo(true);
             new MetadataSerializer().Load(metadata, source, true);
             return metadata;
         }
