@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+  <FormatVersion>2.1</FormatVersion>
+  <Producer>hand-written</Producer>
+  <OriginalFilename>trackers</OriginalFilename>
+  <ImageSize>640;480</ImageSize>
+  <AverageTimeStampsPerFrame>40</AverageTimeStampsPerFrame>
+  <FirstTimeStamp>0</FirstTimeStamp>
+  <SelectionStart>0</SelectionStart>
+  <Keyframes>
+    <Keyframe id="11111111-0000-4000-8000-000000000001">
+      <Timestamp>400</Timestamp>
+      <Name>k</Name>
+      <Drawings>
+        <Line id="11111111-0000-4000-8000-000000000002" name="L">
+          <Start>10;20</Start>
+          <End>110;120</End>
+          <DrawingStyle><Color Key="color"><Value>255;0;0;255</Value></Color><FontSize Key="line size"><Value>24</Value></FontSize></DrawingStyle>
+        </Line>
+        <Label id="11111111-0000-4000-8000-000000000003" name="T">
+          <Text>mismatched</Text>
+          <Position>200;200</Position>
+          <DrawingStyle><Color Key="back color"><Value>255;1;2;3</Value></Color><PenSize Key="font size"><Value>6</Value></PenSize></DrawingStyle>
+        </Label>
+      </Drawings>
+    </Keyframe>
+  </Keyframes>
+  <CoordinateSystem id="11111111-0000-4000-8000-000000000004" name="">
+    <Position>100;50</Position>
+    <Visible>true</Visible>
+  </CoordinateSystem>
+  <Trackability>
+    <TrackableDrawing id="11111111-0000-4000-8000-000000000002" name="old name">
+      <TrackablePoint key="a"><ReferenceTimestamp>400</ReferenceTimestamp><ReferenceValue>15;25</ReferenceValue></TrackablePoint>
+      <TrackablePoint key="b"><ReferenceTimestamp>400</ReferenceTimestamp><ReferenceValue>115;125</ReferenceValue></TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="11111111-0000-4000-8000-000000000099" name="gone">
+      <TrackablePoint key="0"><ReferenceTimestamp>0</ReferenceTimestamp><ReferenceValue>1;1</ReferenceValue></TrackablePoint>
+    </TrackableDrawing>
+  </Trackability>
+</KinoveaVideoAnalysis>
