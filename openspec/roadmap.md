@@ -15,7 +15,7 @@ Phase A, foundations
 - [x] 02 `add-geometry-core` (archived 2026-10-18)
 - [x] 03 `add-kinematics-filtering` (archived 2026-10-18)
 - [x] 04 `add-calibration-and-lens-distortion` (archived 2026-10-19)
-- [ ] 05 `add-kva-metadata-model`
+- [x] 05 `add-kva-metadata-model` (archived 2026-10-18)
 - [ ] 06 `add-headless-renderer`
 
 Phase B, video
