@@ -6,7 +6,7 @@ use crate::drawing::Drawing;
 use crate::keyframe::Keyframe;
 use crate::kva_io::{identity, parse_enum, Scale};
 use crate::metadata::{register_drawing, Metadata};
-use crate::migration::{migrate_legacy, needs_migration};
+use crate::migration::{descendants, migrate_legacy, needs_migration};
 use kinovea_core::preferences::dom::Element;
 use kinovea_core::xml::{parse_boolean, parse_size};
 use kinovea_geometry::{PointF, Size};
@@ -16,8 +16,6 @@ use std::fmt;
 pub enum KvaError {
     Xml(String),
     NotKva(String),
-    /// Formats 1.2 and older are rejected, as the original does.
-    TooOld(String),
 }
 
 impl fmt::Display for KvaError {
@@ -25,7 +23,6 @@ impl fmt::Display for KvaError {
         match self {
             KvaError::Xml(e) => write!(f, "invalid KVA xml: {e}"),
             KvaError::NotKva(root) => write!(f, "not a KVA document: root is {root}"),
-            KvaError::TooOld(v) => write!(f, "KVA format {v} is too old"),
         }
     }
 }
@@ -38,15 +35,10 @@ pub fn read_kva(m: &mut Metadata, xml: &str) -> Result<ImportContext, KvaError> 
     if root.name != "KinoveaVideoAnalysis" {
         return Err(KvaError::NotKva(root.name));
     }
-    let version = root.child_text("FormatVersion").unwrap_or("").trim().to_owned();
     let mut relative_trajectories = false;
-    match version.parse::<f64>() {
-        Ok(v) if v < 1.3 => return Err(KvaError::TooOld(version)),
-        Ok(v) if needs_migration(v) => {
-            root = migrate_legacy(&root);
-            relative_trajectories = true;
-        }
-        _ => {}
+    if format_version(&root).is_some_and(needs_migration) {
+        root = migrate_legacy(&root);
+        relative_trajectories = true;
     }
     let mut ctx = ImportContext::default();
     let mut scale = Scale::IDENTITY;
@@ -141,7 +133,7 @@ pub fn read_kva(m: &mut Metadata, xml: &str) -> Result<ImportContext, KvaError> 
     } else if ctx.is_capture_recording {
         m.video.time_origin = ctx.remap_from(ctx.time_origin, ctx.first_timestamp, m.video.first_timestamp, &m.video);
     }
-    after_import(m);
+    // `FixRelativeTrajectories` runs before `AfterKVAImport`, so the keyframe labels see absolute times.
     if relative_trajectories {
         for t in m.tracks.iter_mut() {
             if let Drawing::Track(track) = t {
@@ -149,7 +141,13 @@ pub fn read_kva(m: &mut Metadata, xml: &str) -> Result<ImportContext, KvaError> 
             }
         }
     }
+    after_import(m);
     Ok(ctx)
+}
+
+/// `descendant::FormatVersion` of the original: the first one in document order, as a number.
+fn format_version(root: &Element) -> Option<f64> {
+    descendants(root, "FormatVersion").first().and_then(|v| v.text.trim().parse().ok())
 }
 
 /// What the player does when a keyframe's drawings are added: register the trackable ones.
@@ -163,12 +161,7 @@ fn register_keyframe(m: &mut Metadata, keyframe: &Keyframe) {
 /// reference values. `UpdateOrigin`: the coordinate system origin comes from the calibration, and
 /// its tracker follows. `CleanUnassigned`: trackers without a trackable drawing are dropped.
 fn after_import(m: &mut Metadata) {
-    let keyframes: Vec<i64> = m.keyframes.iter().map(|k| k.timestamp).collect();
-    for track in m.tracks.iter_mut() {
-        if let Drawing::Track(t) = track {
-            t.update_keyframe_labels(&keyframes);
-        }
-    }
+    m.update_trajectories_for_keyframes();
     for d in m.keyframes.iter().flat_map(|k| k.drawings.iter()) {
         register_drawing(&mut m.trackability, d);
     }

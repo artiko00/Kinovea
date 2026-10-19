@@ -76,6 +76,7 @@ impl ImportContext {
     pub fn remap_from(&self, input: i64, input_reference: i64, output_reference: i64, current: &VideoContext) -> i64 {
         let frame = (input - input_reference) as f64 / self.average_timestamps_per_frame;
         let output_atpf = current.average_timestamps_per_second / (1000.0 / current.baseline_frame_interval_ms);
-        (output_reference as f64 + frame * output_atpf).round() as i64
+        // `Math.Round` of .NET rounds exact halves to even.
+        (output_reference as f64 + frame * output_atpf).round_ties_even() as i64
     }
 }

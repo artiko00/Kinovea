@@ -26,6 +26,17 @@ fn line_and_label() {
 }
 
 #[test]
+fn empty_value_of_elements_keep_an_end_tag() {
+    let line = convert("<Drawing Type=\"DrawingLine2D\"><m_StartPoint/><m_EndPoint/><LineStyle><ColorRGB/></LineStyle></Drawing>");
+    let doc = line.to_document();
+    for tag in ["<Start></Start>", "<End></End>", "<SpacePosition></SpacePosition>", "<Value></Value>"] {
+        assert!(doc.contains(tag), "{tag} missing in {doc}");
+    }
+    let label = convert("<Drawing Type=\"DrawingText\"><Text>Hi</Text><Position/></Drawing>");
+    assert!(label.to_document().contains("<ArrowEnd></ArrowEnd>"));
+}
+
+#[test]
 fn angle_circle_cross_pencil_and_passthrough() {
     let angle = convert("<Drawing Type=\"DrawingAngle2D\"><PointO>0;0</PointO><PointA>1;0</PointA><PointB>0;1</PointB><TextDecoration><BackColor>1;1;1</BackColor></TextDecoration><Measure>x</Measure></Drawing>");
     assert_eq!((angle.child_text("Signed"), angle.child_text("CCW"), angle.child_text("Supplementary")), (Some("false"), Some("true"), Some("false")));

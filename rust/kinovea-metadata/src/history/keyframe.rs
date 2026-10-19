@@ -1,7 +1,7 @@
 //! Undo of keyframe additions, deletions and core modifications (`HistoryMementoAddKeyframe`,
 //! `HistoryMementoDeleteKeyframe`, `HistoryMementoModifyKeyframe`).
 
-use super::memento::{parse, trackers_of, Change, Memento};
+use super::memento::{parse, restore_trackers, trackers_of, Change, Memento};
 use crate::keyframe::Keyframe;
 use crate::kva_io::{identity, Filter, Scale};
 use crate::metadata::Metadata;
@@ -56,22 +56,24 @@ pub(super) fn undo_add(m: &mut Metadata, id: Uuid) -> Change {
     Change::DeleteKeyframe { id, data }
 }
 
-/// Merges the stored keyframe back and restores the trackers of its drawings.
+/// Merges the stored keyframe back, restores the trackers of its drawings and updates the labels of
+/// the tracks (`AfterUndoDeleteKeyframe`).
 pub(super) fn undo_delete(m: &mut Metadata, id: Uuid, data: &str) -> Change {
     if let Some(kf) = keyframe_of(data) {
         m.merge_insert_keyframe(kf);
     }
-    if let Some(t) = parse(data).as_ref().and_then(|r| r.child("Trackability")) {
-        m.trackability.read_kva(t);
-    }
+    restore_trackers(m, parse(data).as_ref());
+    m.update_trajectories_for_keyframes();
     Change::AddKeyframe { id }
 }
 
-/// Updates the core data of the keyframe in place.
+/// Updates the core data of the keyframe in place. A keyframe that no longer exists is not recreated.
 pub(super) fn undo_modify(m: &mut Metadata, id: Uuid, data: &str) -> Change {
     let redo = data_of(m, id, Filter::CORE, false);
-    if let Some(kf) = keyframe_of(data) {
-        m.merge_insert_keyframe(kf);
+    if m.keyframe(id).is_some() {
+        if let Some(kf) = keyframe_of(data) {
+            m.merge_insert_keyframe(kf);
+        }
     }
     Change::ModifyKeyframe { id, data: redo }
 }

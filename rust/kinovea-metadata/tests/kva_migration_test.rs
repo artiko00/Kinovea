@@ -3,11 +3,12 @@
 
 use kinovea_core::preferences::dom::Element;
 use kinovea_fixtures::fixtures_root;
+use kinovea_metadata::drawing::Drawing;
 use kinovea_metadata::ids::normalize_ids;
 use kinovea_metadata::migration::migrate_legacy;
-use kinovea_metadata::{header_metadata, read_kva, write_kva, ExportFlags, KvaError, Metadata};
+use kinovea_metadata::{header_metadata, read_kva, write_kva, ExportFlags, Metadata};
 
-fn check(case: &str, input: &str) {
+fn check(case: &str, input: &str, first_point_time: i64) {
     let repo = fixtures_root().join("../..");
     let xml = std::fs::read_to_string(repo.join(input)).unwrap();
     let converted = migrate_legacy(&Element::parse(&xml).unwrap()).to_document();
@@ -32,30 +33,36 @@ fn check(case: &str, input: &str) {
             first + 1
         );
     }
-    assert!(
-        std::fs::read_to_string(fixtures_root().join(format!("kva/{case}/migration.json")))
-            .unwrap()
-            .contains("\"relative_trajectories\": true")
+    let Some(Drawing::Track(track)) = m.tracks.first() else {
+        panic!("{case}: no track after the import");
+    };
+    assert_eq!(
+        track.positions[0].t, first_point_time,
+        "{case}: relative times become absolute"
     );
 }
 
 #[test]
 fn format_1_5_is_migrated_and_round_trips() {
-    check("migration-15", "tests/cases/kva/inputs/legacy/v15.kva");
+    // The first track starts at 10 and its first point is relative 0.
+    check("migration-15", "tests/cases/kva/inputs/legacy/v15.kva", 10);
 }
 
 #[test]
 fn format_1_3_is_migrated_and_round_trips() {
-    check("migration-13", "tests/cases/kva/inputs/legacy/v13.kva");
+    check("migration-13", "tests/cases/kva/inputs/legacy/v13.kva", 10);
 }
 
 #[test]
-fn format_1_2_is_rejected() {
+fn format_1_2_is_read_as_is() {
     let mut m = Metadata::default();
-    let err = read_kva(
+    read_kva(
         &mut m,
-        "<KinoveaVideoAnalysis><FormatVersion>1.2</FormatVersion></KinoveaVideoAnalysis>",
+        "<KinoveaVideoAnalysis><FormatVersion>1.2</FormatVersion><Keyframes><Keyframe><Timestamp>10</Timestamp></Keyframe></Keyframes></KinoveaVideoAnalysis>",
     )
-    .unwrap_err();
-    assert_eq!(err, KvaError::TooOld("1.2".into()));
+    .unwrap();
+    assert_eq!(
+        m.keyframes.iter().map(|k| k.timestamp).collect::<Vec<_>>(),
+        [10]
+    );
 }

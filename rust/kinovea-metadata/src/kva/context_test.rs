@@ -41,6 +41,14 @@ fn remapping_uses_frames_and_the_output_time_base() {
 }
 
 #[test]
+fn remapping_rounds_exact_halves_to_even() {
+    // Output has one timestamp per frame from 300: 0.5 and 1.5 frames land on 300.5 and 301.5.
+    let ctx = ImportContext { average_timestamps_per_frame: 2.0, ..ImportContext::default() };
+    assert_eq!(ctx.remap(1, &current(), false), 300);
+    assert_eq!(ctx.remap(3, &current(), false), 302);
+}
+
+#[test]
 fn header_metadata_mirrors_image_size_and_timing() {
     let m = crate::kva::header_metadata("<KinoveaVideoAnalysis><ImageSize>320;200</ImageSize><AverageTimeStampsPerFrame>40</AverageTimeStampsPerFrame></KinoveaVideoAnalysis>");
     assert_eq!(m.video.image_size, kinovea_geometry::Size::new(320, 200));
