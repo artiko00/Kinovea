@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+  <FormatVersion>2.1</FormatVersion>
+  <Producer>Kinovea.0.0</Producer>
+  <OriginalFilename />
+  <FullPath />
+  <ByteLength>0</ByteLength>
+  <ImageSize>640;480</ImageSize>
+  <Aspect>Auto</Aspect>
+  <Rotation>Rotate0</Rotation>
+  <Mirror>false</Mirror>
+  <Demosaicing>None</Demosaicing>
+  <Deinterlacing>false</Deinterlacing>
+  <StabilizationTrack>00000000-0000-0000-0000-000000000000</StabilizationTrack>
+  <BackgroundColor>0;255;255;255</BackgroundColor>
+  <AverageTimeStampsPerFrame>40</AverageTimeStampsPerFrame>
+  <CaptureFramerate>50</CaptureFramerate>
+  <VideoFramerate>25</VideoFramerate>
+  <FirstTimeStamp>0</FirstTimeStamp>
+  <SelectionStart>0</SelectionStart>
+  <SelectionEnd>4000</SelectionEnd>
+  <TimeOrigin>400</TimeOrigin>
+  <Chronos>
+    <Chrono id="00000000-0000-4000-8000-000000000001" name="Sprint">
+      <Position>500;400</Position>
+      <Values>
+        <Visible>400</Visible>
+        <Invisible>3000</Invisible>
+        <StartCounting>800</StartCounting>
+        <StopCounting>2000</StopCounting>
+        <ClockOrigin>-1</ClockOrigin>
+      </Values>
+      <Label>
+        <Show>true</Show>
+      </Label>
+      <DrawingStyle>
+        <Color Key="color">
+          <Value>255;0;0;0</Value>
+        </Color>
+        <FontSize Key="font size">
+          <Value>18</Value>
+        </FontSize>
+        <Toggle Key="clock">
+          <Value>false</Value>
+          <Variant>Clock</Variant>
+        </Toggle>
+      </DrawingStyle>
+    </Chrono>
+    <ChronoMulti id="00000000-0000-4000-8000-000000000002" name="Advanced stopwatch 1">
+      <Position>500;440</Position>
+      <Values>
+        <Visible>400</Visible>
+        <Invisible>-1</Invisible>
+        <Sections>
+          <Section name="first" tag="a">800;1200</Section>
+          <Section name="second" tag="b">1600;-1</Section>
+        </Sections>
+        <Locked>true</Locked>
+        <VisibleColumns>Name;Duration;Cumul;Tag</VisibleColumns>
+      </Values>
+      <Label>
+        <Show>false</Show>
+      </Label>
+      <DrawingStyle>
+        <Color Key="color">
+          <Value>255;0;0;0</Value>
+        </Color>
+        <FontSize Key="font size">
+          <Value>18</Value>
+        </FontSize>
+      </DrawingStyle>
+    </ChronoMulti>
+    <Counter id="00000000-0000-4000-8000-000000000003" name="Counter 1">
+      <Position>40;440</Position>
+      <Values>
+        <Visible>400</Visible>
+        <Invisible>-1</Invisible>
+        <Beats>
+          <Beat>800</Beat>
+          <Beat>1200</Beat>
+          <Beat>1600</Beat>
+        </Beats>
+        <Locked>false</Locked>
+        <ZeroBased>true</ZeroBased>
+        <HalfCadence>false</HalfCadence>
+        <DoubleCadence>true</DoubleCadence>
+        <ExtraData>None</ExtraData>
+      </Values>
+      <Label>
+        <Show>false</Show>
+      </Label>
+      <DrawingStyle>
+        <Color Key="color">
+          <Value>255;0;0;0</Value>
+        </Color>
+        <FontSize Key="font size">
+          <Value>18</Value>
+        </FontSize>
+      </DrawingStyle>
+    </Counter>
+  </Chronos>
+  <Tracks>
+    <Track id="00000000-0000-4000-8000-000000000004" name="Trajectory 1">
+      <TimePosition>400</TimePosition>
+      <IsVisible>true</IsVisible>
+      <Visible>400</Visible>
+      <Invisible>-1</Invisible>
+      <ExtraData>Speed</ExtraData>
+      <TrackerParameters>
+        <Algorithm>Correlation</Algorithm>
+        <SearchWindow>100;100</SearchWindow>
+        <BlockWindow>20;20</BlockWindow>
+        <SimilarityThreshold>0.5</SimilarityThreshold>
+        <TemplateUpdateThreshold>0.8</TemplateUpdateThreshold>
+        <UseMask>false</UseMask>
+        <HSVRange>0;360;0;255;0;255</HSVRange>
+        <Dilate>0</Dilate>
+        <Erode>0</Erode>
+      </TrackerParameters>
+      <TrackPointList Count="4">
+        <TrackPoint>100;100;400;0</TrackPoint>
+        <TrackPoint>110;105;440;0</TrackPoint>
+        <TrackPoint>121;111;480;0</TrackPoint>
+        <TrackPoint>133;118;520;0</TrackPoint>
+      </TrackPointList>
+      <MainLabel Text="Trajectory 1">
+        <SpacePosition>120;60</SpacePosition>
+        <TimePosition>0</TimePosition>
+      </MainLabel>
+      <SeeFuture>true</SeeFuture>
+      <ShowTrackLabel>false</ShowTrackLabel>
+      <ShowKeyframeLabels>true</ShowKeyframeLabels>
+      <UseKeyframeColors>true</UseKeyframeColors>
+      <IsInteractiveTrack>false</IsInteractiveTrack>
+      <ShowRotationCircle>false</ShowRotationCircle>
+      <DrawingStyle>
+        <Color Key="color">
+          <Value>255;255;128;0</Value>
+        </Color>
+        <TrackShape Key="track shape">
+          <Value>Dash;true</Value>
+        </TrackShape>
+        <LineSize Key="line size">
+          <Value>3</Value>
+        </LineSize>
+        <PenSize Key="TrackPointSize">
+          <Value>3</Value>
+        </PenSize>
+        <FontSize Key="label size">
+          <Value>8</Value>
+        </FontSize>
+      </DrawingStyle>
+    </Track>
+  </Tracks>
+  <Spotlights>
+    <Spotlight id="00000000-0000-4000-8000-000000000005" name="Spotlight">
+      <Time>400</Time>
+      <Center>300;300</Center>
+      <Radius>50</Radius>
+    </Spotlight>
+    <Spotlight id="00000000-0000-4000-8000-000000000006" name="Spotlight">
+      <Time>800</Time>
+      <Center>350;320</Center>
+      <Radius>60</Radius>
+    </Spotlight>
+  </Spotlights>
+  <NumberSequence>
+    <AutoNumber id="00000000-0000-4000-8000-000000000007" name="AutoNumber">
+      <Time>400</Time>
+      <Location>30;30</Location>
+      <Value>1</Value>
+    </AutoNumber>
+    <AutoNumber id="00000000-0000-4000-8000-000000000008" name="AutoNumber">
+      <Time>440</Time>
+      <Location>60;30</Location>
+      <Value>2</Value>
+    </AutoNumber>
+    <DrawingStyle>
+      <Color Key="back color">
+        <Value>255;0;0;0</Value>
+      </Color>
+      <FontSize Key="font size">
+        <Value>18</Value>
+      </FontSize>
+    </DrawingStyle>
+  </NumberSequence>
+  <Trackability>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000009" name="Goniometer 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>100;100</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="1">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>150;100</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="3">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>180;70</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000010" name="Polyline 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>400;100</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="1">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>450;150</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="2">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>500;100</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000011" name="Line 1">
+      <TrackablePoint key="a">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>50;300</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="b">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>250;320</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000012" name="Marker 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>100;400</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000013" name="Elbow">
+      <TrackablePoint key="o">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>200;200</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="a">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>300;200</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="b">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>200;100</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000014" name="Perspective grid 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>50;50</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="1">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>250;60</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="2">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>260;200</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="3">
+        <ReferenceTimestamp>400</ReferenceTimestamp>
+        <ReferenceValue>40;190</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000005" name="Spotlight">
+      <TrackablePoint key="o">
+        <ReferenceTimestamp>0</ReferenceTimestamp>
+        <ReferenceValue>300;300</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000006" name="Spotlight">
+      <TrackablePoint key="o">
+        <ReferenceTimestamp>0</ReferenceTimestamp>
+        <ReferenceValue>350;320</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+  </Trackability>
+  <VideoFilters />
+</KinoveaVideoAnalysis>

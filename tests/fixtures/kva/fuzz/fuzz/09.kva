@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+<FormatVersion>2.1</FormatVersion>
+<Producer>KvaFuzz</Producer>
+<OriginalFilename>tRIb9gUf</OriginalFilename>
+<GlobalTitle>0aNOYnCPCl3Q</GlobalTitle>
+<ImageSize>334;859</ImageSize>
+<AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+<CaptureFramerate>567.8049</CaptureFramerate>
+<FirstTimeStamp>0</FirstTimeStamp>
+<SelectionStart>0</SelectionStart>
+<Spotlights>
+<Spotlight>
+<Time>5085</Time>
+<Center>254.3956;521.6801</Center>
+<Radius>27</Radius>
+</Spotlight>
+<Spotlight>
+<Time>62220</Time>
+<Center>311.7157;623.9569</Center>
+<Radius>91</Radius>
+</Spotlight>
+</Spotlights>
+<NumberSequence>
+<DrawingStyle>
+<Color Key="back color"><Value>80;173;182;90</Value></Color>
+<FontSize Key="font size"><Value>18</Value></FontSize>
+</DrawingStyle>
+<AutoNumber>
+<Time>37966</Time>
+<Location>85.73225;554.9077</Location>
+<Value>1</Value>
+</AutoNumber>
+</NumberSequence>
+</KinoveaVideoAnalysis>

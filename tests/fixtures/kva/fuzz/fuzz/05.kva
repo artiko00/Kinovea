@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+<FormatVersion>2.1</FormatVersion>
+<Producer>KvaFuzz</Producer>
+<OriginalFilename>QgIN9bVJ</OriginalFilename>
+<GlobalTitle>VeqkVLErmJ5U</GlobalTitle>
+<ImageSize>1437;372</ImageSize>
+<AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+<CaptureFramerate>519.0798</CaptureFramerate>
+<FirstTimeStamp>0</FirstTimeStamp>
+<SelectionStart>0</SelectionStart>
+<Keyframes>
+<Keyframe>
+<Timestamp>41217</Timestamp>
+<Name>NaVRLsfg9o</Name>
+<Drawings>
+<Angle>
+<PointO>66.17847;357.8476</PointO>
+<PointA>1098.9;313.6389</PointA>
+<PointB>755.6442;114.7086</PointB>
+<Signed>false</Signed>
+<CCW>true</CCW>
+<Supplementary>false</Supplementary>
+<DrawingStyle>
+<Color Key="line color"><Value>243;71;206;199</Value></Color>
+<FontSize Key="font size"><Value>18</Value></FontSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>9</OpaqueFrames>
+<Frames>30</Frames>
+</InfosFading>
+</Angle>
+<CrossMark>
+<CenterPoint>241.5848;55.79091</CenterPoint>
+<ShowAsDot>false</ShowAsDot>
+<DrawingStyle>
+<Color Key="back color"><Value>246;67;15;247</Value></Color>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>false</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>2</OpaqueFrames>
+<Frames>52</Frames>
+</InfosFading>
+</CrossMark>
+<Plane>
+<PointUpperLeft>235.3264;44.96719</PointUpperLeft>
+<PointUpperRight>889.9279;151.4709</PointUpperRight>
+<PointLowerRight>764.3245;229.0831</PointLowerRight>
+<PointLowerLeft>398.8465;357.8346</PointLowerLeft>
+<ShowGrid>false</ShowGrid>
+<DrawingStyle>
+<Color Key="color"><Value>225;174;186;245</Value></Color>
+</DrawingStyle>
+<InfosFading>
+<Enabled>false</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>6</OpaqueFrames>
+<Frames>87</Frames>
+</InfosFading>
+</Plane>
+<Label>
+<Text>M048XJCvbhwVVfBvYP</Text>
+<Position>239.3094;263.8061</Position>
+<ArrowEnd>1061.278;124.577</ArrowEnd>
+<DrawingStyle>
+<Color Key="back color"><Value>88;68;80;59</Value></Color>
+<FontSize Key="font size"><Value>11</Value></FontSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>false</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>4</OpaqueFrames>
+<Frames>29</Frames>
+</InfosFading>
+</Label>
+<Angle>
+<PointO>822.1979;37.98381</PointO>
+<PointA>472.9649;128.5935</PointA>
+<PointB>391.6034;4.153863</PointB>
+<Signed>true</Signed>
+<CCW>false</CCW>
+<Supplementary>true</Supplementary>
+<DrawingStyle>
+<Color Key="line color"><Value>229;177;132;234</Value></Color>
+<FontSize Key="font size"><Value>36</Value></FontSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>false</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>false</AlwaysVisible>
+<OpaqueFrames>4</OpaqueFrames>
+<Frames>93</Frames>
+</InfosFading>
+</Angle>
+</Drawings>
+</Keyframe>
+<Keyframe>
+<Timestamp>93343</Timestamp>
+<Name>RumrOMOJru</Name>
+<Drawings>
+<Rectangle>
+<PointUpperLeft>541.2679;13.5529</PointUpperLeft>
+<PointUpperRight>1167.257;35.16994</PointUpperRight>
+<PointLowerRight>1422.312;208.6477</PointLowerRight>
+<PointLowerLeft>4.419717;285.9356</PointLowerLeft>
+<Filled>false</Filled>
+<DrawingStyle>
+<Color Key="color"><Value>174;240;134;111</Value></Color>
+<PenSize Key="pen size"><Value>14</Value></PenSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>false</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>4</OpaqueFrames>
+<Frames>67</Frames>
+</InfosFading>
+</Rectangle>
+<CrossMark>
+<CenterPoint>1139.093;163.2093</CenterPoint>
+<ShowAsDot>false</ShowAsDot>
+<DrawingStyle>
+<Color Key="back color"><Value>207;93;208;173</Value></Color>
+</DrawingStyle>
+<InfosFading>
+<Enabled>false</Enabled>
+<UseDefault>false</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>2</OpaqueFrames>
+<Frames>44</Frames>
+</InfosFading>
+</CrossMark>
+</Drawings>
+</Keyframe>
+</Keyframes>
+<Chronos>
+<Chrono>
+<Position>1119.206;333.5345</Position>
+<Values>
+<Visible>10229</Visible>
+<Invisible>14847</Invisible>
+<StartCounting>11168</StartCounting>
+<StopCounting>13391</StopCounting>
+<ClockOrigin>-1</ClockOrigin>
+</Values>
+<Label>
+<Text>vO4rby</Text>
+<Show>false</Show>
+</Label>
+<DrawingStyle>
+<Color Key="color"><Value>218;255;224;65</Value></Color>
+<FontSize Key="font size"><Value>11</Value></FontSize>
+</DrawingStyle>
+</Chrono>
+<Chrono>
+<Position>452.074;182.4035</Position>
+<Values>
+<Visible>84561</Visible>
+<Invisible>85753</Invisible>
+<StartCounting>85217</StartCounting>
+<StopCounting>85737</StopCounting>
+<ClockOrigin>-1</ClockOrigin>
+</Values>
+<Label>
+<Text>YZkBr5</Text>
+<Show>true</Show>
+</Label>
+<DrawingStyle>
+<Color Key="color"><Value>121;127;179;85</Value></Color>
+<FontSize Key="font size"><Value>24</Value></FontSize>
+</DrawingStyle>
+</Chrono>
+</Chronos>
+<NumberSequence>
+<DrawingStyle>
+<Color Key="back color"><Value>136;81;160;228</Value></Color>
+<FontSize Key="font size"><Value>10</Value></FontSize>
+</DrawingStyle>
+<AutoNumber>
+<Time>55661</Time>
+<Location>603.5525;252.8711</Location>
+<Value>1</Value>
+</AutoNumber>
+</NumberSequence>
+</KinoveaVideoAnalysis>

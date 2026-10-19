@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+  <FormatVersion>2.1</FormatVersion>
+  <Producer>Kinovea.0.0</Producer>
+  <OriginalFilename />
+  <FullPath />
+  <ByteLength>0</ByteLength>
+  <GlobalTitle>SMBV9NkQoKDB</GlobalTitle>
+  <ImageSize>1206;294</ImageSize>
+  <Aspect>Auto</Aspect>
+  <Rotation>Rotate0</Rotation>
+  <Mirror>false</Mirror>
+  <Demosaicing>None</Demosaicing>
+  <Deinterlacing>false</Deinterlacing>
+  <StabilizationTrack>00000000-0000-0000-0000-000000000000</StabilizationTrack>
+  <BackgroundColor>0;255;255;255</BackgroundColor>
+  <AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+  <CaptureFramerate>3.406121</CaptureFramerate>
+  <VideoFramerate>25</VideoFramerate>
+  <FirstTimeStamp>0</FirstTimeStamp>
+  <SelectionStart>0</SelectionStart>
+  <SelectionEnd>0</SelectionEnd>
+  <TimeOrigin>0</TimeOrigin>
+  <Calibration>
+    <CalibrationLine>
+      <Length>100</Length>
+      <Segment>
+        <A>603;147</A>
+        <B>703;147</B>
+      </Segment>
+      <Origin>0;100</Origin>
+      <Offset>0;0</Offset>
+      <Axis>LineHorizontal</Axis>
+    </CalibrationLine>
+    <CalibrationDrawingId>00000000-0000-0000-0000-000000000000</CalibrationDrawingId>
+    <Unit Abbreviation="px">Pixels</Unit>
+  </Calibration>
+  <Keyframes>
+    <Keyframe id="00000000-0000-4000-8000-000000000001">
+      <Timestamp>78254</Timestamp>
+      <Name>YMdfvEN10Q</Name>
+      <Color>51;152;255</Color>
+      <Drawings>
+        <Pencil id="00000000-0000-4000-8000-000000000002" name="Pencil 1">
+          <PointList Count="34">
+            <Point>975.5289;125.4975</Point>
+            <Point>1069.313;154.8778</Point>
+            <Point>322.5777;95.79339</Point>
+            <Point>904.6241;44.22069</Point>
+            <Point>133.1474;45.88948</Point>
+            <Point>923.9211;174.0197</Point>
+            <Point>393.3129;58.70152</Point>
+            <Point>318.3889;29.02086</Point>
+            <Point>707.7629;32.41173</Point>
+            <Point>73.44657;247.8326</Point>
+            <Point>426.014;106.5467</Point>
+            <Point>86.66213;78.99523</Point>
+            <Point>192.3311;292.5595</Point>
+            <Point>322.0722;20.53365</Point>
+            <Point>929.1785;132.8598</Point>
+            <Point>98.32191;167.7021</Point>
+            <Point>43.04654;92.27803</Point>
+            <Point>1063.658;236.104</Point>
+            <Point>839.4709;277.5205</Point>
+            <Point>211.9062;199.3856</Point>
+            <Point>614.8624;185.8485</Point>
+            <Point>857.8559;138.6961</Point>
+            <Point>351.417;144.2048</Point>
+            <Point>24.48071;84.72117</Point>
+            <Point>456.3087;220.7485</Point>
+            <Point>488.5304;169.5511</Point>
+            <Point>410.9997;222.8433</Point>
+            <Point>609.6339;131.2688</Point>
+            <Point>428.1339;181.683</Point>
+            <Point>442.9841;80.07882</Point>
+            <Point>70.87617;199.9966</Point>
+            <Point>458.2166;193.599</Point>
+            <Point>89.91861;57.5324</Point>
+            <Point>670.7892;3.604209</Point>
+          </PointList>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>81;117;103;164</Value>
+            </Color>
+            <PenSize Key="pen size">
+              <Value>36</Value>
+            </PenSize>
+            <PenShape Key="pen shape">
+              <Value>Solid</Value>
+            </PenShape>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>6</OpaqueFrames>
+            <Frames>60</Frames>
+          </InfosFading>
+        </Pencil>
+        <Polyline id="00000000-0000-4000-8000-000000000003" name="Polyline 1">
+          <PointList Count="8">
+            <Point key="0">1175.61;287.7939</Point>
+            <Point key="1">833.9212;5.76764</Point>
+            <Point key="2">56.46593;148.4179</Point>
+            <Point key="3">276.9211;81.65063</Point>
+            <Point key="4">974.8944;128.0309</Point>
+            <Point key="5">540.3743;22.96417</Point>
+            <Point key="6">695.4165;265.5799</Point>
+            <Point key="7">747.0117;243.8952</Point>
+          </PointList>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>64;13;101;24</Value>
+            </Color>
+            <LineSize Key="line size">
+              <Value>36</Value>
+            </LineSize>
+            <LineShape Key="line shape">
+              <Value>Solid</Value>
+            </LineShape>
+            <Arrows Key="arrows">
+              <Value>None</Value>
+            </Arrows>
+            <Toggle Key="curved">
+              <Value>false</Value>
+              <Variant>Curved</Variant>
+            </Toggle>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>false</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>4</OpaqueFrames>
+            <Frames>76</Frames>
+          </InfosFading>
+        </Polyline>
+      </Drawings>
+    </Keyframe>
+  </Keyframes>
+  <Chronos>
+    <Chrono id="00000000-0000-4000-8000-000000000004" name="Rse0wL">
+      <Position>910.4086;188.3566</Position>
+      <Values>
+        <Visible>95807</Visible>
+        <Invisible>104129</Invisible>
+        <StartCounting>96231</StartCounting>
+        <StopCounting>100152</StopCounting>
+        <ClockOrigin>-1</ClockOrigin>
+      </Values>
+      <Label>
+        <Show>false</Show>
+      </Label>
+      <DrawingStyle>
+        <Color Key="color">
+          <Value>247;71;52;225</Value>
+        </Color>
+        <FontSize Key="font size">
+          <Value>8</Value>
+        </FontSize>
+        <Toggle Key="clock">
+          <Value>false</Value>
+          <Variant>Clock</Variant>
+        </Toggle>
+      </DrawingStyle>
+    </Chrono>
+  </Chronos>
+  <CoordinateSystem id="00000000-0000-4000-8000-000000000005" name="">
+    <Position>0;0</Position>
+    <ReferenceTimestamp>-1</ReferenceTimestamp>
+    <Visible>false</Visible>
+    <ShowGrid>true</ShowGrid>
+    <ShowGraduations>true</ShowGraduations>
+    <DrawingStyle>
+      <Color Key="line color">
+        <Value>255;255;0;0</Value>
+      </Color>
+    </DrawingStyle>
+  </CoordinateSystem>
+  <TestGrid id="00000000-0000-4000-8000-000000000006" name="">
+    <Visible>false</Visible>
+    <ShowHorizontalAxis>true</ShowHorizontalAxis>
+    <ShowVerticalAxis>true</ShowVerticalAxis>
+    <ShowFraming>true</ShowFraming>
+    <ShowThirds>false</ShowThirds>
+    <DrawingStyle>
+      <Color Key="color">
+        <Value>255;255;0;0</Value>
+      </Color>
+    </DrawingStyle>
+  </TestGrid>
+  <Trackability>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000003" name="Polyline 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>78254</ReferenceTimestamp>
+        <ReferenceValue>1175.61;287.7939</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="1">
+        <ReferenceTimestamp>78254</ReferenceTimestamp>
+        <ReferenceValue>833.9212;5.76764</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="2">
+        <ReferenceTimestamp>78254</ReferenceTimestamp>
+        <ReferenceValue>56.46593;148.4179</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="3">
+        <ReferenceTimestamp>78254</ReferenceTimestamp>
+        <ReferenceValue>276.9211;81.65063</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="4">
+        <ReferenceTimestamp>78254</ReferenceTimestamp>
+        <ReferenceValue>974.8944;128.0309</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="5">
+        <ReferenceTimestamp>78254</ReferenceTimestamp>
+        <ReferenceValue>540.3743;22.96417</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="6">
+        <ReferenceTimestamp>78254</ReferenceTimestamp>
+        <ReferenceValue>695.4165;265.5799</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="7">
+        <ReferenceTimestamp>78254</ReferenceTimestamp>
+        <ReferenceValue>747.0117;243.8952</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+  </Trackability>
+  <VideoFilters />
+</KinoveaVideoAnalysis>

@@ -27,6 +27,12 @@ use kinovea_core::units::LengthUnit;
 use kinovea_geometry::{PointF, Quadrilateral, Size, SizeF};
 use uuid::Uuid;
 
+impl std::fmt::Debug for CalibrationHelper {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("CalibrationHelper").field("type", &self.calibrator_type).field("image_size", &self.image_size).field("drawing_id", &self.drawing_id).finish_non_exhaustive()
+    }
+}
+
 pub struct CalibrationHelper {
     calibrator_type: CalibratorType,
     calibrator: CalibratorPlane,

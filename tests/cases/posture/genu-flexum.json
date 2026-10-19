@@ -1,0 +1,5 @@
+{
+  "area": "posture",
+  "seed": 7,
+  "inputs": { "file": "Tools/DrawingTools/Custom/5 - Genu flexum.xml", "moves": 3 }
+}

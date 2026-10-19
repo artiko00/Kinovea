@@ -1,0 +1,5 @@
+[
+  { "file": "tests/cases/kva/crossload/minimal.kva", "keyframes": 0, "attached_drawings": 0, "chronos": 0, "tracks": 0, "identical": true },
+  { "file": "tests/cases/kva/crossload/simple.kva", "keyframes": 1, "attached_drawings": 1, "chronos": 0, "tracks": 0, "identical": true },
+  { "file": "tests/cases/kva/crossload/complete.kva", "keyframes": 9, "attached_drawings": 17, "chronos": 2, "tracks": 1, "identical": true }
+]

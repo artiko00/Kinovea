@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+  <FormatVersion>2.1</FormatVersion>
+  <Producer>Kinovea.0.0</Producer>
+  <OriginalFilename>remap</OriginalFilename>
+  <FullPath>C:\oracle\Kinovea\tests\cases\kva\remap.json</FullPath>
+  <ByteLength>0</ByteLength>
+  <ImageSize>640;360</ImageSize>
+  <Aspect>Auto</Aspect>
+  <Rotation>Rotate0</Rotation>
+  <Mirror>false</Mirror>
+  <Demosaicing>None</Demosaicing>
+  <Deinterlacing>false</Deinterlacing>
+  <StabilizationTrack>00000000-0000-0000-0000-000000000000</StabilizationTrack>
+  <BackgroundColor>0;255;255;255</BackgroundColor>
+  <AverageTimeStampsPerFrame>400</AverageTimeStampsPerFrame>
+  <CaptureFramerate>60</CaptureFramerate>
+  <VideoFramerate>25</VideoFramerate>
+  <FirstTimeStamp>100</FirstTimeStamp>
+  <SelectionStart>0</SelectionStart>
+  <SelectionEnd>0</SelectionEnd>
+  <TimeOrigin>300</TimeOrigin>
+  <Calibration>
+    <CalibrationLine>
+      <Length>2</Length>
+      <Segment>
+        <A>100;600</A>
+        <B>700;600</B>
+      </Segment>
+      <Origin>0;0</Origin>
+      <Offset>0;0</Offset>
+      <Axis>LineHorizontal</Axis>
+    </CalibrationLine>
+    <CalibrationDrawingId>00000000-0000-0000-0000-000000000000</CalibrationDrawingId>
+    <Unit Abbreviation="m">Meters</Unit>
+  </Calibration>
+  <Keyframes>
+    <Keyframe id="00000000-0000-4000-8000-000000000001">
+      <Timestamp>300</Timestamp>
+      <Name>origin</Name>
+      <Color>51;152;255</Color>
+      <Drawings>
+        <Line id="00000000-0000-4000-8000-000000000002" name="Line 1">
+          <Start>100;50</Start>
+          <End>300;150</End>
+          <ReferenceTimestamp>300</ReferenceTimestamp>
+          <ExtraData>None</ExtraData>
+          <MeasureLabel>
+            <SpacePosition>200;75</SpacePosition>
+            <TimePosition>0</TimePosition>
+          </MeasureLabel>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>255;0;0;255</Value>
+            </Color>
+            <LineSize Key="line size">
+              <Value>2</Value>
+            </LineSize>
+            <LineShape Key="line shape">
+              <Value>Solid</Value>
+            </LineShape>
+            <Arrows Key="arrows">
+              <Value>None</Value>
+            </Arrows>
+            <FontSize Key="Font">
+              <Value>10</Value>
+            </FontSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </Line>
+        <Circle id="00000000-0000-4000-8000-000000000003" name="Circle 1">
+          <Origin>320;180</Origin>
+          <Radius>50</Radius>
+          <ExtraData>None</ExtraData>
+          <MeasureLabel>
+            <SpacePosition>325;100</SpacePosition>
+            <TimePosition>0</TimePosition>
+          </MeasureLabel>
+          <ShowCenter>false</ShowCenter>
+          <Filled>false</Filled>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>255;100;149;237</Value>
+            </Color>
+            <PenSize Key="pen size">
+              <Value>2</Value>
+            </PenSize>
+            <PenShape Key="pen shape">
+              <Value>Solid</Value>
+            </PenShape>
+            <FontSize Key="Font">
+              <Value>10</Value>
+            </FontSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </Circle>
+        <Label id="00000000-0000-4000-8000-000000000004" name="Text 1">
+          <Text>later</Text>
+          <Position>500;300</Position>
+          <BackgroundVisible>true</BackgroundVisible>
+          <ArrowVisible>false</ArrowVisible>
+          <CircleVisible>false</CircleVisible>
+          <ArrowEnd>900;500</ArrowEnd>
+          <DrawingStyle>
+            <Color Key="back color">
+              <Value>255;0;0;0</Value>
+            </Color>
+            <FontSize Key="font size">
+              <Value>12</Value>
+            </FontSize>
+            <LineSize Key="LineSize">
+              <Value>2</Value>
+            </LineSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </Label>
+      </Drawings>
+    </Keyframe>
+    <Keyframe id="00000000-0000-4000-8000-000000000005">
+      <Timestamp>1900</Timestamp>
+      <Name>four frames later</Name>
+      <Color>51;152;255</Color>
+      <Drawings>
+        <CrossMark id="00000000-0000-4000-8000-000000000006" name="Marker 1">
+          <CenterPoint>160;90</CenterPoint>
+          <ReferenceTimestamp>1900</ReferenceTimestamp>
+          <ExtraData>None</ExtraData>
+          <ShowAsDot>false</ShowAsDot>
+          <MeasureLabel>
+            <SpacePosition>165;60</SpacePosition>
+            <TimePosition>0</TimePosition>
+          </MeasureLabel>
+          <DrawingStyle>
+            <Color Key="back color">
+              <Value>255;100;149;237</Value>
+            </Color>
+            <FontSize Key="Font">
+              <Value>10</Value>
+            </FontSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </CrossMark>
+      </Drawings>
+    </Keyframe>
+  </Keyframes>
+  <Chronos>
+    <Chrono id="00000000-0000-4000-8000-000000000007" name="Stopwatch 1">
+      <Position>500;325</Position>
+      <Values>
+        <Visible>20000</Visible>
+        <Invisible>60000</Invisible>
+        <StartCounting>22000</StartCounting>
+        <StopCounting>40000</StopCounting>
+        <ClockOrigin>-1</ClockOrigin>
+      </Values>
+      <Label>
+        <Show>true</Show>
+      </Label>
+      <DrawingStyle>
+        <Color Key="color">
+          <Value>255;0;0;0</Value>
+        </Color>
+        <FontSize Key="font size">
+          <Value>18</Value>
+        </FontSize>
+        <Toggle Key="clock">
+          <Value>false</Value>
+          <Variant>Clock</Variant>
+        </Toggle>
+      </DrawingStyle>
+    </Chrono>
+  </Chronos>
+  <Tracks>
+    <Track id="00000000-0000-4000-8000-000000000008" name="Trajectory 1">
+      <TimePosition>700</TimePosition>
+      <IsVisible>true</IsVisible>
+      <Visible>700</Visible>
+      <Invisible>-1</Invisible>
+      <ExtraData>Name</ExtraData>
+      <TrackerParameters>
+        <Algorithm>Correlation</Algorithm>
+        <SearchWindow>100;100</SearchWindow>
+        <BlockWindow>20;20</BlockWindow>
+        <SimilarityThreshold>0.5</SimilarityThreshold>
+        <TemplateUpdateThreshold>0.8</TemplateUpdateThreshold>
+        <UseMask>false</UseMask>
+        <HSVRange>0;360;0;255;0;255</HSVRange>
+        <Dilate>0</Dilate>
+        <Erode>0</Erode>
+      </TrackerParameters>
+      <TrackPointList Count="3">
+        <TrackPoint>50;50;700;0</TrackPoint>
+        <TrackPoint>60;55;1100;0</TrackPoint>
+        <TrackPoint>70;62.5;1500;0</TrackPoint>
+      </TrackPointList>
+      <MainLabel Text="Trajectory 1">
+        <SpacePosition>50;25</SpacePosition>
+        <TimePosition>0</TimePosition>
+      </MainLabel>
+      <SeeFuture>true</SeeFuture>
+      <ShowTrackLabel>false</ShowTrackLabel>
+      <ShowKeyframeLabels>true</ShowKeyframeLabels>
+      <UseKeyframeColors>true</UseKeyframeColors>
+      <IsInteractiveTrack>false</IsInteractiveTrack>
+      <ShowRotationCircle>false</ShowRotationCircle>
+      <DrawingStyle>
+        <Color Key="color">
+          <Value>255;255;128;0</Value>
+        </Color>
+        <TrackShape Key="track shape">
+          <Value>Solid;false</Value>
+        </TrackShape>
+        <LineSize Key="line size">
+          <Value>3</Value>
+        </LineSize>
+        <PenSize Key="TrackPointSize">
+          <Value>3</Value>
+        </PenSize>
+        <FontSize Key="label size">
+          <Value>8</Value>
+        </FontSize>
+      </DrawingStyle>
+    </Track>
+  </Tracks>
+  <Spotlights>
+    <Spotlight id="00000000-0000-4000-8000-000000000009" name="Spotlight">
+      <Time>1500</Time>
+      <Center>320;180</Center>
+      <Radius>40</Radius>
+    </Spotlight>
+  </Spotlights>
+  <NumberSequence>
+    <AutoNumber id="00000000-0000-4000-8000-000000000010" name="AutoNumber">
+      <Time>2300</Time>
+      <Location>32;18</Location>
+      <Value>1</Value>
+    </AutoNumber>
+    <DrawingStyle>
+      <Color Key="back color">
+        <Value>255;0;0;0</Value>
+      </Color>
+      <FontSize Key="font size">
+        <Value>18</Value>
+      </FontSize>
+    </DrawingStyle>
+  </NumberSequence>
+  <CoordinateSystem id="00000000-0000-4000-8000-000000000011" name="">
+    <Position>0;0</Position>
+    <ReferenceTimestamp>-1</ReferenceTimestamp>
+    <Visible>false</Visible>
+    <ShowGrid>true</ShowGrid>
+    <ShowGraduations>true</ShowGraduations>
+    <DrawingStyle>
+      <Color Key="line color">
+        <Value>255;255;0;0</Value>
+      </Color>
+    </DrawingStyle>
+  </CoordinateSystem>
+  <TestGrid id="00000000-0000-4000-8000-000000000012" name="">
+    <Visible>false</Visible>
+    <ShowHorizontalAxis>true</ShowHorizontalAxis>
+    <ShowVerticalAxis>true</ShowVerticalAxis>
+    <ShowFraming>true</ShowFraming>
+    <ShowThirds>false</ShowThirds>
+    <DrawingStyle>
+      <Color Key="color">
+        <Value>255;255;0;0</Value>
+      </Color>
+    </DrawingStyle>
+  </TestGrid>
+  <Trackability>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000002" name="Line 1">
+      <TrackablePoint key="a">
+        <ReferenceTimestamp>300</ReferenceTimestamp>
+        <ReferenceValue>100;50</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="b">
+        <ReferenceTimestamp>300</ReferenceTimestamp>
+        <ReferenceValue>300;150</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000006" name="Marker 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>1900</ReferenceTimestamp>
+        <ReferenceValue>160;90</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000009" name="Spotlight">
+      <TrackablePoint key="o">
+        <ReferenceTimestamp>0</ReferenceTimestamp>
+        <ReferenceValue>320;180</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+  </Trackability>
+  <VideoFilters />
+</KinoveaVideoAnalysis>

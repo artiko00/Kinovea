@@ -1,0 +1,5 @@
+{
+  "area": "kva",
+  "seed": 0,
+  "inputs": { "kind": "crossload", "files": ["tests/cases/kva/crossload/minimal.kva", "tests/cases/kva/crossload/simple.kva", "tests/cases/kva/crossload/complete.kva"] }
+}

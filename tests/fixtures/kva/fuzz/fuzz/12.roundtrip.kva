@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+  <FormatVersion>2.1</FormatVersion>
+  <Producer>Kinovea.0.0</Producer>
+  <OriginalFilename />
+  <FullPath />
+  <ByteLength>0</ByteLength>
+  <GlobalTitle>UZKPyPmX3bfh</GlobalTitle>
+  <ImageSize>499;336</ImageSize>
+  <Aspect>Auto</Aspect>
+  <Rotation>Rotate0</Rotation>
+  <Mirror>false</Mirror>
+  <Demosaicing>None</Demosaicing>
+  <Deinterlacing>false</Deinterlacing>
+  <StabilizationTrack>00000000-0000-0000-0000-000000000000</StabilizationTrack>
+  <BackgroundColor>0;255;255;255</BackgroundColor>
+  <AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+  <CaptureFramerate>555.9828</CaptureFramerate>
+  <VideoFramerate>25</VideoFramerate>
+  <FirstTimeStamp>0</FirstTimeStamp>
+  <SelectionStart>0</SelectionStart>
+  <SelectionEnd>0</SelectionEnd>
+  <TimeOrigin>0</TimeOrigin>
+  <Calibration>
+    <CalibrationLine>
+      <Length>100</Length>
+      <Segment>
+        <A>249;168</A>
+        <B>349;168</B>
+      </Segment>
+      <Origin>0;100</Origin>
+      <Offset>0;0</Offset>
+      <Axis>LineHorizontal</Axis>
+    </CalibrationLine>
+    <CalibrationDrawingId>00000000-0000-0000-0000-000000000000</CalibrationDrawingId>
+    <Unit Abbreviation="px">Pixels</Unit>
+  </Calibration>
+  <Keyframes>
+    <Keyframe id="00000000-0000-4000-8000-000000000001">
+      <Timestamp>10445</Timestamp>
+      <Name>mw6XiEtwjJ</Name>
+      <Color>51;152;255</Color>
+      <Drawings>
+        <Angle id="00000000-0000-4000-8000-000000000002" name="Angle 1">
+          <PointO>415.4617;54.45621</PointO>
+          <PointA>233.0275;207.6802</PointA>
+          <PointB>21.56265;235.0357</PointB>
+          <ReferenceTimestamp>10445</ReferenceTimestamp>
+          <Signed>false</Signed>
+          <CCW>true</CCW>
+          <Supplementary>true</Supplementary>
+          <ShowCircle>false</ShowCircle>
+          <DrawingStyle>
+            <Color Key="line color">
+              <Value>56;246;40;143</Value>
+            </Color>
+            <FontSize Key="font size">
+              <Value>24</Value>
+            </FontSize>
+            <Int Key="DecimalPlaces">
+              <Value>0</Value>
+            </Int>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>false</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>2</OpaqueFrames>
+            <Frames>1</Frames>
+          </InfosFading>
+        </Angle>
+        <Line id="00000000-0000-4000-8000-000000000003" name="Line 2">
+          <Start>448.722;6.926807</Start>
+          <End>177.3346;27.54017</End>
+          <ReferenceTimestamp>10445</ReferenceTimestamp>
+          <ExtraData>None</ExtraData>
+          <MeasureLabel>
+            <SpacePosition>-15;-50</SpacePosition>
+            <TimePosition>0</TimePosition>
+          </MeasureLabel>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>200;137;155;88</Value>
+            </Color>
+            <LineSize Key="line size">
+              <Value>4</Value>
+            </LineSize>
+            <LineShape Key="line shape">
+              <Value>Solid</Value>
+            </LineShape>
+            <Arrows Key="arrows">
+              <Value>StartArrow</Value>
+            </Arrows>
+            <FontSize Key="Font">
+              <Value>10</Value>
+            </FontSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>true</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>6</OpaqueFrames>
+            <Frames>5</Frames>
+          </InfosFading>
+        </Line>
+        <Rectangle id="00000000-0000-4000-8000-000000000004" name="Rectangle 2">
+          <PointUpperLeft>154.7825;83.96056</PointUpperLeft>
+          <PointUpperRight>469.4991;165.1868</PointUpperRight>
+          <PointLowerRight>328.0037;244.5702</PointLowerRight>
+          <PointLowerLeft>153.3377;333.962</PointLowerLeft>
+          <Filled>true</Filled>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>197;62;134;216</Value>
+            </Color>
+            <LineSize Key="line size">
+              <Value>2</Value>
+            </LineSize>
+            <PenShape Key="pen shape">
+              <Value>Solid</Value>
+            </PenShape>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>false</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>5</OpaqueFrames>
+            <Frames>26</Frames>
+          </InfosFading>
+        </Rectangle>
+        <Rectangle id="00000000-0000-4000-8000-000000000005" name="Rectangle 1">
+          <PointUpperLeft>201.2697;64.68406</PointUpperLeft>
+          <PointUpperRight>458.2579;84.69983</PointUpperRight>
+          <PointLowerRight>272.2535;242.5353</PointLowerRight>
+          <PointLowerLeft>213.3271;286.2275</PointLowerLeft>
+          <Filled>false</Filled>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>225;204;236;146</Value>
+            </Color>
+            <LineSize Key="line size">
+              <Value>2</Value>
+            </LineSize>
+            <PenShape Key="pen shape">
+              <Value>Solid</Value>
+            </PenShape>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>false</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>true</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>4</Frames>
+          </InfosFading>
+        </Rectangle>
+        <Line id="00000000-0000-4000-8000-000000000006" name="Line 1">
+          <Start>202.6118;123.4837</Start>
+          <End>342.9871;3.756887</End>
+          <ReferenceTimestamp>10445</ReferenceTimestamp>
+          <ExtraData>None</ExtraData>
+          <MeasureLabel>
+            <SpacePosition>-15;-50</SpacePosition>
+            <TimePosition>0</TimePosition>
+          </MeasureLabel>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>75;21;127;43</Value>
+            </Color>
+            <LineSize Key="line size">
+              <Value>36</Value>
+            </LineSize>
+            <LineShape Key="line shape">
+              <Value>Solid</Value>
+            </LineShape>
+            <Arrows Key="arrows">
+              <Value>StartArrow</Value>
+            </Arrows>
+            <FontSize Key="Font">
+              <Value>10</Value>
+            </FontSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>false</Enabled>
+            <UseDefault>false</UseDefault>
+            <AlwaysVisible>true</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>3</OpaqueFrames>
+            <Frames>6</Frames>
+          </InfosFading>
+        </Line>
+      </Drawings>
+    </Keyframe>
+    <Keyframe id="00000000-0000-4000-8000-000000000007">
+      <Timestamp>59459</Timestamp>
+      <Name>oPx43L5bF9</Name>
+      <Color>51;152;255</Color>
+      <Drawings>
+        <Polyline id="00000000-0000-4000-8000-000000000008" name="Polyline 1">
+          <PointList Count="2">
+            <Point key="0">271.1309;293.1177</Point>
+            <Point key="1">322.5899;185.6006</Point>
+          </PointList>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>116;208;103;112</Value>
+            </Color>
+            <LineSize Key="line size">
+              <Value>18</Value>
+            </LineSize>
+            <LineShape Key="line shape">
+              <Value>Solid</Value>
+            </LineShape>
+            <Arrows Key="arrows">
+              <Value>None</Value>
+            </Arrows>
+            <Toggle Key="curved">
+              <Value>false</Value>
+              <Variant>Curved</Variant>
+            </Toggle>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>false</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>true</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>9</OpaqueFrames>
+            <Frames>69</Frames>
+          </InfosFading>
+        </Polyline>
+      </Drawings>
+    </Keyframe>
+    <Keyframe id="00000000-0000-4000-8000-000000000009">
+      <Timestamp>63384</Timestamp>
+      <Name>UPw7HvSuZ6</Name>
+      <Color>51;152;255</Color>
+    </Keyframe>
+  </Keyframes>
+  <Tracks>
+    <Track id="00000000-0000-4000-8000-000000000010" name="Trajectory 1">
+      <TimePosition>49519</TimePosition>
+      <IsVisible>true</IsVisible>
+      <Visible>49519</Visible>
+      <Invisible>-1</Invisible>
+      <ExtraData>None</ExtraData>
+      <TrackerParameters>
+        <Algorithm>Correlation</Algorithm>
+        <SearchWindow>100;100</SearchWindow>
+        <BlockWindow>20;20</BlockWindow>
+        <SimilarityThreshold>0.5</SimilarityThreshold>
+        <TemplateUpdateThreshold>0.8</TemplateUpdateThreshold>
+        <UseMask>false</UseMask>
+        <HSVRange>0;360;0;255;0;255</HSVRange>
+        <Dilate>0</Dilate>
+        <Erode>0</Erode>
+      </TrackerParameters>
+      <TrackPointList Count="11">
+        <TrackPoint>13.30824;325.2371;49519;0</TrackPoint>
+        <TrackPoint>15.80418;316.7571;49520;0</TrackPoint>
+        <TrackPoint>18.7636;325.921;49521;0</TrackPoint>
+        <TrackPoint>16.95577;327.3261;49522;0</TrackPoint>
+        <TrackPoint>23.51194;329.7174;49523;0</TrackPoint>
+        <TrackPoint>24.26537;336.4681;49524;0</TrackPoint>
+        <TrackPoint>17.62656;344.1612;49525;0</TrackPoint>
+        <TrackPoint>26.16253;352.4389;49526;0</TrackPoint>
+        <TrackPoint>19.27216;349.2635;49527;0</TrackPoint>
+        <TrackPoint>12.17504;339.919;49528;0</TrackPoint>
+        <TrackPoint>17.83624;342.1672;49529;0</TrackPoint>
+      </TrackPointList>
+      <MainLabel Text="Trajectory 1">
+        <SpacePosition>436.7234;174.4815</SpacePosition>
+        <TimePosition>0</TimePosition>
+      </MainLabel>
+      <SeeFuture>true</SeeFuture>
+      <ShowTrackLabel>false</ShowTrackLabel>
+      <ShowKeyframeLabels>true</ShowKeyframeLabels>
+      <UseKeyframeColors>true</UseKeyframeColors>
+      <IsInteractiveTrack>false</IsInteractiveTrack>
+      <ShowRotationCircle>false</ShowRotationCircle>
+      <DrawingStyle>
+        <Color Key="color">
+          <Value>92;52;10;183</Value>
+        </Color>
+        <TrackShape Key="track shape">
+          <Value>Dash;false</Value>
+        </TrackShape>
+        <LineSize Key="line size">
+          <Value>8</Value>
+        </LineSize>
+        <PenSize Key="TrackPointSize">
+          <Value>3</Value>
+        </PenSize>
+        <FontSize Key="label size">
+          <Value>8</Value>
+        </FontSize>
+      </DrawingStyle>
+    </Track>
+  </Tracks>
+  <NumberSequence>
+    <AutoNumber id="00000000-0000-4000-8000-000000000011" name="AutoNumber">
+      <Time>9378</Time>
+      <Location>398.8465;334.0485</Location>
+      <Value>1</Value>
+    </AutoNumber>
+    <AutoNumber id="00000000-0000-4000-8000-000000000012" name="AutoNumber">
+      <Time>76282</Time>
+      <Location>122.0593;81.25342</Location>
+      <Value>2</Value>
+    </AutoNumber>
+    <DrawingStyle>
+      <Color Key="back color">
+        <Value>7;105;135;248</Value>
+      </Color>
+      <FontSize Key="font size">
+        <Value>18</Value>
+      </FontSize>
+    </DrawingStyle>
+  </NumberSequence>
+  <CoordinateSystem id="00000000-0000-4000-8000-000000000013" name="">
+    <Position>0;0</Position>
+    <ReferenceTimestamp>-1</ReferenceTimestamp>
+    <Visible>false</Visible>
+    <ShowGrid>true</ShowGrid>
+    <ShowGraduations>true</ShowGraduations>
+    <DrawingStyle>
+      <Color Key="line color">
+        <Value>255;255;0;0</Value>
+      </Color>
+    </DrawingStyle>
+  </CoordinateSystem>
+  <TestGrid id="00000000-0000-4000-8000-000000000014" name="">
+    <Visible>false</Visible>
+    <ShowHorizontalAxis>true</ShowHorizontalAxis>
+    <ShowVerticalAxis>true</ShowVerticalAxis>
+    <ShowFraming>true</ShowFraming>
+    <ShowThirds>false</ShowThirds>
+    <DrawingStyle>
+      <Color Key="color">
+        <Value>255;255;0;0</Value>
+      </Color>
+    </DrawingStyle>
+  </TestGrid>
+  <Trackability>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000006" name="Line 1">
+      <TrackablePoint key="a">
+        <ReferenceTimestamp>10445</ReferenceTimestamp>
+        <ReferenceValue>202.6118;123.4837</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="b">
+        <ReferenceTimestamp>10445</ReferenceTimestamp>
+        <ReferenceValue>342.9871;3.756887</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000003" name="Line 2">
+      <TrackablePoint key="a">
+        <ReferenceTimestamp>10445</ReferenceTimestamp>
+        <ReferenceValue>448.722;6.926807</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="b">
+        <ReferenceTimestamp>10445</ReferenceTimestamp>
+        <ReferenceValue>177.3346;27.54017</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000002" name="Angle 1">
+      <TrackablePoint key="o">
+        <ReferenceTimestamp>10445</ReferenceTimestamp>
+        <ReferenceValue>415.4617;54.45621</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="a">
+        <ReferenceTimestamp>10445</ReferenceTimestamp>
+        <ReferenceValue>233.0275;207.6802</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="b">
+        <ReferenceTimestamp>10445</ReferenceTimestamp>
+        <ReferenceValue>21.56265;235.0357</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000008" name="Polyline 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>59459</ReferenceTimestamp>
+        <ReferenceValue>271.1309;293.1177</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="1">
+        <ReferenceTimestamp>59459</ReferenceTimestamp>
+        <ReferenceValue>322.5899;185.6006</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+  </Trackability>
+  <VideoFilters />
+</KinoveaVideoAnalysis>

@@ -41,9 +41,9 @@
       <Color>51;152;255</Color>
       <Drawings>
         <Angle id="00000000-0000-4000-8000-000000000002" name="Angle 1">
-          <PointO>0;0</PointO>
-          <PointA>0;0</PointA>
-          <PointB>0;0</PointB>
+          <PointO>224;205</PointO>
+          <PointA>298;256</PointA>
+          <PointB>224;155</PointB>
           <ReferenceTimestamp>0</ReferenceTimestamp>
           <Signed>true</Signed>
           <CCW>true</CCW>
@@ -96,6 +96,21 @@
       </Color>
     </DrawingStyle>
   </TestGrid>
-  <Trackability />
+  <Trackability>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000002" name="Angle 1">
+      <TrackablePoint key="o">
+        <ReferenceTimestamp>0</ReferenceTimestamp>
+        <ReferenceValue>224;205</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="a">
+        <ReferenceTimestamp>0</ReferenceTimestamp>
+        <ReferenceValue>298;256</ReferenceValue>
+      </TrackablePoint>
+      <TrackablePoint key="b">
+        <ReferenceTimestamp>0</ReferenceTimestamp>
+        <ReferenceValue>224;155</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+  </Trackability>
   <VideoFilters />
 </KinoveaVideoAnalysis>

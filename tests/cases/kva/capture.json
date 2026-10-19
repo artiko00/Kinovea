@@ -1,0 +1,5 @@
+{
+  "area": "kva",
+  "seed": 0,
+  "inputs": { "kind": "capture", "kva": "tests/cases/kva/inputs/all-drawings.kva" }
+}

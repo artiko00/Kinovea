@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+  <FormatVersion>2.1</FormatVersion>
+  <Producer>Kinovea.0.0</Producer>
+  <OriginalFilename />
+  <FullPath />
+  <ByteLength>0</ByteLength>
+  <GlobalTitle>JrPdOEjOt9mT</GlobalTitle>
+  <ImageSize>685;674</ImageSize>
+  <Aspect>Auto</Aspect>
+  <Rotation>Rotate0</Rotation>
+  <Mirror>false</Mirror>
+  <Demosaicing>None</Demosaicing>
+  <Deinterlacing>false</Deinterlacing>
+  <StabilizationTrack>00000000-0000-0000-0000-000000000000</StabilizationTrack>
+  <BackgroundColor>0;255;255;255</BackgroundColor>
+  <AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+  <CaptureFramerate>80.51543</CaptureFramerate>
+  <VideoFramerate>25</VideoFramerate>
+  <FirstTimeStamp>0</FirstTimeStamp>
+  <SelectionStart>0</SelectionStart>
+  <SelectionEnd>0</SelectionEnd>
+  <TimeOrigin>0</TimeOrigin>
+  <Calibration>
+    <CalibrationLine>
+      <Length>100</Length>
+      <Segment>
+        <A>342;337</A>
+        <B>442;337</B>
+      </Segment>
+      <Origin>0;100</Origin>
+      <Offset>0;0</Offset>
+      <Axis>LineHorizontal</Axis>
+    </CalibrationLine>
+    <CalibrationDrawingId>00000000-0000-0000-0000-000000000000</CalibrationDrawingId>
+    <Unit Abbreviation="px">Pixels</Unit>
+  </Calibration>
+  <Chronos>
+    <Chrono id="00000000-0000-4000-8000-000000000001" name="3A7tB3">
+      <Position>320.5058;584.0556</Position>
+      <Values>
+        <Visible>33394</Visible>
+        <Invisible>37034</Invisible>
+        <StartCounting>33652</StartCounting>
+        <StopCounting>35291</StopCounting>
+        <ClockOrigin>-1</ClockOrigin>
+      </Values>
+      <Label>
+        <Show>true</Show>
+      </Label>
+      <DrawingStyle>
+        <Color Key="color">
+          <Value>155;43;186;158</Value>
+        </Color>
+        <FontSize Key="font size">
+          <Value>9</Value>
+        </FontSize>
+        <Toggle Key="clock">
+          <Value>false</Value>
+          <Variant>Clock</Variant>
+        </Toggle>
+      </DrawingStyle>
+    </Chrono>
+  </Chronos>
+  <Tracks>
+    <Track id="00000000-0000-4000-8000-000000000002" name="Trajectory 1">
+      <TimePosition>6061</TimePosition>
+      <IsVisible>true</IsVisible>
+      <Visible>6061</Visible>
+      <Invisible>-1</Invisible>
+      <ExtraData>Speed</ExtraData>
+      <TrackerParameters>
+        <Algorithm>Correlation</Algorithm>
+        <SearchWindow>100;100</SearchWindow>
+        <BlockWindow>20;20</BlockWindow>
+        <SimilarityThreshold>0.5</SimilarityThreshold>
+        <TemplateUpdateThreshold>0.8</TemplateUpdateThreshold>
+        <UseMask>false</UseMask>
+        <HSVRange>0;360;0;255;0;255</HSVRange>
+        <Dilate>0</Dilate>
+        <Erode>0</Erode>
+      </TrackerParameters>
+      <TrackPointList Count="15">
+        <TrackPoint>579.1608;204.2092;6061;0</TrackPoint>
+        <TrackPoint>582.5168;212.6472;6062;0</TrackPoint>
+        <TrackPoint>590.8047;209.4681;6063;0</TrackPoint>
+        <TrackPoint>590.7999;207.1405;6064;0</TrackPoint>
+        <TrackPoint>581.9215;213.5473;6065;0</TrackPoint>
+        <TrackPoint>577.291;212.5159;6066;0</TrackPoint>
+        <TrackPoint>577.6414;210.7788;6067;0</TrackPoint>
+        <TrackPoint>569.4604;214.2271;6068;0</TrackPoint>
+        <TrackPoint>573.4589;221.4407;6069;0</TrackPoint>
+        <TrackPoint>577.8267;226.0735;6070;0</TrackPoint>
+        <TrackPoint>572.1143;228.5752;6071;0</TrackPoint>
+        <TrackPoint>564.6989;219.4451;6072;0</TrackPoint>
+        <TrackPoint>557.5138;214.3473;6073;0</TrackPoint>
+        <TrackPoint>559.1453;216.8111;6074;0</TrackPoint>
+        <TrackPoint>552.2712;225.7807;6075;0</TrackPoint>
+      </TrackPointList>
+      <MainLabel Text="Trajectory 1">
+        <SpacePosition>558.8569;140.0394</SpacePosition>
+        <TimePosition>0</TimePosition>
+      </MainLabel>
+      <SeeFuture>true</SeeFuture>
+      <ShowTrackLabel>false</ShowTrackLabel>
+      <ShowKeyframeLabels>true</ShowKeyframeLabels>
+      <UseKeyframeColors>true</UseKeyframeColors>
+      <IsInteractiveTrack>false</IsInteractiveTrack>
+      <ShowRotationCircle>false</ShowRotationCircle>
+      <DrawingStyle>
+        <Color Key="color">
+          <Value>248;159;105;5</Value>
+        </Color>
+        <TrackShape Key="track shape">
+          <Value>Solid;false</Value>
+        </TrackShape>
+        <LineSize Key="line size">
+          <Value>30</Value>
+        </LineSize>
+        <PenSize Key="TrackPointSize">
+          <Value>3</Value>
+        </PenSize>
+        <FontSize Key="label size">
+          <Value>8</Value>
+        </FontSize>
+      </DrawingStyle>
+    </Track>
+  </Tracks>
+  <Spotlights>
+    <Spotlight id="00000000-0000-4000-8000-000000000003" name="Spotlight">
+      <Time>72030</Time>
+      <Center>144.3719;138.381</Center>
+      <Radius>6</Radius>
+    </Spotlight>
+  </Spotlights>
+  <CoordinateSystem id="00000000-0000-4000-8000-000000000004" name="">
+    <Position>0;0</Position>
+    <ReferenceTimestamp>-1</ReferenceTimestamp>
+    <Visible>false</Visible>
+    <ShowGrid>true</ShowGrid>
+    <ShowGraduations>true</ShowGraduations>
+    <DrawingStyle>
+      <Color Key="line color">
+        <Value>255;255;0;0</Value>
+      </Color>
+    </DrawingStyle>
+  </CoordinateSystem>
+  <TestGrid id="00000000-0000-4000-8000-000000000005" name="">
+    <Visible>false</Visible>
+    <ShowHorizontalAxis>true</ShowHorizontalAxis>
+    <ShowVerticalAxis>true</ShowVerticalAxis>
+    <ShowFraming>true</ShowFraming>
+    <ShowThirds>false</ShowThirds>
+    <DrawingStyle>
+      <Color Key="color">
+        <Value>255;255;0;0</Value>
+      </Color>
+    </DrawingStyle>
+  </TestGrid>
+  <Trackability>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000003" name="Spotlight">
+      <TrackablePoint key="o">
+        <ReferenceTimestamp>0</ReferenceTimestamp>
+        <ReferenceValue>144.3719;138.381</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+  </Trackability>
+  <VideoFilters />
+</KinoveaVideoAnalysis>

@@ -1,7 +1,9 @@
 {
   "attached_drawings": 1,
+  "chronos": 0,
   "image_height": 384,
   "image_width": 512,
   "keyframes": 1,
+  "time_origin": 0,
   "tracks": 0
 }

@@ -26,31 +26,7 @@ declare!(
     units: units_test,
 );
 
-/// Enum with C# member names as text form.
-macro_rules! text_enum {
-    ($(#[$doc:meta])* $name:ident [$($v:ident),+ $(,)?]) => {
-        $(#[$doc])*
-        #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-        pub enum $name { $($v),+ }
-
-        impl $name {
-            pub const ALL: &'static [$name] = &[$(Self::$v),+];
-
-            pub fn name(self) -> &'static str {
-                match self { $(Self::$v => stringify!($v)),+ }
-            }
-        }
-
-        impl std::str::FromStr for $name {
-            type Err = String;
-            fn from_str(s: &str) -> Result<Self, String> {
-                $(if s == stringify!($v) { return Ok(Self::$v); })+
-                Err(format!("unknown {}: {s}", stringify!($name)))
-            }
-        }
-    };
-}
-pub(crate) use text_enum;
+pub(crate) use kinovea_core::text_enum;
 
 pub use calibration_axis::CalibrationAxis;
 pub use calibration_helper::CalibrationHelper;

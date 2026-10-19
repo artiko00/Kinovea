@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+<FormatVersion>2.1</FormatVersion>
+<Producer>KvaFuzz</Producer>
+<OriginalFilename>zpUrYr25</OriginalFilename>
+<GlobalTitle>QuXlGHf5vj2w</GlobalTitle>
+<ImageSize>1255;655</ImageSize>
+<AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+<CaptureFramerate>42.43254</CaptureFramerate>
+<FirstTimeStamp>0</FirstTimeStamp>
+<SelectionStart>0</SelectionStart>
+<Keyframes>
+<Keyframe>
+<Timestamp>19105</Timestamp>
+<Name>8gNEAsIQLQ</Name>
+<Drawings>
+<Circle>
+<Origin>1002.485;620.8051</Origin>
+<Radius>152</Radius>
+<Filled>true</Filled>
+<DrawingStyle>
+<Color Key="color"><Value>10;149;213;34</Value></Color>
+<PenSize Key="pen size"><Value>2</Value></PenSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>false</AlwaysVisible>
+<OpaqueFrames>1</OpaqueFrames>
+<Frames>11</Frames>
+</InfosFading>
+</Circle>
+</Drawings>
+</Keyframe>
+<Keyframe>
+<Timestamp>74308</Timestamp>
+<Name>XnAFFIybuU</Name>
+<Drawings>
+<Angle>
+<PointO>1129.305;323.0537</PointO>
+<PointA>777.9964;554.4345</PointA>
+<PointB>1184.333;265.5835</PointB>
+<Signed>false</Signed>
+<CCW>false</CCW>
+<Supplementary>true</Supplementary>
+<DrawingStyle>
+<Color Key="line color"><Value>232;153;12;221</Value></Color>
+<FontSize Key="font size"><Value>10</Value></FontSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>false</UseDefault>
+<AlwaysVisible>false</AlwaysVisible>
+<OpaqueFrames>8</OpaqueFrames>
+<Frames>84</Frames>
+</InfosFading>
+</Angle>
+</Drawings>
+</Keyframe>
+<Keyframe>
+<Timestamp>78212</Timestamp>
+<Name>aCtFupglTe</Name>
+<Drawings>
+<Pencil>
+<PointList Count="1">
+<Point>937.2531;559.9565</Point>
+</PointList>
+<DrawingStyle>
+<Color Key="color"><Value>175;86;132;77</Value></Color>
+<PenSize Key="pen size"><Value>3</Value></PenSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>false</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>7</OpaqueFrames>
+<Frames>88</Frames>
+</InfosFading>
+</Pencil>
+<Pencil>
+<PointList Count="15">
+<Point>803.3179;225.2078</Point>
+<Point>253.3825;413.7632</Point>
+<Point>496.1089;344.5363</Point>
+<Point>1137.216;174.2543</Point>
+<Point>913.355;381.3683</Point>
+<Point>1236.069;184.8585</Point>
+<Point>740.2145;554.1985</Point>
+<Point>277.9354;577.4863</Point>
+<Point>991.0537;377.8085</Point>
+<Point>357.3434;386.0847</Point>
+<Point>378.378;5.815455</Point>
+<Point>593.5423;12.95731</Point>
+<Point>307.6109;213.8713</Point>
+<Point>722.9013;648.5918</Point>
+<Point>1251.487;190.2125</Point>
+</PointList>
+<DrawingStyle>
+<Color Key="color"><Value>142;160;183;225</Value></Color>
+<PenSize Key="pen size"><Value>8</Value></PenSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>false</Enabled>
+<UseDefault>false</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>4</OpaqueFrames>
+<Frames>10</Frames>
+</InfosFading>
+</Pencil>
+<Label>
+<Text>hgvoSxNhxl</Text>
+<Position>750.2856;19.95422</Position>
+<ArrowEnd>94.43786;413.4461</ArrowEnd>
+<DrawingStyle>
+<Color Key="back color"><Value>222;46;98;17</Value></Color>
+<FontSize Key="font size"><Value>36</Value></FontSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>false</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>1</OpaqueFrames>
+<Frames>36</Frames>
+</InfosFading>
+</Label>
+<Pencil>
+<PointList Count="28">
+<Point>487.7076;249.7402</Point>
+<Point>433.2068;223.8748</Point>
+<Point>250.6428;122.9228</Point>
+<Point>607.8671;537.5705</Point>
+<Point>1106.604;242.3727</Point>
+<Point>835.4102;7.517581</Point>
+<Point>767.7651;130.6275</Point>
+<Point>446.8316;568.6508</Point>
+<Point>1143.582;245.9164</Point>
+<Point>34.9974;450.1942</Point>
+<Point>1009.845;541.2118</Point>
+<Point>1216.463;232.1041</Point>
+<Point>76.9307;201.9408</Point>
+<Point>184.5789;123.8959</Point>
+<Point>265.9865;451.7864</Point>
+<Point>98.87694;651.6757</Point>
+<Point>839.8312;3.177086</Point>
+<Point>1239.908;165.6447</Point>
+<Point>983.7275;24.48822</Point>
+<Point>1233.615;268.6606</Point>
+<Point>685.3658;166.7178</Point>
+<Point>940.5714;328.0581</Point>
+<Point>648.1457;245.6997</Point>
+<Point>573.56;491.6177</Point>
+<Point>702.6631;262.4372</Point>
+<Point>660.3203;424.8829</Point>
+<Point>415.7884;574.5159</Point>
+<Point>1136.086;368.3288</Point>
+</PointList>
+<DrawingStyle>
+<Color Key="color"><Value>105;253;71;228</Value></Color>
+<PenSize Key="pen size"><Value>1</Value></PenSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>false</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>3</OpaqueFrames>
+<Frames>67</Frames>
+</InfosFading>
+</Pencil>
+</Drawings>
+</Keyframe>
+<Keyframe>
+<Timestamp>89674</Timestamp>
+<Name>vLngf3yMiI</Name>
+</Keyframe>
+</Keyframes>
+<Chronos>
+<Chrono>
+<Position>789.7253;531.3844</Position>
+<Values>
+<Visible>83790</Visible>
+<Invisible>90714</Invisible>
+<StartCounting>84476</StartCounting>
+<StopCounting>88732</StopCounting>
+<ClockOrigin>-1</ClockOrigin>
+</Values>
+<Label>
+<Text>kAPXgA</Text>
+<Show>false</Show>
+</Label>
+<DrawingStyle>
+<Color Key="color"><Value>203;193;23;94</Value></Color>
+<FontSize Key="font size"><Value>11</Value></FontSize>
+</DrawingStyle>
+</Chrono>
+</Chronos>
+<Tracks>
+<Track>
+<TimePosition>55745</TimePosition>
+<Visible>55745</Visible>
+<Invisible>-1</Invisible>
+<ExtraData>TotalDistance</ExtraData>
+<TrackPointList Count="7">
+<TrackPoint>41.97748;555.9539;55745</TrackPoint>
+<TrackPoint>38.30438;559.0002;55746</TrackPoint>
+<TrackPoint>33.42821;563.272;55747</TrackPoint>
+<TrackPoint>38.14645;560.3745;55748</TrackPoint>
+<TrackPoint>37.85677;569.2454;55749</TrackPoint>
+<TrackPoint>30.91518;571.1316;55750</TrackPoint>
+<TrackPoint>21.71763;574.0132;55751</TrackPoint>
+</TrackPointList>
+<DrawingStyle>
+<Color Key="color"><Value>170;204;7;220</Value></Color>
+<LineSize Key="line size"><Value>1</Value></LineSize>
+<TrackShape Key="track shape"><Value>Solid;true</Value></TrackShape>
+</DrawingStyle>
+<MainLabel Text="FWqshs">
+<SpacePosition>311.4185;583.1499</SpacePosition>
+<TimePosition>0</TimePosition>
+</MainLabel>
+</Track>
+</Tracks>
+<Spotlights>
+<Spotlight>
+<Time>51936</Time>
+<Center>324.8409;649.8889</Center>
+<Radius>67</Radius>
+</Spotlight>
+<Spotlight>
+<Time>118</Time>
+<Center>1076.048;113.0011</Center>
+<Radius>52</Radius>
+</Spotlight>
+</Spotlights>
+<NumberSequence>
+<DrawingStyle>
+<Color Key="back color"><Value>44;243;14;190</Value></Color>
+<FontSize Key="font size"><Value>36</Value></FontSize>
+</DrawingStyle>
+<AutoNumber>
+<Time>89735</Time>
+<Location>803.3241;106.4921</Location>
+<Value>1</Value>
+</AutoNumber>
+</NumberSequence>
+</KinoveaVideoAnalysis>

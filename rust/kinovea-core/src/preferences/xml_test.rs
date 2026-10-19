@@ -35,6 +35,7 @@ fn canonical(e: &Element, ids: &mut HashMap<String, String>) -> Element {
         attributes: e.attributes.clone(),
         text,
         children,
+        end_tag: e.end_tag,
     }
 }
 

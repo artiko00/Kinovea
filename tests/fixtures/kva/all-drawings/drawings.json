@@ -1,0 +1,28 @@
+{
+  "keyframes": [
+    { "id": "00000000-0000-4000-8000-000000000001", "timestamp": 400, "drawings": [
+      { "element": "DistortionGrid", "id": "00000000-0000-4000-8000-000000000002", "name": "Distortion grid 1" },
+      { "element": "GenericPosture", "id": "00000000-0000-4000-8000-000000000003", "name": "Goniometer 1" },
+      { "element": "Bitmap", "id": "00000000-0000-4000-8000-000000000004", "name": "Bitmap Image 1" },
+      { "element": "TimePolyline", "id": "00000000-0000-4000-8000-000000000005", "name": "Trajectory curve 1" },
+      { "element": "TimeSegment", "id": "00000000-0000-4000-8000-000000000006", "name": "Time segment 1" },
+      { "element": "Rectangle", "id": "00000000-0000-4000-8000-000000000007", "name": "Rectangle 1" },
+      { "element": "Polyline", "id": "00000000-0000-4000-8000-000000000008", "name": "Polyline 1" },
+      { "element": "Pencil", "id": "00000000-0000-4000-8000-000000000009", "name": "Pencil 1" },
+      { "element": "Line", "id": "00000000-0000-4000-8000-000000000010", "name": "Line 1" },
+      { "element": "Label", "id": "00000000-0000-4000-8000-000000000011", "name": "Text 1" },
+      { "element": "CrossMark", "id": "00000000-0000-4000-8000-000000000012", "name": "Marker 1" },
+      { "element": "Circle", "id": "00000000-0000-4000-8000-000000000013", "name": "Circle 1" },
+      { "element": "Angle", "id": "00000000-0000-4000-8000-000000000014", "name": "Elbow" },
+      { "element": "Plane", "id": "00000000-0000-4000-8000-000000000015", "name": "Perspective grid 1" }
+    ] }
+  ],
+  "chronos": [
+    { "element": "Chrono", "id": "00000000-0000-4000-8000-000000000016", "name": "Sprint" },
+    { "element": "ChronoMulti", "id": "00000000-0000-4000-8000-000000000017", "name": "Advanced stopwatch 1" },
+    { "element": "Counter", "id": "00000000-0000-4000-8000-000000000018", "name": "Counter 1" }
+  ],
+  "tracks": [
+    { "element": "Track", "id": "00000000-0000-4000-8000-000000000019", "name": "Trajectory 1" }
+  ]
+}

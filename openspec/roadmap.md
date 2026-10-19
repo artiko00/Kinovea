@@ -14,7 +14,7 @@ Phase A, foundations
 - [x] 01 `add-core-types-and-units` (archived 2026-10-18)
 - [x] 02 `add-geometry-core` (archived 2026-10-18)
 - [x] 03 `add-kinematics-filtering` (archived 2026-10-18)
-- [ ] 04 `add-calibration-and-lens-distortion`
+- [x] 04 `add-calibration-and-lens-distortion` (archived 2026-10-19)
 - [ ] 05 `add-kva-metadata-model`
 - [ ] 06 `add-headless-renderer`
 

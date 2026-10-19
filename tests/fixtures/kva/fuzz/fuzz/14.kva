@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+<FormatVersion>2.1</FormatVersion>
+<Producer>KvaFuzz</Producer>
+<OriginalFilename>jHiDQSuz</OriginalFilename>
+<GlobalTitle>1ouAOHyWAETX</GlobalTitle>
+<ImageSize>1119;1049</ImageSize>
+<AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+<CaptureFramerate>493.8689</CaptureFramerate>
+<FirstTimeStamp>0</FirstTimeStamp>
+<SelectionStart>0</SelectionStart>
+<Keyframes>
+<Keyframe>
+<Timestamp>25092</Timestamp>
+<Name>BxemuJd5SO</Name>
+<Drawings>
+<Line>
+<Start>584.9339;283.1757</Start>
+<End>191.2035;907.5379</End>
+<DrawingStyle>
+<Color Key="color"><Value>245;115;136;221</Value></Color>
+<LineSize Key="line size"><Value>4</Value></LineSize>
+<Arrows Key="arrows"><Value>DoubleArrow</Value></Arrows>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>false</UseDefault>
+<AlwaysVisible>false</AlwaysVisible>
+<OpaqueFrames>6</OpaqueFrames>
+<Frames>25</Frames>
+</InfosFading>
+</Line>
+<Circle>
+<Origin>904.9955;731.0183</Origin>
+<Radius>29</Radius>
+<Filled>false</Filled>
+<DrawingStyle>
+<Color Key="color"><Value>223;226;4;82</Value></Color>
+<PenSize Key="pen size"><Value>14</Value></PenSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>2</OpaqueFrames>
+<Frames>43</Frames>
+</InfosFading>
+</Circle>
+<Plane>
+<PointUpperLeft>0.9329363;345.8397</PointUpperLeft>
+<PointUpperRight>1105.191;137.9674</PointUpperRight>
+<PointLowerRight>651.5184;696.3917</PointLowerRight>
+<PointLowerLeft>487.5658;966.8815</PointLowerLeft>
+<ShowGrid>true</ShowGrid>
+<DrawingStyle>
+<Color Key="color"><Value>254;205;245;147</Value></Color>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>false</AlwaysVisible>
+<OpaqueFrames>7</OpaqueFrames>
+<Frames>32</Frames>
+</InfosFading>
+</Plane>
+<Circle>
+<Origin>107.3602;20.21236</Origin>
+<Radius>101</Radius>
+<Filled>true</Filled>
+<DrawingStyle>
+<Color Key="color"><Value>138;163;64;217</Value></Color>
+<PenSize Key="pen size"><Value>3</Value></PenSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>false</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>7</OpaqueFrames>
+<Frames>86</Frames>
+</InfosFading>
+</Circle>
+<Angle>
+<PointO>3.57068;310.3643</PointO>
+<PointA>756.1361;410.7109</PointA>
+<PointB>97.91713;235.6205</PointB>
+<Signed>false</Signed>
+<CCW>false</CCW>
+<Supplementary>false</Supplementary>
+<DrawingStyle>
+<Color Key="line color"><Value>163;18;236;113</Value></Color>
+<FontSize Key="font size"><Value>36</Value></FontSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>false</Enabled>
+<UseDefault>false</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>9</OpaqueFrames>
+<Frames>67</Frames>
+</InfosFading>
+</Angle>
+</Drawings>
+</Keyframe>
+<Keyframe>
+<Timestamp>66968</Timestamp>
+<Name>uQEzAM5DPb</Name>
+<Drawings>
+<Plane>
+<PointUpperLeft>63.53047;50.6334</PointUpperLeft>
+<PointUpperRight>785.9601;190.3741</PointUpperRight>
+<PointLowerRight>1016.063;982.6633</PointLowerRight>
+<PointLowerLeft>159.7132;645.9742</PointLowerLeft>
+<ShowGrid>true</ShowGrid>
+<DrawingStyle>
+<Color Key="color"><Value>40;42;188;157</Value></Color>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>false</UseDefault>
+<AlwaysVisible>false</AlwaysVisible>
+<OpaqueFrames>9</OpaqueFrames>
+<Frames>66</Frames>
+</InfosFading>
+</Plane>
+<CrossMark>
+<CenterPoint>1095.877;322.3229</CenterPoint>
+<ShowAsDot>true</ShowAsDot>
+<DrawingStyle>
+<Color Key="back color"><Value>136;124;129;227</Value></Color>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>false</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>7</OpaqueFrames>
+<Frames>28</Frames>
+</InfosFading>
+</CrossMark>
+<Rectangle>
+<PointUpperLeft>432.4965;473.7252</PointUpperLeft>
+<PointUpperRight>1095.255;433.2442</PointUpperRight>
+<PointLowerRight>581.8698;835.3591</PointLowerRight>
+<PointLowerLeft>408.3599;897.4951</PointLowerLeft>
+<Filled>true</Filled>
+<DrawingStyle>
+<Color Key="color"><Value>184;101;43;132</Value></Color>
+<PenSize Key="pen size"><Value>18</Value></PenSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>false</Enabled>
+<UseDefault>false</UseDefault>
+<AlwaysVisible>false</AlwaysVisible>
+<OpaqueFrames>1</OpaqueFrames>
+<Frames>58</Frames>
+</InfosFading>
+</Rectangle>
+<Label>
+<Text>bAfI626NGdH3u8S</Text>
+<Position>572.54;934.3763</Position>
+<ArrowEnd>857.0099;315.4962</ArrowEnd>
+<DrawingStyle>
+<Color Key="back color"><Value>238;135;222;149</Value></Color>
+<FontSize Key="font size"><Value>20</Value></FontSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>false</UseDefault>
+<AlwaysVisible>false</AlwaysVisible>
+<OpaqueFrames>1</OpaqueFrames>
+<Frames>28</Frames>
+</InfosFading>
+</Label>
+<Rectangle>
+<PointUpperLeft>36.70601;84.31476</PointUpperLeft>
+<PointUpperRight>710.9567;29.77751</PointUpperRight>
+<PointLowerRight>982.5911;774.3694</PointLowerRight>
+<PointLowerLeft>481.6458;663.0057</PointLowerLeft>
+<Filled>true</Filled>
+<DrawingStyle>
+<Color Key="color"><Value>188;205;20;151</Value></Color>
+<PenSize Key="pen size"><Value>14</Value></PenSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>false</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>8</OpaqueFrames>
+<Frames>8</Frames>
+</InfosFading>
+</Rectangle>
+</Drawings>
+</Keyframe>
+</Keyframes>
+<Chronos>
+<Chrono>
+<Position>278.6769;155.8454</Position>
+<Values>
+<Visible>1627</Visible>
+<Invisible>3745</Invisible>
+<StartCounting>1969</StartCounting>
+<StopCounting>3391</StopCounting>
+<ClockOrigin>-1</ClockOrigin>
+</Values>
+<Label>
+<Text>1Dm8gZ</Text>
+<Show>true</Show>
+</Label>
+<DrawingStyle>
+<Color Key="color"><Value>168;254;95;157</Value></Color>
+<FontSize Key="font size"><Value>11</Value></FontSize>
+</DrawingStyle>
+</Chrono>
+</Chronos>
+<NumberSequence>
+<DrawingStyle>
+<Color Key="back color"><Value>160;165;144;32</Value></Color>
+<FontSize Key="font size"><Value>14</Value></FontSize>
+</DrawingStyle>
+<AutoNumber>
+<Time>27483</Time>
+<Location>1030.918;797.4473</Location>
+<Value>1</Value>
+</AutoNumber>
+</NumberSequence>
+</KinoveaVideoAnalysis>

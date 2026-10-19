@@ -1,0 +1,5 @@
+{
+  "area": "kva",
+  "seed": 20261018,
+  "inputs": { "kind": "fuzz", "count": 20 }
+}

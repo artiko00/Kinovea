@@ -49,6 +49,13 @@
     <Compile Include="Areas\KinematicsArea.cs" />
     <Compile Include="Areas\KinematicsArea.Series.cs" />
     <Compile Include="Areas\KvaArea.cs" />
+    <Compile Include="Areas\KvaArea.Summary.cs" />
+    <Compile Include="Areas\KvaArea.Variants.cs" />
+    <Compile Include="Areas\KvaArea.Fuzz.cs" />
+    <Compile Include="Areas\PostureArea.cs" />
+    <Compile Include="Areas\PostureArea.Moves.cs" />
+    <Compile Include="KvaFuzz.cs" />
+    <Compile Include="KvaFuzz.Drawings.cs" />
     <Compile Include="Areas\TimecodeArea.cs" />
     <Compile Include="Areas\UnitsArea.cs" />
     <Compile Include="Areas\PreferencesArea.cs" />

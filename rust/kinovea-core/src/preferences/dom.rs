@@ -12,6 +12,8 @@ pub struct Element {
     pub attributes: Vec<(String, String)>,
     pub text: String,
     pub children: Vec<Element>,
+    /// Written as `<X></X>` even when empty; `<X />` otherwise (an XSLT `value-of` does this).
+    pub end_tag: bool,
 }
 
 /// Error raised when the XML text is malformed.
@@ -61,7 +63,6 @@ impl Element {
     /// Parses a document and returns its root element.
     pub fn parse(xml: &str) -> Result<Element, XmlError> {
         let mut reader = Reader::from_str(xml);
-        reader.config_mut().trim_text(true);
         let mut stack: Vec<Element> = Vec::new();
         let err = |e: quick_xml::Error| XmlError(e.to_string());
         loop {
@@ -75,8 +76,10 @@ impl Element {
                     }
                 }
                 Event::Text(text) => {
-                    let text = text.unescape().map_err(err)?;
-                    if let Some(current) = stack.last_mut() {
+                    // Whitespace between elements is layout, not content (`IgnoreWhitespace`).
+                    // XML line-ending normalization, as `XmlReader` does.
+                    let text = text.unescape().map_err(err)?.replace("\r\n", "\n").replace('\r', "\n");
+                    if let Some(current) = stack.last_mut().filter(|_| !text.trim().is_empty()) {
                         current.text.push_str(&text);
                     }
                 }
@@ -110,7 +113,7 @@ impl Element {
         for (k, v) in &self.attributes {
             let _ = write!(out, " {k}=\"{}\"", escape(v, true));
         }
-        if self.children.is_empty() && self.text.is_empty() {
+        if self.children.is_empty() && self.text.is_empty() && !self.end_tag {
             out.push_str(" />\n");
         } else if self.children.is_empty() {
             let _ = writeln!(out, ">{}</{}>", escape(&self.text, false), self.name);

@@ -1,0 +1,5 @@
+{
+  "area": "kva",
+  "seed": 0,
+  "inputs": { "kva": "tests/cases/kva/inputs/remap.kva", "context": { "imageSize": "640;360", "averageTimeStampsPerFrame": 400, "averageTimeStampsPerSecond": 10000, "baselineFrameInterval": 40, "firstTimeStamp": 100, "timeOrigin": 300 } }
+}

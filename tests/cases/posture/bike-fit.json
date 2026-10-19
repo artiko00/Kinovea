@@ -1,0 +1,5 @@
+{
+  "area": "posture",
+  "seed": 7,
+  "inputs": { "file": "Tools/DrawingTools/Custom/3 - Bike fit.xml", "moves": 3 }
+}

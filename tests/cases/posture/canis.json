@@ -1,0 +1,5 @@
+{
+  "area": "posture",
+  "seed": 7,
+  "inputs": { "file": "Tools/DrawingTools/Custom/canis.xml", "moves": 3 }
+}
