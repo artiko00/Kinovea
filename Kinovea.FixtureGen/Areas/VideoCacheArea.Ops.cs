@@ -68,8 +68,9 @@ namespace Kinovea.FixtureGen.Areas
 
         /// <summary>
         /// A prebuffer add blocks while the buffer is full. The replay is single-threaded, so the add runs on a
-        /// worker: if it has not returned after a while it is reported "Blocked", then released with
-        /// InterruptAdd (leaving the frame out) and the interrupt flag is reset to its previous value (false).
+        /// worker; it is reported "Blocked" once the worker sits in Monitor.Wait (nothing else can make it wait
+        /// here: no other thread holds the lock). It is then released with InterruptAdd, which leaves the frame
+        /// out, and ResetInterruptAdd sets the flag back to false (it was false: an interrupted add returns at once).
         /// </summary>
         private string Add(VideoFrame frame)
         {
@@ -79,13 +80,18 @@ namespace Kinovea.FixtureGen.Areas
             CacheAddResult result = CacheAddResult.Added;
             Thread worker = new Thread(() => result = prebuffer.Add(frame));
             worker.Start();
-            if (worker.Join(1000))
-                return result.ToString();
+            while (!worker.Join(10))
+            {
+                if ((worker.ThreadState & ThreadState.WaitSleepJoin) == 0)
+                    continue;
 
-            prebuffer.InterruptAdd();
-            worker.Join();
-            prebuffer.ResetInterruptAdd();
-            return "Blocked";
+                prebuffer.InterruptAdd();
+                worker.Join();
+                prebuffer.ResetInterruptAdd();
+                return "Blocked";
+            }
+
+            return result.ToString();
         }
 
         private string TryAcquire(PlayerAction action, long reference)
