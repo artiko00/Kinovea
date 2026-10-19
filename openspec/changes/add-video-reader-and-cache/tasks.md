@@ -17,18 +17,18 @@
 
 ## 3. Dense cache
 
-- [ ] 3.1 Write `src/cache_test.rs` covering add/duplicate, closest with ties, next at end, trim protecting current, clear, snapshot versions and working zone; implement `src/cache.rs` and the shared `src/closest.rs` helpers with their own `closest_test.rs`; verify tests pass.
+- [x] 3.1 Write `src/cache_test.rs` covering add/duplicate, closest with ties, next at end, trim protecting current, clear, snapshot versions and working zone; implement `src/cache.rs` and the shared `src/closest.rs` helpers with their own `closest_test.rs`; verify tests pass.
 
 ## 4. Prebuffer
 
-- [ ] 4.1 Write `src/prebuffer_test.rs` for single-threaded behavior: capacity, retention on acquire closest and next, contiguity, relate timestamp, try acquire for the four player actions, purge, shutdown, snapshot; implement `src/prebuffer.rs` (`Mutex` + `Condvar`) porting `EvictBehind`, `EvictNonContiguous`, `EvictOne` arithmetic; verify tests pass.
-- [ ] 4.2 Write `tests/prebuffer_concurrency_test.rs`: producer thread blocked on a full buffer unblocks after consumer acquire; interrupt returns `Interrupted` within 1 s and the frame is absent; forced add never blocks; run with `cargo test -p kinovea-video --test prebuffer_concurrency_test -- --test-threads=1` ten times in a loop to check for flakiness; verify all runs pass.
+- [x] 4.1 Write `src/prebuffer_test.rs` for single-threaded behavior: capacity, retention on acquire closest and next, contiguity, relate timestamp, try acquire for the four player actions, purge, shutdown, snapshot; implement `src/prebuffer.rs` (`Mutex` + `Condvar`) porting `EvictBehind`, `EvictNonContiguous`, `EvictOne` arithmetic; verify tests pass.
+- [x] 4.2 Write `tests/prebuffer_concurrency_test.rs`: producer thread blocked on a full buffer unblocks after consumer acquire; interrupt returns `Interrupted` within 1 s and the frame is absent; forced add never blocks; run with `cargo test -p kinovea-video --test prebuffer_concurrency_test -- --test-threads=1` ten times in a loop to check for flakiness; verify all runs pass.
 
 ## 5. Parity with the original containers
 
-- [ ] 5.1 Add `tests/cases/videocache/{cache-basic,prebuffer-eviction,prebuffer-tryacquire,prebuffer-forceadd}.json` with `inputs.container`, `inputs.capacity`, `inputs.retention`, `inputs.tsPerFrame`, `inputs.ops`; document the op grammar in `tests/README.md`; verify `openspec validate` is unaffected and `npm run lint` passes.
-- [ ] 5.2 Implement `Kinovea.FixtureGen/Areas/VideoCacheArea.cs` (no-op disposer, null bitmaps, `steps.csv` with `op,result,current,snapshot`), register it in `Program.cs`; run `tools/oracle/fixtures.sh --verify`; verify the four fixture directories appear with identical trees on the second run.
-- [ ] 5.3 Write `tests/videocache_parity_test.rs` that loads every `tests/fixtures/videocache/*/steps.csv` through `kinovea-fixtures`, replays the ops on the Rust containers and asserts each row exactly; verify `cargo test -p kinovea-video` passes and fails when one expected snapshot is edited in a temp copy.
+- [x] 5.1 Add `tests/cases/videocache/{cache-basic,prebuffer-eviction,prebuffer-tryacquire,prebuffer-forceadd}.json` with `inputs.container`, `inputs.capacity`, `inputs.retention`, `inputs.tsPerFrame`, `inputs.ops`; document the op grammar in `tests/README.md`; verify `openspec validate` is unaffected and `npm run lint` passes.
+- [x] 5.2 Implement `Kinovea.FixtureGen/Areas/VideoCacheArea.cs` (no-op disposer, null bitmaps, `steps.csv` with `op,result,current,snapshot`), register it in `Program.cs`; run `tools/oracle/fixtures.sh --verify`; verify the four fixture directories appear with identical trees on the second run.
+- [x] 5.3 Write `tests/videocache_parity_test.rs` that loads every `tests/fixtures/videocache/*/steps.csv` through `kinovea-fixtures`, replays the ops on the Rust containers and asserts each row exactly; verify `cargo test -p kinovea-video` passes and fails when one expected snapshot is edited in a temp copy.
 
 ## 6. Frame pipeline
 
