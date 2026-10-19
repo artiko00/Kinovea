@@ -53,6 +53,8 @@
     <Compile Include="Areas\KvaArea.Variants.cs" />
     <Compile Include="Areas\KvaArea.Fuzz.cs" />
     <Compile Include="Areas\PostureArea.cs" />
+    <Compile Include="Areas\RenderArea.cs" />
+    <Compile Include="Areas\RenderArea.Hits.cs" />
     <Compile Include="Areas\PostureArea.Moves.cs" />
     <Compile Include="KvaFuzz.cs" />
     <Compile Include="KvaFuzz.Drawings.cs" />

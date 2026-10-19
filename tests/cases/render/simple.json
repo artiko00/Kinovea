@@ -1,0 +1,5 @@
+{
+  "area": "render",
+  "seed": 0,
+  "inputs": { "kva": "Tools/XML/Schema/samples/simple.kva", "frame": "40;40;40", "scale": 1, "timestamps": [0, 10], "defaultFading": { "enabled": true, "frames": 20, "opaque": 1, "alwaysVisible": false }, "hitScales": [0.5, 1, 2], "hitStep": 4, "hitTimestamp": 0, "mad_max": 1.5, "outliers_max": 1500 }
+}
