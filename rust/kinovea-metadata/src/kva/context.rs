@@ -5,6 +5,22 @@ use crate::kva_io::Scale;
 use crate::metadata::VideoContext;
 use kinovea_geometry::Size;
 
+/// A metadata whose video context mirrors a file header (image size and timestamps per frame),
+/// which is how a file is loaded when no video is open.
+pub fn header_metadata(xml: &str) -> crate::metadata::Metadata {
+    let root = kinovea_core::preferences::dom::Element::parse(xml).ok();
+    let size = root.as_ref().and_then(|r| r.child_text("ImageSize")).map(kinovea_core::xml::parse_size).unwrap_or((0, 0));
+    let mut m = crate::metadata::Metadata::new(Size::new(size.0, size.1));
+    m.video.average_timestamps_per_frame = root.as_ref().and_then(|r| r.child_text("AverageTimeStampsPerFrame")).and_then(|t| t.trim().parse().ok()).unwrap_or(1.0);
+    m
+}
+
+/// `Path.GetFileNameWithoutExtension` for Windows or POSIX paths.
+pub fn file_stem(path: &str) -> String {
+    let name = path.rsplit(['\\', '/']).next().unwrap_or("");
+    name.rfind('.').filter(|i| *i > 0).map_or(name, |i| &name[..i]).to_owned()
+}
+
 /// Header values of the file being imported.
 #[derive(Debug, Clone, PartialEq, Default)]
 pub struct ImportContext {
@@ -39,11 +55,10 @@ impl ImportContext {
         if self.byte_length > 0 && current.video_byte_length > 0 {
             return self.byte_length == current.video_byte_length;
         }
-        let stem = |p: &str| std::path::Path::new(p).file_stem().map(|s| s.to_string_lossy().into_owned()).unwrap_or_default();
         if !self.path.is_empty() {
-            return stem(&self.path) == stem(&current.video_path);
+            return file_stem(&self.path) == file_stem(&current.video_path);
         }
-        !self.file_name.is_empty() && self.file_name == stem(&current.video_path)
+        !self.file_name.is_empty() && self.file_name == file_stem(&current.video_path)
     }
 
     /// Maps a file timestamp onto the current video's time base.

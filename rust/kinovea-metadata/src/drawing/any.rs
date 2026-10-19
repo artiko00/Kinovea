@@ -8,6 +8,7 @@ macro_rules! kinds {
     ($($v:ident => $display:literal),+ $(,)?) => {
         /// Every attached drawing kind.
         #[derive(Debug, Clone, PartialEq)]
+        #[allow(clippy::large_enum_variant)]
         pub enum Drawing {
             $($v($v),)+
         }
@@ -29,8 +30,7 @@ macro_rules! kinds {
                 })
             }
 
-            /// English tool name used for automatic drawing names (`ToolDisplayName`).
-            pub fn tool_display_name(&self) -> &'static str {
+            fn fixed_display_name(&self) -> &'static str {
                 match self {
                     $(Drawing::$v(_) => $display,)+
                 }
@@ -58,6 +58,7 @@ kinds!(
     Track => "Trajectory",
     Bitmap => "Bitmap Image",
     Svg => "SVG Image",
+    GenericPostureDrawing => "",
 );
 
 impl Drawing {
@@ -91,6 +92,19 @@ impl Drawing {
 
     pub fn content_hash(&self) -> i32 {
         dispatch!(self, |d| d.content_hash())
+    }
+
+    pub fn is_valid(&self) -> bool {
+        dispatch!(self, |d| d.is_valid())
+    }
+
+    /// English tool name used for automatic drawing names (`ToolDisplayName`); postures use
+    /// the tool's own name.
+    pub fn tool_display_name(&self) -> String {
+        match self {
+            Drawing::GenericPostureDrawing(p) => p.tool_name(),
+            other => other.fixed_display_name().to_owned(),
+        }
     }
 
     /// Planes are appended to a keyframe while every other kind is inserted first.

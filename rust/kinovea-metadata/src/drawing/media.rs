@@ -95,6 +95,13 @@ impl KvaDrawing for Bitmap {
         out
     }
 
+    /// A sticker reference or an embedded payload; a file only if it exists.
+    fn is_valid(&self) -> bool {
+        (self.is_sticker && !self.sticker_reference.is_empty())
+            || !self.bitmap_base64.is_empty()
+            || (!self.file.is_empty() && std::path::Path::new(&self.file).exists())
+    }
+
     fn content_hash(&self) -> i32 {
         let b = self.bounding_box;
         (b.x.to_bits() ^ b.y.to_bits() ^ b.width.to_bits() ^ b.height.to_bits()) as i32
@@ -155,5 +162,10 @@ impl KvaDrawing for Svg {
     /// The original returns 0 for SVG drawings.
     fn content_hash(&self) -> i32 {
         0
+    }
+
+    /// The original only keeps SVG drawings whose file could be loaded.
+    fn is_valid(&self) -> bool {
+        !self.file.is_empty() && std::path::Path::new(&self.file).exists()
     }
 }

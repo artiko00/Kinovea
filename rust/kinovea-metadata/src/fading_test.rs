@@ -72,3 +72,27 @@ fn kva_round_trip_and_minimum_frames() {
     assert_eq!(f.content_hash(), f.clone().content_hash());
     assert_ne!(f.content_hash(), Fading::default().content_hash());
 }
+
+/// Oracle parity of `GetOpacityFactor` over the fixture grid.
+#[test]
+fn opacity_matches_the_oracle_table() {
+    let csv = std::fs::read_to_string(kinovea_fixtures::fixtures_root().join("kva/fading/opacity.csv")).unwrap();
+    let mut rows = 0;
+    for line in csv.lines().skip(1) {
+        let f: Vec<&str> = line.split(',').collect();
+        let fading = Fading {
+            enabled: true,
+            use_default: false,
+            always_visible: f[0] == "1",
+            opaque_frames: f[1].parse().unwrap(),
+            fading_frames: f[2].parse().unwrap(),
+            master_factor: f[3].parse().unwrap(),
+            average_timestamps_per_frame: f[4].parse().unwrap(),
+            reference_timestamp: f[5].parse().unwrap(),
+        };
+        let got = fading.opacity_factor(f[6].parse().unwrap(), &Fading::default());
+        kinovea_fixtures::assert_close(got, f[7].parse().unwrap(), 1e-9, line);
+        rows += 1;
+    }
+    assert!(rows > 600, "{rows}");
+}

@@ -29,6 +29,7 @@
   <Tracks>
     <Track><TimePosition>21000</TimePosition><Visible>21000</Visible><Invisible>-1</Invisible>
       <TrackPointList Count="3"><TrackPoint>100;100;21000</TrackPoint><TrackPoint>120;110;22000</TrackPoint><TrackPoint>140;125;23000</TrackPoint></TrackPointList>
+      <DrawingStyle><Color Key="color"><Value>255;255;128;0</Value></Color></DrawingStyle>
       <MainLabel Text="t"><SpacePosition>100;50</SpacePosition><TimePosition>0</TimePosition></MainLabel></Track>
   </Tracks>
   <Spotlights><Spotlight><Time>23000</Time><Center>640;360</Center><Radius>80</Radius></Spotlight></Spotlights>

@@ -78,11 +78,18 @@ pub struct Metadata {
     pub video_filters: Element,
     /// `CameraMotion` element kept verbatim when present.
     pub camera_motion: Option<Element>,
+    /// Formats a timestamp for display (`TimeCodeBuilder`); unnamed keyframes use it.
+    pub timecode: fn(i64) -> String,
+}
+
+/// Default timecode: the raw timestamp, as the oracle's builder.
+pub fn timestamp_text(timestamp: i64) -> String {
+    timestamp.to_string()
 }
 
 impl Default for Metadata {
     fn default() -> Self {
-        Metadata { video: VideoContext::default(), global_title: String::new(), image_aspect: ImageAspectRatio::Auto, image_rotation: ImageRotation::Rotate0, mirrored: false, demosaicing: Demosaicing::None, deinterlacing: false, stabilization_track: Uuid::nil(), background_color: Color::argb(0, 255, 255, 255), context_string: String::new(), calibration: CalibrationHelper::without_tracking(Size::default(), Units::default(), 25.0), keyframes: Vec::new(), chronos: Vec::new(), tracks: Vec::new(), spotlights: Spotlights::default(), number_sequence: NumberSequence::default(), coordinate_system: CoordinateSystem::default(), test_grid: TestGrid::default(), trackability: TrackabilityManager::default(), video_filters: Element::new("VideoFilters"), camera_motion: None }
+        Metadata { video: VideoContext::default(), global_title: String::new(), image_aspect: ImageAspectRatio::Auto, image_rotation: ImageRotation::Rotate0, mirrored: false, demosaicing: Demosaicing::None, deinterlacing: false, stabilization_track: Uuid::nil(), background_color: Color::argb(0, 255, 255, 255), context_string: String::new(), calibration: CalibrationHelper::without_tracking(Size::default(), Units::default(), 25.0), keyframes: Vec::new(), chronos: Vec::new(), tracks: Vec::new(), spotlights: Spotlights::default(), number_sequence: NumberSequence::default(), coordinate_system: CoordinateSystem::default(), test_grid: TestGrid::default(), trackability: TrackabilityManager::default(), video_filters: Element::new("VideoFilters"), camera_motion: None, timecode: timestamp_text }
     }
 }
 

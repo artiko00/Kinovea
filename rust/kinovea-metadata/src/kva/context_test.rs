@@ -39,3 +39,20 @@ fn remapping_uses_frames_and_the_output_time_base() {
     assert_eq!(capture.remap(1020, &current(), false), 102);
     assert_eq!(ImportContext::default().remap(7, &current(), false), 7);
 }
+
+#[test]
+fn header_metadata_mirrors_image_size_and_timing() {
+    let m = crate::kva::header_metadata("<KinoveaVideoAnalysis><ImageSize>320;200</ImageSize><AverageTimeStampsPerFrame>40</AverageTimeStampsPerFrame></KinoveaVideoAnalysis>");
+    assert_eq!(m.video.image_size, kinovea_geometry::Size::new(320, 200));
+    assert_eq!(m.video.average_timestamps_per_frame, 40.0);
+    assert_eq!(crate::kva::header_metadata("<x/>").video.average_timestamps_per_frame, 1.0);
+}
+
+#[test]
+fn file_stem_accepts_both_separators() {
+    use crate::kva::context::file_stem;
+    assert_eq!(file_stem("C:\\videos\\run.mp4"), "run");
+    assert_eq!(file_stem("/clips/jump.tar.gz"), "jump.tar");
+    assert_eq!(file_stem(".hidden"), ".hidden");
+    assert_eq!(file_stem(""), "");
+}

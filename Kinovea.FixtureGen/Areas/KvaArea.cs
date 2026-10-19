@@ -67,6 +67,10 @@ namespace Kinovea.FixtureGen.Areas
         {
             Metadata metadata = new Metadata(new HistoryStack(), TimecodeBuilder);
             metadata.TrackableDrawingAdded += (s, e) => metadata.TrackabilityManager.Add(e.Value, e.Value.ReferenceTimestamp);
+            // The original never assigns these two; importing a KVA with Spotlights or a
+            // NumberSequence then throws and aborts the import at that element.
+            metadata.DrawingSpotlight.ParentMetadata = metadata;
+            metadata.DrawingNumberSequence.ParentMetadata = metadata;
             return metadata;
         }
 

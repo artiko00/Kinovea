@@ -40,6 +40,11 @@ impl Keyframe {
         Some(self.drawings.remove(i))
     }
 
+    /// `Keyframe.Name`: the timecode of the position when no name was given.
+    pub fn display_name(&self, timecode: fn(i64) -> String) -> String {
+        if self.name.is_empty() { timecode(self.timestamp) } else { self.name.clone() }
+    }
+
     pub fn drawing(&self, id: Uuid) -> Option<&Drawing> {
         self.drawings.iter().find(|d| d.id() == id)
     }
@@ -59,7 +64,7 @@ impl Keyframe {
                 "Drawings" => {
                     for d in &c.children {
                         if let Some(mut drawing) = Drawing::read_kva(d, scale, &identity) {
-                            if kf.drawings.iter().any(|x| x.id() == drawing.id()) {
+                            if !drawing.is_valid() || kf.drawings.iter().any(|x| x.id() == drawing.id()) {
                                 continue;
                             }
                             drawing.header_mut().reference_timestamp = kf.timestamp;
@@ -74,16 +79,14 @@ impl Keyframe {
         kf
     }
 
-    /// `<Keyframe id>` with `Timestamp`, optional `Name`, `Color`, optional `Comment` and the
-    /// drawings in file order.
-    pub fn to_element(&self, filter: Filter, refs: RefValue) -> Element {
+    /// `<Keyframe id>` with `Timestamp`, `Name` (the timecode when unnamed), `Color`, optional
+    /// `Comment` and the drawings in file order.
+    pub fn to_element(&self, filter: Filter, refs: RefValue, timecode: fn(i64) -> String) -> Element {
         let mut e = Element::new("Keyframe");
         e.attributes.push(("id".into(), id_text(self.id)));
         if filter.core {
             e.push_leaf("Timestamp", &self.timestamp.to_string());
-            if !self.name.is_empty() {
-                e.push_leaf("Name", &self.name);
-            }
+            e.push_leaf("Name", &self.display_name(timecode));
             e.push_leaf("Color", &self.color.write(false));
             if !self.comments.is_empty() {
                 e.push_leaf("Comment", &self.comments);

@@ -17,3 +17,10 @@ fn writes_with_or_without_alpha_and_hashes_argb() {
     assert_eq!(Color::argb(0, 255, 255, 255).hash_code(), 0x00FF_FFFF);
     assert_eq!(Color::rgb(0, 0, 0).hash_code(), 0xFF00_0000u32 as i32);
 }
+
+#[test]
+fn hex_colours_parse_like_color_converter() {
+    assert_eq!(Color::parse("#dc322f", Color::BLACK), Color::rgb(0xdc, 0x32, 0x2f));
+    assert_eq!(Color::parse("#80dc322f", Color::BLACK), Color::argb(0x80, 0xdc, 0x32, 0x2f));
+    assert_eq!(Color::parse("#zz", Color::BLACK), Color::BLACK);
+}

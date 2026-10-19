@@ -18,6 +18,9 @@ mod counter_test;
 mod crossmark;
 #[cfg(test)]
 mod crossmark_test;
+mod generic_posture;
+#[cfg(test)]
+mod generic_posture_test;
 mod label;
 #[cfg(test)]
 mod label_test;
@@ -127,6 +130,10 @@ pub trait KvaDrawing: Sized {
     fn set_trackable_point(&mut self, _key: &str, _value: PointF) {}
     /// Hash of the persisted content, stable within Rust.
     fn content_hash(&self) -> i32;
+    /// `IsValid`: invalid drawings are dropped when a keyframe is read.
+    fn is_valid(&self) -> bool {
+        true
+    }
 }
 
 /// Full drawing element: `<Name id="…" name="…">children</Name>`.
@@ -138,3 +145,4 @@ pub fn element<D: KvaDrawing>(d: &D, filter: Filter, refs: RefValue) -> Element 
     e.children = d.write_kva(filter, refs);
     e
 }
+pub use generic_posture::GenericPostureDrawing;

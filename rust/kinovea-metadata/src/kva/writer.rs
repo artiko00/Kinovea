@@ -21,6 +21,9 @@ pub struct ExportFlags {
 impl ExportFlags {
     pub const FULL: ExportFlags = ExportFlags { drawings: true, calibration: true, video_specific: true };
     pub const CAPTURE_RECORDING: ExportFlags = ExportFlags { drawings: true, calibration: true, video_specific: false };
+    pub const DRAWINGS: ExportFlags = ExportFlags { drawings: true, calibration: false, video_specific: false };
+    pub const CALIBRATION: ExportFlags = ExportFlags { drawings: false, calibration: true, video_specific: false };
+    pub const VIDEO_SPECIFIC: ExportFlags = ExportFlags { drawings: false, calibration: false, video_specific: true };
 }
 
 /// Builds the document; `version` is the software version written in `Producer`.
@@ -35,7 +38,7 @@ pub fn write_kva(m: &Metadata, version: &str, is_capture_recording: bool, flags:
     }
     if flags.drawings && !m.keyframes.is_empty() {
         let mut kfs = Element::new("Keyframes");
-        kfs.children = m.keyframes.iter().map(|k| k.to_element(Filter::KVA, &refs)).collect();
+        kfs.children = m.keyframes.iter().map(|k| k.to_element(Filter::KVA, &refs, m.timecode)).collect();
         root.push(kfs);
     }
     if flags.video_specific {
@@ -84,8 +87,7 @@ fn general_information(root: &mut Element, m: &Metadata, version: &str, is_captu
     root.push_leaf("FormatVersion", "2.1");
     root.push_leaf("Producer", &format!("{PRODUCER}.{version}"));
     if !is_capture_recording {
-        let stem = std::path::Path::new(&v.video_path).file_stem().map(|s| s.to_string_lossy().into_owned()).unwrap_or_default();
-        root.push_leaf("OriginalFilename", &stem);
+        root.push_leaf("OriginalFilename", &crate::kva::context::file_stem(&v.video_path));
         root.push_leaf("FullPath", &v.video_path);
         root.push_leaf("ByteLength", &v.video_byte_length.to_string());
     } else {

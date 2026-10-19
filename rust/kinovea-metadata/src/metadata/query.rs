@@ -17,7 +17,7 @@ impl Metadata {
         let mut given: Vec<String> = Vec::new();
         for d in drawings.iter_mut() {
             if d.header().name.is_empty() {
-                let name = self.next_name(d.tool_display_name(), &given);
+                let name = self.next_name(&d.tool_display_name(), &given);
                 d.header_mut().name = name.clone();
                 given.push(name);
             }

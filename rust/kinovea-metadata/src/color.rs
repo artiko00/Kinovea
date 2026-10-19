@@ -21,11 +21,24 @@ impl Color {
 
     /// `R;G;B` or `A;R;G;B`; `fallback` when unreadable (named colours are not supported).
     pub fn parse(text: &str, fallback: Color) -> Color {
+        if let Some(hex) = text.trim().strip_prefix('#') {
+            return Color::parse_hex(hex).unwrap_or(fallback);
+        }
         let parts: Vec<Option<u8>> = text.split(';').map(|p| p.trim().parse().ok()).collect();
         match parts.as_slice() {
             [Some(r), Some(g), Some(b)] => Color::rgb(*r, *g, *b),
             [Some(a), Some(r), Some(g), Some(b)] => Color::argb(*a, *r, *g, *b),
             _ => fallback,
+        }
+    }
+
+    /// `#RRGGBB` or `#AARRGGBB`, as `ColorConverter` accepts.
+    fn parse_hex(hex: &str) -> Option<Color> {
+        let v = u32::from_str_radix(hex, 16).ok()?;
+        match hex.len() {
+            6 => Some(Color::rgb((v >> 16) as u8, (v >> 8) as u8, v as u8)),
+            8 => Some(Color::argb((v >> 24) as u8, (v >> 16) as u8, (v >> 8) as u8, v as u8)),
+            _ => None,
         }
     }
 

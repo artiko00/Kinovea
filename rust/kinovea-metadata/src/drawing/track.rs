@@ -58,7 +58,7 @@ impl Track {
             is_visible: true,
             visible: begin,
             invisible: i64::MAX,
-            measure_label_type: MeasureLabelType::None,
+            measure_label_type: MeasureLabelType::Name,
             parameters: TrackingParameters::default(),
             positions,
             main_label: MeasureLabel::new(PointF::EMPTY),

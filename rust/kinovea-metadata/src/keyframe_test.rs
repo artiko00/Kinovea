@@ -13,7 +13,7 @@ fn empty_keyframe_round_trips_without_drawings_element() {
     assert_eq!(kf.timestamp, 480480);
     assert_eq!(kf.name, "0:00:05:34");
     let refs = |_: Uuid, _: &str| PointF::EMPTY;
-    let doc = kf.to_element(Filter::KVA, &refs).to_document();
+    let doc = kf.to_element(Filter::KVA, &refs, crate::metadata::timestamp_text).to_document();
     assert_eq!(&doc[doc.find('\n').unwrap() + 1..], KF);
     let mapped = Keyframe::read_kva(&Element::parse(KF).unwrap(), Scale::IDENTITY, &|t| t + 1);
     assert_eq!(mapped.timestamp, 480481);
@@ -28,12 +28,12 @@ fn drawings_are_inserted_first_planes_last_and_written_in_file_order() {
     assert_eq!(kf.drawings[0].header().reference_timestamp, 5);
     assert_eq!(kf.comments, "hi");
     let refs = |_: Uuid, _: &str| PointF::EMPTY;
-    let out = kf.to_element(Filter::KVA, &refs);
+    let out = kf.to_element(Filter::KVA, &refs, crate::metadata::timestamp_text);
     let written: Vec<&str> = out.child("Drawings").unwrap().children.iter().map(|d| d.attribute("name").unwrap()).collect();
     assert_eq!(written, ["P", "A", "B"]);
     assert_eq!(out.child_text("Comment"), Some("hi"));
-    assert!(out.child("Name").is_none());
-    assert!(kf.to_element(Filter::CORE, &refs).child("Drawings").is_none());
+    assert_eq!(out.child_text("Name"), Some(kf.timestamp.to_string().as_str()), "unnamed keyframes show their timecode");
+    assert!(kf.to_element(Filter::CORE, &refs, crate::metadata::timestamp_text).child("Drawings").is_none());
 }
 
 #[test]

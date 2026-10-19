@@ -11,7 +11,7 @@ mod writer;
 #[cfg(test)]
 mod writer_test;
 
-pub use context::ImportContext;
+pub use context::{header_metadata, ImportContext};
 pub use reader::{read_kva, KvaError};
 pub use writer::{write_kva, ExportFlags};
 
