@@ -34,7 +34,6 @@ pub struct Scope<'a> {
 
 impl Scope<'_> {
     /// `GetNumericalTime`: a timestamp as a number in the preferred timecode format.
-    /// The high speed factor is not ported (the document does not carry one), so it is 1.
     pub fn time(&self, timestamps: i64, base: TimeBase) -> f32 {
         let video = &self.metadata.video;
         let format = match self.prefs.timecode_format {
@@ -50,7 +49,7 @@ impl Scope<'_> {
         } else {
             0.0
         };
-        let milliseconds = frames * video.baseline_frame_interval_ms;
+        let milliseconds = frames * video.baseline_frame_interval_ms / video.high_speed_factor;
         let time = match format {
             TimecodeFormat::Frames => frames,
             TimecodeFormat::Milliseconds => milliseconds,
@@ -63,18 +62,26 @@ impl Scope<'_> {
         time as f32
     }
 
-    /// `GetPoint` in world space, the point itself in image space. The distortion stage is
-    /// the identity: no lens model is ported yet.
+    /// `GetPoint` in world space (lens distortion first), the point itself in image space.
     pub fn point(&self, p: PointF) -> PointF {
         match self.prefs.export_space {
-            ExportSpace::WorldSpace => self.metadata.calibration.calibrator().transform(p),
+            ExportSpace::WorldSpace => self.metadata.calibration.point(p),
+            ExportSpace::ImageSpace => p,
+        }
+    }
+
+    /// `GetPointAtTime` in world space: a tracked calibration object is read at `timestamp`.
+    pub fn point_at(&self, p: PointF, timestamp: i64) -> PointF {
+        match self.prefs.export_space {
+            ExportSpace::WorldSpace => self.metadata.calibration.point_at_time(p, timestamp),
             ExportSpace::ImageSpace => p,
         }
     }
 
     /// `AngleHelper.Update` followed by `ComputeCalibratedAngle`, in the calibration's angle
-    /// unit. A degenerate angle (a leg of length 0) has no value and reads 0, which is what a
-    /// fresh helper of the original holds.
+    /// unit. The legs are read in world space whatever the export space, as the original does.
+    /// A degenerate angle (a leg of length 0) has no value and reads 0, which is what a fresh
+    /// helper of the original holds.
     pub fn angle(&self, o: PointF, a: PointF, b: PointF, flags: AngleFlags) -> f32 {
         if o == a || o == b {
             return 0.0;
@@ -84,7 +91,12 @@ impl Scope<'_> {
         } else {
             (a, b)
         };
-        let (o, a, b) = (self.point(o), self.point(a), self.point(b));
+        let calibration = &self.metadata.calibration;
+        let (o, a, b) = (
+            calibration.point(o),
+            calibration.point(a),
+            calibration.point(b),
+        );
         let radians = if flags.counter_clockwise {
             angle_at(o, a, b)
         } else {

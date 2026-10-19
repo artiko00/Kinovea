@@ -5,6 +5,7 @@ pub mod rtf;
 
 pub mod collect;
 mod collect_drawings;
+mod collect_posture;
 mod collect_series;
 pub mod csv;
 mod csv_chrono;
@@ -24,6 +25,8 @@ mod case_test;
 #[cfg(test)]
 mod collect_drawings_test;
 #[cfg(test)]
+mod collect_posture_test;
+#[cfg(test)]
 mod collect_series_test;
 #[cfg(test)]
 mod collect_test;
@@ -37,6 +40,8 @@ mod json_test;
 mod lib_test;
 #[cfg(test)]
 mod measure_angle_test;
+#[cfg(test)]
+mod measure_distortion_test;
 #[cfg(test)]
 mod measure_test;
 #[cfg(test)]

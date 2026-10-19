@@ -119,7 +119,7 @@ fn track_series(scope: &Scope, t: &Track) -> (i64, Timeseries) {
     let points: Vec<PointF> = t
         .positions
         .iter()
-        .map(|p| scope.point(PointF::new(p.x, p.y)))
+        .map(|p| scope.point_at(PointF::new(p.x, p.y), p.t))
         .collect();
     let first = t.positions.first().map_or(0, |p| p.t);
     (

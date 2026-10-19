@@ -1,6 +1,7 @@
 //! Positions, distances and angles of the drawings of one keyframe, each list sorted by name
-//! (the keyframe loop of `Metadata.CollectMeasuredData`). Postures are not collected yet.
+//! (the keyframe loop of `Metadata.CollectMeasuredData`).
 
+use crate::collect_posture::collect_posture;
 use crate::measure::{AngleFlags, Scope};
 use crate::measured_data::{Position, Scalar};
 use kinovea_geometry::helpers::distance;
@@ -28,6 +29,7 @@ pub fn collect_keyframe(scope: &Scope, drawings: &[Drawing], time: f32) -> Keyfr
                 time,
                 value: distance(scope.point(l.a), scope.point(l.b)),
             }),
+            Drawing::GenericPostureDrawing(g) => collect_posture(scope, g, time, &mut out),
             Drawing::Angle(a) => {
                 let flags = AngleFlags {
                     signed: a.signed,

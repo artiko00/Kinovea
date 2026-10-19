@@ -120,3 +120,28 @@ fn world_space_maps_the_image_centre_to_the_origin() {
         centre
     );
 }
+
+#[test]
+fn high_speed_factor_divides_the_milliseconds() {
+    let mut m = metadata(1000.0, 0);
+    m.set_high_speed_factor(2.0);
+    let p = prefs(TimecodeFormat::ClassicTime, ExportSpace::WorldSpace);
+    let s = Scope {
+        metadata: &m,
+        prefs: &p,
+    };
+    assert!(close(s.time(1000, TimeBase::Absolute), 0.02));
+}
+
+#[test]
+fn zero_high_speed_factor_reads_as_one() {
+    let mut m = metadata(1000.0, 0);
+    m.set_high_speed_factor(0.0);
+    assert_eq!(m.video.high_speed_factor, 1.0);
+    let p = prefs(TimecodeFormat::ClassicTime, ExportSpace::WorldSpace);
+    let s = Scope {
+        metadata: &m,
+        prefs: &p,
+    };
+    assert!(close(s.time(1000, TimeBase::Absolute), 0.04));
+}

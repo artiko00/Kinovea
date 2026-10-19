@@ -91,6 +91,23 @@ fn complete_sample_matches_the_oracle() {
     check("complete");
 }
 
+/// Every export case has an oracle sample: new cases are checked without a new test.
+#[test]
+fn every_export_case_matches_the_oracle() {
+    let cases = fixtures_root().join("../../tests/cases/export");
+    let mut names: Vec<String> = std::fs::read_dir(cases)
+        .unwrap()
+        .map(|e| e.unwrap().path())
+        .filter(|p| p.extension().is_some_and(|x| x == "json"))
+        .map(|p| p.file_stem().unwrap().to_string_lossy().into_owned())
+        .collect();
+    names.sort();
+    assert!(!names.is_empty(), "no export cases found");
+    for name in &names {
+        check(name);
+    }
+}
+
 #[test]
 fn keys_keep_document_order_and_duplicates() {
     assert_eq!(
