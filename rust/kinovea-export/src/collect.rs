@@ -3,7 +3,7 @@
 use crate::collect_drawings::collect_keyframe;
 use crate::collect_series::{times, timeseries};
 use crate::measure::{Scope, TimeBase};
-use crate::measured_data::{unit_symbols, ExportPrefs, KeyframeData, MeasuredData};
+use crate::measured_data::{keyframe_name, unit_symbols, ExportPrefs, KeyframeData, MeasuredData};
 use kinovea_metadata::Metadata;
 use std::path::Path;
 
@@ -37,11 +37,7 @@ pub fn collect_measured_data(metadata: &Metadata, prefs: &ExportPrefs) -> Measur
     {
         let time = scope.time(kf.timestamp, TimeBase::UserOrigin);
         md.keyframes.push(KeyframeData {
-            name: if kf.name.is_empty() {
-                (metadata.timecode)(kf.timestamp)
-            } else {
-                kf.name.clone()
-            },
+            name: keyframe_name(kf, metadata.timecode),
             time,
             comment: kf.comments.clone(),
         });

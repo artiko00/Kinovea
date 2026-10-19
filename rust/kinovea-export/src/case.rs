@@ -1,7 +1,8 @@
 //! Loads an export case the way the oracle's `ExportArea` does: the KVA read with the case
 //! context, the whole selection, and the case's export preferences. Test support only.
 
-use crate::measured_data::ExportPrefs;
+use crate::collect::collect_measured_data;
+use crate::measured_data::{ExportPrefs, MeasuredData};
 use kinovea_fixtures::fixtures_root;
 use kinovea_geometry::Size;
 use kinovea_metadata::{read_kva, Metadata};
@@ -43,6 +44,51 @@ pub fn load_case(name: &str) -> Loaded {
         producer: "Kinovea.0.0".to_owned(),
     };
     Loaded { metadata, prefs }
+}
+
+/// The measured data of an export case, collected as the oracle does.
+pub fn measured(name: &str) -> MeasuredData {
+    let loaded = load_case(name);
+    collect_measured_data(&loaded.metadata, &loaded.prefs)
+}
+
+/// Text of a file of an export case's fixture folder.
+pub fn fixture_text(name: &str, file: &str) -> String {
+    read(&fixtures_root().join("export").join(name).join(file))
+}
+
+/// Checks `write` against the fixture `file` of every case that has it, and against `None` for
+/// the cases with measured data but no `file` (the original writes no file then).
+pub fn check_optional_file(file: &str, write: impl Fn(&MeasuredData) -> Option<String>) {
+    let written = cases_with_fixture(file);
+    assert!(!written.is_empty());
+    for name in &written {
+        assert_eq!(
+            write(&measured(name)),
+            Some(fixture_text(name, file)),
+            "{name}"
+        );
+    }
+    let without: Vec<String> = cases_with_fixture("measured.json")
+        .into_iter()
+        .filter(|name| !written.contains(name))
+        .collect();
+    assert!(!without.is_empty());
+    for name in &without {
+        assert_eq!(write(&measured(name)), None, "{name}");
+    }
+}
+
+/// Names of the export cases whose fixture folder holds `file`, in name order.
+pub fn cases_with_fixture(file: &str) -> Vec<String> {
+    let mut names: Vec<String> = std::fs::read_dir(fixtures_root().join("export"))
+        .unwrap()
+        .map(|entry| entry.unwrap().path())
+        .filter(|path| path.join(file).is_file())
+        .map(|path| path.file_name().unwrap().to_string_lossy().into_owned())
+        .collect();
+    names.sort();
+    names
 }
 
 fn read(path: &std::path::Path) -> String {

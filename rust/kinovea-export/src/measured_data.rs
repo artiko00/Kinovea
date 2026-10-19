@@ -5,7 +5,7 @@ use kinovea_core::timecode::TimecodeFormat;
 use kinovea_core::units::{time_abbreviation, LengthUnit};
 use kinovea_geometry::{PointF, Size};
 use kinovea_metadata::drawing::ChronoColumn;
-use kinovea_metadata::Metadata;
+use kinovea_metadata::{Keyframe, Metadata};
 
 /// Export options: the preferences the original reads, plus the producer written in the header.
 #[derive(Debug, Clone, PartialEq)]
@@ -61,6 +61,15 @@ pub struct KeyframeData {
     pub name: String,
     pub time: f32,
     pub comment: String,
+}
+
+/// The keyframe title, or its time code when the title is empty (`Keyframe.Name`).
+pub fn keyframe_name(keyframe: &Keyframe, timecode: impl Fn(i64) -> String) -> String {
+    if keyframe.name.is_empty() {
+        timecode(keyframe.timestamp)
+    } else {
+        keyframe.name.clone()
+    }
 }
 
 #[derive(Debug, Clone, PartialEq)]

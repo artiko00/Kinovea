@@ -6,11 +6,16 @@ pub mod rtf;
 pub mod collect;
 mod collect_drawings;
 mod collect_series;
+pub mod csv;
+mod csv_chrono;
+mod csv_trajectory;
 pub mod json;
 mod json_render;
 mod json_series;
+pub mod markdown;
 pub mod measure;
 pub mod measured_data;
+mod number_text;
 
 #[cfg(test)]
 mod case;
@@ -58,6 +63,8 @@ mod srt_timecode_test;
 pub mod trc;
 #[cfg(test)]
 mod trc_test;
+
+pub mod txt;
 
 /// Returns the crate name as declared in `Cargo.toml`.
 pub fn crate_name() -> &'static str {
