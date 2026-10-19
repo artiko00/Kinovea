@@ -1,0 +1,42 @@
+op,result,current,snapshot,frames
+relate 0,Empty,-1,-1|,
+acquireNext,False,-1,-1|,
+add 0,Added,-1,1|[0;0],0
+add 1,Added,-1,2|[0;1],0 1
+add 2,Added,-1,3|[0;2],0 1 2
+add 3,Added,-1,4|[0;3],0 1 2 3
+add 4,Added,-1,5|[0;4],0 1 2 3 4
+add 5,Added,-1,6|[0;5],0 1 2 3 4 5
+add 6,Added,-1,7|[0;6],0 1 2 3 4 5 6
+add 7,Added,-1,8|[0;7],0 1 2 3 4 5 6 7
+add 8,Blocked,-1,8|[0;7],0 1 2 3 4 5 6 7
+contiguous,True,-1,8|[0;7],0 1 2 3 4 5 6 7
+acquireClosest 5,,5,9|[2;7],2 3 4 5 6 7
+add 8,Added,5,10|[2;8],2 3 4 5 6 7 8
+add 9,Added,5,11|[2;9],2 3 4 5 6 7 8 9
+add 10,Blocked,5,11|[2;9],2 3 4 5 6 7 8 9
+acquireNext,True,6,12|[3;9],3 4 5 6 7 8 9
+acquireNext,True,7,13|[4;9],4 5 6 7 8 9
+add 10,Added,7,14|[4;10],4 5 6 7 8 9 10
+add 10,Duplicate,7,14|[4;10],4 5 6 7 8 9 10
+acquireNext,True,8,15|[5;10],5 6 7 8 9 10
+acquireNext,True,9,16|[6;10],6 7 8 9 10
+acquireNext,True,10,17|[7;10],7 8 9 10
+acquireNext,False,10,17|[7;10],7 8 9 10
+acquireClosest 2,,7,18|[7;10],7 8 9 10
+acquireClosest 100,,10,19|[7;10],7 8 9 10
+add 20 11,Added,10,20|[7;10] [20;20],7 8 9 10 20
+contiguous,False,10,20|[7;10] [20;20],7 8 9 10 20
+purge,,10,21|[10;10],10
+add 12,Added,10,22|[10;10] [12;12],10 12
+add 13 12,Added,10,23|[10;10] [12;13],10 12 13
+contiguous,False,10,23|[10;10] [12;13],10 12 13
+interrupt,,10,23|[10;10] [12;13],10 12 13
+add 14,Interrupted,10,23|[10;10] [12;13],10 12 13
+resetInterrupt,,10,23|[10;10] [12;13],10 12 13
+add 14,Added,10,24|[10;10] [12;14],10 12 13 14
+shutdown,,-1,25|,
+add 15,Interrupted,-1,25|,
+resetInterrupt,,-1,25|,
+add 15,Added,-1,26|[15;15],15
+acquireClosest 15,,15,26|[15;15],15
