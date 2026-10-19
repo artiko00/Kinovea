@@ -5,10 +5,11 @@
 use super::{DrawingTracker, TrackabilityManager, TrackablePoint};
 use uuid::Uuid;
 
-/// Folds a 128-bit id into 32 bits, the way a `Guid` hash code does.
+/// `Guid.GetHashCode`: `_a ^ ((_b << 16) | _c) ^ ((_f << 24) | _k)` over the fields of the text form,
+/// with `_c` read as unsigned. `_f` is the 3rd byte of the last group, `_k` the last one.
 fn uuid_hash(id: Uuid) -> i32 {
-    let v = id.as_u128();
-    (v as u32 ^ (v >> 32) as u32 ^ (v >> 64) as u32 ^ (v >> 96) as u32) as i32
+    let (a, b, c, d) = id.as_fields();
+    (a as i32) ^ (((b as i32) << 16) | c as i32) ^ (((d[2] as i32) << 24) | d[7] as i32)
 }
 
 /// `Int64.GetHashCode`.
@@ -46,7 +47,8 @@ impl TrackabilityManager {
             .is_some_and(|t| t.object_tracking_initialized)
     }
 
-    /// `InitializeTracking` (`DrawingTracker.cs:300-305`): object tracking starts for the drawing.
+    /// The object tracking part of `InitializeTracking` (`DrawingTracker.cs:300-305`). The tracking flag
+    /// (`isCurrentlyTracking`) is runtime state: see `TrabilityRuntime::initialize_tracking`.
     pub fn start_object_tracking(&mut self, drawing_id: Uuid) {
         if let Some(t) = self
             .trackers

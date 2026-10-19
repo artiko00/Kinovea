@@ -121,3 +121,17 @@ fn unbinding_keeps_object_tracking_initialized() {
         .iter()
         .all(|(_, p)| p.track_id.is_none()));
 }
+
+#[test]
+fn a_drawing_id_hashes_like_the_dotnet_guid() {
+    // Guid.GetHashCode: _a ^ ((_b << 16) | _c) ^ ((_f << 24) | _k) over the fields of the text form.
+    // For 8000ffff-8001-8000-0102-030405060708: _a = 0x8000FFFF, _b = 0x8001, _c = 0x8000 (ushort),
+    // _f = 0x03 (the 3rd byte of the last group), _k = 0x08.
+    // 0x8000FFFF ^ 0x80018000 = 0x00017FFF (0x8000 ^ 0x8001 = 0x0001, 0xFFFF ^ 0x8000 = 0x7FFF);
+    // 0x00017FFF ^ 0x03000008 = 0x03017FF7.
+    let id = Uuid::parse_str("8000ffff-8001-8000-0102-030405060708").unwrap();
+    let mut m = TrackabilityManager::default();
+    m.add(id, "Line", 0, &[]);
+    let hash = m.tracker(id).unwrap().content_hash();
+    assert_eq!(hash, 0x0301_7FF7);
+}
