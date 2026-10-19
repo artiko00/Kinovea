@@ -19,3 +19,12 @@ fn legacy_tracks_become_track_point_lists_with_a_main_label() {
     let style = track.child("DrawingStyle").unwrap();
     assert_eq!(style.children[2].child_text("Value"), Some("Solid;false"));
 }
+
+#[test]
+fn empty_track_values_keep_an_end_tag() {
+    let xml = "<KinoveaVideoAnalysis><Tracks><Track><TrackPositionList><TrackPosition/></TrackPositionList><MainLabel><KeyframeLabel/></MainLabel></Track></Tracks></KinoveaVideoAnalysis>";
+    let doc = migrate_legacy(&Element::parse(xml).unwrap()).to_document();
+    for tag in ["></TrackPoint>", "<SpacePosition></SpacePosition>", "<TimePosition></TimePosition>"] {
+        assert!(doc.contains(tag), "{tag} missing in {doc}");
+    }
+}

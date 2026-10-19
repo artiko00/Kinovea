@@ -89,6 +89,15 @@ impl TrackabilityManager {
         self.trackers.retain(|t| t.drawing_id != drawing_id);
     }
 
+    /// `ForgetTrack`: the points driven by the deleted track `track_id` are no longer bound to it.
+    pub fn forget_track(&mut self, track_id: Uuid) {
+        for (_, p) in self.trackers.iter_mut().flat_map(|t| t.points.iter_mut()) {
+            if p.track_id == Some(track_id) {
+                p.track_id = None;
+            }
+        }
+    }
+
     pub fn tracker(&self, drawing_id: Uuid) -> Option<&DrawingTracker> {
         self.trackers.iter().find(|t| t.drawing_id == drawing_id)
     }

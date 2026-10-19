@@ -128,3 +128,9 @@ Chronological. Newest entry last. Never delete entries; correct a wrong decision
 - Adversarial review: Hermes (DeepSeek default, reasoning high, toolsets terminal+file, session `kinovea-change05-adversarial`) on a throwaway worktree; it changed no files. Confirmed and fixed: coordinate-system tracker dropped on import (the original keeps it and re-anchors the origin from the calibration), drawing trackers echoing stale file names/points, integer style values copied across the four integer classes, segment-handle impacts indexed by point reference in the original. A new oracle case `kva/trackers` covers the first three.
 - Gotchas: Claude Code worktree isolation branches from `origin/master`, so agents need worktrees created from the change tip; custom agent types load only after a restart; the original never sets `ParentMetadata` on the spotlight and number-sequence managers; `ContentHash` is not stable across processes.
 - Verified: `cd rust && make verify` (495 tests), `npm run lint`, `tools/oracle/fixtures.sh --verify`.
+
+## 2026-10-19 — fix-kva-review-findings (branch fix/kva-review-findings)
+
+- Agent: Claude Code (Opus 5.5) with a Haiku subagent. Hermes (DeepSeek, reasoning high, toolsets terminal+file, session `kinovea-change05-migration-history`) reviewed migration and undo history on a throwaway worktree (no files changed); it reported 4 medium and 10 low findings with reproductions.
+- Done: every finding verified against the cited C#/XSLT before fixing (M2 partly refuted: `MergeInsertKeyframe` does not refresh labels); fixes with tests, most verified by mutation. Format 1.2 and older are read as the original does (the earlier rejection was a misreading). All fixtures still match byte for byte; `make verify` and `npm run lint` green.
+- Open: `AddDrawing(managerId)` type filters for chronos/tracks and the keyframe-name setter label refresh are not ported (noted by the agent, out of scope).

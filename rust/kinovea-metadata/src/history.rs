@@ -31,8 +31,8 @@ impl HistoryStack {
     /// `PushNewCommand`: clears the redo stack. A modification identical to the top of the undo
     /// stack is dropped, since several UI parts may prepare the same change.
     pub fn push(&mut self, memento: Memento) {
-        if let Change::ModifyDrawing { data, .. } = &memento.change {
-            if self.undo.last().is_some_and(|top| matches!(&top.change, Change::ModifyDrawing { data: previous, .. } if previous == data)) {
+        if let Change::ModifyDrawing { filter, data, .. } = &memento.change {
+            if self.undo.last().is_some_and(|top| matches!(&top.change, Change::ModifyDrawing { filter: f, data: previous, .. } if f == filter && previous == data)) {
                 return;
             }
         }
