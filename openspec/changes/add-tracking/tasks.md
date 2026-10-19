@@ -2,8 +2,8 @@
 
 ## 1. Parameters, timeline and pixel helpers
 
-- [ ] 1.1 After the `imageproc` decision: add dependencies to `rust/kinovea-tracking/Cargo.toml` (`kinovea-core`, `kinovea-geometry`, `kinovea-video`, and `imageproc` + `image` if approved); write `src/pixels_test.rs` (BGRA `FrameBuffer` → gray/HSV, ROI crop clamped to the image) then implement `src/pixels.rs`; verify `cargo test -p kinovea-tracking` passes.
-- [ ] 1.2 Write `src/parameters_test.rs` (defaults, clamping to 400, content hash, XML round trip with the exact element names, unknown element skipped) then implement `src/parameters.rs` (`TrackingParameters`, `TrackingAlgorithm`, `HsvRange`); verify tests pass.
+- [ ] 1.1 Add path dependencies to `rust/kinovea-tracking/Cargo.toml` (`kinovea-core`, `kinovea-geometry`, `kinovea-video`, `kinovea-metadata`; filters in-crate, see "Decisions taken at apply time"); write `src/pixels_test.rs` (BGRA `FrameBuffer` → gray/HSV, ROI crop clamped to the image, median blur, Sobel, dilate/erode as OpenCV with default borders) then implement `src/pixels.rs`; verify `cargo test -p kinovea-tracking` passes.
+- [ ] 1.2 Check `kinovea_metadata::drawing::tracking_parameters` (`TrackingParameters`, `TrackingAlgorithm`, `HsvRange`) against the spec: defaults, clamping to 400, content hash, XML round trip with the exact element names, unknown element skipped; add the missing behavior there with tests; verify tests pass.
 - [ ] 1.3 Write `src/timeline_test.rs` (insert, closest from, last, trim, clear with disposer, enumerate order) then implement `src/timeline.rs`; verify tests pass.
 
 ## 2. Template matching
@@ -21,7 +21,7 @@
 
 - [ ] 4.1 Write `src/trackable_point_test.rs` (reference set clears cache, camera transform computed once) then implement `src/trackable_point.rs` and the `CameraTransform` trait in `src/camera.rs` with a fake in tests; verify tests pass.
 - [ ] 4.2 Write `src/drawing_tracker_test.rs` with a fake `Trackable`: object tracking precedence, fallback to camera, none, bind and unbind tracks, trim; implement `src/drawing_tracker.rs` and the `Trackable` trait; verify tests pass.
-- [ ] 4.3 Write `src/manager_test.rs` (add, assign after load, forget changes the hash, any-tracking flag, trim) and `src/manager_xml_test.rs` (round trip, `Trackers` sections of `Tools/XML/Schema/samples/*.kva` parsed and re-serialized identically); implement `src/manager.rs` and `src/xml.rs`; verify tests pass.
+- [ ] 4.3 Write `src/manager_test.rs` (add, assign after load, forget changes the hash, any-tracking flag, trim) for the runtime over `kinovea_metadata::TrackabilityManager`; serialization is already covered by the KVA fixture tests of `kinovea-metadata` (check that the `Trackers` and `TrackerParameters` sections of `Tools/XML/Schema/samples/*.kva` round trip there, add a test if missing); implement `src/manager.rs`; verify tests pass.
 
 ## 5. Oracle parity
 
