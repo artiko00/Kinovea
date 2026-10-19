@@ -35,13 +35,20 @@ pub(super) fn move_segment_handle(p: &mut GenericPosture, space: Space, handle: 
             continue;
         }
         let reference = p.handles[i].reference;
-        if reference == start {
-            prepare_impacts(p, i);
-            process_point_impacts(p, space, i, old_start);
+        let old = if reference == start {
+            old_start
         } else if reference == end {
-            prepare_impacts(p, i);
-            process_point_impacts(p, space, i, old_end);
-        }
+            old_end
+        } else {
+            continue;
+        };
+        // The original passes the point index where a handle index is expected. An index past
+        // the handles throws there, which aborts the move without undoing what was already done.
+        let Some(handle) = usize::try_from(reference).ok().filter(|&h| h < p.handles.len()) else {
+            return;
+        };
+        prepare_impacts(p, handle);
+        process_point_impacts(p, space, handle, old);
     }
 }
 

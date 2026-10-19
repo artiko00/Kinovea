@@ -64,6 +64,13 @@ fn complete_sample_round_trips() {
 }
 
 #[test]
+fn trackers_round_trip() {
+    let (m, _) = load("tests/cases/kva/inputs/trackers.kva");
+    let want = std::fs::read_to_string(fixtures_root().join("kva/trackers/roundtrip.kva")).unwrap();
+    assert_same_text("trackers", &written(&m, false, ExportFlags::FULL), &want);
+}
+
+#[test]
 fn every_drawing_kind_round_trips() {
     let (m, _) = load("tests/cases/kva/inputs/all-drawings.kva");
     let want =

@@ -69,7 +69,6 @@ fn move_point_handle(p: &mut GenericPosture, space: Space, handle: usize, point:
     prepare_impacts(p, handle);
     let constraint = p.handles[handle].constraint.clone();
     let target = match constraint.as_ref().filter(|_| is_active(constraint.as_ref(), p)).map(|c| &c.kind) {
-        None | Some(ConstraintKind::LineSlide { .. }) if constraint.is_none() => Some(point),
         None => Some(point),
         Some(ConstraintKind::LineSlide { start, end, allowed, margin }) => Some(closest_point(get(p, *start), get(p, *end), point, *allowed, *margin)),
         Some(ConstraintKind::VerticalSlide) => Some(PointF::new(old.x, point.y)),

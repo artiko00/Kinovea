@@ -37,3 +37,42 @@ fn circle_handle_sets_the_truncated_radius() {
     move_handle(&mut p, Space(None), 2, PointF::new(53.0, 54.9), false);
     assert_eq!(p.circles[0].radius, 5, "(int) truncation of 5.74");
 }
+
+/// Handle 2 is the point handle on the end of segment 0 (point 1). Its impacts are those of
+/// handle 1, the handle at index 1, because the original passes the point index as a handle index.
+#[test]
+fn segment_end_impacts_come_from_the_handle_at_the_point_index() {
+    let mut p = GenericPosture {
+        point_list: vec![PointF::new(0.0, 0.0), PointF::new(10.0, 0.0), PointF::new(30.0, 40.0), PointF::new(50.0, 50.0)],
+        segments: vec![Segment { name: String::new(), start: 0, end: 1, stroke: Stroke::default(), option_group: String::new() }],
+        handles: vec![
+            Handle { name: String::new(), kind: HandleType::Segment, color: TRANSPARENT, reference: 0, trackable: false, option_group: String::new(), grab_point: PointF::EMPTY, constraint: None, impacts: Vec::new() },
+            Handle { name: String::new(), kind: HandleType::Point, color: TRANSPARENT, reference: 3, trackable: false, option_group: String::new(), grab_point: PointF::EMPTY, constraint: None, impacts: vec![Impact::HorizontalAlign { point: 2 }] },
+            Handle { name: String::new(), kind: HandleType::Point, color: TRANSPARENT, reference: 1, trackable: false, option_group: String::new(), grab_point: PointF::EMPTY, constraint: None, impacts: Vec::new() },
+        ],
+        ..GenericPosture::default()
+    };
+    move_handle(&mut p, Space(None), 0, PointF::new(5.0, 0.0), false);
+    assert_eq!(p.point_list[1], PointF::new(15.0, 0.0));
+    assert_eq!(p.point_list[2], PointF::new(50.0, 40.0), "aligned on handle 1, the handle of point 3");
+}
+
+/// The point handle on point 5 is past the handles: the original throws, `MoveHandle` catches it and
+/// the rest of the move is abandoned, so the handle on point 1 is never processed.
+#[test]
+fn out_of_range_point_index_aborts_the_rest_of_the_segment_move() {
+    let handle = |kind, reference, impacts| Handle { name: String::new(), kind, color: TRANSPARENT, reference, trackable: false, option_group: String::new(), grab_point: PointF::EMPTY, constraint: None, impacts };
+    let mut p = GenericPosture {
+        point_list: vec![PointF::new(0.0, 0.0), PointF::new(10.0, 0.0), PointF::new(20.0, 20.0), PointF::new(30.0, 30.0), PointF::new(40.0, 40.0), PointF::new(50.0, 50.0)],
+        segments: vec![Segment { name: String::new(), start: 1, end: 5, stroke: Stroke::default(), option_group: String::new() }],
+        handles: vec![
+            handle(HandleType::Segment, 0, Vec::new()),
+            handle(HandleType::Point, 5, Vec::new()),
+            handle(HandleType::Point, 1, vec![Impact::HorizontalAlign { point: 2 }]),
+        ],
+        ..GenericPosture::default()
+    };
+    move_handle(&mut p, Space(None), 0, PointF::new(5.0, 0.0), false);
+    assert_eq!((p.point_list[1], p.point_list[5]), (PointF::new(15.0, 0.0), PointF::new(55.0, 50.0)), "the segment still moves");
+    assert_eq!(p.point_list[2], PointF::new(20.0, 20.0), "no impact after the abort");
+}

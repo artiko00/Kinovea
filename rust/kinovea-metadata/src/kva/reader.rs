@@ -159,7 +159,9 @@ fn register_keyframe(m: &mut Metadata, keyframe: &Keyframe) {
     }
 }
 
-/// `AfterKVAImport`: trackers of drawings that are no longer trackable are dropped.
+/// `AfterKVAImport`. `Assign`: every trackable drawing takes its current name and points as
+/// reference values. `UpdateOrigin`: the coordinate system origin comes from the calibration, and
+/// its tracker follows. `CleanUnassigned`: trackers without a trackable drawing are dropped.
 fn after_import(m: &mut Metadata) {
     let keyframes: Vec<i64> = m.keyframes.iter().map(|k| k.timestamp).collect();
     for track in m.tracks.iter_mut() {
@@ -167,11 +169,21 @@ fn after_import(m: &mut Metadata) {
             t.update_keyframe_labels(&keyframes);
         }
     }
-    let live: Vec<uuid::Uuid> = m
+    for d in m.keyframes.iter().flat_map(|k| k.drawings.iter()) {
+        register_drawing(&mut m.trackability, d);
+    }
+    m.register_spotlights();
+    m.coordinate_system.origin = m.calibration.origin();
+    let cs = &m.coordinate_system;
+    if m.trackability.tracker(cs.header.id).is_some() {
+        m.trackability.add(cs.header.id, &cs.header.name, 0, &cs.trackable_points());
+    }
+    let mut live: Vec<uuid::Uuid> = m
         .attached_drawings()
         .filter(|d| d.is_trackable() && !d.trackable_points().is_empty())
         .map(|d| d.id())
         .chain(m.spotlights.items.iter().map(|s| s.id))
         .collect();
+    live.push(m.coordinate_system.header.id);
     m.trackability.trackers.retain(|t| live.contains(&t.drawing_id));
 }

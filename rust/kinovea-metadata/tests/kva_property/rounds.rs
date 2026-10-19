@@ -7,7 +7,8 @@ use kinovea_metadata::drawing::Drawing;
 use kinovea_metadata::keyframe::Keyframe;
 use kinovea_metadata::kva_io::{identity, Filter, Scale};
 use kinovea_metadata::multi::{NumberSequence, Spotlights};
-use kinovea_metadata::singletons::{singleton_element, CoordinateSystem, TestGrid};
+use kinovea_metadata::singletons::{singleton_element, TestGrid};
+use kinovea_metadata::{header_metadata, read_kva, write_kva, ExportFlags};
 use uuid::Uuid;
 
 pub const SEEDS: u64 = 64;
@@ -81,13 +82,27 @@ pub fn numbers_round(xml: &str) -> String {
     e.to_document()
 }
 
+/// Reads the fragment inside a whole document, with the tracker its drawing has in a file, and
+/// writes the document back. The `CoordinateSystem` element is what the document writes for it.
 pub fn coordinate_round(xml: &str) -> String {
-    let mut cs = CoordinateSystem::default();
-    cs.read_kva(&parse(xml));
-    let origin = cs.origin;
-    let refs = |_: Uuid, _: &str| origin;
-    let children = cs.write_kva(Filter::KVA, &refs);
-    singleton_element(CoordinateSystem::KVA_NAME, &cs.header, children).to_document()
+    let fragment = parse(xml);
+    let id = fragment.attribute("id").unwrap_or_default();
+    let position = fragment.child_text("Position").unwrap_or("0;0");
+    let doc = format!(
+        "<KinoveaVideoAnalysis><FormatVersion>2.1</FormatVersion><ImageSize>640;480</ImageSize>{xml}\
+         <Trackability><TrackableDrawing id=\"{id}\" name=\"\"><TrackablePoint key=\"0\">\
+         <ReferenceTimestamp>0</ReferenceTimestamp><ReferenceValue>{position}</ReferenceValue>\
+         </TrackablePoint></TrackableDrawing></Trackability></KinoveaVideoAnalysis>"
+    );
+    let mut m = header_metadata(&doc);
+    read_kva(&mut m, &doc).expect("well-formed KVA");
+    let written = write_kva(&m, "0.0", false, ExportFlags::FULL);
+    written
+        .children
+        .iter()
+        .find(|c| c.name == "CoordinateSystem")
+        .expect("the document writes its coordinate system")
+        .to_document()
 }
 
 pub fn test_grid_round(xml: &str) -> String {
