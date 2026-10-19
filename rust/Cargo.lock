@@ -216,7 +216,9 @@ name = "kinovea-video"
 version = "0.1.0"
 dependencies = [
  "kinovea-core",
+ "kinovea-fixtures",
  "kinovea-geometry",
+ "serde_json",
 ]
 
 [[package]]

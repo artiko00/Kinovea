@@ -3,9 +3,18 @@
 #[cfg(test)]
 mod lib_test;
 
+pub mod cache;
+#[cfg(test)]
+mod cache_test;
 pub mod capabilities;
 #[cfg(test)]
 mod capabilities_test;
+pub mod closest;
+#[cfg(test)]
+mod closest_test;
+pub mod container;
+#[cfg(test)]
+mod container_test;
 pub mod decoding;
 #[cfg(test)]
 mod decoding_test;
@@ -25,6 +34,9 @@ pub mod info;
 #[cfg(test)]
 mod info_test;
 pub mod pipeline;
+pub mod prebuffer;
+#[cfg(test)]
+mod prebuffer_test;
 pub mod reader;
 #[cfg(test)]
 mod reader_test;
@@ -37,6 +49,9 @@ mod relation_test;
 pub mod results;
 #[cfg(test)]
 mod results_test;
+pub mod snapshot;
+#[cfg(test)]
+mod snapshot_test;
 pub mod state;
 #[cfg(test)]
 mod state_test;
