@@ -25,21 +25,21 @@
 - [x] 4.1 Write `src/drawing_test.rs` for the common header, `Drawing` enum exhaustiveness (one variant per KVA element name) and `content_hash` stability; implement `src/drawing.rs` with the header struct and enum; verify tests pass.
 - [x] 4.2 Implement simple geometric drawings in `src/drawing/{line,angle,crossmark,circle,rectangle,pencil,polyline,label}.rs` each with `*_test.rs` covering fields, trackable points, measured value in pixels, and KVA read/write round trip of the matching fragments from `all-drawings.kva`; verify tests pass.
 - [x] 4.3 Implement `plane`, `distortion_grid`, `test_grid`, `coordinate_system` with tests on quadrilateral persistence and read/write parity; verify tests pass.
-- [ ] 4.4 Implement time drawings `chrono`, `chrono_multi`, `counter`, `time_segment`, `time_polyline` and multi-drawings `spotlights`, `auto_numbers` with item structs; tests cover section lists, visibility timestamps and round trip; verify tests pass.
+- [x] 4.4 Implement time drawings `chrono`, `chrono_multi`, `counter`, `time_segment`, `time_polyline` and multi-drawings `spotlights`, `auto_numbers` with item structs; tests cover section lists, visibility timestamps and round trip; verify tests pass.
 - [x] 4.5 Implement `track` (timed points, tracker parameters block kept verbatim, labels, keyframe labels), `bitmap`, `svg` (path or embedded payload) with read/write tests; verify tests pass.
 - [x] 4.6 Write `src/keyframe_test.rs` and `src/metadata_test.rs` (sorted keyframes, `find_drawing`, managers, singletons, trackability records) then implement `src/keyframe.rs` and `src/metadata.rs`; verify tests pass and `cargo clippy` is clean.
 
 ## 5. KVA 2.x reader and writer
 
 - [x] 5.1 Write `tests/kva_roundtrip_test.rs`: for every `tests/fixtures/kva/*/roundtrip.kva` load the case input, write with producer `Kinovea.0.0`, normalize ids, compare bytes; implement `src/kva/{reader,writer}.rs` general information, calibration block (stored verbatim as `CalibrationData` until 04 is integrated), keyframes and drawings dispatch; verify the minimal and simple cases pass.
-- [ ] 5.2 Extend the reader and writer for chronos, tracks, spotlights, number sequence, coordinate system, test grid, trackability, video filters (verbatim), camera motion (verbatim); verify `complete` and `all-drawings` cases pass byte for byte.
-- [ ] 5.3 Implement context remapping (`scaling`, `remap_timestamp`, same-context detection) in `src/kva/context.rs` with `context_test.rs` against the `kva/remap` fixture; verify within 1e-4.
-- [ ] 5.4 Implement export flags (`Basics`, `Drawings`, `Calibration`, `VideoSpecific`, capture recording) with a test comparing the capture-recording output to a fixture produced by a new `tests/cases/kva/capture.json` case; verify byte parity.
+- [x] 5.2 Extend the reader and writer for chronos, tracks, spotlights, number sequence, coordinate system, test grid, trackability, video filters (verbatim), camera motion (verbatim); verify `complete` and `all-drawings` cases pass byte for byte.
+- [x] 5.3 Implement context remapping (`scaling`, `remap_timestamp`, same-context detection) in `src/kva/context.rs` with `context_test.rs` against the `kva/remap` fixture; verify within 1e-4.
+- [x] 5.4 Implement export flags (`Basics`, `Drawings`, `Calibration`, `VideoSpecific`, capture recording) with a test comparing the capture-recording output to a fixture produced by a new `tests/cases/kva/capture.json` case; verify byte parity.
 - [ ] 5.5 Add `tests/kva_fuzz_test.rs` loading the 20 fuzzed files and checking round trip against their fixture; add `proptest` property read(write(d)) == d for every drawing kind in `tests/kva_property_test.rs`; verify `make verify`.
 
 ## 6. Migration
 
-- [ ] 6.1 Write `tests/migration_test.rs` comparing `migrate(legacy)` output model to the model loaded from the fixture `converted.kva`, and rejection of 1.2; implement `src/migration.rs` (format detection, 1.5→2.x renames, unit mapping, relative track times); verify tests pass.
+- [x] 6.1 Write `tests/migration_test.rs` comparing `migrate(legacy)` output model to the model loaded from the fixture `converted.kva`, and rejection of 1.2; implement `src/migration.rs` (format detection, 1.5→2.x renames, unit mapping, relative track times); verify tests pass.
 
 ## 7. Undo history
 
@@ -49,7 +49,7 @@
 
 - [x] 8.1 Write `src/posture_test.rs` loading the 16 custom files embedded via `include_str!` and comparing counts to `tests/fixtures/posture/<name>/summary.json`, plus Body25 index-to-name assertions; implement `src/posture/{model,parser}.rs`; verify tests pass.
 - [x] 8.2 Write `src/posture/engine_test.rs` against `tests/fixtures/posture/moves/moves.csv`; port constraints and impacts into `src/posture/engine.rs`; verify within 1e-3.
-- [ ] 8.3 Implement the `GenericPosture` drawing variant read/write and add it to the all-drawings round trip; verify byte parity.
+- [x] 8.3 Implement the `GenericPosture` drawing variant read/write and add it to the all-drawings round trip; verify byte parity.
 
 ## 9. Integration
 
