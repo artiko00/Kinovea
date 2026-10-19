@@ -214,6 +214,10 @@ version = "0.1.0"
 [[package]]
 name = "kinovea-video"
 version = "0.1.0"
+dependencies = [
+ "kinovea-core",
+ "kinovea-geometry",
+]
 
 [[package]]
 name = "libc"

@@ -7,6 +7,8 @@ repository.workspace = true
 rust-version.workspace = true
 
 [dependencies]
+kinovea-core = { path = "../kinovea-core" }
+kinovea-geometry = { path = "../kinovea-geometry" }
 
 [lints]
 workspace = true
