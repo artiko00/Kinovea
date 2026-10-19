@@ -47,7 +47,7 @@ impl Spotlight {
     }
 
     pub fn to_element(&self, filter: Filter) -> Element {
-        let mut e = item_element(Spotlight::KVA_NAME, self.id, &self.name);
+        let mut e = item_element(Spotlight::KVA_NAME, self.id, Spotlight::KVA_NAME);
         if filter.core {
             e.push_leaf("Time", &self.timestamp.to_string());
             e.push(point_leaf("Center", self.center));
@@ -141,7 +141,7 @@ impl AutoNumber {
     }
 
     pub fn to_element(&self, filter: Filter) -> Element {
-        let mut e = item_element(AutoNumber::KVA_NAME, self.id, &self.name);
+        let mut e = item_element(AutoNumber::KVA_NAME, self.id, AutoNumber::KVA_NAME);
         if filter.core {
             e.push_leaf("Time", &self.timestamp.to_string());
             e.push(point_leaf("Location", self.location));

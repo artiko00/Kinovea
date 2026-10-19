@@ -19,6 +19,7 @@ declare!(
     keyframe: keyframe_test,
     kva: kva_test,
     metadata: metadata_test,
+    migration: migration_test,
     multi: multi_test,
     posture: posture_test,
     singletons: singletons_test,

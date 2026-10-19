@@ -6,6 +6,7 @@ use crate::drawing::Drawing;
 use crate::keyframe::Keyframe;
 use crate::kva_io::{identity, parse_enum, Scale};
 use crate::metadata::Metadata;
+use crate::migration::{migrate_legacy, needs_migration};
 use kinovea_core::preferences::dom::Element;
 use kinovea_core::xml::{parse_boolean, parse_size};
 use kinovea_geometry::{PointF, Size};
@@ -15,8 +16,6 @@ use std::fmt;
 pub enum KvaError {
     Xml(String),
     NotKva(String),
-    /// Formats 1.3 to 1.5 need the migration step first.
-    NeedsMigration(String),
     /// Formats 1.2 and older are rejected, as the original does.
     TooOld(String),
 }
@@ -26,7 +25,6 @@ impl fmt::Display for KvaError {
         match self {
             KvaError::Xml(e) => write!(f, "invalid KVA xml: {e}"),
             KvaError::NotKva(root) => write!(f, "not a KVA document: root is {root}"),
-            KvaError::NeedsMigration(v) => write!(f, "KVA format {v} must be migrated first"),
             KvaError::TooOld(v) => write!(f, "KVA format {v} is too old"),
         }
     }
@@ -36,14 +34,18 @@ impl std::error::Error for KvaError {}
 
 /// Reads a 2.x document into `m`, which must already describe the current video.
 pub fn read_kva(m: &mut Metadata, xml: &str) -> Result<ImportContext, KvaError> {
-    let root = Element::parse(xml).map_err(|e| KvaError::Xml(e.to_string()))?;
+    let mut root = Element::parse(xml).map_err(|e| KvaError::Xml(e.to_string()))?;
     if root.name != "KinoveaVideoAnalysis" {
         return Err(KvaError::NotKva(root.name));
     }
     let version = root.child_text("FormatVersion").unwrap_or("").trim().to_owned();
+    let mut relative_trajectories = false;
     match version.parse::<f64>() {
         Ok(v) if v < 1.3 => return Err(KvaError::TooOld(version)),
-        Ok(v) if v < 2.0 => return Err(KvaError::NeedsMigration(version)),
+        Ok(v) if needs_migration(v) => {
+            root = migrate_legacy(&root);
+            relative_trajectories = true;
+        }
         _ => {}
     }
     let mut ctx = ImportContext::default();
@@ -139,6 +141,13 @@ pub fn read_kva(m: &mut Metadata, xml: &str) -> Result<ImportContext, KvaError> 
         m.video.time_origin = ctx.remap_from(ctx.time_origin, ctx.first_timestamp, m.video.first_timestamp, &m.video);
     }
     after_import(m);
+    if relative_trajectories {
+        for t in m.tracks.iter_mut() {
+            if let Drawing::Track(track) = t {
+                track.fix_relative_trajectories();
+            }
+        }
+    }
     Ok(ctx)
 }
 

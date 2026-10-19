@@ -124,6 +124,13 @@ impl Track {
         });
     }
 
+    /// Legacy files store point times relative to the track start (`FixRelativeTrajectories`).
+    pub fn fix_relative_trajectories(&mut self) {
+        for p in &mut self.positions {
+            p.t += self.begin_timestamp;
+        }
+    }
+
     fn point_at(&self, index: usize) -> PointF {
         self.positions
             .get(index)

@@ -47,7 +47,7 @@ fn version_and_root_checks() {
     let mut m = Metadata::default();
     assert_eq!(read_kva(&mut m, "<Other/>"), Err(KvaError::NotKva("Other".into())));
     assert_eq!(read_kva(&mut m, "<KinoveaVideoAnalysis><FormatVersion>1.2</FormatVersion></KinoveaVideoAnalysis>"), Err(KvaError::TooOld("1.2".into())));
-    assert_eq!(read_kva(&mut m, "<KinoveaVideoAnalysis><FormatVersion>1.5</FormatVersion></KinoveaVideoAnalysis>"), Err(KvaError::NeedsMigration("1.5".into())));
+    assert!(read_kva(&mut m, "<KinoveaVideoAnalysis><FormatVersion>1.5</FormatVersion></KinoveaVideoAnalysis>").is_ok(), "1.3 to 1.5 are migrated on the fly");
     assert!(matches!(read_kva(&mut m, "<broken"), Err(KvaError::Xml(_))));
     assert_eq!(KvaError::TooOld("1.2".into()).to_string(), "KVA format 1.2 is too old");
 }
