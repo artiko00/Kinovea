@@ -1,5 +1,25 @@
 //! Kinovea `tracking` crate. Behavior is added by later OpenSpec changes.
 
+pub mod camera;
+#[cfg(test)]
+pub(crate) mod camera_test;
+
+pub mod drawing_tracker;
+#[cfg(test)]
+mod drawing_tracker_apply_test;
+#[cfg(test)]
+pub(crate) mod drawing_tracker_test;
+
+pub mod manager;
+#[cfg(test)]
+mod manager_test;
+#[cfg(test)]
+mod manager_trim_test;
+
+pub mod trackable_point;
+#[cfg(test)]
+mod trackable_point_test;
+
 pub mod ncc;
 mod ncc_integral;
 mod ncc_map;
