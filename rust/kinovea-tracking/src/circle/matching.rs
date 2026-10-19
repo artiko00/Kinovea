@@ -1,6 +1,6 @@
 //! Port of `TrackerCircle.MatchCircle`: the Hough search around the reference radius, in the
-//! search window clamped to the frame. The median blur of the original (`blurROI`, off by default)
-//! is not ported.
+//! search window clamped to the frame. The original's median blur (`blurROI`) is not ported: its
+//! flag is a private field fixed to `false` (`TrackerCircle.cs:70`), so the branch is unreachable.
 
 #[cfg(test)]
 #[path = "matching_test.rs"]

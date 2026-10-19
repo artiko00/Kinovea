@@ -5,7 +5,6 @@
 use crate::camera::CameraTransform;
 use crate::drawing_tracker::{find_track, point_at_time, DrawingState, Trackable};
 use kinovea_geometry::PointF;
-use kinovea_metadata::drawing::Track;
 use kinovea_metadata::trackability::TrackabilityManager;
 use kinovea_metadata::{Drawing, Uuid};
 use std::collections::HashMap;
@@ -69,6 +68,16 @@ impl TrackabilityRuntime {
             .apply_at(tracker, tracks, time, camera, drawing);
     }
 
+    /// `InitializeTracking` (`DrawingTracker.cs:300-305`): object tracking starts and the drawing is
+    /// tracked (`isCurrentlyTracking`, which lives here, not in the data).
+    pub fn initialize_tracking(&mut self, data: &mut TrackabilityManager, drawing_id: Uuid) {
+        data.start_object_tracking(drawing_id);
+        self.drawings
+            .entry(drawing_id)
+            .or_default()
+            .currently_tracking = true;
+    }
+
     /// `ForgetTrack` (`TrackabilityManager.cs:606-615`). Drawings left without object tracking stop
     /// tracking (`DrawingTracker.cs:374-376`, `:385-402`).
     pub fn forget_track(&mut self, data: &mut TrackabilityManager, track_id: Uuid) {
@@ -114,34 +123,4 @@ pub fn assign(
         data.start_object_tracking(drawing_id);
     }
     true
-}
-
-/// `TrimAttachedTracks` (`Metadata.cs:1251-1260`): cuts the tracks bound to the drawing after `time`.
-pub fn trim_attached_tracks(
-    data: &TrackabilityManager,
-    tracks: &mut [Drawing],
-    drawing_id: Uuid,
-    time: i64,
-) {
-    let Some(tracker) = data.tracker(drawing_id) else {
-        return;
-    };
-    let bound: Vec<Uuid> = tracker
-        .points
-        .iter()
-        .filter_map(|(_, p)| p.track_id)
-        .collect();
-    tracks
-        .iter_mut()
-        .filter_map(|d| match d {
-            Drawing::Track(t) if bound.contains(&t.header.id) => Some(t),
-            _ => None,
-        })
-        .for_each(|t| trim_track(t, time));
-}
-
-/// `Track.Trim` (`DrawingTrack.cs:1540-1565`): keeps the positions up to the one closest to `time`.
-pub fn trim_track(track: &mut Track, time: i64) {
-    let last = track.closest_point(time);
-    track.positions.truncate(last + 1);
 }

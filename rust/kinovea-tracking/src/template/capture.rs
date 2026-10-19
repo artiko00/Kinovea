@@ -8,6 +8,14 @@ use kinovea_video::frame::FrameBuffer;
 
 use crate::pixels::image::Roi;
 
+/// A template captured at `time`, with the similarity of the step that produced it (1 for a
+/// reference point, 0 after a failed step).
+#[derive(Debug, Clone, PartialEq)]
+pub struct TrackingTemplate {
+    pub score: f32,
+    pub patch: Patch,
+}
+
 /// BGRA template pixels, row-major, 4 bytes per pixel.
 #[derive(Debug, Clone, PartialEq)]
 pub struct Patch {

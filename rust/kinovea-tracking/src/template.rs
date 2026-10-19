@@ -7,6 +7,8 @@ pub mod capture;
 mod capture_test;
 pub mod matching;
 #[cfg(test)]
+mod matching_mask_test;
+#[cfg(test)]
 mod matching_test;
 #[cfg(test)]
 mod policy_test;
@@ -15,22 +17,17 @@ use kinovea_core::timed_point::TimedPoint;
 use kinovea_metadata::drawing::tracking_parameters::TrackingParameters;
 use kinovea_video::frame::FrameBuffer;
 
-use crate::template::capture::{capture, Patch};
+use crate::pixels::image::GrayImage;
 use crate::timeline::Timeline;
 use crate::tracker::{StepResult, Tracker};
+pub use capture::TrackingTemplate;
 use matching::match_block;
-
-/// A template captured at `time`, with the similarity of the step that produced it (1 for a
-/// reference point, 0 after a failed step).
-#[derive(Debug, Clone, PartialEq)]
-pub struct TrackingTemplate {
-    pub score: f32,
-    pub patch: Patch,
-}
 
 pub struct TemplateTracker {
     parameters: TrackingParameters,
     templates: Timeline<TrackingTemplate>,
+    /// `cvMaskGray`: built once with masking on, then kept and used even when masking is turned off.
+    mask: Option<GrayImage>,
 }
 
 impl TemplateTracker {
@@ -38,6 +35,7 @@ impl TemplateTracker {
         TemplateTracker {
             parameters,
             templates: Timeline::new(),
+            mask: None,
         }
     }
 
@@ -76,7 +74,7 @@ impl TemplateTracker {
                 || score_f < self.parameters.similarity_threshold);
         let patch = match self.templates.last() {
             Some(template) if keep => template.patch.clone(),
-            _ => capture(image, (x, y), self.parameters.block_window()),
+            _ => capture::capture(image, (x, y), self.parameters.block_window()),
         };
         self.templates
             .insert(time, TrackingTemplate { score, patch });
@@ -107,10 +105,17 @@ impl Tracker for TemplateTracker {
             matched: false,
             score: 0.0,
         };
-        let (Some(image), Some(template)) = (image, self.ready_template()) else {
+        let (Some(image), Some(template)) = (image, self.ready_template().map(|t| t.patch.clone()))
+        else {
             return previous;
         };
-        let found = match_block(&self.parameters, image, &template.patch, (last.x, last.y));
+        let found = match_block(
+            &self.parameters,
+            image,
+            &template,
+            (last.x, last.y),
+            &mut self.mask,
+        );
         let failed = found.similarity == 0.0
             || f64::from(found.similarity) < self.parameters.similarity_threshold;
         let (location, score) = if failed {
@@ -128,7 +133,7 @@ impl Tracker for TemplateTracker {
 
     /// `CreateReferenceTrackPoint`: always captures a template, with a score of 1.
     fn create_reference_point(&mut self, point: &mut TimedPoint, image: &FrameBuffer) {
-        let patch = capture(image, (point.x, point.y), self.parameters.block_window());
+        let patch = capture::capture(image, (point.x, point.y), self.parameters.block_window());
         self.templates
             .insert(point.t, TrackingTemplate { score: 1.0, patch });
     }

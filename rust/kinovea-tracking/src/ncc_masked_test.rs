@@ -95,7 +95,9 @@ fn full_mask_equals_the_unmasked_map() {
 }
 
 #[test]
-fn template_flat_under_the_mask_scores_one_everywhere() {
+fn template_flat_under_the_mask_is_nan_everywhere() {
+    // OpenCV 4.10 (`matchTemplate`, mask flat under the template): every window is 0/0, the whole
+    // map is NaN, and `minMaxLoc` reports max -inf. The caller then retries without the mask.
     let image = lcg_bytes(1, 23 * 17);
     let template: Vec<u8> = (0..5 * 4)
         .map(|p| if p % 2 == 0 { 40 } else { (p * 37 % 255) as u8 })
@@ -106,5 +108,6 @@ fn template_flat_under_the_mask_scores_one_everywhere() {
         plane(&template, 5, 4, 1),
         Some(&mask),
     );
-    assert!(map.values.iter().all(|&v| v == 1.0));
+    assert!(map.values.iter().all(|v| v.is_nan()));
+    assert_eq!(map.min_max_loc().max, f32::NEG_INFINITY);
 }

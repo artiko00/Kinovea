@@ -25,9 +25,13 @@ pub(crate) mod drawing_tracker_test;
 
 pub mod manager;
 #[cfg(test)]
-mod manager_test;
+mod manager_initialize_test;
 #[cfg(test)]
-mod manager_trim_test;
+mod manager_test;
+
+pub mod trim;
+#[cfg(test)]
+mod trim_test;
 
 pub mod trackable_point;
 #[cfg(test)]

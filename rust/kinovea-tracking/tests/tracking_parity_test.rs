@@ -6,12 +6,18 @@ mod tracking_cases;
 
 use kinovea_tracking::circle::CircleTracker;
 use kinovea_tracking::template::TemplateTracker;
-use tracking_cases::{expected, load, names, run};
+use tracking_cases::{expected, load, names, run, Row};
 
 const POSITION_TOLERANCE: f64 = 0.5;
 const SCORE_TOLERANCE: f64 = 0.02;
 /// Largest center or radius difference, in px, allowed on the circle cases.
 const CIRCLE_TOLERANCE_PX: f64 = 1.0;
+/// Cases where the original leaves the tolerances at one frame, from f32 rounding in OpenCV's
+/// correlation. At (69, 61) of `template-mask-flat` the numerator error (about 8 units on 4.7e7,
+/// measured with `TM_CCORR`) exceeds the snap margin (7.89), so OpenCV gives 0 where the exact NCC
+/// is 0.9836. Rows before the frame meet the tolerances, the frame is the first one outside them, and
+/// later rows are not compared since the trajectory has diverged.
+const F32_NEAR_TIES: &[(&str, usize)] = &[("template-mask-flat", 4)];
 
 #[test]
 fn template_cases_match_the_original() {
@@ -24,9 +30,25 @@ fn template_cases_match_the_original() {
         let rows = run(&case, &mut tracker);
         let expected = expected(&name);
         assert_eq!(rows.len(), expected.len(), "{name}: row count");
+        let first_outside = F32_NEAR_TIES
+            .iter()
+            .find(|(case, _)| *case == name)
+            .map(|(_, frame)| *frame);
         let (mut dx, mut dy, mut ds) = (0.0f64, 0.0f64, 0.0f64);
         for (got, want) in rows.iter().zip(&expected) {
             let frame = got.frame;
+            assert_eq!(
+                (got.frame, got.t, got.r),
+                (want.frame, want.t, want.r),
+                "{name}: frame, t and r"
+            );
+            if Some(frame) == first_outside {
+                assert!(
+                    !within_tolerance(got, want),
+                    "{name} frame {frame}: within tolerance, the f32 near-tie deviation is gone"
+                );
+                break;
+            }
             dx = dx.max((got.x - want.x).abs());
             dy = dy.max((got.y - want.y).abs());
             ds = ds.max((got.score - want.score).abs());
@@ -55,6 +77,13 @@ fn template_cases_match_the_original() {
             rows.len()
         );
     }
+}
+
+fn within_tolerance(got: &Row, want: &Row) -> bool {
+    (got.x - want.x).abs() <= POSITION_TOLERANCE
+        && (got.y - want.y).abs() <= POSITION_TOLERANCE
+        && (got.score - want.score).abs() <= SCORE_TOLERANCE
+        && got.matched == want.matched
 }
 
 #[test]

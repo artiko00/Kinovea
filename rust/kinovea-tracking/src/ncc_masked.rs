@@ -19,12 +19,12 @@ pub(crate) fn match_masked<T: Copy + Into<f64>>(
     assert!(n > 0.0, "the mask excludes every template pixel");
     let centred = centred_template(template, &included, n);
     let template_norm = centred.iter().map(|a| a * a).sum::<f64>().sqrt();
-    // OpenCV: a template that is flat under the mask makes the whole map 1.
+    // OpenCV: a template that is flat under the mask makes every window 0/0, so the whole map is NaN.
     if template_norm < f64::EPSILON {
         return Map {
             width,
             height,
-            values: vec![1.0; width * height],
+            values: vec![f32::NAN; width * height],
         };
     }
     let mut values = Vec::with_capacity(width * height);
