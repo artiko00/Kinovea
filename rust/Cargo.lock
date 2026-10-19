@@ -210,6 +210,13 @@ version = "0.1.0"
 [[package]]
 name = "kinovea-tracking"
 version = "0.1.0"
+dependencies = [
+ "kinovea-core",
+ "kinovea-fixtures",
+ "kinovea-geometry",
+ "kinovea-metadata",
+ "kinovea-video",
+]
 
 [[package]]
 name = "kinovea-video"

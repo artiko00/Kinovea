@@ -26,6 +26,14 @@ mod refine_test;
 
 pub mod hough;
 
+pub mod pixels;
+#[cfg(test)]
+mod pixels_test;
+
+pub mod timeline;
+#[cfg(test)]
+mod timeline_test;
+
 /// Returns the crate name as declared in `Cargo.toml`.
 pub fn crate_name() -> &'static str {
     env!("CARGO_PKG_NAME")
