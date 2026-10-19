@@ -131,7 +131,8 @@ fn deleting_a_track_forgets_the_tracking_bound_to_it() {
     let track = Track::new(vec![TimedPoint::new(1.0, 2.0, 0)]);
     let track_id = track.header.id;
     m.tracks.push(Drawing::Track(track));
-    m.trackability.trackers[0].points[0].1.track_id = Some(track_id);
+    let drawing_id = m.trackability.trackers[0].drawing_id;
+    m.trackability.bind_track(drawing_id, "o", track_id);
 
     m.delete_drawing(Manager::Tracks, track_id).unwrap();
 

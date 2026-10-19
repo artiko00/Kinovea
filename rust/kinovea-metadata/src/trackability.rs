@@ -7,6 +7,10 @@ use kinovea_core::preferences::dom::Element;
 use kinovea_geometry::PointF;
 use uuid::Uuid;
 
+mod state;
+#[cfg(test)]
+mod state_test;
+
 #[derive(Debug, Clone, PartialEq)]
 pub struct TrackablePoint {
     pub reference_timestamp: i64,
@@ -21,11 +25,14 @@ pub struct DrawingTracker {
     pub name: String,
     /// Keyed points in registration order.
     pub points: Vec<(String, TrackablePoint)>,
+    /// `isObjectTrackingInitialized`. Not in KVA: set when tracks are bound or assigned, cleared when
+    /// the last bound track is forgotten.
+    pub object_tracking_initialized: bool,
 }
 
 impl DrawingTracker {
     pub fn read_kva(e: &Element) -> DrawingTracker {
-        let mut t = DrawingTracker { drawing_id: e.attribute("id").and_then(parse_id).unwrap_or_default(), name: e.attribute("name").unwrap_or("").to_owned(), points: Vec::new() };
+        let mut t = DrawingTracker { drawing_id: e.attribute("id").and_then(parse_id).unwrap_or_default(), name: e.attribute("name").unwrap_or("").to_owned(), points: Vec::new(), object_tracking_initialized: false };
         for c in e.children.iter().filter(|c| c.name == "TrackablePoint") {
             let mut p = TrackablePoint { reference_timestamp: 0, reference_value: PointF::EMPTY, track_id: None };
             for v in &c.children {
@@ -72,11 +79,13 @@ impl TrackabilityManager {
             drawing_id,
             name: name.to_owned(),
             points: points.iter().map(|(k, p)| (k.clone(), TrackablePoint { reference_timestamp: timestamp, reference_value: *p, track_id: None })).collect(),
+            object_tracking_initialized: false,
         };
         match self.trackers.iter().position(|t| t.drawing_id == drawing_id) {
             Some(i) => {
                 // Re-assignment keeps the track bindings.
                 let old = std::mem::replace(&mut self.trackers[i], tracker);
+                self.trackers[i].object_tracking_initialized = old.object_tracking_initialized;
                 for (key, p) in &mut self.trackers[i].points {
                     p.track_id = old.points.iter().find(|(k, _)| k == key).and_then(|(_, o)| o.track_id);
                 }
@@ -89,11 +98,23 @@ impl TrackabilityManager {
         self.trackers.retain(|t| t.drawing_id != drawing_id);
     }
 
-    /// `ForgetTrack`: the points driven by the deleted track `track_id` are no longer bound to it.
+    /// `ForgetTrack` (`DrawingTracker.cs:352-380`): the points driven by the deleted track are unbound.
+    /// A drawing left without any bound track leaves object tracking. Ignored while object tracking
+    /// is not initialized.
     pub fn forget_track(&mut self, track_id: Uuid) {
-        for (_, p) in self.trackers.iter_mut().flat_map(|t| t.points.iter_mut()) {
-            if p.track_id == Some(track_id) {
-                p.track_id = None;
+        for t in &mut self.trackers {
+            if !t.object_tracking_initialized {
+                continue;
+            }
+            let mut bound = false;
+            for (_, p) in &mut t.points {
+                if p.track_id == Some(track_id) {
+                    p.track_id = None;
+                    bound = true;
+                }
+            }
+            if bound && t.points.iter().all(|(_, p)| p.track_id.is_none()) {
+                t.object_tracking_initialized = false;
             }
         }
     }
