@@ -1,15 +1,28 @@
 //! Owner: P1. Painters for `DrawingCoordinateSystem.Draw` and `DrawingTestGrid.Draw`.
 
-use super::PaintContext;
-use crate::renderer::Renderer;
-use kinovea_metadata::singletons::{CoordinateSystem, TestGrid};
+mod coordinate_system;
+#[cfg(test)]
+mod coordinate_system_test;
+#[cfg(test)]
+mod fixture_test;
+mod grid;
+mod grid_finder;
+#[cfg(test)]
+mod grid_finder_test;
+mod grid_lines;
+#[cfg(test)]
+mod grid_lines_test;
+#[cfg(test)]
+mod grid_test;
+mod range;
+#[cfg(test)]
+mod range_test;
+mod test_grid;
+#[cfg(test)]
+mod test_grid_test;
+mod tick;
+#[cfg(test)]
+mod tick_test;
 
-/// Port of `DrawingCoordinateSystem.Draw`.
-pub fn paint_coordinate_system(d: &CoordinateSystem, ctx: &PaintContext, r: &mut dyn Renderer) {
-    let _ = (d, ctx, r);
-}
-
-/// Port of `DrawingTestGrid.Draw`.
-pub fn paint_test_grid(d: &TestGrid, ctx: &PaintContext, r: &mut dyn Renderer) {
-    let _ = (d, ctx, r);
-}
+pub use coordinate_system::paint_coordinate_system;
+pub use test_grid::paint_test_grid;

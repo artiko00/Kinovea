@@ -6,6 +6,9 @@ mod arrow_test;
 pub mod bounding_box;
 #[cfg(test)]
 mod bounding_box_test;
+pub mod decimal;
+#[cfg(test)]
+mod decimal_test;
 pub mod frame;
 #[cfg(test)]
 mod frame_test;
