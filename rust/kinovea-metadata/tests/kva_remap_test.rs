@@ -19,6 +19,7 @@ fn other_video_context_is_remapped_like_the_original() {
     // The oracle used its case file as the "current video": it exists, so the import is
     // judged against it (different path, no byte length known → different context).
     m.video.video_path = "C:\\oracle\\Kinovea\\tests\\cases\\kva\\remap.json".into();
+    m.post_setup_video();
     let ctx = read_kva(&mut m, &xml).unwrap();
     assert_eq!(ctx.image_size, Size::new(1280, 720));
     assert!(!ctx.is_same_context(&m.video));

@@ -1229,9 +1229,9 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
       </DrawingStyle>
     </Track>
   </Tracks>
-  <CoordinateSystem id="00000000-0000-4000-8000-000000000030" name="">
-    <Position>0;0</Position>
-    <ReferenceTimestamp>-1</ReferenceTimestamp>
+  <CoordinateSystem id="00000000-0000-4000-8000-000000000030" name="Coordinate system 1">
+    <Position>424;240</Position>
+    <ReferenceTimestamp>0</ReferenceTimestamp>
     <Visible>false</Visible>
     <ShowGrid>true</ShowGrid>
     <ShowGraduations>true</ShowGraduations>
@@ -1241,7 +1241,7 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
       </Color>
     </DrawingStyle>
   </CoordinateSystem>
-  <TestGrid id="00000000-0000-4000-8000-000000000031" name="">
+  <TestGrid id="00000000-0000-4000-8000-000000000031" name="Camera test grid 1">
     <Visible>false</Visible>
     <ShowHorizontalAxis>true</ShowHorizontalAxis>
     <ShowVerticalAxis>true</ShowVerticalAxis>
@@ -1348,6 +1348,12 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
       <TrackablePoint key="b">
         <ReferenceTimestamp>369369</ReferenceTimestamp>
         <ReferenceValue>297;21</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000030" name="Coordinate system 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>0</ReferenceTimestamp>
+        <ReferenceValue>424;240</ReferenceValue>
       </TrackablePoint>
     </TrackableDrawing>
   </Trackability>

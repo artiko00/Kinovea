@@ -129,8 +129,29 @@ Chronological. Newest entry last. Never delete entries; correct a wrong decision
 - Gotchas: Claude Code worktree isolation branches from `origin/master`, so agents need worktrees created from the change tip; custom agent types load only after a restart; the original never sets `ParentMetadata` on the spotlight and number-sequence managers; `ContentHash` is not stable across processes.
 - Verified: `cd rust && make verify` (495 tests), `npm run lint`, `tools/oracle/fixtures.sh --verify`.
 
+## 2026-10-18 — add-kva-metadata-model archived (PR #7 merged), add-headless-renderer started
+
+- Agent: Claude Code (Opus 5.5) orchestrating Haiku subagents (`haiku-rust-dev`, effort xhigh) in worktrees under `/home/artiko/Desarrollos/Kinovea-wt/`. Branch `feat/headless-renderer`.
+- Done: oracle `render` area (`RenderArea*.cs`): GDI+ rasterizations with the `FlushOnGraphics`/`FlushDrawingsOnGraphics` settings and z-order, hit tables over a probe grid at scales 0.5/1/2; cases `geometry` (tight), `geometry-x2`, `simple`, `complete`, `all-drawings` with tolerances fixed in the case JSON; `fixtures.sh --verify` deterministic. Rust: crate scaffold (internal deps only), viewport transform and `HitTester` geometry (R2), `Renderer` trait, style mapping and recording backend (R1), paint skeleton with per-kind ownership.
+- Discovered: a non-perspective `Plane` never builds its projective mapping, so its original `HitTest` throws with a sliding line visible (recorded as an `exception` row); `HitPath` widens with a pen of `lineSize + enlarger`, so the tolerance per side is half of that.
+- Blocked: tasks 5.x and 7.1 need `tiny-skia`, `fontdue`, `png` and Liberation Sans (asked, no answer yet; AGENTS.md requires approval).
+- Next: painters P1/P2 and per-drawing hit testing in parallel, then integration, primitive-coverage test, Hermes review.
+
+## 2026-10-19 — add-headless-renderer (apply, without the CPU backend)
+
+- Agent: Claude Code (Opus 5.5) orchestrating Haiku subagents (`haiku-rust-dev`, effort xhigh): R1 trait/style/recording, R2 viewport/hit geometry, P1–P4 painters, unification of AngleHelper/TickMark, H per-drawing hit testing. Each diff validated (scope, removed test lines, test-name counts) and re-verified on the branch.
+- Done (13/18 tasks): oracle `render` area and fixtures; `Renderer` trait, style mapping, recording backend; viewport; painters for all kinds plus singletons and multi-drawings; primitive coverage over `all-drawings`; per-drawing hit testing against `hits.csv` with two explicit, staleness-checked lists (text-metric zones pending a font rasterizer; capped Pencil/posture probes). `make verify` 890 tests green.
+- Fixes found during integration: label leaders shortened by `UpdateStartEnd` like the original; `StyleData.LineSize` bound by key; two orphan `_test.rs` files that satisfied `testlens` but were never compiled (one did not parse) are now declared; decimal places carried in `PaintContext`.
+- Tooling gap (not fixed, decision pending): `cargo fmt --check` skips modules declared inside macros (120 files across five crates, plus `kinovea-render/src/paint`, which is checked with `rustfmt --check` by hand).
+- Blocked: tasks 2.1, 5.1–5.3, 7.1 need `tiny-skia`, `fontdue`, `png` and Liberation Sans (asked twice, no answer; AGENTS.md requires approval). The change cannot be archived until then.
 ## 2026-10-19 — fix-kva-review-findings (branch fix/kva-review-findings)
 
 - Agent: Claude Code (Opus 5.5) with a Haiku subagent. Hermes (DeepSeek, reasoning high, toolsets terminal+file, session `kinovea-change05-migration-history`) reviewed migration and undo history on a throwaway worktree (no files changed); it reported 4 medium and 10 low findings with reproductions.
 - Done: every finding verified against the cited C#/XSLT before fixing (M2 partly refuted: `MergeInsertKeyframe` does not refresh labels); fixes with tests, most verified by mutation. Format 1.2 and older are read as the original does (the earlier rejection was a misreading). All fixtures still match byte for byte; `make verify` and `npm run lint` green.
 - Open: `AddDrawing(managerId)` type filters for chronos/tracks and the keyframe-name setter label refresh are not ported (noted by the agent, out of scope).
+
+## 2026-10-19 — add-headless-renderer (hit parity review)
+
+- Agent: Claude Code (Opus 5.5) orchestrating two Haiku subagents (R: hit harness and render fixes; T: trackability order), after the Hermes review of change 06.
+- Done: hit harness measured inside each drawing's box, targets from the metadata, text exemptions limited to text-zone codes, singletons hit-tested; tautological tests and the empty `cpu`/`compose` modules removed. Root causes fixed against the C#: GDI+ top-left fill on stroke edges, infinite-line clipping of the coordinate system axes, item fading from the video, plane hit through the calibration mapping. The oracle now runs `PostSetupVideo` before loading a KVA (Rust too), and trackability follows the original `Dictionary` order and `UpdateId`; new case `kva/trackers-no-cs`. Fixtures from commit 4a587e9b; `cargo test --workspace` 935 passed, `make verify` and `npm run lint` green.
+- Still blocked: tasks 2.1, 5.1–5.3, 7.1 (crates approval). Follow-ups H5 (default timecode format) and H8 (circle plane-calibration branch).

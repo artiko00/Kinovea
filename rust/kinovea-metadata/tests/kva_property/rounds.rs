@@ -8,7 +8,7 @@ use kinovea_metadata::keyframe::Keyframe;
 use kinovea_metadata::kva_io::{identity, Filter, Scale};
 use kinovea_metadata::multi::{NumberSequence, Spotlights};
 use kinovea_metadata::singletons::{singleton_element, TestGrid};
-use kinovea_metadata::{header_metadata, read_kva, write_kva, ExportFlags};
+use kinovea_metadata::{load_kva, write_kva, ExportFlags};
 use uuid::Uuid;
 
 pub const SEEDS: u64 = 64;
@@ -94,8 +94,7 @@ pub fn coordinate_round(xml: &str) -> String {
          <ReferenceTimestamp>0</ReferenceTimestamp><ReferenceValue>{position}</ReferenceValue>\
          </TrackablePoint></TrackableDrawing></Trackability></KinoveaVideoAnalysis>"
     );
-    let mut m = header_metadata(&doc);
-    read_kva(&mut m, &doc).expect("well-formed KVA");
+    let m = load_kva(&doc).expect("well-formed KVA");
     let written = write_kva(&m, "0.0", false, ExportFlags::FULL);
     written
         .children

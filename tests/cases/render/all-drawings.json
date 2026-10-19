@@ -1,0 +1,5 @@
+{
+  "area": "render",
+  "seed": 0,
+  "inputs": { "kva": "tests/cases/kva/inputs/all-drawings.kva", "frame": "40;40;40", "scale": 1, "timestamps": [400, 1000], "defaultFading": { "enabled": true, "frames": 20, "opaque": 1, "alwaysVisible": false }, "hitScales": [0.5, 1, 2], "hitStep": 4, "hitTimestamp": 1000, "mad_max": 3.5, "outliers_max": 12000 }
+}

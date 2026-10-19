@@ -109,7 +109,7 @@
           <Radius>45</Radius>
           <ExtraData>Circumference</ExtraData>
           <MeasureLabel>
-            <SpacePosition>330;180</SpacePosition>
+            <SpacePosition>375;180</SpacePosition>
             <TimePosition>0</TimePosition>
           </MeasureLabel>
           <ShowCenter>false</ShowCenter>
@@ -597,9 +597,9 @@
       </FontSize>
     </DrawingStyle>
   </NumberSequence>
-  <CoordinateSystem id="00000000-0000-4000-8000-000000000025" name="">
-    <Position>0;0</Position>
-    <ReferenceTimestamp>-1</ReferenceTimestamp>
+  <CoordinateSystem id="00000000-0000-4000-8000-000000000025" name="Coordinate system 1">
+    <Position>320;240</Position>
+    <ReferenceTimestamp>0</ReferenceTimestamp>
     <Visible>true</Visible>
     <ShowGrid>false</ShowGrid>
     <ShowGraduations>true</ShowGraduations>
@@ -609,7 +609,7 @@
       </Color>
     </DrawingStyle>
   </CoordinateSystem>
-  <TestGrid id="00000000-0000-4000-8000-000000000026" name="">
+  <TestGrid id="00000000-0000-4000-8000-000000000026" name="Camera test grid 1">
     <Visible>true</Visible>
     <ShowHorizontalAxis>false</ShowHorizontalAxis>
     <ShowVerticalAxis>true</ShowVerticalAxis>
@@ -622,6 +622,12 @@
     </DrawingStyle>
   </TestGrid>
   <Trackability>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000025" name="Coordinate system 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>0</ReferenceTimestamp>
+        <ReferenceValue>320;240</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
     <TrackableDrawing id="00000000-0000-4000-8000-000000000014" name="Goniometer 1">
       <TrackablePoint key="0">
         <ReferenceTimestamp>400</ReferenceTimestamp>

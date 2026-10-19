@@ -206,6 +206,15 @@ dependencies = [
 [[package]]
 name = "kinovea-render"
 version = "0.1.0"
+dependencies = [
+ "kinovea-core",
+ "kinovea-fixtures",
+ "kinovea-geometry",
+ "kinovea-measurement",
+ "kinovea-metadata",
+ "serde_json",
+ "uuid",
+]
 
 [[package]]
 name = "kinovea-tracking"

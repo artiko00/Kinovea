@@ -59,7 +59,7 @@ namespace Kinovea.FixtureGen.Areas
             }
         }
 
-        private static string ElementName(AbstractDrawing drawing)
+        internal static string ElementName(AbstractDrawing drawing)
         {
             object[] attributes = drawing.GetType().GetCustomAttributes(typeof(XmlTypeAttribute), false);
             return attributes.Length == 0 ? drawing.GetType().Name : ((XmlTypeAttribute)attributes[0]).TypeName;

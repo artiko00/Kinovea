@@ -63,6 +63,13 @@ impl MeasureLabel {
         self.attach = attach;
     }
 
+    /// `SetAttach(p, true)`: the attach point moves to `attach` and the label moves by the same offset.
+    pub fn move_attach(&mut self, attach: PointF) {
+        let (dx, dy) = (attach.x - self.attach.x, attach.y - self.attach.y);
+        self.position = self.position.translate(dx, dy);
+        self.attach = attach;
+    }
+
     /// Hash of the position relative to the attach point.
     pub fn content_hash(&self) -> i32 {
         let dx = self.position.x - self.attach.x;

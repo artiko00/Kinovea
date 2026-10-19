@@ -47,6 +47,21 @@ Oracle PNGs come from GDI+ with `SmoothingMode.AntiAlias` and `TextRenderingHint
 ### Legacy superseded
 Painting and hit-testing parts of `Kinovea.ScreenManager/Metadata/Drawings/*.cs`, `Metadata/Drawings/Helpers/{ArrowHelper,BoundingBox,GraphicsExtensions,RoundedRectangle}.cs`, `Metadata/{HitTester,MiniLabel}.cs`, `IImageToViewportTransformer.cs`, `ImageToViewportTransformer.cs`, and the flush methods of `PlayerScreen/Controls/PlayerScreenUserInterface2.cs` (`FlushOnGraphics`, `FlushDrawingsOnGraphics`, `GetFlushedImage`). Deleted in `remove-dotnet-solution`.
 
+### Deviations recorded during apply
+- Hit parity lists in `rust/kinovea-render/tests/hits_test.rs`, both checked for staleness:
+  - Agreement is measured inside the box of the probes that hit in either implementation (plus 16 px, clipped to the image), not over the whole image, so a 1 px error on a small drawing fails. Targets are enumerated from the metadata (keyframes, chronos, tracks, the four singletons), and every oracle row must match a drawing.
+  - `PENDING_TEXT_METRICS` (11 drawings, each with the hit codes of its text zones): text boxes measured by GDI+ Arial (labels, mini labels, chronos, counter, auto numbers). Rust measures text with the recording backend's fixed advance until a font rasterizer is approved; only those codes are exempt, the full rule applies to the other codes of the same drawing and to every other drawing.
+  - `EXPECTED_EXCEPTIONS` (empty): drawings whose `HitTest` throws in the oracle. The non-perspective plane stopped throwing once the oracle runs `PostSetupVideo`.
+  - `KNOWN_DEVIATIONS` (6 entries, Pencil and one GenericPosture scale): a capped number of probes off the Rust boundary, at the exact counts observed. Probable cause, not confirmed: hand-drawn strokes with 1 px zigzag widened by 13 px or more overlap, and `Region(path)` with the default Alternate fill leaves holes where the widened outline overlaps. The 99 percent agreement still applies; exceeding the cap fails.
+- The hit-path tolerance per side is half of `lineSize + untransform(10)` (pen width), as `HitTester.HitPath` widens with a pen of that width; the spec wording "line size plus 10 pixels" means the pen width.
+- `StyleData.LineSize` binds by key (`line size`, `pen size`, `LineSize`), so `TrackPointSize` no longer overrides it.
+- The oracle runs `Metadata.PostSetupVideo` before loading a KVA, as the player does when it opens a video (`FrameServerPlayer.cs:245`): singletons are named, the test grid is scaled to the image and the coordinate system is registered for trackability. Rust has the same step (`Metadata::post_setup_video`, `kva::load_kva`). This changed every KVA and render fixture.
+- Hit edges follow GDI+ region fill: the bottom and right sides of a widened stroke exactly at half width are outside (top-left rule).
+- Coordinate system axes and grid lines without a visible vanishing point clip the infinite line against the image (`LiangBarsky.ClipLine(rect, a, b)`), not the segment.
+- Spotlight and auto-number items fade with the player defaults and the video frame duration (`FromInfosFading`), in paint and in hit testing.
+- Trackability keeps the original's `Dictionary` order (removed entries leave a slot reused by the next add), and the coordinate system tracker goes through `UpdateId` after a KVA import. Consequence: the original is not a fixed point on KVA files that already hold a coordinate system tracker (it moves it after the drawings), so the crossload check asserts that Rust reproduces the original's reload instead of byte identity, except for `minimal`.
+- Painters read lens distortion from the calibration helper (as the original reads `DistortionHelper`); the `Distorter` trait stays for external transforms.
+
 ## Risks / Trade-offs
 
 - [GDI+ text cannot be matched pixel-exactly] → tolerance-based comparison; geometry-only cases keep tight tolerances so regressions in shapes are still caught.

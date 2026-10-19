@@ -95,7 +95,7 @@
           <Radius>45</Radius>
           <ExtraData>Circumference</ExtraData>
           <MeasureLabel>
-            <SpacePosition>330;180</SpacePosition>
+            <SpacePosition>375;180</SpacePosition>
             <TimePosition>0</TimePosition>
           </MeasureLabel>
           <ShowCenter>false</ShowCenter>
@@ -419,7 +419,7 @@
       </Drawings>
     </Keyframe>
   </Keyframes>
-  <TestGrid id="00000000-0000-4000-8000-000000000017" name="">
+  <TestGrid id="00000000-0000-4000-8000-000000000017" name="Camera test grid 1">
     <Visible>true</Visible>
     <ShowHorizontalAxis>false</ShowHorizontalAxis>
     <ShowVerticalAxis>true</ShowVerticalAxis>

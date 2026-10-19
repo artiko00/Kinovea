@@ -3,7 +3,7 @@
 
 use kinovea_fixtures::fixtures_root;
 use kinovea_metadata::ids::normalize_ids;
-use kinovea_metadata::{header_metadata, read_kva, write_kva, ExportFlags};
+use kinovea_metadata::{load_kva, write_kva, ExportFlags};
 
 #[test]
 fn fuzzed_files_round_trip_like_the_original() {
@@ -12,8 +12,7 @@ fn fuzzed_files_round_trip_like_the_original() {
     for n in 1..=20 {
         let input = std::fs::read_to_string(dir.join(format!("{n:02}.kva"))).unwrap();
         let want = std::fs::read_to_string(dir.join(format!("{n:02}.roundtrip.kva"))).unwrap();
-        let mut m = header_metadata(&input);
-        read_kva(&mut m, &input).unwrap();
+        let m = load_kva(&input).unwrap();
         let got = normalize_ids(&write_kva(&m, "0.0", false, ExportFlags::FULL).to_document());
         if got != want {
             let first = got
