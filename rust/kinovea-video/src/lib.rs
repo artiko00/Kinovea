@@ -18,6 +18,7 @@ mod geometry_test;
 pub mod info;
 #[cfg(test)]
 mod info_test;
+pub mod pipeline;
 pub mod results;
 #[cfg(test)]
 mod results_test;
