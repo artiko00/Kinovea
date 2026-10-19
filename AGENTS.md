@@ -50,6 +50,7 @@ CI: `.github/workflows/build.yml` builds the C# solution on `windows-latest`; `r
 - `Kinovea.Tests/` — manual test console (not in the `.sln`). `VideoTests/` — legacy, .NET 2.0, not in the `.sln`.
 - `Refs/` — vendored native SDKs. `Installer/` — NSIS + signing scripts. `Tools/` — XSLT, drawing tools, helpers.
 - `rust/` — Cargo workspace: `kinovea-{core,geometry,kinematics,measurement,metadata,render,video,tracking,export,fixtures}` + `kinovea` bin. Tests live next to sources as `src/<file>_test.rs` (what `testlens` recognizes).
+  `kinovea-video` holds the `VideoReader` contract, the dense cache and the bounded prebuffer (parity with `tests/fixtures/videocache/*`), the capture frame pipeline, the reader registry and a synthetic reader for tests.
   `kinovea-metadata` holds the annotation model (drawings, keyframes, styles, trackability, generic postures with their constraint engine, undo history) and the KVA 2.x reader/writer with legacy 1.3–1.5 migration; its `tests/` compare bytes with `tests/fixtures/kva/*` and `tests/fixtures/posture/*`.
 - `Kinovea.FixtureGen/` — C# console that generates parity fixtures. `tests/cases/` inputs, `tests/fixtures/` generated outputs (see `tests/README.md`). `tools/oracle/` — provision/build/pull scripts for the Windows host.
 - `openspec/` — spec-driven changes. `.agent/` — this harness (init, progress log, features).

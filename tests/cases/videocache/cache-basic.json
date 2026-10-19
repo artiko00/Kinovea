@@ -1,0 +1,39 @@
+{
+  "area": "videocache",
+  "seed": 0,
+  "inputs": {
+    "container": "cache",
+    "tolerance": 0.5,
+    "ops": [
+      "acquireNext",
+      "workingZone",
+      "add 0",
+      "add 10",
+      "add 20",
+      "add 30",
+      "add 10",
+      "acquireClosest 15",
+      "acquireClosest 25",
+      "acquireClosest -100",
+      "acquireNext",
+      "acquireNext",
+      "acquireNext",
+      "acquireNext",
+      "workingZone",
+      "acquireClosest 10",
+      "trim 10 20",
+      "acquireClosest 30",
+      "trim 0 15",
+      "add 40",
+      "trim 50 60",
+      "acquireNext",
+      "add 5",
+      "forceAdd 7",
+      "forceAdd 7",
+      "acquireClosest 6",
+      "clear",
+      "acquireClosest 0",
+      "shutdown"
+    ]
+  }
+}

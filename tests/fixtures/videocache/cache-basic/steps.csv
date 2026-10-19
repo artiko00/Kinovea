@@ -1,0 +1,30 @@
+op,result,current,snapshot,frames
+acquireNext,False,-1,-1|,
+workingZone,-1;-1,-1,-1|,
+add 0,Added,-1,1|[0;0],0
+add 10,Added,-1,2|[0;10],0 10
+add 20,Added,-1,3|[0;20],0 10 20
+add 30,Added,-1,4|[0;30],0 10 20 30
+add 10,Duplicate,-1,4|[0;30],0 10 20 30
+acquireClosest 15,,10,4|[0;30],0 10 20 30
+acquireClosest 25,,20,4|[0;30],0 10 20 30
+acquireClosest -100,,0,4|[0;30],0 10 20 30
+acquireNext,True,10,4|[0;30],0 10 20 30
+acquireNext,True,20,4|[0;30],0 10 20 30
+acquireNext,True,30,4|[0;30],0 10 20 30
+acquireNext,False,30,4|[0;30],0 10 20 30
+workingZone,0;30,30,4|[0;30],0 10 20 30
+acquireClosest 10,,10,4|[0;30],0 10 20 30
+trim 10 20,,10,5|[10;20],10 20
+acquireClosest 30,,20,5|[10;20],10 20
+trim 0 15,,10,6|[10;10],10
+add 40,Added,10,7|[10;40],10 40
+trim 50 60,,-1,8|,
+acquireNext,False,-1,8|,
+add 5,Added,-1,9|[5;5],5
+forceAdd 7,Added,-1,10|[5;7],5 7
+forceAdd 7,Duplicate,-1,10|[5;7],5 7
+acquireClosest 6,,5,10|[5;7],5 7
+clear,,-1,11|,
+acquireClosest 0,,-1,11|,
+shutdown,exception:NotImplementedException,-1,11|,

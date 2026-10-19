@@ -17,7 +17,7 @@ The ring buffer SHALL pre-allocate a power-of-two number of slots of a fixed byt
 The producer SHALL claim the next slot only if every active consumer has read past the slot that would be overwritten; a refused claim SHALL count as one dropped frame. Commit SHALL make the slot visible to consumers by advancing the producer position.
 
 #### Scenario: Drop when a consumer lags
-- **WHEN** capacity is 4, one active consumer is at position 0 and the producer has committed positions 0..3
+- **WHEN** capacity is 4, one active consumer is at position -1 (it has read nothing) and the producer has committed positions 0..3
 - **THEN** the next claim is refused and the drop count becomes 1
 
 #### Scenario: Inactive consumers do not block
@@ -35,7 +35,7 @@ A consumer waiting for a position SHALL return as soon as the producer position 
 The pipeline SHALL publish the measured frame frequency of the producer, computed over a sliding window of recent frame arrival times.
 
 #### Scenario: Steady producer
-- **WHEN** frames arrive every 20 ms for 48 frames
+- **WHEN** frames arrive every 20 ms for 200 frames (the pipeline ignores the first 48 intervals and averages windows of 24)
 - **THEN** the published frequency is 50 Hz within 5 percent
 
 ### Requirement: Batch consumer lifecycle

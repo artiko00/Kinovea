@@ -1,0 +1,13 @@
+op,result,current,snapshot,frames
+relate 0,exception:NullReferenceException,-1,-1|,
+purge,exception:NullReferenceException,-1,-1|,
+tryAcquire Timestamp 0,exception:NullReferenceException,-1,-1|,
+contiguous,exception:NullReferenceException,-1,-1|,
+interrupt,exception:NullReferenceException,-1,-1|,
+add 0,Added,-1,1|[0;0],0
+add 10,Added,-1,2|[0;10],0 10
+relate 5,exception:NullReferenceException,-1,2|[0;10],0 10
+acquireClosest 5,,0,2|[0;10],0 10
+acquireClosest 15,,10,2|[0;10],0 10
+trim 20 10,,-1,3|,
+add 20,Added,-1,4|[20;20],20

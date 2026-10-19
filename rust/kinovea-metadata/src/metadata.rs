@@ -21,8 +21,7 @@ mod query;
 mod query_test;
 
 crate::text_enum!(ImageAspectRatio [Auto, Force43, Force169, ForcedSquarePixels]);
-crate::text_enum!(ImageRotation [Rotate0, Rotate90, Rotate180, Rotate270]);
-crate::text_enum!(Demosaicing [None, RGGB, BGGR, GRBG, GBRG]);
+pub use kinovea_core::image_options::{Demosaicing, ImageRotation};
 
 /// Where a drawing lives (`AbstractDrawingManager.Id`).
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

@@ -1,0 +1,36 @@
+op,result,current,snapshot,frames
+tryAcquire Timestamp 0,False;-1;False,-1,-1|,
+relate 5,Empty,-1,-1|,
+add 0,Added,-1,1|[0;0],0
+add 10,Added,-1,2|[0;10],0 10
+add 20,Added,-1,3|[0;20],0 10 20
+add 30,Added,-1,4|[0;30],0 10 20 30
+add 40,Added,-1,5|[0;40],0 10 20 30 40
+add 50,Added,-1,6|[0;50],0 10 20 30 40 50
+add 60,Added,-1,7|[0;60],0 10 20 30 40 50 60
+add 70,Added,-1,8|[0;70],0 10 20 30 40 50 60 70
+add 80,Added,-1,9|[0;80],0 10 20 30 40 50 60 70 80
+add 90,Added,-1,10|[0;90],0 10 20 30 40 50 60 70 80 90
+add 100,Added,-1,11|[0;100],0 10 20 30 40 50 60 70 80 90 100
+tryAcquire Timestamp 34,True;30;True,30,12|[0;100],0 10 20 30 40 50 60 70 80 90 100
+tryAcquire Timestamp 30,True;30;True,30,13|[0;100],0 10 20 30 40 50 60 70 80 90 100
+tryAcquire StepForward 0,True;40;True,40,14|[0;100],0 10 20 30 40 50 60 70 80 90 100
+tryAcquire StepForward 0,True;50;True,50,15|[10;100],10 20 30 40 50 60 70 80 90 100
+tryAcquire StepBackward 0,True;40;True,40,16|[10;100],10 20 30 40 50 60 70 80 90 100
+tryAcquire Playback 55,True;50;True,50,17|[10;100],10 20 30 40 50 60 70 80 90 100
+tryAcquire Playback 60,True;60;True,60,18|[20;100],20 30 40 50 60 70 80 90 100
+relate -5,Behind,60,18|[20;100],20 30 40 50 60 70 80 90 100
+relate 60,InBoundsMatch,60,18|[20;100],20 30 40 50 60 70 80 90 100
+relate 65,InBoundsMatch,60,18|[20;100],20 30 40 50 60 70 80 90 100
+relate 100,InBoundsMatch,60,18|[20;100],20 30 40 50 60 70 80 90 100
+relate 105,InBoundsMatch,60,18|[20;100],20 30 40 50 60 70 80 90 100
+relate 150,Ahead,60,18|[20;100],20 30 40 50 60 70 80 90 100
+relate 1000,FarAhead,60,18|[20;100],20 30 40 50 60 70 80 90 100
+add 200 190,Added,60,19|[20;100] [200;200],20 30 40 50 60 70 80 90 100 200
+acquireClosest 100,,100,20|[60;100] [200;200],60 70 80 90 100 200
+tryAcquire StepForward 0,False;-1;False,100,21|[70;100] [200;200],70 80 90 100 200
+contiguous,False,100,21|[70;100] [200;200],70 80 90 100 200
+acquireClosest 200,,200,22|[70;100] [200;200],70 80 90 100 200
+tryAcquire StepBackward 0,False;-1;False,200,23|[70;100] [200;200],70 80 90 100 200
+tryAcquire Timestamp 150,False;-1;False,200,24|[70;100] [200;200],70 80 90 100 200
+tryAcquire Timestamp 0,False;-1;False,200,25|[70;100] [200;200],70 80 90 100 200

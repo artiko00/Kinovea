@@ -1,0 +1,26 @@
+op,result,current,snapshot,frames
+add 0,Added,-1,1|[0;0],0
+add 1,Added,-1,2|[0;1],0 1
+add 2,Added,-1,3|[0;2],0 1 2
+add 50 49,Added,-1,4|[0;2] [50;50],0 1 2 50
+add 3,Added,-1,5|[0;3],0 1 2 3
+acquireClosest 1,,1,6|[0;3],0 1 2 3
+add 4,Blocked,1,6|[0;3],0 1 2 3
+add 60 59,Blocked,1,6|[0;3],0 1 2 3
+add 5,Blocked,1,6|[0;3],0 1 2 3
+forceAdd 6,Added,1,7|[1;3] [6;6],1 2 3 6
+forceAdd 6,Duplicate,1,7|[1;3] [6;6],1 2 3 6
+acquireClosest 6,,6,8|[3;3] [6;6],3 6
+forceAdd 7,Added,6,9|[3;3] [6;7],3 6 7
+forceAdd 8,Added,6,10|[3;3] [6;8],3 6 7 8
+acquireClosest 2,,3,11|[3;3] [6;8],3 6 7 8
+forceAdd 9,Added,3,12|[3;3] [6;9],3 6 7 8 9
+forceAdd 10,Added,3,13|[3;3] [6;10],3 6 7 8 9 10
+forceAdd 11,Added,3,14|[3;3] [6;11],3 6 7 8 9 10 11
+contiguous,False,3,14|[3;3] [6;11],3 6 7 8 9 10 11
+purge,,3,15|[3;3],3
+forceAdd 0,Added,3,16|[0;0] [3;3],0 3
+forceAdd 1,Added,3,17|[0;1] [3;3],0 1 3
+forceAdd 2,Added,3,18|[0;3],0 1 2 3
+forceAdd 3,Duplicate,3,18|[0;3],0 1 2 3
+forceAdd 4,Added,3,19|[1;4],1 2 3 4

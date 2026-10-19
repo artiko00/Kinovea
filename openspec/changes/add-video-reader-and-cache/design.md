@@ -46,6 +46,15 @@ Abstract members of the C# class become required trait methods; the concrete hel
 ### D8. Dependencies
 None beyond `std` and workspace crates. `arc-swap` was considered for the snapshot and rejected: a `Mutex` held for a pointer copy is sufficient. Any future addition is a decision requiring approval.
 
+## Deviations recorded during apply
+
+- Prebuffer frames live in a sorted `Vec` (not a `BTreeMap`): the eviction arithmetic indexes like `SortedList`.
+- `PreBuffer::clear` empties the buffer where `PreBuffer2.Clear` throws `NotImplementedException`, like `Cache::shutdown` (D3); the fixture replay reports the original exception. Producers blocked in `add` are woken only where the original pulses (add, acquire with eviction, interrupt, shutdown), not after purge, forced add or try-acquire.
+- The replay maps a blocking `add` to `try_add` (no state change when it would wait); the oracle records `Blocked` once its worker sits in `Monitor.Wait`. The blocking path itself is covered by the concurrency tests.
+- `playback_timestamp` takes the elapsed time instead of reading a stored epoch; companion KVA detection is case-sensitive on Linux; `most_recent_supported` breaks mtime ties by name (the order of `GetFiles` is unspecified).
+- `EvictNonContiguous` is not ported: its only call is commented out in `PreBuffer2.TryAcquire`.
+- Two pipeline scenarios were corrected to the original: a consumer that has read nothing is at -1, and the measured frequency needs more than 48 intervals.
+
 ## Legacy superseded
 
 `Kinovea.Video/VideoReaders/VideoReader.cs`, `VideoTypeManager.cs`, `VideoCapabilities.cs`, `SupportedExtensionsAttribute.cs`, `IFrameGenerator.cs`, `CapabilityNotSupportedException.cs`; `Kinovea.Video/Caching/*` (`Cache.cs`, `PreBuffer2.cs`, `SingleFrame.cs`, `VideoFrame.cs`, `PlayerState.cs`, `PlayerAction.cs`, `CacheSnapshot.cs`, `TryAcquireResult.cs`, `DecodingJobPlan.cs`, `DecoderRelocation.cs`, `CacheTimestampRelation.cs`, `FrameSkippingPolicy.cs`, `VideoDecodingMode.cs`, `CacheLoadMode.cs`, `SeekProgress.cs`, `ThreadCanceler.cs`, `IVideoFramesContainer.cs`, `IWorkingZoneContainer.cs`, `RequestFulfilledEventArgs.cs`, `CacheAddResult.cs`); `Kinovea.Video/VideoGeometry/*`, `VideoInfo.cs`, `VideoSummary.cs`, `Fraction.cs`, `FitHelper.cs`, `WorkingZoneRequest.cs`, `OpenVideoResult.cs`, `VideoExportResult.cs`, `VideoExportSettings.cs`, `RecordingResult.cs`, `RecordingSettings.cs`, `Delegates.cs`; all of `Kinovea.Pipeline/`.

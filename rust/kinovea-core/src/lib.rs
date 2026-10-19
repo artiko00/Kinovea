@@ -29,6 +29,9 @@ macro_rules! text_enum {
 #[cfg(test)]
 mod lib_test;
 
+pub mod image_options;
+#[cfg(test)]
+mod image_options_test;
 pub mod preferences;
 pub mod timecode;
 mod timecode_format;

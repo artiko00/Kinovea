@@ -1,0 +1,36 @@
+{
+  "area": "videocache",
+  "seed": 0,
+  "inputs": {
+    "container": "prebuffer",
+    "capacity": 4,
+    "retention": 2,
+    "tolerance": 0.5,
+    "farAhead": 10,
+    "tsPerFrame": 1,
+    "ops": [
+      "add 0",
+      "add 1",
+      "clear",
+      "trim 0 1",
+      "workingZone",
+      "add 2",
+      "add 3",
+      "add 1",
+      "acquireClosest 2",
+      "add 4",
+      "add 2",
+      "forceAdd 5",
+      "forceAdd 0",
+      "purge",
+      "acquireNext",
+      "tryAcquire StepForward 0",
+      "tryAcquire StepBackward 0",
+      "relate 2",
+      "relate 3",
+      "shutdown",
+      "relate 2",
+      "clear"
+    ]
+  }
+}

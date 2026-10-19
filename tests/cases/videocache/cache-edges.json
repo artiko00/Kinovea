@@ -1,0 +1,22 @@
+{
+  "area": "videocache",
+  "seed": 0,
+  "inputs": {
+    "container": "cache",
+    "tolerance": 0.5,
+    "ops": [
+      "relate 0",
+      "purge",
+      "tryAcquire Timestamp 0",
+      "contiguous",
+      "interrupt",
+      "add 0",
+      "add 10",
+      "relate 5",
+      "acquireClosest 5",
+      "acquireClosest 15",
+      "trim 20 10",
+      "add 20"
+    ]
+  }
+}
