@@ -2,25 +2,25 @@
 
 ## 1. Oracle fixtures
 
-- [ ] 1.1 Add `tests/cases/export/{minimal,simple,complete}.json` (inputs: kva path, `exportSpace`, `csvDecimalSeparator: point`, `timecodeFormat: ClassicTime`) and `Kinovea.FixtureGen/Areas/ExportArea.cs` running the six spreadsheet exporters plus `ExporterMarkdown` without images into `<out>/export/<case>/{measured.json,trajectory.csv,chrono.csv,trajectory.txt,report.md,measured.xlsx,measured.ods}`; register the area in `Program.cs`; verify `tools/oracle/fixtures.sh --verify` reports identical trees.
-- [ ] 1.2 Extend `ExportArea` to extract `xl/worksheets/sheet1.xml`, `xl/sharedStrings.xml` (as `measured.xlsx.sheet1.xml`, `measured.xlsx.strings.xml`) and `content.xml` (as `measured.ods.content.xml`) next to the binaries; verify the extracted XML is stable across two runs and committed under `tests/fixtures/export/`.
-- [ ] 1.3 Add `tests/cases/import/{openpose,trc,srt}.json` with small hand-written inputs in `tests/cases/import/data/` (3 OpenPose frames × 2 persons incl. one low-confidence joint and one COCO person; a 26-marker TRC with 5 rows; an SRT with 3 cues incl. tags and one empty block) and `Kinovea.FixtureGen/Areas/ImportArea.cs` that imports them into an empty document (1920×1080, 400 ts/frame) and saves `imported.kva` with ids normalised as in `KvaArea`; verify fixtures regenerate deterministically.
+- [x] 1.1 Add `tests/cases/export/{minimal,simple,complete}.json` (inputs: kva path, `exportSpace`, `csvDecimalSeparator: point`, `timecodeFormat: ClassicTime`) and `Kinovea.FixtureGen/Areas/ExportArea.cs` running the six spreadsheet exporters plus `ExporterMarkdown` without images into `<out>/export/<case>/{measured.json,trajectory.csv,chrono.csv,trajectory.txt,report.md,measured.xlsx,measured.ods}`; register the area in `Program.cs`; verify `tools/oracle/fixtures.sh --verify` reports identical trees.
+- [x] 1.2 Extend `ExportArea` to extract `xl/worksheets/sheet1.xml`, `xl/sharedStrings.xml` (as `measured.xlsx.sheet1.xml`, `measured.xlsx.strings.xml`) and `content.xml` (as `measured.ods.content.xml`) next to the binaries; verify the extracted XML is stable across two runs and committed under `tests/fixtures/export/`.
+- [x] 1.3 Add `tests/cases/import/{openpose,trc,srt}.json` with small hand-written inputs in `tests/cases/import/data/` (3 OpenPose frames × 2 persons incl. one low-confidence joint and one COCO person; a 26-marker TRC with 5 rows; an SRT with 3 cues incl. tags and one empty block) and `Kinovea.FixtureGen/Areas/ImportArea.cs` that imports them into an empty document (1920×1080, 400 ts/frame) and saves `imported.kva` with ids normalised as in `KvaArea`; verify fixtures regenerate deterministically.
 
 ## 2. Measured data collector and text exports
 
-- [ ] 2.1 Write failing tests in `rust/kinovea-export/src/measured_data_test.rs` loading `tests/fixtures/export/complete/measured.json` and asserting counts and values of each list; implement `rust/kinovea-export/src/measured_data.rs` (`MeasuredData` structs, `collect_measured_data(&Document, &ExportPrefs)`); verify `cargo test -p kinovea-export` green and `cd rust && make verify`.
-- [ ] 2.2 Write `rust/kinovea-export/src/rtf_test.rs` (cases: plain, `\par`, `\'e9`, `\u233?`, nested groups) then `src/rtf.rs` `rtf_to_text`; verify tests pass and the keyframe comments of the three samples equal the `comment` fields of `measured.json`.
-- [ ] 2.3 Write `src/csv_test.rs` comparing `write_csv_trajectory` and `write_csv_chrono` output to `trajectory.csv` and `chrono.csv` byte for byte, plus a comma-separator case; implement `src/csv.rs` (`CsvFormat { decimal, list_separator }`, quoting, NaN → empty); verify tests pass.
-- [ ] 2.4 Write `src/txt_test.rs` against `trajectory.txt`, implement `src/txt.rs`; verify.
-- [ ] 2.5 Write `src/json_test.rs` parsing both Rust output and `measured.json` into `serde_json::Value` and asserting equality with 1e-4 numeric tolerance and identical key order; implement `src/json.rs`; verify.
-- [ ] 2.6 Write `src/markdown_test.rs` against `report.md` (no images) and a case with three image paths; implement `src/markdown.rs`; verify.
+- [x] 2.1 Write failing tests in `rust/kinovea-export/src/measured_data_test.rs` loading `tests/fixtures/export/complete/measured.json` and asserting counts and values of each list; implement `rust/kinovea-export/src/measured_data.rs` (`MeasuredData` structs, `collect_measured_data(&Document, &ExportPrefs)`); verify `cargo test -p kinovea-export` green and `cd rust && make verify`.
+- [x] 2.2 Write `rust/kinovea-export/src/rtf_test.rs` (cases: plain, `\par`, `\'e9`, `\u233?`, nested groups) then `src/rtf.rs` `rtf_to_text`; verify tests pass and the keyframe comments of the three samples equal the `comment` fields of `measured.json`.
+- [x] 2.3 Write `src/csv_test.rs` comparing `write_csv_trajectory` and `write_csv_chrono` output to `trajectory.csv` and `chrono.csv` byte for byte, plus a comma-separator case; implement `src/csv.rs` (`CsvFormat { decimal, list_separator }`, quoting, NaN → empty); verify tests pass.
+- [x] 2.4 Write `src/txt_test.rs` against `trajectory.txt`, implement `src/txt.rs`; verify.
+- [x] 2.5 Write `src/json_test.rs` parsing both Rust output and `measured.json` into `serde_json::Value` and asserting equality with 1e-4 numeric tolerance and identical key order; implement `src/json.rs`; verify.
+- [x] 2.6 Write `src/markdown_test.rs` against `report.md` (no images) and a case with three image paths; implement `src/markdown.rs`; verify.
 
 ## 3. Importers
 
-- [ ] 3.1 Write `src/openpose_test.rs` (folder scan with prefix and alphanumeric sort, frame token parse failure, 75-value filter, confidence options) asserting the saved KVA equals `tests/fixtures/import/openpose/imported.kva` after id normalisation; implement `src/openpose.rs` using the `OpenPoseBody25` tool from `kinovea-metadata`; verify.
-- [ ] 3.2 Write `src/trc_test.rs` (header parsing, marker mismatch error, posture + 26 tracks) against `tests/fixtures/import/trc/imported.kva`; implement `src/trc.rs`; verify.
-- [ ] 3.3 Write `src/srt_test.rs` (block split, `,`/`.` millis, tag stripping, CRLF) against `tests/fixtures/import/srt/imported.kva`; implement `src/srt.rs`; verify.
-- [ ] 3.4 Write `src/import_test.rs` for `import_file(&mut Document, path)` dispatch (`.kva` → metadata loader, `.trc`, `.srt`, `_keypoints.json`, unknown → error) and `ImportReport`; implement `src/import.rs`; verify `make verify`.
+- [x] 3.1 Write `src/openpose_test.rs` (folder scan with prefix and alphanumeric sort, frame token parse failure, 75-value filter, confidence options) asserting the saved KVA equals `tests/fixtures/import/openpose/imported.kva` after id normalisation; implement `src/openpose.rs` using the `OpenPoseBody25` tool from `kinovea-metadata`; verify.
+- [x] 3.2 Write `src/trc_test.rs` (header parsing, marker mismatch error, posture + 26 tracks) against `tests/fixtures/import/trc/imported.kva`; implement `src/trc.rs`; verify.
+- [x] 3.3 Write `src/srt_test.rs` (block split, `,`/`.` millis, tag stripping, CRLF) against `tests/fixtures/import/srt/imported.kva`; implement `src/srt.rs`; verify.
+- [x] 3.4 Write `src/import_test.rs` for `import_file(&mut Document, path)` dispatch (`.kva` → metadata loader, `.trc`, `.srt`, `_keypoints.json`, unknown → error) and `ImportReport`; implement `src/import.rs`; verify `make verify`.
 
 ## 4. Spreadsheet containers (approval for `rust_xlsxwriter`, `zip`, `quick-xml`)
 

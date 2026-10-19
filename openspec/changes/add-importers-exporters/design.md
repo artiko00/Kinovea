@@ -53,6 +53,15 @@ Mirrors `WriterFFMpegCLI`: `ffmpeg` child process, raw BGR24 frames piped to std
 ### Legacy superseded
 `Kinovea.ScreenManager/Importers/**` (OpenPose, SRT, TRC), `Exporters/Spreadsheet/*.cs`, `Exporters/Document/{DocumentExporter,ExporterMarkdown,DocumentExportFormat}.cs`, `Exporters/Images/{ExporterImage,ExporterImageSequence,ExporterImageSideBySide,ImageExporter,ImageExportFormat}.cs`, `Exporters/Video/{ExporterVideo,ExporterVideoSideBySide,VideoExporter,VideoExportFormat,WriterFFMpegCLI,WriterFFMpegCliHelper}.cs`, `Metadata/Serialization/MeasuredData*.cs`, `Metadata.CollectMeasuredData` and the `CollectMeasuredData` methods on drawings. The `FormConfigureExport*` dialogs and `ControlEncodingSettings` are superseded by the UI changes.
 
+## Deviations recorded during apply
+
+- Oracle: the xlsx and ods containers embed their creation time, so only the sheet XML (`measured.xlsx.sheet1.xml`, `measured.xlsx.strings.xml`, `measured.ods.content.xml`) is stored. Import inputs live in `tests/data/import` because the generator treats every `.json` under `tests/cases` as a case. The Markdown keyframe timecode comes from the document timecode builder; the oracle's builder returns the raw timestamp, and the Rust writer takes the formatter as an argument.
+- The TRC case has 22 markers (the `BodyWithFeet` tool) and 7 data rows with `NumFrames` 10: the original bounds its data loop by `NumFrames` as a line count, so 5 rows are imported; Rust reproduces it. Each TRC track starts with its first point twice, as `DrawingTrack(name, points)` does.
+- `rtf_to_text` drops the final paragraph mark, as `RichTextBox.Text`; `\ansicpg` is not read (code page 1252 always).
+- Choosing the same video context checks first that the current video exists and is not empty (`MetadataSerializer.IsSameContext`); Rust used names first, which only showed on the `all-drawings` export case.
+- `HighSpeedFactor` is a field of the video context (default 1, not stored in KVA); the original derives it in `PostSetupVideo`, which the oracle does not call, so the fixtures use 1.
+- Not yet ported: trackability timelines in the measured data (with `add-tracking`), counter and cadence (TODO in the original), calibration driven by tracking (static calibration is used), culture-aware sorting (ordinal in Rust, stable sorts).
+
 ## Risks / Trade-offs
 
 - [`rust_xlsxwriter` cell styles differ from SpreadsheetLight] → the spec compares values, number formats and merges, not fills or fonts.

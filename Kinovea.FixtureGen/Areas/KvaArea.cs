@@ -91,7 +91,7 @@ namespace Kinovea.FixtureGen.Areas
             metadata.AverageTimeStampsPerFrame = atpf == null ? 1 : double.Parse(atpf.Value, Oracle.Culture);
         }
 
-        private static void ApplyContext(Metadata metadata, JObject context, string videoPath)
+        public static void ApplyContext(Metadata metadata, JObject context, string videoPath)
         {
             metadata.ImageSize = ParseSize((string)context["imageSize"]);
             metadata.AverageTimeStampsPerFrame = (double)context["averageTimeStampsPerFrame"];

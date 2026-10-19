@@ -153,6 +153,13 @@ dependencies = [
 [[package]]
 name = "kinovea-export"
 version = "0.1.0"
+dependencies = [
+ "kinovea-core",
+ "kinovea-fixtures",
+ "kinovea-geometry",
+ "kinovea-metadata",
+ "serde_json",
+]
 
 [[package]]
 name = "kinovea-fixtures"

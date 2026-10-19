@@ -24,6 +24,8 @@ namespace Kinovea.FixtureGen
             new PostureArea(),
             new VideoCacheArea(),
             new TrackingArea(),
+            new ExportArea(),
+            new ImportArea(),
         }.ToDictionary(a => a.Name);
 
         public static int Main(string[] args)

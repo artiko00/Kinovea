@@ -1,0 +1,18 @@
+{
+  "area": "export",
+  "seed": 0,
+  "inputs": {
+    "kva": "Tools/XML/Schema/samples/simple.kva",
+    "context": {
+      "imageSize": "512;384",
+      "averageTimeStampsPerFrame": 1.0,
+      "averageTimeStampsPerSecond": 25.0,
+      "baselineFrameInterval": 40,
+      "firstTimeStamp": 0,
+      "timeOrigin": 0
+    },
+    "exportSpace": "WorldSpace",
+    "csvDecimalSeparator": "Point",
+    "timecodeFormat": "ClassicTime"
+  }
+}

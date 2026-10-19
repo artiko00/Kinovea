@@ -147,3 +147,9 @@ Chronological. Newest entry last. Never delete entries; correct a wrong decision
 - Done: new oracle area `tracking` (formula frames, six cases, the original trackers through OpenCvSharp, the GDI+ mask dumped); parity: template within 0.016 px and 0.005 similarity, circle exact. Pixel steps checked against OpenCV 4.10 and 5.0 in throwaway environments outside the repo (gray uses the 15-bit coefficients). Specs corrected where they described behavior the original does not have (HSV mask, median blur on by default, trackability fallbacks and hash).
 - Hough divergences observed: none on the synthetic cases (centers at `(cell + 0.5) * dp`, as OpenCV). Filter crate: none (in-crate).
 - Open: PR #8 (change 06) also changes `kinovea-metadata/src/trackability.rs` (Dictionary order, `update_id`); merging both will need a manual merge of that file.
+
+## 2026-10-19 — add-importers-exporters, sections 1-3 (branch feat/importers-exporters)
+
+- Agent: Claude Code (Opus 5.5) orchestrating Haiku subagents (E1 RTF, E2 measured data and JSON, E3 importers, E4 CSV/TXT/Markdown, E5 postures, distortion, high speed factor). Every change after 10 needs a dependency approval; sections 1-3 of change 12 do not, so they were done first. Also archived `fix-kva-review-findings` on master (its archive commit was only on the unmerged branch of change 06).
+- Done: oracle areas `export` (six spreadsheet exporters and Markdown on four documents, sheet XML kept for xlsx/ods) and `import` (OpenPose, TRC, SRT on hand-written inputs); Rust collector, JSON, CSV, TXT and Markdown writers match the original on every case (JSON at 1e-4 with key order, the rest byte for byte); importers match byte for byte. Found and fixed in `kinovea-metadata`: the same-context rule of KVA loading checks the video file first.
+- Blocked: sections 4 (`rust_xlsxwriter`, `zip`, `quick-xml`), 5 (`clap`) and 6 (changes 06 and 08). The change cannot be archived until then.

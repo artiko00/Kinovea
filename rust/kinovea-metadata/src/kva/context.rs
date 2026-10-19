@@ -43,11 +43,15 @@ impl ImportContext {
         Scale { x: current.image_size.width as f32 / self.image_size.width as f32, y: current.image_size.height as f32 / self.image_size.height as f32 }
     }
 
-    /// `IsSameContext` without touching the file system: no current video path means the same
-    /// context; otherwise the paths, then the byte lengths, then the file names are compared.
+    /// `IsSameContext` without touching the file system (`MetadataSerializer.cs:530-555`): no
+    /// current video path means the same context; a current file that is missing or empty (length
+    /// 0) is another one; otherwise the paths, then the byte lengths, then the file names compare.
     pub fn is_same_context(&self, current: &VideoContext) -> bool {
         if current.video_path.is_empty() {
             return true;
+        }
+        if current.video_byte_length == 0 {
+            return false;
         }
         if !self.path.is_empty() && self.path == current.video_path {
             return true;

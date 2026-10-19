@@ -1,0 +1,235 @@
+{
+  "metadata": {
+    "producer": "Kinovea.0.0",
+    "fullPath": "complete.mp4",
+    "originalFilename": "complete",
+    "imageSize": {
+      "width": 848,
+      "height": 480
+    },
+    "captureFramerate": 25.0,
+    "videoFramerate": 25.0
+  },
+  "data": {
+    "keyframes": [
+      {
+        "name": "comments",
+        "timeUnit": "s",
+        "time": 1.28,
+        "comment": "Comments\nComments with formatting"
+      },
+      {
+        "name": "labels",
+        "timeUnit": "s",
+        "time": 2.84,
+        "comment": ""
+      },
+      {
+        "name": "pencils",
+        "timeUnit": "s",
+        "time": 4.08,
+        "comment": ""
+      },
+      {
+        "name": "lines",
+        "timeUnit": "s",
+        "time": 5.48,
+        "comment": ""
+      },
+      {
+        "name": "circles",
+        "timeUnit": "s",
+        "time": 7.12,
+        "comment": ""
+      },
+      {
+        "name": "crossmarks",
+        "timeUnit": "s",
+        "time": 8.48,
+        "comment": ""
+      },
+      {
+        "name": "angles",
+        "timeUnit": "s",
+        "time": 9.84,
+        "comment": ""
+      },
+      {
+        "name": "0:00:05:34",
+        "timeUnit": "s",
+        "time": 12.8,
+        "comment": ""
+      },
+      {
+        "name": "0:00:05:36",
+        "timeUnit": "s",
+        "time": 12.84,
+        "comment": ""
+      }
+    ],
+    "positions": [
+      {
+        "name": "Marker 1",
+        "timeUnit": "s",
+        "dataUnit": "px",
+        "time": 8.48,
+        "value": [
+          -165.0,
+          161.0
+        ]
+      },
+      {
+        "name": "Marker 2",
+        "timeUnit": "s",
+        "dataUnit": "px",
+        "time": 8.48,
+        "value": [
+          -182.0,
+          161.0
+        ]
+      },
+      {
+        "name": "Marker 3",
+        "timeUnit": "s",
+        "dataUnit": "px",
+        "time": 8.48,
+        "value": [
+          -164.0,
+          187.0
+        ]
+      },
+      {
+        "name": "Marker 4",
+        "timeUnit": "s",
+        "dataUnit": "px",
+        "time": 8.48,
+        "value": [
+          -181.0,
+          186.0
+        ]
+      }
+    ],
+    "distances": [
+      {
+        "name": "Line 1",
+        "timeUnit": "s",
+        "dataUnit": "px",
+        "time": 5.48,
+        "value": 97.3087845
+      },
+      {
+        "name": "Line 2",
+        "timeUnit": "s",
+        "dataUnit": "px",
+        "time": 5.48,
+        "value": 361.001373
+      },
+      {
+        "name": "Line 3",
+        "timeUnit": "s",
+        "dataUnit": "px",
+        "time": 5.48,
+        "value": 84.59315
+      }
+    ],
+    "angles": [
+      {
+        "name": "Angle 1",
+        "timeUnit": "s",
+        "dataUnit": "°",
+        "time": 9.84,
+        "value": -90.0
+      },
+      {
+        "name": "Angle 2",
+        "timeUnit": "s",
+        "dataUnit": "°",
+        "time": 9.84,
+        "value": 90.0
+      },
+      {
+        "name": "Angle 3",
+        "timeUnit": "s",
+        "dataUnit": "°",
+        "time": 9.84,
+        "value": 180.0
+      }
+    ],
+    "times": [
+      {
+        "name": "default",
+        "timeUnit": "s",
+        "duration": 0.0,
+        "cumul": 0.0,
+        "start": 0.0,
+        "stop": 0.0
+      },
+      {
+        "name": "countdown",
+        "timeUnit": "s",
+        "duration": 0.52,
+        "cumul": 0.52,
+        "start": 11.16,
+        "stop": 11.68
+      }
+    ],
+    "timeseries": [
+      {
+        "name": "Trajectory 1",
+        "timeUnit": "s",
+        "dataUnit": "px",
+        "time": [
+          0.0,
+          0.04,
+          0.08,
+          0.12,
+          0.16,
+          0.2,
+          0.24,
+          0.28,
+          0.32
+        ],
+        "data": {
+          "0": [
+            [
+              -181.0,
+              -113.0
+            ],
+            [
+              161.0,
+              -121.0
+            ],
+            [
+              167.0,
+              106.0
+            ],
+            [
+              -178.0,
+              113.0
+            ],
+            [
+              -242.0,
+              189.0
+            ],
+            [
+              230.0,
+              181.0
+            ],
+            [
+              221.0,
+              -197.0
+            ],
+            [
+              -247.0,
+              -186.0
+            ],
+            [
+              -291.0,
+              93.0
+            ]
+          ]
+        }
+      }
+    ]
+  }
+}

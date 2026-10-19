@@ -1,0 +1,16 @@
+{
+  "area": "import",
+  "seed": 0,
+  "inputs": {
+    "kind": "srt",
+    "file": "tests/data/import/clip.srt",
+    "context": {
+      "imageSize": "1920;1080",
+      "averageTimeStampsPerFrame": 400,
+      "averageTimeStampsPerSecond": 10000,
+      "baselineFrameInterval": 40,
+      "firstTimeStamp": 0,
+      "timeOrigin": 0
+    }
+  }
+}

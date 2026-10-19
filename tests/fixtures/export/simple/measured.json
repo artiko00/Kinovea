@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "producer": "Kinovea.0.0",
+    "fullPath": "simple.mp4",
+    "originalFilename": "simple",
+    "imageSize": {
+      "width": 512,
+      "height": 384
+    },
+    "captureFramerate": 25.0,
+    "videoFramerate": 25.0
+  },
+  "data": {
+    "keyframes": [
+      {
+        "name": "0:00:00:00",
+        "timeUnit": "s",
+        "time": 0.0,
+        "comment": ""
+      }
+    ],
+    "positions": [],
+    "distances": [],
+    "angles": [
+      {
+        "name": "Angle 1",
+        "timeUnit": "s",
+        "dataUnit": "°",
+        "time": 0.0,
+        "value": 124.574196
+      }
+    ],
+    "times": [],
+    "timeseries": []
+  }
+}

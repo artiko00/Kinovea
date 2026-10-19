@@ -47,11 +47,13 @@ pub struct VideoContext {
     pub selection_end: i64,
     pub time_origin: i64,
     pub capture_fps: f64,
+    /// Capture over video frame rate; 1 unless set (`Metadata.HighSpeedFactor`, never saved in KVA).
+    pub high_speed_factor: f64,
 }
 
 impl Default for VideoContext {
     fn default() -> Self {
-        VideoContext { video_path: String::new(), video_byte_length: 0, image_size: Size::default(), average_timestamps_per_frame: 1.0, average_timestamps_per_second: 25.0, baseline_frame_interval_ms: 40.0, first_timestamp: 0, selection_start: 0, selection_end: 0, time_origin: 0, capture_fps: 25.0 }
+        VideoContext { video_path: String::new(), video_byte_length: 0, image_size: Size::default(), average_timestamps_per_frame: 1.0, average_timestamps_per_second: 25.0, baseline_frame_interval_ms: 40.0, first_timestamp: 0, selection_start: 0, selection_end: 0, time_origin: 0, capture_fps: 25.0, high_speed_factor: 1.0 }
     }
 }
 
@@ -104,6 +106,9 @@ impl Metadata {
         m.set_image_size(image_size);
         m
     }
+
+    /// `Metadata.HighSpeedFactor` setter: 0 is read as 1.
+    pub fn set_high_speed_factor(&mut self, factor: f64) { self.video.high_speed_factor = if factor == 0.0 { 1.0 } else { factor }; }
 
     /// `Metadata.ImageSize` setter: re-initializes the calibration for the new size.
     pub fn set_image_size(&mut self, image_size: Size) {
