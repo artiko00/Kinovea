@@ -47,22 +47,22 @@ When the best location is not on the border of the similarity map and the simila
 - **THEN** the refined position is within 0.15 pixel of the true position
 
 ### Requirement: Template update policy
-After a successful step the template SHALL be replaced by the image patch at the new location when the similarity is above the update threshold or below the similarity threshold; otherwise the previous template SHALL be kept.
+After each step the previous template SHALL be kept when the similarity is above the update threshold or below the similarity threshold (a confident match or a failure); otherwise (a fair match) the template SHALL be replaced by the image patch at the new location, as `TrackerTemplateMatching.CreateTrackPoint` does.
 
-#### Scenario: Confident match updates
+#### Scenario: Confident match keeps the template
 - **WHEN** a step succeeds with similarity 0.95 and update threshold 0.8
-- **THEN** the stored template is the new patch
-
-#### Scenario: Mediocre match keeps template
-- **WHEN** a step succeeds with similarity 0.7
 - **THEN** the stored template is unchanged
 
-### Requirement: Mask
-When mask usage is enabled, pixels outside the HSV range SHALL be excluded from the correlation after the configured dilation and erosion; when the masked correlation yields no valid score the tracker SHALL fall back to the unmasked correlation.
+#### Scenario: Fair match updates the template
+- **WHEN** a step succeeds with similarity 0.7, similarity threshold 0.5 and update threshold 0.8
+- **THEN** the stored template is the new patch
 
-#### Scenario: Mask excludes background
-- **WHEN** a mask selects the target colour and the background changes between frames
-- **THEN** the step still succeeds with similarity above the threshold
+### Requirement: Mask
+When mask usage is enabled, the correlation SHALL be restricted to the ellipse inscribed in the block window (the mask the original paints with GDI+); when the masked correlation yields an infinite score or a score above 1 the tracker SHALL fall back to the unmasked correlation. The HSV range, dilation and erosion parameters are stored but not used by the tracker, as in the original.
+
+#### Scenario: Mask excludes the block corners
+- **WHEN** a disc moves over a gradient background with mask usage enabled
+- **THEN** each step succeeds with similarity above the threshold and the corners of the block do not take part in the correlation
 
 ### Requirement: Trim and clear
 Trimming at a time SHALL drop templates after that time; clear SHALL drop all templates and the tracker SHALL report not ready.

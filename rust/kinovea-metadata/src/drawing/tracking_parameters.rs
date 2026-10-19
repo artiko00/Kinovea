@@ -8,70 +8,27 @@ use kinovea_geometry::Size;
 
 crate::text_enum!(TrackingAlgorithm [Correlation, Circle]);
 
-#[derive(Debug, Clone, PartialEq)]
-pub struct HsvRange {
-    pub hue: (f32, f32),
-    pub saturation: (f32, f32),
-    pub value: (f32, f32),
-}
+pub mod hsv_range;
+#[cfg(test)]
+mod hsv_range_test;
+pub use hsv_range::HsvRange;
 
-impl Default for HsvRange {
-    fn default() -> Self {
-        HsvRange {
-            hue: (0.0, 360.0),
-            saturation: (0.0, 255.0),
-            value: (0.0, 255.0),
-        }
-    }
-}
-
-impl HsvRange {
-    pub fn parse(text: &str) -> HsvRange {
-        let v: Vec<f32> = text
-            .split(';')
-            .filter_map(|p| p.trim().parse().ok())
-            .collect();
-        if v.len() != 6 {
-            return HsvRange {
-                hue: (0.0, 0.0),
-                saturation: (0.0, 0.0),
-                value: (0.0, 0.0),
-            };
-        }
-        HsvRange {
-            hue: (v[0], v[1]),
-            saturation: (v[2], v[3]),
-            value: (v[4], v[5]),
-        }
-    }
-
-    pub fn write(&self) -> String {
-        [
-            self.hue.0,
-            self.hue.1,
-            self.saturation.0,
-            self.saturation.1,
-            self.value.0,
-            self.value.1,
-        ]
-        .iter()
-        .map(|v| format_f32_default(*v))
-        .collect::<Vec<_>>()
-        .join(";")
-    }
-}
+/// `TrackingParameters.maxWindowSize`: both window sides are clamped to this.
+const MAX_WINDOW_SIZE: i32 = 400;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct TrackingParameters {
     pub algorithm: TrackingAlgorithm,
-    pub search_window: Size,
-    pub block_window: Size,
+    search_window: Size,
+    block_window: Size,
     pub similarity_threshold: f64,
     pub template_update_threshold: f64,
     pub use_mask: bool,
     pub hsv_range: HsvRange,
     pub dilate: i32,
     pub erode: i32,
+    /// Not stored in KVA, as in the original.
+    pub reset_on_move: bool,
 }
 
 impl Default for TrackingParameters {
@@ -86,11 +43,41 @@ impl Default for TrackingParameters {
             hsv_range: HsvRange::default(),
             dilate: 0,
             erode: 0,
+            reset_on_move: true,
         }
     }
 }
 
 impl TrackingParameters {
+    pub fn search_window(&self) -> Size {
+        self.search_window
+    }
+
+    pub fn block_window(&self) -> Size {
+        self.block_window
+    }
+
+    /// `SearchWindow` setter: clamped, then grown to the block window.
+    pub fn set_search_window(&mut self, size: Size) {
+        self.search_window = clamp_window(size);
+        self.fit_block_window();
+    }
+
+    /// `BlockWindow` setter: clamped, then the search window is grown to fit.
+    pub fn set_block_window(&mut self, size: Size) {
+        self.block_window = clamp_window(size);
+        self.fit_block_window();
+    }
+
+    /// `FitBlockWindow`: correlation needs the search window to hold the whole block.
+    fn fit_block_window(&mut self) {
+        if self.algorithm != TrackingAlgorithm::Correlation {
+            return;
+        }
+        self.search_window.width = self.search_window.width.max(self.block_window.width);
+        self.search_window.height = self.search_window.height.max(self.block_window.height);
+    }
+
     pub fn read_kva(e: &Element) -> TrackingParameters {
         let mut p = TrackingParameters::default();
         for c in &e.children {
@@ -157,5 +144,13 @@ impl TrackingParameters {
             ^ i32::from(self.use_mask)
             ^ self.dilate
             ^ self.erode << 8
+            ^ self.hsv_range.content_hash()
     }
+}
+
+fn clamp_window(size: Size) -> Size {
+    Size::new(
+        size.width.min(MAX_WINDOW_SIZE),
+        size.height.min(MAX_WINDOW_SIZE),
+    )
 }

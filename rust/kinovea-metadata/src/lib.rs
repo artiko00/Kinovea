@@ -39,6 +39,7 @@ pub use keyframe::Keyframe;
 pub use kva::{header_metadata, read_kva, write_kva, ExportFlags, KvaError};
 pub use metadata::Metadata;
 pub use style::{StyleElement, StyleElements, StyleValue};
+pub use uuid::Uuid;
 
 /// Returns the crate name as declared in `Cargo.toml`.
 pub fn crate_name() -> &'static str {

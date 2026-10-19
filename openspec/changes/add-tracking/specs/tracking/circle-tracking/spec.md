@@ -14,7 +14,7 @@ The expected radius SHALL be the average of the radii of the most recent tracked
 - **THEN** the next step searches around radius 12
 
 ### Requirement: Detection
-A step SHALL convert the search region to grayscale, apply a median blur, and detect circles with a gradient Hough transform at the reference radius, starting from a high vote threshold and lowering it by steps until exactly one circle passes or the minimum is reached; zero votes SHALL mean failure.
+A step SHALL convert the search region to grayscale, apply a median blur only when region blurring is enabled (off by default, as in the original), and detect circles with a gradient Hough transform at the reference radius, starting from a high vote threshold and lowering it by steps until exactly one circle passes or the minimum is reached; zero votes SHALL mean failure.
 
 #### Scenario: Synthetic disc
 - **WHEN** a filled disc of radius 10 rendered by formula moves 4 pixels between frames

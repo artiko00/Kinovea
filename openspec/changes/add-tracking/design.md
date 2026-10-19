@@ -41,6 +41,22 @@ A closed form for the vertex of a parabola through (-1, a), (0, b), (1, c): `dx 
 ### D6. Tolerances
 Template: 0.5 px positions, 0.02 similarity, exact flags. Circle: 1 px center and radius, exact flags. Recorded in `tests/README.md`.
 
+## Decisions taken at apply time
+
+- D1 filters: written in-crate (gray and HSV conversion, median blur, Sobel, dilate and erode in `src/pixels*`), no `imageproc`/`image`. The design allowed either; no dependency approval was available and the specs do not change.
+- D4 reuse: `kinovea-metadata` (change 05) already owns `TrackingParameters`, `HsvRange`, `TrackablePoint`, `DrawingTracker`, `TrackabilityManager` and their KVA reading and writing, with byte parity on the fixtures. `kinovea-tracking` depends on `kinovea-metadata` and reuses those types instead of declaring a second set; it adds the algorithms, the `Tracker` trait, `Timeline<T>`, the camera-transform trait and the trackability runtime (positions at a time from tracks, camera motion or the reference value). Missing behavior of the shared types (clamping, content hash) is added in `kinovea-metadata`.
+
+## Deviations recorded during apply
+
+- Template: where the original throws (no image, no valid template) the step returns the previous point, not matched, score 0. The elliptic mask matches the GDI+ `FillEllipse` output of the oracle except one pixel (row 2, column 4 of the 21x17 block), pinned in `pixels/mask_test.rs`. Near a perfect match the correlation may give 0.999998 where OpenCV gives 1.0, so Rust refines where the original does not (0.002 px in `template-lost`). NCC clips a negative masked energy to 0 (OpenCV takes the square root of a rounding residue); a collinear parabola keeps the integer peak.
+- Circle: no median blur by default (`blurROI = false`), as the original; the specs were corrected. Without samples or reference the step fails instead of throwing.
+- Trackability: a gap in a track returns an empty point (the original dereferences null); `TrackId` is written whenever a point is bound, while the original writes it only once object tracking is initialized (differs only before `assign`).
+- `TrackingParameters` reads a non-numeric `Dilate`/`Erode` as 0; the original throws and stops reading. The tracker does not use those values (nor the HSV range).
+- A template flat under the mask gives NaN (OpenCV 0/0), so the step retries without the mask as the original. The mask, once built, keeps being applied when `use_mask` is turned off (`cvMaskGray` is tracker state); a mask of another size with `use_mask` off throws in OpenCV and is skipped in Rust.
+- `template-mask-flat` is pinned as an f32 near-tie in the parity test: OpenCV's correlation error (about 8 units on 4.7e7) exceeds the snap margin at one window of frame 4, so the original gives 0 where the exact NCC is 0.98; earlier frames meet the tolerances, the frame must stay the first one outside them.
+- The drawing tracker hash uses the .NET Framework `Guid.GetHashCode` formula; the sign of the `_c` field is not verified (the hash is never stored).
+- The tracking oracle renders frames into bitmap bits by an integer formula (`tests/cases/tracking/README.md`); results: template within 0.016 px and 0.005 similarity, circle exact.
+
 ## Legacy superseded
 
 `Kinovea.ScreenManager/Tracking/Tracking/AbstractTracker.cs`, `TrackStatus.cs`, `TrackingSource.cs`, `TemplateMatching/TrackerTemplateMatching.cs`, `TemplateMatching/TrackingTemplate.cs`, `TemplateMatching/TemplateMatchResult.cs`, `Circle/TrackerCircle.cs`; `Tracking/Trackability/TrackablePoint.cs`, `DrawingTracker.cs`, `TrackabilityManager.cs`; `Kinovea.ScreenManager/Metadata/Timeline.cs`; `Kinovea.Services/Types/TrackingParameters.cs`, `TrackingAlgorithm.cs`, `HSVRange.cs`.
