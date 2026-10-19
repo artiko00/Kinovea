@@ -13,6 +13,7 @@ fn context_holds_the_draw_parameters() {
         selected: false,
         metadata: &metadata,
         default_fading: &fading,
+        decimal_places: crate::paint::helpers::decimal::DEFAULT_DECIMAL_PLACES,
         distorter: None,
         camera: None,
     };

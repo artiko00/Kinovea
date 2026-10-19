@@ -17,6 +17,33 @@ mod resolving {
         StyleData::from_elements(&elements)
     }
 
+    // StyleData.cs:126 LineSize and DrawingTrack.cs:2377-2378: `line size` feeds LineSize, while the
+    // track's `TrackPointSize` pen is bound to its own property, whatever the element order.
+    #[test]
+    fn track_point_pen_does_not_override_line_size() {
+        for order in [0, 1] {
+            let line = ("line size", StyleValue::LineSize(6));
+            let point = ("TrackPointSize", StyleValue::PenSize(3));
+            let items = if order == 0 {
+                vec![line.clone(), point.clone()]
+            } else {
+                vec![point, line]
+            };
+            let style = StyleData::from_elements(&StyleElements::new(items));
+            assert_eq!(style.line_size, 6);
+        }
+    }
+
+    // DrawingCircle.cs:549 and DrawingPencil.cs:300 bind LineSize to `pen size`, DrawingText.cs:537
+    // to `LineSize`: those keys feed the line size.
+    #[test]
+    fn pen_size_and_legacy_line_size_keys_feed_line_size() {
+        let pen = StyleElements::new(vec![("pen size", StyleValue::PenSize(4))]);
+        assert_eq!(StyleData::from_elements(&pen).line_size, 4);
+        let legacy = StyleElements::new(vec![("LineSize", StyleValue::LineSize(5))]);
+        assert_eq!(StyleData::from_elements(&legacy).line_size, 5);
+    }
+
     #[test]
     fn keys_pick_main_and_back_colours_and_kinds_pick_the_rest() {
         let elements = StyleElements::new(vec![

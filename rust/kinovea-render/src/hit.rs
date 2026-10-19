@@ -1,19 +1,61 @@
 //! Hit testing as geometry (`HitTester`, design D5): point boxes, widened paths and lines.
 //! Tolerances are in viewport pixels, converted to image pixels with the viewport scale.
 
+pub mod angle;
+#[cfg(test)]
+mod angle_test;
 mod bezier;
 #[cfg(test)]
 mod bezier_test;
+pub mod chrono;
+#[cfg(test)]
+mod chrono_test;
+pub mod common;
+pub mod context;
+pub mod drawing;
+pub mod label;
+#[cfg(test)]
+mod label_test;
+pub mod media;
+#[cfg(test)]
+mod media_test;
 mod path;
 #[cfg(test)]
 mod path_test;
+pub mod plane;
+#[cfg(test)]
+mod plane_test;
+pub mod posture;
+#[cfg(test)]
+mod posture_body_test;
+#[cfg(test)]
+mod posture_test;
 mod region;
 #[cfg(test)]
 mod region_test;
+pub mod shapes;
+#[cfg(test)]
+mod shapes_test;
+mod stroke;
+#[cfg(test)]
+mod stroke_test;
+pub mod strokes;
+#[cfg(test)]
+mod strokes_test;
+pub mod sweep;
+#[cfg(test)]
+mod sweep_test;
+pub mod time;
+#[cfg(test)]
+mod time_test;
+pub mod track;
+#[cfg(test)]
+mod track_test;
 
 use crate::viewport::ImageToViewport;
 use kinovea_geometry::{helpers::distance, PointF, RectangleF};
 
+pub use context::Hit;
 pub use path::GraphicsPath;
 
 /// `HitTester.HitPoint`: a box of `max(1, untransform(10))` around `target`, right and bottom exclusive.
@@ -50,7 +92,9 @@ pub fn hit_path(
         let radius = half_width.max(5.0).trunc();
         return distance(p, first) <= radius;
     }
-    path.distance_to(p) <= half_width
+    path.figures
+        .iter()
+        .any(|f| stroke::stroke_hit(&f.points, f.closed, half_width, p))
 }
 
 /// `HitTester.HitLine` without distortion: a segment with a line size of 1.

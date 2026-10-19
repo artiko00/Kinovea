@@ -29,11 +29,6 @@ const HANDLE_ARM: f32 = 4.0;
 const ORIGIN_RADIUS: i32 = 5;
 /// Plane size in plane units when the drawing is not the calibration drawing.
 const DEFAULT_SIZE: f32 = 100.0;
-/// Decimal places of the tick labels: the default of `PlayerPreferences.decimalPlaces`
-/// (`Kinovea.Services/Preferences/PlayerPreferences.cs:324`), used by the oracle. Replaced by the
-/// preference once the paint context carries it.
-pub const DEFAULT_DECIMAL_PLACES: i32 = 2;
-
 /// Port of `DrawingPlane.Draw`: handles, origin ring, then either the grid with the sliding lines or,
 /// when `drawEdgesOnly`, the four edges.
 pub fn paint_plane(d: &Plane, ctx: &PaintContext, r: &mut dyn Renderer) {
@@ -83,7 +78,7 @@ fn draw_plane_grid(r: &mut dyn Renderer, pen: &Pen, d: &Plane, ctx: &PaintContex
         rows: int_element(&d.header.style, "rows", 10),
     };
     draw_grid(r, pen, &grid, d.show_grid, ctx);
-    draw_sliding_lines(r, pen, &grid, d, ctx, DEFAULT_DECIMAL_PLACES);
+    draw_sliding_lines(r, pen, &grid, d, ctx, ctx.decimal_places);
 }
 
 /// The calibration rectangle for the calibration drawing (`CalibrationByPlane_GetRectangleSize`),

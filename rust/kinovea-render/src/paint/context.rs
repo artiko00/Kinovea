@@ -23,6 +23,9 @@ pub struct PaintContext<'a> {
     pub selected: bool,
     pub metadata: &'a Metadata,
     pub default_fading: &'a Fading,
+    /// `PlayerPreferences.DecimalPlaces` for measure texts (default
+    /// `helpers::decimal::DEFAULT_DECIMAL_PLACES`).
+    pub decimal_places: i32,
     pub distorter: Option<&'a dyn Distorter>,
     pub camera: Option<&'a dyn CameraTransform>,
 }

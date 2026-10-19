@@ -52,9 +52,15 @@ impl Default for StyleData {
     }
 }
 
+/// Element keys bound to `StyleData.LineSize`: `line size` (most kinds), `pen size` (circle, pencil)
+/// and `LineSize` (text). A track's `TrackPointSize` is bound to its own property (DrawingTrack.cs:2378).
+/// Bindings: StyleData.cs:126, DrawingLine.cs:581, DrawingCircle.cs:549, DrawingText.cs:537.
+const LINE_SIZE_KEYS: [&str; 3] = ["line size", "pen size", "LineSize"];
+
 impl StyleData {
     /// Resolves the values from a drawing's style elements. Colours are told apart by key (`back color`
-    /// is the background); the other elements by kind. Missing elements keep the defaults.
+    /// is the background); sizes by key too (see `LINE_SIZE_KEYS`); the other elements by kind. Missing
+    /// elements keep the defaults.
     pub fn from_elements(elements: &StyleElements) -> Self {
         let mut style = StyleData::default();
         for e in &elements.elements {
@@ -62,7 +68,11 @@ impl StyleData {
                 StyleValue::Color(c) if e.key.contains("back") => style.background_color = *c,
                 StyleValue::Color(c) => style.color = *c,
                 StyleValue::FontSize(v) => style.font_size = *v,
-                StyleValue::LineSize(v) | StyleValue::PenSize(v) => style.line_size = *v,
+                StyleValue::LineSize(v) | StyleValue::PenSize(v)
+                    if LINE_SIZE_KEYS.contains(&e.key.as_str()) =>
+                {
+                    style.line_size = *v
+                }
                 StyleValue::LineShape(v) => style.line_shape = *v,
                 StyleValue::Arrows(v) => style.line_ending = *v,
                 StyleValue::TrackShape(v) => style.track_shape = *v,

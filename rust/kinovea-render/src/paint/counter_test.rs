@@ -114,3 +114,53 @@ fn locked_counter_is_dimmed_to_three_quarters() {
         matches!(&r.calls[0], Call::FillPath(_, b, _) if b.color == Color::argb(168, 10, 20, 30))
     );
 }
+
+// DrawingCounter.cs:988-1012 (average) with Metadata.GetCadence (Metadata.cs:1549): 2 cycles over
+// 500 ticks at 25 ticks per second is 0.1 Hz; the period is 500 / 2 = 250 ticks.
+#[test]
+fn average_cadence_and_period_over_all_beats() {
+    assert_eq!(
+        text_of(&counter(MeasureLabelType::CadenceAverage), 1300).as_deref(),
+        Some("0.1 Hz")
+    );
+    assert_eq!(
+        text_of(&counter(MeasureLabelType::PeriodAverage), 1300).as_deref(),
+        Some("250")
+    );
+}
+
+// DrawingCounter.cs:960-985 (instant): inside the 1200-1500 interval, 300 ticks is 1 / 12 Hz, which
+// MinimalDigits rounds to 0.08 Hz; the period is the 300 ticks themselves.
+#[test]
+fn instant_cadence_and_period_use_the_interval_around_the_time() {
+    assert_eq!(
+        text_of(&counter(MeasureLabelType::CadenceInstant), 1300).as_deref(),
+        Some("0.08 Hz")
+    );
+    assert_eq!(
+        text_of(&counter(MeasureLabelType::PeriodInstant), 1300).as_deref(),
+        Some("300")
+    );
+}
+
+// DrawingCounter.cs:967-974: exactly on a beat the interval is the one leading to it, and the first
+// beat has none.
+#[test]
+fn instant_on_a_beat_uses_the_interval_leading_to_it() {
+    assert_eq!(
+        text_of(&counter(MeasureLabelType::PeriodInstant), 1200).as_deref(),
+        Some("200")
+    );
+    assert_eq!(
+        text_of(&counter(MeasureLabelType::CadenceInstant), 1000).as_deref(),
+        Some("*")
+    );
+}
+
+// DrawingCounter.cs:964-967 and 1000-1004: the half cadence doubles the period and halves the cycles.
+#[test]
+fn half_cadence_doubles_the_period() {
+    let mut d = counter(MeasureLabelType::PeriodInstant);
+    d.half_cadence = true;
+    assert_eq!(text_of(&d, 1300).as_deref(), Some("600"));
+}

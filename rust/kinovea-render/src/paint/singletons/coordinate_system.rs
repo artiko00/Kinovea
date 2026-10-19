@@ -4,7 +4,6 @@
 
 use super::grid::GridLine;
 use super::grid_finder::find;
-use crate::paint::helpers::decimal::DEFAULT_DECIMAL_PLACES;
 use crate::paint::helpers::frame::to_viewport;
 use crate::paint::helpers::tick_mark::{draw_tick_mark, TickLabel};
 use crate::paint::PaintContext;
@@ -61,7 +60,7 @@ pub fn paint_coordinate_system(d: &CoordinateSystem, ctx: &PaintContext, r: &mut
             fill: &back,
             text: &fore,
             font: &font,
-            decimal_places: DEFAULT_DECIMAL_PLACES,
+            decimal_places: ctx.decimal_places,
         };
         let distort = |p: PointF| ctx.distorter.map_or(p, |distorter| distorter.distort(p));
         for tick in &grid.tick_marks {

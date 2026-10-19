@@ -102,10 +102,8 @@ pub(super) fn draw_name_label(
     boxed: Rectangle,
     box_radius: i32,
 ) {
-    let size = r.measure_text(name, font);
     let radius = line_height(r, font) / 3;
-    let top = boxed.y - size.height as i32 - box_radius - radius;
-    let label = Rectangle::new(boxed.x, top, size.width as i32, size.height as i32);
+    let label = name_tag_rect(r, name, font, boxed, box_radius);
     draw_rounded_rectangle(r, to_rect_f(label), back, radius, true, false, None);
     r.draw_text(
         name,
@@ -113,6 +111,21 @@ pub(super) fn draw_name_label(
         fore,
         PointF::new(label.x as f32, label.y as f32),
     );
+}
+
+/// Box of the name tag above `boxed` (`DrawingChrono.Draw` lines 262-276, shared with the counter
+/// and the multi chrono). Also the hit box of the tag, in viewport pixels.
+pub(crate) fn name_tag_rect(
+    r: &dyn Renderer,
+    name: &str,
+    font: &Font,
+    boxed: Rectangle,
+    box_radius: i32,
+) -> Rectangle {
+    let size = r.measure_text(name, font);
+    let radius = line_height(r, font) / 3;
+    let top = boxed.y - size.height as i32 - box_radius - radius;
+    Rectangle::new(boxed.x, top, size.width as i32, size.height as i32)
 }
 
 /// `InfosFading.GetOpacityFactor` with `MasterFactor` set to `master`. The drawing keeps its own
@@ -137,7 +150,7 @@ pub(super) fn drawing_opacity(
 
 /// `DrawingChrono.GetTimecode`: the time since the clock origin in clock mode, otherwise the
 /// stopwatch value, clamped to the start and stop of the counting.
-fn chrono_text(d: &Chrono, timestamp: i64, timecode: fn(i64) -> String) -> String {
+pub(crate) fn chrono_text(d: &Chrono, timestamp: i64, timecode: fn(i64) -> String) -> String {
     let clock = matches!(
         d.header.style.get("clock"),
         Some(StyleValue::Toggle { value: true, .. })

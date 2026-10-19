@@ -4,7 +4,7 @@
 use super::frame::{colored, edge_pen, PostureFrame};
 use super::texts::with_symbol;
 use crate::paint::helpers::angle_helper::{AngleFlags, AngleHelper};
-use crate::paint::helpers::decimal::format_value;
+use crate::paint::helpers::decimal::format_rounded;
 use crate::paint::helpers::frame::{rect_f, to_viewport};
 use crate::paint::helpers::rounded_rect::{draw_rounded_rectangle, line_height};
 use crate::renderer::{Brush, Renderer};
@@ -64,7 +64,10 @@ struct Label<'a> {
 /// `AngleHelper.DrawText`: the value in the calibration units, scaled with the viewport.
 fn draw_text(f: &PostureFrame, r: &mut dyn Renderer, origin: PointF, text: &Label) {
     let calibration = &f.ctx.metadata.calibration;
-    let value = format_value(calibration.convert_angle(text.helper.calibrated_angle));
+    let value = format_rounded(
+        calibration.convert_angle(text.helper.calibrated_angle),
+        f.ctx.decimal_places,
+    );
     let label = with_symbol(
         text.symbol,
         &format!("{value} {}", calibration.angle_abbreviation()),

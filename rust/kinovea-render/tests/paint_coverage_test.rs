@@ -33,6 +33,7 @@ fn record(
         selected: false,
         metadata: m,
         default_fading: &fading,
+        decimal_places: kinovea_render::paint::helpers::decimal::DEFAULT_DECIMAL_PLACES,
         distorter: None,
         camera: None,
     };

@@ -31,6 +31,7 @@ impl Scene {
             selected: false,
             metadata: &self.metadata,
             default_fading: &self.default_fading,
+            decimal_places: crate::paint::helpers::decimal::DEFAULT_DECIMAL_PLACES,
             distorter: None,
             camera: None,
         }
