@@ -6,6 +6,9 @@ mod arrow_test;
 pub mod bounding_box;
 #[cfg(test)]
 mod bounding_box_test;
+pub mod frame;
+#[cfg(test)]
+mod frame_test;
 pub mod mini_label;
 #[cfg(test)]
 mod mini_label_test;
