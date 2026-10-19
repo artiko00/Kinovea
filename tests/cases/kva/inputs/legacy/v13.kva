@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+  <FormatVersion>1.3</FormatVersion>
+  <Producer>Kinovea.0.8.7</Producer>
+  <OriginalFilename>legacy13.avi</OriginalFilename>
+  <ImageSize>640;480</ImageSize>
+  <AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+  <FirstTimeStamp>0</FirstTimeStamp>
+  <SelectionStart>0</SelectionStart>
+  <CalibrationHelp>
+    <PixelToUnit>0.5</PixelToUnit>
+    <LengthUnit UserUnitLength="cm">0</LengthUnit>
+  </CalibrationHelp>
+  <Keyframes>
+    <Keyframe>
+      <Position UserTime="0:00:00:00">10</Position>
+      <Title>First</Title>
+      <Comment>Old comment</Comment>
+      <Drawings>
+        <Drawing Type="DrawingLine2D"><m_StartPoint>100;100</m_StartPoint><m_EndPoint>300;120</m_EndPoint><MeasureIsVisible>True</MeasureIsVisible><LineStyle><Size>3</Size><LineShape>EndArrow</LineShape><ColorRGB>255;0;0</ColorRGB></LineStyle><InfosFading><Enabled>True</Enabled><Frames>20</Frames><AlwaysVisible>False</AlwaysVisible><UseDefault>True</UseDefault></InfosFading></Drawing>
+        <Drawing Type="DrawingAngle2D"><PointO>200;200</PointO><PointA>300;200</PointA><PointB>200;100</PointB><TextDecoration><BackColor>0;128;255</BackColor><FontSize>12</FontSize></TextDecoration><InfosFading><Enabled>True</Enabled><Frames>20</Frames><AlwaysVisible>False</AlwaysVisible><UseDefault>True</UseDefault></InfosFading></Drawing>
+        <Drawing Type="DrawingCircle"><Origin>400;300</Origin><Radius>40</Radius><LineStyle><Size>2</Size><ColorRGB>0;255;0</ColorRGB></LineStyle><InfosFading><Enabled>True</Enabled><Frames>20</Frames><AlwaysVisible>False</AlwaysVisible><UseDefault>True</UseDefault></InfosFading></Drawing>
+        <Drawing Type="DrawingCross2D"><CenterPoint>50;400</CenterPoint><CoordinatesVisible>True</CoordinatesVisible><LineStyle><Size>2</Size><ColorRGB>0;0;255</ColorRGB></LineStyle><InfosFading><Enabled>True</Enabled><Frames>20</Frames><AlwaysVisible>False</AlwaysVisible><UseDefault>True</UseDefault></InfosFading></Drawing>
+        <Drawing Type="DrawingPencil"><PointList Count="3"><Point>10;10</Point><Point>20;20</Point><Point>30;10</Point></PointList><LineStyle><Size>4</Size><ColorRGB>10;20;30</ColorRGB></LineStyle><InfosFading><Enabled>True</Enabled><Frames>20</Frames><AlwaysVisible>False</AlwaysVisible><UseDefault>True</UseDefault></InfosFading></Drawing>
+        <Drawing Type="DrawingText"><Text>Old label</Text><Position>20;20</Position><TextDecoration><BackColor>30;60;90</BackColor><FontSize>16</FontSize></TextDecoration><InfosFading><Enabled>True</Enabled><Frames>20</Frames><AlwaysVisible>False</AlwaysVisible><UseDefault>True</UseDefault></InfosFading></Drawing>
+      </Drawings>
+    </Keyframe>
+    <Keyframe>
+      <Position UserTime="0:00:00:02">50</Position>
+    </Keyframe>
+  </Keyframes>
+  <Chronos>
+    <Chrono><Position>500;400</Position><Values><Visible>10</Visible><Invisible>-1</Invisible><StartCounting>20</StartCounting><StopCounting>40</StopCounting></Values><Label><Text>old chrono</Text><Show>True</Show></Label></Chrono>
+  </Chronos>
+  <Tracks>
+    <Track>
+      <TimePosition>10</TimePosition>
+      <Mode>Complete</Mode>
+      <ExtraData>TotalDistance</ExtraData>
+      <TrackPositionList Count="3" UserUnitLength="cm">
+        <TrackPosition UserX="0" UserXInvariant="0" UserY="0" UserYInvariant="0" UserTime="0">100;100;0</TrackPosition>
+        <TrackPosition UserX="1" UserXInvariant="1" UserY="1" UserYInvariant="1" UserTime="1">110;105;1</TrackPosition>
+        <TrackPosition UserX="2" UserXInvariant="2" UserY="2" UserYInvariant="2" UserTime="2">121;111;2</TrackPosition>
+      </TrackPositionList>
+      <Label><Text>old track</Text></Label>
+      <MainLabel><KeyframeLabel><SpacePosition>120;60</SpacePosition><TimePosition>0</TimePosition></KeyframeLabel></MainLabel>
+      <TrackLine><LineStyle><Size>2</Size><ColorRGB>255;128;0</ColorRGB></LineStyle></TrackLine>
+    </Track>
+  </Tracks>
+</KinoveaVideoAnalysis>

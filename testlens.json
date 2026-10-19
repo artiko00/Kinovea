@@ -37,6 +37,7 @@
     "Installer",
     "Tools",
     "VideoTests",
-    "Refs"
+    "Refs",
+    "rust/kinovea-metadata/examples"
   ]
 }

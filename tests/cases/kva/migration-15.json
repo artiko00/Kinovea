@@ -1,0 +1,5 @@
+{
+  "area": "kva",
+  "seed": 0,
+  "inputs": { "kind": "migration", "kva": "tests/cases/kva/inputs/legacy/v15.kva" }
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+  <FormatVersion>2.1</FormatVersion>
+  <Producer>hand-written</Producer>
+  <OriginalFilename>all-drawings</OriginalFilename>
+  <ImageSize>640;480</ImageSize>
+  <AverageTimeStampsPerFrame>40</AverageTimeStampsPerFrame>
+  <CaptureFramerate>50</CaptureFramerate>
+  <FirstTimeStamp>0</FirstTimeStamp>
+  <SelectionStart>0</SelectionStart>
+  <SelectionEnd>4000</SelectionEnd>
+  <TimeOrigin>400</TimeOrigin>
+  <Keyframes>
+    <Keyframe>
+      <Timestamp>400</Timestamp>
+      <Name>All kinds</Name>
+      <Drawings>
+        <Angle name="Elbow"><PointO>200;200</PointO><PointA>300;200</PointA><PointB>200;100</PointB><Signed>true</Signed><CCW>false</CCW><Supplementary>true</Supplementary><ShowCircle>true</ShowCircle>
+          <DrawingStyle><Color Key="line color"><Value>255;0;128;255</Value></Color><FontSize Key="font size"><Value>12</Value></FontSize></DrawingStyle>
+          <InfosFading><Enabled>true</Enabled><UseDefault>false</UseDefault><AlwaysVisible>false</AlwaysVisible><OpaqueFrames>3</OpaqueFrames><Frames>12</Frames></InfosFading></Angle>
+        <Circle><Origin>320;240</Origin><Radius>45</Radius><Filled>true</Filled><ExtraData>Circumference</ExtraData><MeasureLabel><SpacePosition>330;180</SpacePosition><TimePosition>0</TimePosition></MeasureLabel>
+          <DrawingStyle><Color Key="color"><Value>255;255;0;0</Value></Color><PenSize Key="pen size"><Value>6</Value></PenSize><PenShape Key="pen shape"><Value>Dash</Value></PenShape></DrawingStyle></Circle>
+        <CrossMark><CenterPoint>100;400</CenterPoint><ShowAsDot>true</ShowAsDot><ExtraData>Position</ExtraData><MeasureLabel><SpacePosition>120;360</SpacePosition><TimePosition>0</TimePosition></MeasureLabel>
+          <DrawingStyle><Color Key="back color"><Value>255;0;255;0</Value></Color></DrawingStyle></CrossMark>
+        <Label><Text>Hello</Text><Position>20;20</Position><BackgroundVisible>false</BackgroundVisible><ArrowVisible>true</ArrowVisible><CircleVisible>true</CircleVisible><ArrowEnd>90;90</ArrowEnd>
+          <DrawingStyle><Color Key="back color"><Value>255;30;60;90</Value></Color><FontSize Key="font size"><Value>24</Value></FontSize></DrawingStyle></Label>
+        <Line><Start>50;300</Start><End>250;320</End><ExtraData>TotalDistance</ExtraData><MeasureLabel><SpacePosition>140;280</SpacePosition><TimePosition>0</TimePosition></MeasureLabel>
+          <DrawingStyle><Color Key="color"><Value>255;0;0;255</Value></Color><LineSize Key="line size"><Value>4</Value></LineSize><LineShape Key="line shape"><Value>Squiggle</Value></LineShape><Arrows Key="arrows"><Value>DoubleArrow</Value></Arrows></DrawingStyle></Line>
+        <Pencil><PointList Count="3"><Point>10;10</Point><Point>20;15</Point><Point>30;30</Point></PointList>
+          <DrawingStyle><Color Key="color"><Value>255;10;20;30</Value></Color><PenSize Key="pen size"><Value>3</Value></PenSize></DrawingStyle></Pencil>
+        <Polyline><PointList Count="3"><Point key="0">400;100</Point><Point key="1">450;150</Point><Point key="2">500;100</Point></PointList>
+          <DrawingStyle><Color Key="color"><Value>255;200;100;50</Value></Color><LineSize Key="line size"><Value>2</Value></LineSize></DrawingStyle></Polyline>
+        <Rectangle><PointUpperLeft>400;300</PointUpperLeft><PointUpperRight>500;300</PointUpperRight><PointLowerRight>500;380</PointLowerRight><PointLowerLeft>400;380</PointLowerLeft><Filled>true</Filled>
+          <DrawingStyle><Color Key="color"><Value>255;0;100;200</Value></Color><PenSize Key="pen size"><Value>2</Value></PenSize></DrawingStyle></Rectangle>
+        <TimeSegment><Start>60;450</Start><End>260;450</End><Fraction>0.25</Fraction><MeasureLabel><SpacePosition>160;420</SpacePosition><TimePosition>0</TimePosition></MeasureLabel>
+          <DrawingStyle><Color Key="color"><Value>255;120;120;0</Value></Color></DrawingStyle></TimeSegment>
+        <TimePolyline><PointList Count="3"><Point key="0">300;400</Point><Point key="1">340;440</Point><Point key="2">380;400</Point></PointList>
+          <DrawingStyle><Color Key="color"><Value>255;0;0;0</Value></Color></DrawingStyle></TimePolyline>
+        <Bitmap><File /><BoundingBox>500;20;64;64</BoundingBox><Sticker>true</Sticker><StickerReference>_1f389</StickerReference></Bitmap>
+        <SVG><File>C:\missing\drawing.svg</File></SVG>
+        <GenericPosture><ToolId>02ea93f9-ba00-424b-8c87-07e156e0252f</ToolId><Positions><Point>100;100</Point><Point>150;100</Point><Point>200;100</Point><Point>180;70</Point></Positions>
+          <DrawingStyle><Color Key="line color"><Value>255;85;107;47</Value></Color></DrawingStyle></GenericPosture>
+        <DistortionGrid><Points><Point>100;100</Point><Point>200;100</Point><Point>300;100</Point><Point>100;200</Point><Point>200;200</Point><Point>300;200</Point><Point>100;300</Point><Point>200;300</Point><Point>300;300</Point></Points>
+          <DrawingStyle><Color Key="color"><Value>255;255;0;255</Value></Color></DrawingStyle></DistortionGrid>
+        <Plane><PointUpperLeft>50;50</PointUpperLeft><PointUpperRight>250;60</PointUpperRight><PointLowerRight>260;200</PointLowerRight><PointLowerLeft>40;190</PointLowerLeft><ShowGrid>true</ShowGrid><ShowXLine>true</ShowXLine><ShowYLine>false</ShowYLine><XLineCoord>0.25</XLineCoord><YLineCoord>0.75</YLineCoord>
+          <DrawingStyle><Color Key="color"><Value>255;64;64;64</Value></Color><GridDivisions Key="cols"><Value>6</Value></GridDivisions><GridDivisions Key="rows"><Value>4</Value></GridDivisions></DrawingStyle></Plane>
+      </Drawings>
+    </Keyframe>
+  </Keyframes>
+  <Chronos>
+    <Chrono><Position>500;400</Position><Values><Visible>400</Visible><Invisible>3000</Invisible><StartCounting>800</StartCounting><StopCounting>2000</StopCounting><ClockOrigin>-1</ClockOrigin></Values><Label><Text>Sprint</Text><Show>true</Show></Label>
+      <DrawingStyle><Color Key="color"><Value>255;0;0;0</Value></Color><FontSize Key="font size"><Value>18</Value></FontSize></DrawingStyle></Chrono>
+    <ChronoMulti><Position>500;440</Position><Values><Visible>400</Visible><Invisible>-1</Invisible><Sections><Section name="first" tag="a">800;1200</Section><Section name="second" tag="b">1600;-1</Section></Sections><Locked>true</Locked></Values><Label><Show>false</Show></Label>
+      <DrawingStyle><Color Key="color"><Value>255;0;0;0</Value></Color><FontSize Key="font size"><Value>18</Value></FontSize></DrawingStyle></ChronoMulti>
+    <Counter><Position>40;440</Position><Values><Visible>400</Visible><Invisible>-1</Invisible><Beats><Beat>800</Beat><Beat>1200</Beat><Beat>1600</Beat></Beats><Locked>false</Locked><ZeroBased>true</ZeroBased><HalfCadence>false</HalfCadence><DoubleCadence>true</DoubleCadence><ExtraData>Cadence</ExtraData></Values>
+      <DrawingStyle><Color Key="color"><Value>255;0;0;0</Value></Color><FontSize Key="font size"><Value>18</Value></FontSize></DrawingStyle></Counter>
+  </Chronos>
+  <Tracks>
+    <Track><TimePosition>400</TimePosition><Visible>400</Visible><Invisible>-1</Invisible><ExtraData>Speed</ExtraData>
+      <TrackPointList Count="4"><TrackPoint>100;100;400</TrackPoint><TrackPoint>110;105;440</TrackPoint><TrackPoint>121;111;480</TrackPoint><TrackPoint>133;118;520</TrackPoint></TrackPointList>
+      <DrawingStyle><Color Key="color"><Value>255;255;128;0</Value></Color><LineSize Key="line size"><Value>3</Value></LineSize><TrackShape Key="track shape"><Value>Dash;true</Value></TrackShape></DrawingStyle>
+      <MainLabel Text="Ball"><SpacePosition>120;60</SpacePosition><TimePosition>0</TimePosition></MainLabel></Track>
+  </Tracks>
+  <Spotlights>
+    <Spotlight><Time>400</Time><Center>300;300</Center><Radius>50</Radius></Spotlight>
+    <Spotlight><Time>800</Time><Center>350;320</Center><Radius>60</Radius></Spotlight>
+  </Spotlights>
+  <AutoNumbers>
+    <DrawingStyle><Color Key="back color"><Value>255;0;0;0</Value></Color><FontSize Key="font size"><Value>18</Value></FontSize></DrawingStyle>
+    <AutoNumber><Time>400</Time><Location>30;30</Location><Value>1</Value></AutoNumber>
+    <AutoNumber><Time>440</Time><Location>60;30</Location><Value>2</Value></AutoNumber>
+  </AutoNumbers>
+  <CoordinateSystem><Position>320;240</Position><Visible>true</Visible><ShowGrid>false</ShowGrid><ShowGraduations>true</ShowGraduations><DrawingStyle><Color Key="line color"><Value>255;0;255;255</Value></Color></DrawingStyle></CoordinateSystem>
+  <TestGrid><Visible>true</Visible><ShowHorizontalAxis>false</ShowHorizontalAxis><ShowVerticalAxis>true</ShowVerticalAxis><ShowFraming>false</ShowFraming><ShowThirds>true</ShowThirds><DrawingStyle><Color Key="color"><Value>255;255;255;0</Value></Color></DrawingStyle></TestGrid>
+</KinoveaVideoAnalysis>

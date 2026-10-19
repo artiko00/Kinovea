@@ -21,6 +21,7 @@ namespace Kinovea.FixtureGen
             new PreferencesArea(),
             new GeometryArea(),
             new CalibrationArea(),
+            new PostureArea(),
         }.ToDictionary(a => a.Name);
 
         public static int Main(string[] args)
