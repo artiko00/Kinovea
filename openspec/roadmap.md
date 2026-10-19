@@ -19,7 +19,7 @@ Phase A, foundations
 - [ ] 06 `add-headless-renderer`
 
 Phase B, video
-- [ ] 07 `add-video-reader-and-cache`
+- [x] 07 `add-video-reader-and-cache` (archived 2026-10-19)
 - [ ] 08 `add-ffmpeg-video-reader`
 - [ ] 09 `add-image-gif-svg-readers`
 
