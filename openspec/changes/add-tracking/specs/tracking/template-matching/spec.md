@@ -58,11 +58,11 @@ After a successful step the template SHALL be replaced by the image patch at the
 - **THEN** the stored template is unchanged
 
 ### Requirement: Mask
-When mask usage is enabled, pixels outside the HSV range SHALL be excluded from the correlation after the configured dilation and erosion; when the masked correlation yields no valid score the tracker SHALL fall back to the unmasked correlation.
+When mask usage is enabled, the correlation SHALL be restricted to the ellipse inscribed in the block window (the mask the original paints with GDI+); when the masked correlation yields an infinite score or a score above 1 the tracker SHALL fall back to the unmasked correlation. The HSV range, dilation and erosion parameters are stored but not used by the tracker, as in the original.
 
-#### Scenario: Mask excludes background
-- **WHEN** a mask selects the target colour and the background changes between frames
-- **THEN** the step still succeeds with similarity above the threshold
+#### Scenario: Mask excludes the block corners
+- **WHEN** a disc moves over a gradient background with mask usage enabled
+- **THEN** each step succeeds with similarity above the threshold and the corners of the block do not take part in the correlation
 
 ### Requirement: Trim and clear
 Trimming at a time SHALL drop templates after that time; clear SHALL drop all templates and the tracker SHALL report not ready.

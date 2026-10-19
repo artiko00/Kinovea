@@ -4,22 +4,25 @@
 
 mod tracking_cases;
 
+use kinovea_tracking::circle::CircleTracker;
 use kinovea_tracking::template::TemplateTracker;
+use tracking_cases::{expected, load, names, run};
 
-/// Design D6: positions within 0.5 px, similarity within 0.02, matched flags exact.
 const POSITION_TOLERANCE: f64 = 0.5;
 const SCORE_TOLERANCE: f64 = 0.02;
+/// Largest center or radius difference, in px, allowed on the circle cases.
+const CIRCLE_TOLERANCE_PX: f64 = 1.0;
 
 #[test]
 fn template_cases_match_the_original() {
-    for name in tracking_cases::names() {
-        let case = tracking_cases::load(&name);
+    for name in names() {
+        let case = load(&name);
         if case.circle {
             continue;
         }
         let mut tracker = TemplateTracker::new(case.parameters.clone());
-        let rows = tracking_cases::run(&case, &mut tracker);
-        let expected = tracking_cases::expected(&name);
+        let rows = run(&case, &mut tracker);
+        let expected = expected(&name);
         assert_eq!(rows.len(), expected.len(), "{name}: row count");
         let (mut dx, mut dy, mut ds) = (0.0f64, 0.0f64, 0.0f64);
         for (got, want) in rows.iter().zip(&expected) {
@@ -51,5 +54,41 @@ fn template_cases_match_the_original() {
             "{name}: worst |dx| {dx:.4} px, |dy| {dy:.4} px, |dscore| {ds:.4} over {} rows",
             rows.len()
         );
+    }
+}
+
+#[test]
+fn circle_cases_match_the_original() {
+    let cases: Vec<_> = names()
+        .into_iter()
+        .map(|name| (load(&name), name))
+        .filter(|(case, _)| case.circle)
+        .collect();
+    assert!(!cases.is_empty());
+    for (case, name) in &cases {
+        let mut tracker = CircleTracker::new(case.parameters.clone());
+        let rows = run(case, &mut tracker);
+        let want = expected(name);
+        assert_eq!(rows.len(), want.len(), "{name}: row count");
+        let mut worst = 0.0_f64;
+        for (got, want) in rows.iter().zip(&want) {
+            assert_eq!(
+                (got.frame, got.t),
+                (want.frame, want.t),
+                "{name}: frame and time"
+            );
+            assert_eq!(
+                got.matched, want.matched,
+                "{name}: frame {} matched",
+                want.frame
+            );
+            let diff = (got.x - want.x)
+                .abs()
+                .max((got.y - want.y).abs())
+                .max((got.r - want.r).abs());
+            worst = worst.max(diff);
+        }
+        eprintln!("{name}: worst center or radius difference {worst:.3} px");
+        assert!(worst <= CIRCLE_TOLERANCE_PX, "{name}: {worst} px");
     }
 }

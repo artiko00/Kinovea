@@ -24,6 +24,8 @@ mod ncc_unmasked_test;
 #[cfg(test)]
 mod refine_test;
 
+pub mod circle;
+
 pub mod hough;
 
 pub mod pixels;
