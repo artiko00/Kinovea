@@ -28,7 +28,6 @@ pub enum RecordingResult {
     VideoStreamNotCreated,
     EncoderParametersNotSet,
     EncoderNotOpened,
-    /// C# `FileNotOpenned` (sic).
     FileNotOpened,
     FileHeaderNotWritten,
     InputFrameNotAllocated,
