@@ -38,6 +38,10 @@ pub mod timeline;
 #[cfg(test)]
 mod timeline_test;
 
+pub mod template;
+#[cfg(test)]
+mod template_test;
+
 pub mod tracker;
 #[cfg(test)]
 mod tracker_test;
