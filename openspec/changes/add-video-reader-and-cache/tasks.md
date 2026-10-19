@@ -2,11 +2,11 @@
 
 ## 1. Core types
 
-- [ ] 1.1 Write `rust/kinovea-video/src/info_test.rs` for `VideoInfo` (empty constructor, single-frame detection, frame interval from fps) and `Fraction::is_empty`; implement `src/info.rs`; verify `cargo test -p kinovea-video` passes.
-- [ ] 1.2 Write `src/capabilities_test.rs` (bitflag combinations, convenience accessors, `can_switch_decoding_mode` matrix) then implement `src/capabilities.rs` with `VideoCapabilities`, `VideoDecodingMode`, `CacheLoadMode`; verify tests pass.
-- [ ] 1.3 Write `src/state_test.rs` for `PlayerState` (clone, invalid state, display) and `PlayerAction`, `WorkingZoneRequest`, `OpenVideoResult`, `RecordingResult`, `VideoExportResult`, `SeekProgress`; implement `src/state.rs`; verify tests pass.
-- [ ] 1.4 Write `src/frame_test.rs` for `FrameBuffer` (BGRA8, stride, `Arc` sharing, `pixel(x, y)`) and `VideoFrame::empty`; implement `src/frame.rs`; verify tests pass.
-- [ ] 1.5 Write `src/geometry_test.rs` for `VideoGeometry`, `VideoGeometryRequest`, reference size under rotation and `FitHelper` (fit a size into a box keeping ratio) then implement `src/geometry.rs`; verify tests pass and `cargo clippy -p kinovea-video --all-targets -- -D warnings` is clean.
+- [x] 1.1 Write `rust/kinovea-video/src/info_test.rs` for `VideoInfo` (empty constructor, single-frame detection, frame interval from fps) and `Fraction::is_empty`; implement `src/info.rs`; verify `cargo test -p kinovea-video` passes.
+- [x] 1.2 Write `src/capabilities_test.rs` (bitflag combinations, convenience accessors, `can_switch_decoding_mode` matrix) then implement `src/capabilities.rs` with `VideoCapabilities`, `VideoDecodingMode`, `CacheLoadMode`; verify tests pass.
+- [x] 1.3 Write `src/state_test.rs` for `PlayerState` (clone, invalid state, display) and `PlayerAction`, `WorkingZoneRequest`, `OpenVideoResult`, `RecordingResult`, `VideoExportResult`, `SeekProgress`; implement `src/state.rs`; verify tests pass.
+- [x] 1.4 Write `src/frame_test.rs` for `FrameBuffer` (BGRA8, stride, `Arc` sharing, `pixel(x, y)`) and `VideoFrame::empty`; implement `src/frame.rs`; verify tests pass.
+- [x] 1.5 Write `src/geometry_test.rs` for `VideoGeometry`, `VideoGeometryRequest`, reference size under rotation and `FitHelper` (fit a size into a box keeping ratio) then implement `src/geometry.rs`; verify tests pass and `cargo clippy -p kinovea-video --all-targets -- -D warnings` is clean.
 
 ## 2. Reader contract
 
