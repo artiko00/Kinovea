@@ -10,10 +10,10 @@
 
 ## 2. Reader contract
 
-- [ ] 2.1 Write `src/reader_test.rs` with a `SyntheticReader` (configurable fps, frames, timestamps per frame; each frame paints its timestamp in the first pixels) and tests for `relate_timestamps` (all five relations plus unknown), `playback_timestamp`, `move_to`/`move_next`, end-of-zone; implement `src/reader.rs` (`VideoReader` trait with default methods, `RequestFulfilled` channel); verify tests pass.
-- [ ] 2.2 Write `src/enumerate_test.rs` for interval 0 and positive interval enumeration against `SyntheticReader`; implement `enumerate_frames` as an iterator in `src/reader.rs`; verify tests pass.
-- [ ] 2.3 Write `src/summary_test.rs` (thumbnail count and bound, companion KVA detection in a temp dir) then implement `src/summary.rs`; verify tests pass.
-- [ ] 2.4 Write `src/registry_test.rs` (case-insensitive lookup, wildcard fallback, `is_supported`, most-recent supported file in a temp dir) then implement `src/registry.rs`; verify tests pass.
+- [x] 2.1 Write `src/reader_test.rs` with a `SyntheticReader` (configurable fps, frames, timestamps per frame; each frame paints its timestamp in the first pixels) and tests for `relate_timestamps` (all five relations plus unknown), `playback_timestamp`, `move_to`/`move_next`, end-of-zone; implement `src/reader.rs` (`VideoReader` trait with default methods, `RequestFulfilled` channel); verify tests pass.
+- [x] 2.2 Write `src/enumerate_test.rs` for interval 0 and positive interval enumeration against `SyntheticReader`; implement `enumerate_frames` as an iterator in `src/reader.rs`; verify tests pass.
+- [x] 2.3 Write `src/summary_test.rs` (thumbnail count and bound, companion KVA detection in a temp dir) then implement `src/summary.rs`; verify tests pass.
+- [x] 2.4 Write `src/registry_test.rs` (case-insensitive lookup, wildcard fallback, `is_supported`, most-recent supported file in a temp dir) then implement `src/registry.rs`; verify tests pass.
 
 ## 3. Dense cache
 
