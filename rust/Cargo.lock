@@ -216,6 +216,7 @@ dependencies = [
  "kinovea-geometry",
  "kinovea-metadata",
  "kinovea-video",
+ "serde_json",
 ]
 
 [[package]]
