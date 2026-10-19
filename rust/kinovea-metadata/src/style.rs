@@ -4,6 +4,9 @@
 mod element;
 #[cfg(test)]
 mod element_test;
+mod import;
+#[cfg(test)]
+mod import_test;
 mod tools;
 #[cfg(test)]
 mod tools_test;
@@ -60,10 +63,11 @@ impl StyleElements {
     }
 
     /// `ImportValues`: copies the values of matching keys, ignoring keys not present here.
+    /// Unknown kinds are not imported, as the original `ReadXml` drops them.
     pub fn import_values(&mut self, other: &StyleElements) {
-        for e in &other.elements {
+        for e in other.elements.iter().filter(|e| !matches!(e.value, StyleValue::Unknown(_))) {
             if let Some(v) = self.get_mut(&e.key) {
-                *v = e.value.clone();
+                import::import_value(v, &e.value);
             }
         }
     }

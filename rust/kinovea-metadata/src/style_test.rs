@@ -30,6 +30,13 @@ fn import_values_only_touches_known_keys() {
 }
 
 #[test]
+fn unknown_kinds_do_not_overwrite_known_keys() {
+    let mut style = StyleElements::new(vec![("cols", StyleValue::int(10))]);
+    style.import_kva(&Element::parse("<DrawingStyle><GridDivisions Key=\"cols\"><Value>6</Value></GridDivisions></DrawingStyle>").unwrap());
+    assert_eq!(style.get("cols"), Some(&StyleValue::int(10)));
+}
+
+#[test]
 fn insert_remove_complete_memorize_restore() {
     let mut style = StyleElements::new(vec![("color", StyleValue::Color(Color::BLACK))]);
     style.insert("size", StyleValue::int(4));

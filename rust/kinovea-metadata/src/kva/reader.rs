@@ -6,6 +6,7 @@ use crate::drawing::Drawing;
 use crate::keyframe::Keyframe;
 use crate::kva_io::{identity, parse_enum, Scale};
 use crate::metadata::Metadata;
+use crate::multi::Spotlight;
 use crate::migration::{migrate_legacy, needs_migration};
 use kinovea_core::preferences::dom::Element;
 use kinovea_core::xml::{parse_boolean, parse_size};
@@ -121,6 +122,7 @@ pub fn read_kva(m: &mut Metadata, xml: &str) -> Result<ImportContext, KvaError> 
                 let is_same = same_context(m, &ctx);
                 let video = m.video.clone();
                 m.spotlights.read_kva(c, scale, &|ts| ctx.remap(ts, &video, is_same));
+                register_spotlights(m);
             }
             "AutoNumbers" | "NumberSequence" => {
                 let is_same = same_context(m, &ctx);
@@ -151,9 +153,9 @@ pub fn read_kva(m: &mut Metadata, xml: &str) -> Result<ImportContext, KvaError> 
     Ok(ctx)
 }
 
-/// What the player does when a keyframe's drawings are added: register the trackables.
+/// What the player does when a keyframe's drawings are added: register the trackable ones.
 fn register_keyframe(m: &mut Metadata, keyframe: &Keyframe) {
-    for d in &keyframe.drawings {
+    for d in keyframe.drawings.iter().filter(|d| d.is_trackable()) {
         let points = d.trackable_points();
         if !points.is_empty() {
             m.trackability.add(d.id(), &d.header().name, d.header().reference_timestamp, &points);
@@ -161,15 +163,26 @@ fn register_keyframe(m: &mut Metadata, keyframe: &Keyframe) {
     }
 }
 
-/// `AfterKVAImport`: trackers are re-assigned from the drawings and orphans are dropped.
+/// Spotlight items are trackable through their centre; their reference timestamp stays 0.
+fn register_spotlights(m: &mut Metadata) {
+    for s in &m.spotlights.items {
+        m.trackability.add(s.id, Spotlight::KVA_NAME, 0, &[("o".to_owned(), s.center)]);
+    }
+}
+
+/// `AfterKVAImport`: trackers of drawings that are no longer trackable are dropped.
 fn after_import(m: &mut Metadata) {
-    m.register_trackables();
     let keyframes: Vec<i64> = m.keyframes.iter().map(|k| k.timestamp).collect();
     for track in m.tracks.iter_mut() {
         if let Drawing::Track(t) = track {
             t.update_keyframe_labels(&keyframes);
         }
     }
-    let live: Vec<uuid::Uuid> = m.attached_drawings().filter(|d| !d.trackable_points().is_empty()).map(|d| d.id()).collect();
+    let live: Vec<uuid::Uuid> = m
+        .attached_drawings()
+        .filter(|d| d.is_trackable() && !d.trackable_points().is_empty())
+        .map(|d| d.id())
+        .chain(m.spotlights.items.iter().map(|s| s.id))
+        .collect();
     m.trackability.trackers.retain(|t| live.contains(&t.drawing_id));
 }

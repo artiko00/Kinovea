@@ -12,6 +12,8 @@ pub struct Element {
     pub attributes: Vec<(String, String)>,
     pub text: String,
     pub children: Vec<Element>,
+    /// Written as `<X></X>` even when empty; `<X />` otherwise (an XSLT `value-of` does this).
+    pub end_tag: bool,
 }
 
 /// Error raised when the XML text is malformed.
@@ -111,7 +113,7 @@ impl Element {
         for (k, v) in &self.attributes {
             let _ = write!(out, " {k}=\"{}\"", escape(v, true));
         }
-        if self.children.is_empty() && self.text.is_empty() {
+        if self.children.is_empty() && self.text.is_empty() && !self.end_tag {
             out.push_str(" />\n");
         } else if self.children.is_empty() {
             let _ = writeln!(out, ">{}</{}>", escape(&self.text, false), self.name);

@@ -56,3 +56,31 @@ fn distortion_grid_points_round_trip() {
     grid.set_trackable_point("9", PointF::new(9.0, 9.0));
     assert_eq!(grid.points[1], PointF::new(9.0, 9.0));
 }
+
+#[test]
+fn read_starts_from_the_grid_style_and_a_visible_fading() {
+    let plane = Plane::read_kva(
+        &Element::parse("<Plane><ShowGrid>true</ShowGrid></Plane>").unwrap(),
+        Scale::IDENTITY,
+        &identity,
+    );
+    assert_eq!(
+        plane.header.style.get("perspective"),
+        Some(&StyleValue::Toggle {
+            value: false,
+            variant: crate::style::ToggleVariant::Perspective
+        })
+    );
+    assert!(!plane.header.fading.use_default);
+    assert!(plane.header.fading.always_visible);
+    assert_eq!(
+        Plane::new(kinovea_geometry::Quadrilateral::empty())
+            .header
+            .style
+            .get("perspective"),
+        Some(&StyleValue::Toggle {
+            value: true,
+            variant: crate::style::ToggleVariant::Perspective
+        })
+    );
+}

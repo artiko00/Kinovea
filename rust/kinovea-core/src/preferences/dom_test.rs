@@ -24,6 +24,17 @@ fn building_elements() {
 }
 
 #[test]
+fn empty_element_keeps_its_end_tag_when_asked() {
+    let mut root = Element::new("Root");
+    root.push(Element { end_tag: true, ..Element::leaf("Origin", "") });
+    root.push_leaf("Culture", "");
+    assert_eq!(
+        root.to_document(),
+        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Root>\n  <Origin></Origin>\n  <Culture />\n</Root>"
+    );
+}
+
+#[test]
 fn malformed_input_is_an_error() {
     assert!(Element::parse("<Root><A></Root>").is_err());
     assert!(Element::parse("").is_err());

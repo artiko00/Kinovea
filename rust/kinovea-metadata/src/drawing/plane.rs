@@ -21,8 +21,16 @@ pub struct Plane {
 
 impl Plane {
     pub fn new(quad: Quadrilateral) -> Self {
+        Plane::with_style(quad, default_style("Plane"))
+    }
+
+    /// The grid is always visible and does not use the default fading (`DrawingPlane` constructors).
+    fn with_style(quad: Quadrilateral, style: StyleElements) -> Self {
+        let mut header = Header::new("", style);
+        header.fading.use_default = false;
+        header.fading.always_visible = true;
         Plane {
-            header: Header::new("", default_style("Plane")),
+            header,
             quad,
             show_grid: true,
             show_x_line: false,
@@ -55,7 +63,8 @@ impl KvaDrawing for Plane {
     }
 
     fn read_kva(e: &Element, scale: Scale, _map: TimestampMapper) -> Self {
-        let mut d = Plane::new(Quadrilateral::empty());
+        // The reading constructor starts from the `Grid` tool style, not from `Plane`.
+        let mut d = Plane::with_style(Quadrilateral::empty(), default_style("Grid"));
         d.header.read_attributes(e);
         for c in &e.children {
             let t = c.text.trim();

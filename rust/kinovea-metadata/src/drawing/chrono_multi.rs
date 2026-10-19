@@ -42,7 +42,12 @@ impl ChronoMulti {
             invisible: i64::MAX,
             sections: Vec::new(),
             locked: false,
-            visible_columns: Vec::new(),
+            visible_columns: vec![
+                ChronoColumn::Name,
+                ChronoColumn::Duration,
+                ChronoColumn::Cumul,
+                ChronoColumn::Tag,
+            ],
             show_label: false,
         }
     }

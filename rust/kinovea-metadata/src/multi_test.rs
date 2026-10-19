@@ -1,5 +1,5 @@
 use crate::kva_io::{identity, Filter, Scale};
-use crate::multi::{AutoNumber, NumberSequence, Spotlight, Spotlights};
+use crate::multi::{AutoNumber, NumberSequence, Spotlights};
 use kinovea_core::preferences::dom::Element;
 use kinovea_geometry::PointF;
 
@@ -9,7 +9,7 @@ fn body(doc: String) -> String {
 
 #[test]
 fn spotlights_round_trip_and_replace_known_ids() {
-    let xml = "<Spotlights>\n  <Spotlight id=\"00000000-0000-4000-8000-000000000001\" name=\"\">\n    <Time>100</Time>\n    <Center>50;60</Center>\n    <Radius>30</Radius>\n  </Spotlight>\n</Spotlights>";
+    let xml = "<Spotlights>\n  <Spotlight id=\"00000000-0000-4000-8000-000000000001\" name=\"Spotlight\">\n    <Time>100</Time>\n    <Center>50;60</Center>\n    <Radius>30</Radius>\n  </Spotlight>\n</Spotlights>";
     let mut s = Spotlights::default();
     s.read_kva(&Element::parse(xml).unwrap(), Scale::IDENTITY, &identity);
     assert_eq!(s.items.len(), 1);
@@ -21,12 +21,11 @@ fn spotlights_round_trip_and_replace_known_ids() {
     assert_eq!(s.items.len(), 1);
     assert_eq!((s.items[0].radius, s.items[0].timestamp, s.items[0].center), (20, 200, PointF::new(25.0, 30.0)));
     assert_ne!(s.content_hash(), Spotlights::default().content_hash());
-    assert_eq!(Spotlight::new(1, PointF::EMPTY, 2).name, "");
 }
 
 #[test]
 fn number_sequence_writes_items_then_style() {
-    let xml = "<NumberSequence>\n  <AutoNumber id=\"00000000-0000-4000-8000-000000000001\" name=\"\">\n    <Time>5</Time>\n    <Location>10;20</Location>\n    <Value>3</Value>\n  </AutoNumber>\n  <DrawingStyle>\n    <Color Key=\"back color\">\n      <Value>255;0;0;0</Value>\n    </Color>\n    <FontSize Key=\"font size\">\n      <Value>24</Value>\n    </FontSize>\n  </DrawingStyle>\n</NumberSequence>";
+    let xml = "<NumberSequence>\n  <AutoNumber id=\"00000000-0000-4000-8000-000000000001\" name=\"AutoNumber\">\n    <Time>5</Time>\n    <Location>10;20</Location>\n    <Value>3</Value>\n  </AutoNumber>\n  <DrawingStyle>\n    <Color Key=\"back color\">\n      <Value>255;0;0;0</Value>\n    </Color>\n    <FontSize Key=\"font size\">\n      <Value>24</Value>\n    </FontSize>\n  </DrawingStyle>\n</NumberSequence>";
     let mut n = NumberSequence::default();
     n.read_kva(&Element::parse(xml).unwrap(), Scale::IDENTITY, &identity);
     assert_eq!(n.items[0].value, 3);

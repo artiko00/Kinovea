@@ -25,6 +25,21 @@ fn enum_dispatches_by_kva_name() {
 }
 
 #[test]
+fn only_the_original_trackable_kinds_register_their_points() {
+    let line = Drawing::Line(Line::new(PointF::new(0.0, 0.0), PointF::new(3.0, 4.0)));
+    assert!(line.is_trackable());
+    let grid = Drawing::read_kva(
+        &Element::parse("<DistortionGrid><Points><Point>1;2</Point></Points></DistortionGrid>")
+            .unwrap(),
+        Scale::IDENTITY,
+        &identity,
+    )
+    .unwrap();
+    assert!(!grid.trackable_points().is_empty());
+    assert!(!grid.is_trackable());
+}
+
+#[test]
 fn enum_writes_the_full_element_and_moves_points() {
     let mut d = Drawing::Line(Line::new(PointF::new(0.0, 0.0), PointF::new(3.0, 4.0)));
     d.header_mut().name = "L".into();

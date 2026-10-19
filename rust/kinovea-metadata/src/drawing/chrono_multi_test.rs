@@ -64,3 +64,17 @@ fn sections_stay_sorted_by_start_and_parsing_has_fallbacks() {
     );
     assert_ne!(c.content_hash(), empty.content_hash());
 }
+
+#[test]
+fn new_shows_name_duration_cumul_and_tag_columns() {
+    let multi = ChronoMulti::new(PointF::EMPTY);
+    assert_eq!(
+        multi.visible_columns,
+        [
+            ChronoColumn::Name,
+            ChronoColumn::Duration,
+            ChronoColumn::Cumul,
+            ChronoColumn::Tag
+        ]
+    );
+}

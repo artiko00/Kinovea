@@ -13,7 +13,6 @@ use uuid::Uuid;
 #[derive(Debug, Clone, PartialEq)]
 pub struct Spotlight {
     pub id: Uuid,
-    pub name: String,
     pub timestamp: i64,
     pub center: PointF,
     pub radius: i32,
@@ -23,16 +22,13 @@ impl Spotlight {
     pub const KVA_NAME: &'static str = "Spotlight";
 
     pub fn new(timestamp: i64, center: PointF, radius: i32) -> Self {
-        Spotlight { id: new_id(), name: String::new(), timestamp, center, radius }
+        Spotlight { id: new_id(), timestamp, center, radius }
     }
 
     pub fn read_kva(e: &Element, scale: Scale, map: TimestampMapper) -> Spotlight {
         let mut s = Spotlight::new(0, PointF::EMPTY, 0);
         if let Some(id) = e.attribute("id").and_then(parse_id) {
             s.id = id;
-        }
-        if let Some(name) = e.attribute("name") {
-            s.name = name.to_owned();
         }
         for c in &e.children {
             let t = c.text.trim();
@@ -47,7 +43,7 @@ impl Spotlight {
     }
 
     pub fn to_element(&self, filter: Filter) -> Element {
-        let mut e = item_element(Spotlight::KVA_NAME, self.id, Spotlight::KVA_NAME);
+        let mut e = item_element(Spotlight::KVA_NAME, self.id);
         if filter.core {
             e.push_leaf("Time", &self.timestamp.to_string());
             e.push(point_leaf("Center", self.center));
@@ -61,10 +57,11 @@ impl Spotlight {
     }
 }
 
-fn item_element(name: &str, id: Uuid, item_name: &str) -> Element {
+/// The `name` attribute is constant: the original `Name` of these items is the element name.
+fn item_element(name: &str, id: Uuid) -> Element {
     let mut e = Element::new(name);
     e.attributes.push(("id".into(), id_text(id)));
-    e.attributes.push(("name".into(), item_name.to_owned()));
+    e.attributes.push(("name".into(), name.to_owned()));
     e
 }
 
@@ -107,7 +104,6 @@ impl Spotlights {
 #[derive(Debug, Clone, PartialEq)]
 pub struct AutoNumber {
     pub id: Uuid,
-    pub name: String,
     pub timestamp: i64,
     pub location: PointF,
     pub value: i32,
@@ -117,16 +113,13 @@ impl AutoNumber {
     pub const KVA_NAME: &'static str = "AutoNumber";
 
     pub fn new(timestamp: i64, location: PointF, value: i32) -> Self {
-        AutoNumber { id: new_id(), name: String::new(), timestamp, location, value }
+        AutoNumber { id: new_id(), timestamp, location, value }
     }
 
     pub fn read_kva(e: &Element, scale: Scale, map: TimestampMapper) -> AutoNumber {
         let mut n = AutoNumber::new(0, PointF::EMPTY, 0);
         if let Some(id) = e.attribute("id").and_then(parse_id) {
             n.id = id;
-        }
-        if let Some(name) = e.attribute("name") {
-            n.name = name.to_owned();
         }
         for c in &e.children {
             let t = c.text.trim();
@@ -141,7 +134,7 @@ impl AutoNumber {
     }
 
     pub fn to_element(&self, filter: Filter) -> Element {
-        let mut e = item_element(AutoNumber::KVA_NAME, self.id, AutoNumber::KVA_NAME);
+        let mut e = item_element(AutoNumber::KVA_NAME, self.id);
         if filter.core {
             e.push_leaf("Time", &self.timestamp.to_string());
             e.push(point_leaf("Location", self.location));

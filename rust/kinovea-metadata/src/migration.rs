@@ -61,7 +61,7 @@ fn calibration(help: &Element) -> Element {
     let mut line = Element::new("CalibrationLine");
     let origin = text(help, "CoordinatesOrigin");
     if origin != "-1;-1" {
-        line.push_leaf("Origin", origin);
+        line.push(Element { end_tag: true, ..Element::leaf("Origin", origin) });
     }
     line.push_leaf("Scale", text(help, "PixelToUnit"));
     cal.push(line);

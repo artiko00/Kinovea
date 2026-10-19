@@ -119,6 +119,19 @@ impl Drawing {
             Drawing::Chrono(_) | Drawing::ChronoMulti(_) | Drawing::Counter(_)
         )
     }
+
+    /// `ITrackable` in the original: only these kinds register their points for tracking.
+    pub fn is_trackable(&self) -> bool {
+        matches!(
+            self,
+            Drawing::Line(_)
+                | Drawing::Angle(_)
+                | Drawing::CrossMark(_)
+                | Drawing::Plane(_)
+                | Drawing::Polyline(_)
+                | Drawing::GenericPostureDrawing(_)
+        )
+    }
 }
 
 fn kva_name_of<D: KvaDrawing>(_: &D) -> &'static str {
