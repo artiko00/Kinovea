@@ -18,3 +18,5 @@ mod rounded_rect_test;
 pub mod squiggly;
 #[cfg(test)]
 mod squiggly_test;
+#[cfg(test)]
+pub(crate) mod support_test;
