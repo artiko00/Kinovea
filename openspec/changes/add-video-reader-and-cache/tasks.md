@@ -39,7 +39,7 @@
 
 ## 7. Integration
 
-- [ ] 7.1 Replace `crate_name()` placeholder in `rust/kinovea-video/src/lib.rs` with the public module tree and crate docs listing the superseded C# files; update `rust/Cargo.toml` dependency of `kinovea-video` on `kinovea-core`; verify `cd rust && make verify` exits 0 and `npx testlens check` reports no untested Rust file.
+- [x] 7.1 Replace `crate_name()` placeholder in `rust/kinovea-video/src/lib.rs` with the public module tree and crate docs listing the superseded C# files; update `rust/Cargo.toml` dependency of `kinovea-video` on `kinovea-core`; verify `cd rust && make verify` exits 0 and `npx testlens check` reports no untested Rust file.
 - [ ] 7.2 Append the session entry to `.agent/progress.md` (what was ported, fixture area added, flaky-test loop result) and tick `07` in `openspec/roadmap.md` after archive; verify `npm run lint` passes.
 
 ## Workflow follow-up
