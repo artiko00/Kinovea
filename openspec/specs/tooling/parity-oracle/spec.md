@@ -70,3 +70,14 @@ Adding the generator SHALL NOT change the behavior or the build output of the ex
 #### Scenario: Existing build still passes
 - **WHEN** the Windows CI build workflow runs after the generator project is added to the solution
 - **THEN** the workflow succeeds and the produced installer and portable archive contain no generator binaries
+
+### Requirement: Oracle covers annotations and postures
+The oracle SHALL provide fixture areas for the annotation model: `kva` with per-drawing content hashes and remapping cases, `posture` with description summaries and handle-move results, and a fuzzed KVA corpus generated with fixed seeds.
+
+#### Scenario: Fuzzed corpus is deterministic
+- **WHEN** the fuzzed corpus is generated twice with the same seeds
+- **THEN** both trees are byte-identical
+
+#### Scenario: Cross-load check
+- **WHEN** a KVA written by the Rust implementation is placed under `tests/cases/kva/crossload/`
+- **THEN** the oracle loads it and writes a summary with counts and content hashes that Rust tests compare against their own
