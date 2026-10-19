@@ -11,7 +11,8 @@ namespace Kinovea.FixtureGen.Areas
         /// `hits.csv`: every probe of a `hitStep` grid over the image whose `HitTest` result is not
         /// -1, for each viewport scale. Keyframe drawings are probed at their keyframe time, detached
         /// ones at `hitTimestamp`; a frame is painted first at that time and scale because several
-        /// drawings compute their screen boxes while drawing. Probes not listed are misses.
+        /// drawings compute their screen boxes while drawing. Probes not listed are misses; a drawing
+        /// whose `HitTest` throws gets a single `exception` row at the failing probe.
         /// </summary>
         private static void WriteHits(FixtureCase c, Metadata m, Color frame, bool fadingEnabled, string outDir)
         {
@@ -49,7 +50,19 @@ namespace Kinovea.FixtureGen.Areas
             {
                 for (int x = 0; x < image.Width; x += step)
                 {
-                    int result = d.HitTest(new PointF(x, y), t, distorter, transformer);
+                    int result;
+                    try
+                    {
+                        result = d.HitTest(new PointF(x, y), t, distorter, transformer);
+                    }
+                    catch (System.Exception)
+                    {
+                        // The original throws for some states (e.g. a non-perspective plane whose
+                        // projective mapping is only built while drawing a perspective grid).
+                        // One `exception` row marks the drawing; it is not probed further.
+                        rows.Add(CsvRows.Row(CsvRows.S(container, index, element, t, scale, x, y, "exception")));
+                        return;
+                    }
                     if (result >= 0)
                         rows.Add(CsvRows.Row(CsvRows.S(container, index, element, t, scale, x, y, result)));
                 }
