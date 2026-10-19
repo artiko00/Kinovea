@@ -52,6 +52,9 @@ Template: 0.5 px positions, 0.02 similarity, exact flags. Circle: 1 px center an
 - Circle: no median blur by default (`blurROI = false`), as the original; the specs were corrected. Without samples or reference the step fails instead of throwing.
 - Trackability: a gap in a track returns an empty point (the original dereferences null); `TrackId` is written whenever a point is bound, while the original writes it only once object tracking is initialized (differs only before `assign`).
 - `TrackingParameters` reads a non-numeric `Dilate`/`Erode` as 0; the original throws and stops reading. The tracker does not use those values (nor the HSV range).
+- A template flat under the mask gives NaN (OpenCV 0/0), so the step retries without the mask as the original. The mask, once built, keeps being applied when `use_mask` is turned off (`cvMaskGray` is tracker state); a mask of another size with `use_mask` off throws in OpenCV and is skipped in Rust.
+- `template-mask-flat` is pinned as an f32 near-tie in the parity test: OpenCV's correlation error (about 8 units on 4.7e7) exceeds the snap margin at one window of frame 4, so the original gives 0 where the exact NCC is 0.98; earlier frames meet the tolerances, the frame must stay the first one outside them.
+- The drawing tracker hash uses the .NET Framework `Guid.GetHashCode` formula; the sign of the `_c` field is not verified (the hash is never stored).
 - The tracking oracle renders frames into bitmap bits by an integer formula (`tests/cases/tracking/README.md`); results: template within 0.016 px and 0.005 similarity, circle exact.
 
 ## Legacy superseded
