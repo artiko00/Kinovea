@@ -18,10 +18,10 @@
 
 ## 4. Painter
 
-- [ ] 4.1 Write `src/paint/line_test.rs` etc. using the recording backend (expected primitive sequence for straight, dashed, squiggly, arrows) then port `Line`, `Polyline`, `Pencil`, `Rectangle`, `Circle`, `CrossMark` painting including `ArrowHelper` and squiggly lines into `src/paint/*.rs`; verify tests pass.
-- [ ] 4.2 Port `Angle` (pie, arc, arrow), `Plane`, `DistortionGrid`, `TestGrid`, `CoordinateSystem` painting with recording tests; verify tests pass.
-- [ ] 4.3 Port `MiniLabel`, `RoundedRectangle`, `BoundingBox` helpers and `Label` painting with text measure and draw; recording tests; verify tests pass.
-- [ ] 4.4 Port `Chrono`, `ChronoMulti`, `Counter`, `TimeSegment`, `TimePolyline`, `Spotlights`, `AutoNumbers`, `Track` (trajectory, points, labels), `GenericPosture`, `Bitmap` and `SVG` placeholders; recording tests; add the primitive-coverage test over the `all-drawings` fixture; verify tests pass.
+- [x] 4.1 Write `src/paint/line_test.rs` etc. using the recording backend (expected primitive sequence for straight, dashed, squiggly, arrows) then port `Line`, `Polyline`, `Pencil`, `Rectangle`, `Circle`, `CrossMark` painting including `ArrowHelper` and squiggly lines into `src/paint/*.rs`; verify tests pass.
+- [x] 4.2 Port `Angle` (pie, arc, arrow), `Plane`, `DistortionGrid`, `TestGrid`, `CoordinateSystem` painting with recording tests; verify tests pass.
+- [x] 4.3 Port `MiniLabel`, `RoundedRectangle`, `BoundingBox` helpers and `Label` painting with text measure and draw; recording tests; verify tests pass.
+- [x] 4.4 Port `Chrono`, `ChronoMulti`, `Counter`, `TimeSegment`, `TimePolyline`, `Spotlights`, `AutoNumbers`, `Track` (trajectory, points, labels), `GenericPosture`, `Bitmap` and `SVG` placeholders; recording tests; add the primitive-coverage test over the `all-drawings` fixture; verify tests pass. Deviations: Bitmap/SVG are placeholders until image readers land; counter cadence/period texts and the time-segment fraction formatting are simplified (recorded for the snapshot round).
 
 ## 5. CPU backend and snapshots
 
