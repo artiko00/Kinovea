@@ -27,7 +27,7 @@
         <A>256;192</A>
         <B>356;192</B>
       </Segment>
-      <Origin>-256;-92</Origin>
+      <Origin>0;100</Origin>
       <Offset>0;0</Offset>
       <Axis>LineHorizontal</Axis>
     </CalibrationLine>
@@ -73,8 +73,8 @@
     </Keyframe>
   </Keyframes>
   <CoordinateSystem id="00000000-0000-4000-8000-000000000003" name="Coordinate system 1">
-    <Position>0;0</Position>
-    <ReferenceTimestamp>-1</ReferenceTimestamp>
+    <Position>256;192</Position>
+    <ReferenceTimestamp>0</ReferenceTimestamp>
     <Visible>false</Visible>
     <ShowGrid>true</ShowGrid>
     <ShowGraduations>true</ShowGraduations>
@@ -109,6 +109,12 @@
       <TrackablePoint key="b">
         <ReferenceTimestamp>0</ReferenceTimestamp>
         <ReferenceValue>224;155</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000003" name="Coordinate system 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>0</ReferenceTimestamp>
+        <ReferenceValue>256;192</ReferenceValue>
       </TrackablePoint>
     </TrackableDrawing>
   </Trackability>

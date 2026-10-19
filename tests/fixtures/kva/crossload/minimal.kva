@@ -27,7 +27,7 @@
         <A>320;240</A>
         <B>420;240</B>
       </Segment>
-      <Origin>-320;-140</Origin>
+      <Origin>0;100</Origin>
       <Offset>0;0</Offset>
       <Axis>LineHorizontal</Axis>
     </CalibrationLine>
@@ -35,8 +35,8 @@
     <Unit Abbreviation="px">Pixels</Unit>
   </Calibration>
   <CoordinateSystem id="00000000-0000-4000-8000-000000000001" name="Coordinate system 1">
-    <Position>0;0</Position>
-    <ReferenceTimestamp>-1</ReferenceTimestamp>
+    <Position>320;240</Position>
+    <ReferenceTimestamp>0</ReferenceTimestamp>
     <Visible>false</Visible>
     <ShowGrid>true</ShowGrid>
     <ShowGraduations>true</ShowGraduations>
@@ -58,6 +58,13 @@
       </Color>
     </DrawingStyle>
   </TestGrid>
-  <Trackability />
+  <Trackability>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000001" name="Coordinate system 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>0</ReferenceTimestamp>
+        <ReferenceValue>320;240</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+  </Trackability>
   <VideoFilters />
 </KinoveaVideoAnalysis>

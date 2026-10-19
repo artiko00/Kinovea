@@ -27,7 +27,7 @@
         <A>424;240</A>
         <B>524;240</B>
       </Segment>
-      <Origin>-424;-140</Origin>
+      <Origin>0;100</Origin>
       <Offset>0;0</Offset>
       <Axis>LineHorizontal</Axis>
     </CalibrationLine>
@@ -1230,8 +1230,8 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
     </Track>
   </Tracks>
   <CoordinateSystem id="00000000-0000-4000-8000-000000000030" name="Coordinate system 1">
-    <Position>0;0</Position>
-    <ReferenceTimestamp>-1</ReferenceTimestamp>
+    <Position>424;240</Position>
+    <ReferenceTimestamp>0</ReferenceTimestamp>
     <Visible>false</Visible>
     <ShowGrid>true</ShowGrid>
     <ShowGraduations>true</ShowGraduations>
@@ -1348,6 +1348,12 @@ C\ul\b\i omment\ulnone\b0\i0 s \strike with\strike0  \cf1\highlight2 formatting\
       <TrackablePoint key="b">
         <ReferenceTimestamp>369369</ReferenceTimestamp>
         <ReferenceValue>297;21</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000030" name="Coordinate system 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>0</ReferenceTimestamp>
+        <ReferenceValue>424;240</ReferenceValue>
       </TrackablePoint>
     </TrackableDrawing>
   </Trackability>
