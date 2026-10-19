@@ -149,3 +149,9 @@ Chronological. Newest entry last. Never delete entries; correct a wrong decision
 - Agent: Claude Code (Opus 5.5) with a Haiku subagent. Hermes (DeepSeek, reasoning high, toolsets terminal+file, session `kinovea-change05-migration-history`) reviewed migration and undo history on a throwaway worktree (no files changed); it reported 4 medium and 10 low findings with reproductions.
 - Done: every finding verified against the cited C#/XSLT before fixing (M2 partly refuted: `MergeInsertKeyframe` does not refresh labels); fixes with tests, most verified by mutation. Format 1.2 and older are read as the original does (the earlier rejection was a misreading). All fixtures still match byte for byte; `make verify` and `npm run lint` green.
 - Open: `AddDrawing(managerId)` type filters for chronos/tracks and the keyframe-name setter label refresh are not ported (noted by the agent, out of scope).
+
+## 2026-10-19 — add-headless-renderer (hit parity review)
+
+- Agent: Claude Code (Opus 5.5) orchestrating two Haiku subagents (R: hit harness and render fixes; T: trackability order), after the Hermes review of change 06.
+- Done: hit harness measured inside each drawing's box, targets from the metadata, text exemptions limited to text-zone codes, singletons hit-tested; tautological tests and the empty `cpu`/`compose` modules removed. Root causes fixed against the C#: GDI+ top-left fill on stroke edges, infinite-line clipping of the coordinate system axes, item fading from the video, plane hit through the calibration mapping. The oracle now runs `PostSetupVideo` before loading a KVA (Rust too), and trackability follows the original `Dictionary` order and `UpdateId`; new case `kva/trackers-no-cs`. Fixtures from commit 4a587e9b; `cargo test --workspace` 935 passed, `make verify` and `npm run lint` green.
+- Still blocked: tasks 2.1, 5.1–5.3, 7.1 (crates approval). Follow-ups H5 (default timecode format) and H8 (circle plane-calibration branch).
