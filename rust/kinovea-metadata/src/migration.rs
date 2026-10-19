@@ -13,7 +13,7 @@ mod tracks_test;
 
 pub const PRODUCER: &str = "Kinovea XSLT Converter (1.5 to 2.0)";
 
-/// Formats 1.3 to 1.5 are converted; 2.x is read as is; older ones are rejected by the reader.
+/// Formats 1.3 to 1.5 are converted; any other version is read as is, as the original does.
 pub fn needs_migration(version: f64) -> bool {
     (1.3..2.0).contains(&version)
 }
@@ -61,12 +61,12 @@ fn calibration(help: &Element) -> Element {
     let mut line = Element::new("CalibrationLine");
     let origin = text(help, "CoordinatesOrigin");
     if origin != "-1;-1" {
-        line.push(Element { end_tag: true, ..Element::leaf("Origin", origin) });
+        line.push(value_leaf("Origin", origin));
     }
-    line.push_leaf("Scale", text(help, "PixelToUnit"));
+    line.push(value_leaf("Scale", text(help, "PixelToUnit")));
     cal.push(line);
     let unit_code = help.child("LengthUnit");
-    let unit = match unit_code.map_or("", |u| u.text.trim()) {
+    let unit = match unit_code.map_or("", |u| u.text.as_str()) {
         "0" => "Centimeters",
         "1" => "Meters",
         "2" => "Inches",
@@ -104,8 +104,13 @@ pub(crate) fn path_text<'a>(e: &'a Element, path: &[&str]) -> &'a str {
     current.text.as_str()
 }
 
+/// `xsl:value-of` as an element: a leaf written as `<X></X>` even when the text is empty.
+pub(crate) fn value_leaf(name: &str, text: &str) -> Element {
+    Element { end_tag: true, ..Element::leaf(name, text) }
+}
+
 /// `//name` in document order.
-fn descendants<'a>(e: &'a Element, name: &str) -> Vec<&'a Element> {
+pub(crate) fn descendants<'a>(e: &'a Element, name: &str) -> Vec<&'a Element> {
     let mut out = Vec::new();
     for c in &e.children {
         if c.name == name {
@@ -120,6 +125,6 @@ fn descendants<'a>(e: &'a Element, name: &str) -> Vec<&'a Element> {
 pub(crate) fn style(tag: &str, key: &str, value: &str) -> Element {
     let mut e = Element::new(tag);
     e.attributes.push(("Key".into(), key.to_owned()));
-    e.push_leaf("Value", value);
+    e.push(value_leaf("Value", value));
     e
 }

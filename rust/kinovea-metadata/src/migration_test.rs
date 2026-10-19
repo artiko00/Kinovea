@@ -24,6 +24,24 @@ fn header_calibration_and_fixed_sections() {
 }
 
 #[test]
+fn length_unit_is_compared_without_trimming() {
+    let unit = |text: &str| {
+        let xml = format!("<KinoveaVideoAnalysis><CalibrationHelp><LengthUnit>{text}</LengthUnit></CalibrationHelp></KinoveaVideoAnalysis>");
+        let out = migrate_legacy(&Element::parse(&xml).unwrap());
+        out.child("Calibration").unwrap().child("Unit").unwrap().text.clone()
+    };
+    assert_eq!(unit("1"), "Meters");
+    assert_eq!(unit(" 1"), "Pixels", "the stylesheet compares the exact text");
+}
+
+#[test]
+fn empty_scale_keeps_an_end_tag() {
+    let xml = "<KinoveaVideoAnalysis><CalibrationHelp><PixelToUnit/></CalibrationHelp></KinoveaVideoAnalysis>";
+    let out = migrate_legacy(&Element::parse(xml).unwrap());
+    assert!(out.to_document().contains("<Scale></Scale>"));
+}
+
+#[test]
 fn unknown_units_and_missing_values_follow_the_stylesheet() {
     let xml = "<KinoveaVideoAnalysis><CalibrationHelp><LengthUnit>9</LengthUnit></CalibrationHelp></KinoveaVideoAnalysis>";
     let out = migrate_legacy(&Element::parse(xml).unwrap());

@@ -14,6 +14,8 @@ use uuid::Uuid;
 pub mod edit;
 #[cfg(test)]
 mod edit_test;
+#[cfg(test)]
+mod multi_edit_test;
 mod query;
 #[cfg(test)]
 mod query_test;

@@ -144,3 +144,8 @@ Chronological. Newest entry last. Never delete entries; correct a wrong decision
 - Fixes found during integration: label leaders shortened by `UpdateStartEnd` like the original; `StyleData.LineSize` bound by key; two orphan `_test.rs` files that satisfied `testlens` but were never compiled (one did not parse) are now declared; decimal places carried in `PaintContext`.
 - Tooling gap (not fixed, decision pending): `cargo fmt --check` skips modules declared inside macros (120 files across five crates, plus `kinovea-render/src/paint`, which is checked with `rustfmt --check` by hand).
 - Blocked: tasks 2.1, 5.1–5.3, 7.1 need `tiny-skia`, `fontdue`, `png` and Liberation Sans (asked twice, no answer; AGENTS.md requires approval). The change cannot be archived until then.
+## 2026-10-19 — fix-kva-review-findings (branch fix/kva-review-findings)
+
+- Agent: Claude Code (Opus 5.5) with a Haiku subagent. Hermes (DeepSeek, reasoning high, toolsets terminal+file, session `kinovea-change05-migration-history`) reviewed migration and undo history on a throwaway worktree (no files changed); it reported 4 medium and 10 low findings with reproductions.
+- Done: every finding verified against the cited C#/XSLT before fixing (M2 partly refuted: `MergeInsertKeyframe` does not refresh labels); fixes with tests, most verified by mutation. Format 1.2 and older are read as the original does (the earlier rejection was a misreading). All fixtures still match byte for byte; `make verify` and `npm run lint` green.
+- Open: `AddDrawing(managerId)` type filters for chronos/tracks and the keyframe-name setter label refresh are not ported (noted by the agent, out of scope).

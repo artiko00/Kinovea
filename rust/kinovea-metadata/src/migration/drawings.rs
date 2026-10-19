@@ -1,6 +1,6 @@
 //! Legacy `Drawing Type="…"` elements rewritten as 2.0 drawing elements.
 
-use super::{copy_child, path_text, style, text};
+use super::{copy_child, path_text, style, text, value_leaf};
 use kinovea_core::preferences::dom::Element;
 
 pub(super) fn convert(drawings: &Element) -> Element {
@@ -27,7 +27,7 @@ fn with_style(e: &mut Element, elements: Vec<Element>) {
 
 fn measure_label(e: &mut Element, position: &str) {
     let mut label = Element::new("MeasureLabel");
-    label.push_leaf("SpacePosition", position);
+    label.push(value_leaf("SpacePosition", position));
     label.push_leaf("TimePosition", "0");
     e.push(label);
 }
@@ -70,8 +70,8 @@ fn cross(d: &Element) -> Element {
 
 fn line(d: &Element) -> Element {
     let mut e = Element::new("Line");
-    e.push_leaf("Start", text(d, "m_StartPoint"));
-    e.push_leaf("End", text(d, "m_EndPoint"));
+    e.push(value_leaf("Start", text(d, "m_StartPoint")));
+    e.push(value_leaf("End", text(d, "m_EndPoint")));
     e.push_leaf("ExtraData", if text(d, "MeasureIsVisible") == "True" { "TotalDistance" } else { "None" });
     measure_label(&mut e, text(d, "m_StartPoint"));
     let arrows = match path_text(d, &["LineStyle", "LineShape"]) {
@@ -99,7 +99,7 @@ fn label(d: &Element) -> Element {
     copy_child(&mut e, d, "Text");
     copy_child(&mut e, d, "Position");
     e.push_leaf("ArrowVisible", "false");
-    e.push_leaf("ArrowEnd", text(d, "Position"));
+    e.push(value_leaf("ArrowEnd", text(d, "Position")));
     with_style(&mut e, vec![style("Color", "back color", path_text(d, &["TextDecoration", "BackColor"])), style("FontSize", "font size", path_text(d, &["TextDecoration", "FontSize"]))]);
     copy_child(&mut e, d, "InfosFading");
     e

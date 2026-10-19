@@ -9,6 +9,12 @@ use crate::multi::{AutoNumber, Spotlight};
 use kinovea_core::preferences::dom::Element;
 use uuid::Uuid;
 
+/// Singletons are edited in place: they are never added to or removed from a container.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum EditError {
+    Singleton,
+}
+
 /// An item of the `Spotlights` or `NumberSequence` containers.
 #[derive(Debug, Clone, PartialEq)]
 pub enum MultiItem {
@@ -57,42 +63,65 @@ impl Metadata {
         }
     }
 
-    /// `AddDrawing(managerId, drawing)`: a keyframe drawing takes the keyframe time as reference.
-    pub fn add_drawing(&mut self, manager: Manager, mut drawing: Drawing) {
+    /// `AddDrawing(managerId, drawing)`: a keyframe drawing takes the keyframe time as reference. A
+    /// drawing whose id is already in its container is not added again.
+    pub fn add_drawing(&mut self, manager: Manager, mut drawing: Drawing) -> Result<(), EditError> {
+        let id = drawing.id();
         match manager {
             Manager::Keyframe(kid) => {
-                if let Some(kf) = self.keyframes.iter_mut().find(|k| k.id == kid) {
+                if let Some(kf) = self.keyframes.iter_mut().find(|k| k.id == kid).filter(|kf| !kf.drawings.iter().any(|d| d.id() == id)) {
                     drawing.header_mut().reference_timestamp = kf.timestamp;
                     drawing.header_mut().fading.reference_timestamp = kf.timestamp;
                     kf.add_drawing(drawing);
                 }
             }
-            Manager::Chronos => self.chronos.push(drawing),
-            Manager::Tracks => self.tracks.push(drawing),
-            Manager::Singletons => {}
+            Manager::Chronos if !has_id(&self.chronos, id) => self.chronos.push(drawing),
+            Manager::Tracks if !has_id(&self.tracks, id) => self.tracks.push(drawing),
+            Manager::Chronos | Manager::Tracks => {}
+            Manager::Singletons => return Err(EditError::Singleton),
         }
+        Ok(())
     }
 
-    /// `DeleteDrawing`: removes the drawing and its tracker, and returns the drawing.
-    pub fn delete_drawing(&mut self, manager: Manager, id: Uuid) -> Option<Drawing> {
+    /// `DeleteDrawing`: removes the drawing and its tracker, and returns the drawing. A deleted track
+    /// is forgotten by the trackers bound to it.
+    pub fn delete_drawing(&mut self, manager: Manager, id: Uuid) -> Result<Option<Drawing>, EditError> {
         let removed = match manager {
-            Manager::Keyframe(kid) => self.keyframes.iter_mut().find(|k| k.id == kid)?.remove_drawing(id),
+            Manager::Keyframe(kid) => self.keyframes.iter_mut().find(|k| k.id == kid).and_then(|k| k.remove_drawing(id)),
             Manager::Chronos => take_drawing(&mut self.chronos, id),
             Manager::Tracks => take_drawing(&mut self.tracks, id),
-            Manager::Singletons => None,
-        }?;
+            Manager::Singletons => return Err(EditError::Singleton),
+        };
+        let Some(removed) = removed else {
+            return Ok(None);
+        };
         self.trackability.remove(id);
-        Some(removed)
+        if matches!(removed, Drawing::Track(_)) {
+            self.trackability.forget_track(id);
+        }
+        Ok(Some(removed))
     }
 
-    /// `DeleteKeyframe`: removes the keyframe and the trackers of its drawings.
+    /// `DeleteKeyframe`: removes the keyframe and the trackers of its drawings, then updates the
+    /// keyframe labels of the tracks.
     pub fn delete_keyframe(&mut self, id: Uuid) -> Option<Keyframe> {
         let i = self.keyframes.iter().position(|k| k.id == id)?;
         let kf = self.keyframes.remove(i);
         for d in &kf.drawings {
             self.trackability.remove(d.id());
         }
+        self.update_trajectories_for_keyframes();
         Some(kf)
+    }
+
+    /// `UpdateTrajectoriesForKeyframes`: every track refreshes its labels for the keyframe times.
+    pub fn update_trajectories_for_keyframes(&mut self) {
+        let keyframes: Vec<i64> = self.keyframes.iter().map(|k| k.timestamp).collect();
+        for track in self.tracks.iter_mut() {
+            if let Drawing::Track(t) = track {
+                t.update_keyframe_labels(&keyframes);
+            }
+        }
     }
 
     /// `AddMultidrawingItem`: appends the item to its container.
@@ -103,14 +132,28 @@ impl Metadata {
         }
     }
 
-    /// `DeleteMultiDrawingItem`: removes the item from the container that holds it.
-    pub fn delete_multi_item(&mut self, id: Uuid) -> Option<MultiItem> {
-        if let Some(i) = self.spotlights.items.iter().position(|s| s.id == id) {
-            return Some(MultiItem::Spotlight(self.spotlights.items.remove(i)));
-        }
-        let i = self.number_sequence.items.iter().position(|a| a.id == id)?;
-        Some(MultiItem::AutoNumber(self.number_sequence.items.remove(i)))
+    /// The item with `id` in whichever container holds it, without removing it.
+    pub fn multi_item(&self, id: Uuid) -> Option<MultiItem> {
+        let spotlight = self.spotlights.items.iter().find(|s| s.id == id).cloned().map(MultiItem::Spotlight);
+        spotlight.or_else(|| self.number_sequence.items.iter().find(|a| a.id == id).cloned().map(MultiItem::AutoNumber))
     }
+
+    /// `DeleteMultiDrawingItem`: removes the item from the container that holds it, with its tracker.
+    pub fn delete_multi_item(&mut self, id: Uuid) -> Option<MultiItem> {
+        let item = match self.spotlights.items.iter().position(|s| s.id == id) {
+            Some(i) => MultiItem::Spotlight(self.spotlights.items.remove(i)),
+            None => {
+                let i = self.number_sequence.items.iter().position(|a| a.id == id)?;
+                MultiItem::AutoNumber(self.number_sequence.items.remove(i))
+            }
+        };
+        self.trackability.remove(id);
+        Some(item)
+    }
+}
+
+fn has_id(list: &[Drawing], id: Uuid) -> bool {
+    list.iter().any(|d| d.id() == id)
 }
 
 fn take_drawing(list: &mut Vec<Drawing>, id: Uuid) -> Option<Drawing> {
