@@ -30,6 +30,17 @@ fn same_context_detection() {
 }
 
 #[test]
+fn a_missing_or_empty_current_file_is_another_context_before_any_comparison() {
+    // IsSameContext: no path is the same context; a file that is missing or empty (length 0)
+    // is another one, even when the names match.
+    let missing = VideoContext { video_byte_length: 0, ..current() };
+    assert!(!ImportContext { path: "/videos/run.mp4".into(), ..ImportContext::default() }.is_same_context(&missing));
+    assert!(!ImportContext { file_name: "run".into(), ..ImportContext::default() }.is_same_context(&missing));
+    let no_path = VideoContext { video_path: String::new(), ..missing.clone() };
+    assert!(ImportContext { file_name: "run".into(), ..ImportContext::default() }.is_same_context(&no_path));
+}
+
+#[test]
 fn remapping_uses_frames_and_the_output_time_base() {
     let ctx = ImportContext { average_timestamps_per_frame: 10.0, first_timestamp: 1000, time_origin: 2000, ..ImportContext::default() };
     assert_eq!(ctx.remap(2050, &current(), true), 2050);
