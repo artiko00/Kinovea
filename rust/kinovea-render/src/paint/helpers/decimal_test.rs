@@ -1,6 +1,6 @@
 //! `String.Format("{0}", Math.Round(value, 2))` as .NET Framework prints it.
 
-use super::decimal::format_value;
+use super::decimal::{format_rounded, format_value};
 
 #[test]
 fn whole_and_negative_values_print_without_decimals() {
@@ -23,4 +23,11 @@ fn values_round_to_two_decimals() {
 fn ties_go_to_the_even_digit() {
     // 12.5 -> 12.
     assert_eq!(format_value(0.125), "0.12");
+}
+
+#[test]
+fn explicit_places_round_before_printing() {
+    // Math.Round(1.23456, 0) = 1; Math.Round(1.23456, 3) = 1.235 (ties do not apply).
+    assert_eq!(format_rounded(1.23456, 0), "1");
+    assert_eq!(format_rounded(1.23456, 3), "1.235");
 }

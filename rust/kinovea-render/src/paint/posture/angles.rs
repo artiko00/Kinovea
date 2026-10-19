@@ -1,17 +1,16 @@
 //! Port of `DrawAngles` and `AngleHelper.DrawText`: the pie and the arc of each angle, and its value on
-//! a background placed along the middle of the sweep.
+//! a background placed along the middle of the sweep. The geometry comes from the shared `AngleHelper`.
 
-use super::angle_sweep::{compute, Angle, AngleFlags, Sweep};
 use super::frame::{colored, edge_pen, PostureFrame};
 use super::texts::with_symbol;
+use crate::paint::helpers::angle_helper::{AngleFlags, AngleHelper};
 use crate::paint::helpers::decimal::format_value;
 use crate::paint::helpers::frame::{rect_f, to_viewport};
 use crate::paint::helpers::rounded_rect::{draw_rounded_rectangle, line_height};
 use crate::renderer::{Brush, Renderer};
-use kinovea_geometry::{PointF, RectangleF, SizeF};
+use kinovea_geometry::{PointF, RectangleF};
 use kinovea_metadata::style::DashStyle;
 use kinovea_metadata::Color;
-use std::f64::consts::PI;
 
 /// Pen width of the angle arc (`penEdge.Width = 2`).
 const ARC_WIDTH: f32 = 2.0;
@@ -25,53 +24,49 @@ pub fn paint_angles(f: &PostureFrame, r: &mut dyn Renderer) {
         let o = f.image_point(angle.origin);
         let a = f.image_point(angle.leg1);
         let b = f.image_point(angle.leg2);
+        // The shared helper leaves an empty sweep here; the posture has no earlier state to keep.
+        if o == a || o == b {
+            continue;
+        }
         let flags = AngleFlags {
             radius: angle.radius,
             signed: angle.signed,
             ccw: angle.ccw,
             supplementary: angle.supplementary,
         };
-        let Some(state) = compute(o, a, b, flags, &f.ctx.metadata.calibration) else {
-            continue;
-        };
-        let rect = rect_f(f.ctx.viewport.transform_rect_f(state.sweep.bounding));
+        let helper = AngleHelper::new(o, a, b, flags, &f.ctx.metadata.calibration);
+        let sweep = helper.sweep;
+        let rect = rect_f(f.ctx.viewport.transform_rect_f(sweep.bounding_box));
         let edge = colored(angle.color, f.alpha, f.edge_base());
         let fill = colored(angle.color, f.alpha_background, f.fill_base());
         let pen = edge_pen(edge, ARC_WIDTH, DashStyle::Solid);
-        r.fill_pie(
-            rect,
-            state.sweep.start,
-            state.sweep.sweep,
-            &Brush::solid(fill),
-        );
-        r.stroke_arc(rect, state.sweep.start, state.sweep.sweep, &pen);
-        let origin = to_viewport(f.ctx, state.sweep.origin);
-        draw_text(
-            f,
-            r,
-            origin,
-            &state,
-            angle.text_distance,
-            &angle.symbol,
+        r.fill_pie(rect, sweep.start, sweep.sweep, &Brush::solid(fill));
+        r.stroke_arc(rect, sweep.start, sweep.sweep, &pen);
+        let origin = to_viewport(f.ctx, o);
+        let label = Label {
+            helper: &helper,
+            distance: angle.text_distance,
+            symbol: &angle.symbol,
             fill,
-        );
+        };
+        draw_text(f, r, origin, &label);
     }
 }
 
-/// `AngleHelper.DrawText`: the value in the calibration units, scaled with the viewport.
-fn draw_text(
-    f: &PostureFrame,
-    r: &mut dyn Renderer,
-    origin: PointF,
-    angle: &Angle,
-    text_distance: i32,
-    symbol: &str,
+/// What `draw_text` reads of the angle besides its origin.
+struct Label<'a> {
+    helper: &'a AngleHelper,
+    distance: i32,
+    symbol: &'a str,
     fill: Color,
-) {
+}
+
+/// `AngleHelper.DrawText`: the value in the calibration units, scaled with the viewport.
+fn draw_text(f: &PostureFrame, r: &mut dyn Renderer, origin: PointF, text: &Label) {
     let calibration = &f.ctx.metadata.calibration;
-    let value = format_value(calibration.convert_angle(angle.calibrated));
+    let value = format_value(calibration.convert_angle(text.helper.calibrated_angle));
     let label = with_symbol(
-        symbol,
+        text.symbol,
         &format!("{value} {}", calibration.angle_abbreviation()),
     );
     let scale = f.ctx.viewport.scale as f32;
@@ -79,22 +74,19 @@ fn draw_text(
     let size = r.measure_text(&label, &font);
     let scaled_font = f.style.font(scale);
     let scaled_size = r.measure_text(&label, &scaled_font);
-    let offset = text_position(angle.sweep, text_distance, size);
+    let offset = text.helper.text_position(text.distance, size);
     let at = PointF::new(origin.x + offset.x * scale, origin.y + offset.y * scale);
     let rect = RectangleF::new(at.x, at.y, scaled_size.width, scaled_size.height);
     let radius = line_height(r, &scaled_font) / 4;
-    draw_rounded_rectangle(r, rect, &Brush::solid(fill), radius, false, false, None);
+    draw_rounded_rectangle(
+        r,
+        rect,
+        &Brush::solid(text.fill),
+        radius,
+        false,
+        false,
+        None,
+    );
     let fore = f.style.foreground_brush(f.text_alpha());
     r.draw_text(&label, &scaled_font, &fore, at);
-}
-
-/// `GetTextPosition`: `text_distance` along the middle of the sweep, the label centred on that point.
-fn text_position(sweep: Sweep, text_distance: i32, size: SizeF) -> PointF {
-    // `MathHelper.Radians` returns a float.
-    let degrees = sweep.start + sweep.sweep / 2.0;
-    let radians = f64::from((f64::from(degrees) * PI / 180.0) as f32);
-    let distance = f64::from(text_distance);
-    let x = radians.cos() * distance - f64::from(size.width) / 2.0;
-    let y = radians.sin() * distance - f64::from(size.height) / 2.0;
-    PointF::new(x as f32, y as f32)
 }

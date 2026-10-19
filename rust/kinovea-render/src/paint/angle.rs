@@ -1,11 +1,5 @@
 //! Owner: P3. Painters ported from `DrawingAngle.Draw`.
 
-pub mod helper;
-#[cfg(test)]
-mod helper_test;
-pub mod sweep;
-#[cfg(test)]
-mod sweep_test;
 pub mod value;
 #[cfg(test)]
 mod value_test;
@@ -13,9 +7,9 @@ mod value_test;
 use super::helpers::arrow::{arrow_offset, draw_arrow};
 use super::helpers::frame::{opacity, point_box, rect_f, to_viewport};
 use super::PaintContext;
+use crate::paint::helpers::angle_helper::{AngleFlags, AngleHelper};
 use crate::renderer::{Pen, Renderer};
 use crate::style::StyleData;
-use helper::AngleHelper;
 use kinovea_geometry::PointF;
 use kinovea_metadata::drawing::Angle;
 use kinovea_metadata::style::DashStyle;
@@ -38,15 +32,14 @@ pub fn paint_angle(d: &Angle, ctx: &PaintContext, r: &mut dyn Renderer) {
     }
     let style = angle_style(&d.header.style);
     let (o, a, b) = fix_legs(d.o, d.a, d.b, ctx);
-    let helper = AngleHelper::new(
-        o,
-        a,
-        b,
-        d.signed,
-        d.counter_clockwise,
-        d.supplementary,
-        &ctx.metadata.calibration,
-    );
+    // The angle painter always passes a zero radius: the arrow carries the sweep's extent.
+    let flags = AngleFlags {
+        radius: 0,
+        signed: d.signed,
+        ccw: d.counter_clockwise,
+        supplementary: d.supplementary,
+    };
+    let helper = AngleHelper::new(o, a, b, flags, &ctx.metadata.calibration);
     let sweep = helper.sweep;
     let bounds = ctx.viewport.transform_rect_f(sweep.bounding_box);
     if bounds.width == 0 && bounds.height == 0 {

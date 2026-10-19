@@ -1,4 +1,6 @@
-use super::helper::{text_distance, AngleHelper};
+//! `AngleHelper.Update` on uncalibrated pixels: the value in world space (y up) and the text placement.
+
+use super::angle_helper::{text_distance, AngleFlags, AngleHelper};
 use kinovea_geometry::{PointF, RectangleF, SizeF};
 use kinovea_metadata::Metadata;
 use std::f32::consts::{FRAC_PI_2, FRAC_PI_4, PI};
@@ -11,6 +13,15 @@ fn o() -> PointF {
     PointF::new(100.0, 100.0)
 }
 
+fn flags(signed: bool, ccw: bool, supplementary: bool) -> AngleFlags {
+    AngleFlags {
+        radius: 0,
+        signed,
+        ccw,
+        supplementary,
+    }
+}
+
 /// Second leg north (100, 50), first leg east (150, 100).
 fn helper(signed: bool, ccw: bool, supplementary: bool) -> AngleHelper {
     let metadata = Metadata::default();
@@ -18,9 +29,7 @@ fn helper(signed: bool, ccw: bool, supplementary: bool) -> AngleHelper {
         o(),
         PointF::new(150.0, 100.0),
         PointF::new(100.0, 50.0),
-        signed,
-        ccw,
-        supplementary,
+        flags(signed, ccw, supplementary),
         &metadata.calibration,
     )
 }
@@ -63,18 +72,14 @@ fn supplementary_angle_uses_the_mirrored_second_leg() {
         o(),
         PointF::new(150.0, 100.0),
         b,
-        true,
-        true,
-        false,
+        flags(true, true, false),
         &metadata.calibration,
     );
     let supplement = AngleHelper::new(
         o(),
         PointF::new(150.0, 100.0),
         b,
-        true,
-        true,
-        true,
+        flags(true, true, true),
         &metadata.calibration,
     );
     assert!(close(plain.calibrated_angle, 3.0 * FRAC_PI_4));
@@ -89,9 +94,7 @@ fn leg_coinciding_with_the_origin_leaves_the_sweep_empty() {
         o(),
         o(),
         PointF::new(100.0, 50.0),
-        true,
-        true,
-        false,
+        flags(true, true, false),
         &metadata.calibration,
     );
     assert_eq!(h.calibrated_angle, 0.0);

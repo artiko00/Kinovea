@@ -1,12 +1,12 @@
 //! Owner: P3. Port of `AngleHelper.DrawText`: the value of the angle on a box along its bisector.
 
-use super::helper::{text_distance, AngleHelper};
+use crate::paint::helpers::angle_helper::{text_distance, AngleHelper};
+use crate::paint::helpers::decimal::format_rounded;
 use crate::paint::helpers::frame::stretch;
 use crate::paint::helpers::rounded_rect::draw_rounded_rectangle;
 use crate::paint::PaintContext;
 use crate::renderer::{Brush, Renderer};
 use crate::style::StyleData;
-use kinovea_geometry::helpers::round;
 use kinovea_geometry::{PointF, RectangleF};
 use kinovea_measurement::CalibrationHelper;
 use kinovea_metadata::drawing::Angle;
@@ -48,7 +48,7 @@ pub fn draw_value(r: &mut dyn Renderer, value: &Value, origin: PointF, ctx: &Pai
 
 /// `AngleHelper.DrawText`: the value rounded to `DecimalPlaces`, then the unit.
 pub fn value_label(d: &Angle, helper: &AngleHelper, calibration: &CalibrationHelper) -> String {
-    let value = round(
+    let value = format_rounded(
         calibration.convert_angle(helper.calibrated_angle),
         decimal_places(&d.header.style),
     );

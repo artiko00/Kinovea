@@ -1,6 +1,6 @@
 //! Grid of the coordinate system in image coordinates (`CoordinateSystemGrid`, `GridLine`, `GridAxis`).
 
-use super::tick::TickMark;
+use crate::paint::helpers::tick_mark::TickMark;
 use kinovea_geometry::PointF;
 
 /// A segment of the grid, already clipped to the image. Axes use the same shape.

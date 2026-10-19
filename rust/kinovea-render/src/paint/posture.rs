@@ -1,8 +1,5 @@
 //! Owner: P1. Painters ported from `DrawingGenericPosture.Draw`, in its drawing order.
 
-mod angle_sweep;
-#[cfg(test)]
-mod angle_sweep_test;
 mod angles;
 #[cfg(test)]
 mod angles_test;

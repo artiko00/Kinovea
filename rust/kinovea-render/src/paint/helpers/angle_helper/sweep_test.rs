@@ -1,3 +1,6 @@
+//! `SweepAngle.Update` with a zero radius, as the angle painter always passes it. Origin (100, 100),
+//! first leg east (150, 100), second leg north (100, 50): a quarter turn.
+
 use super::sweep::Sweep;
 use kinovea_geometry::{PointF, RectangleF};
 
@@ -5,12 +8,12 @@ fn close(a: f32, b: f32) -> bool {
     (a - b).abs() < 1e-3
 }
 
-/// Origin (100, 100), first leg east (150, 100), second leg north (100, 50): a quarter turn.
 fn quarter_turn(signed: bool, ccw: bool) -> Sweep {
     Sweep::update(
         PointF::new(100.0, 100.0),
         PointF::new(150.0, 100.0),
         PointF::new(100.0, 50.0),
+        0.0,
         signed,
         ccw,
     )
@@ -42,6 +45,7 @@ fn signed_reflex_angle_flips_to_the_short_arc() {
         PointF::new(100.0, 100.0),
         PointF::new(50.0, 100.0),
         PointF::new(100.0, 50.0),
+        0.0,
         true,
         true,
     );
@@ -56,6 +60,7 @@ fn unsigned_reflex_angle_keeps_the_long_arc() {
         PointF::new(100.0, 100.0),
         PointF::new(50.0, 100.0),
         PointF::new(100.0, 50.0),
+        0.0,
         false,
         true,
     );

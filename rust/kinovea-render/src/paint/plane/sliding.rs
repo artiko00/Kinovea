@@ -2,7 +2,7 @@
 //! graduation ticks (`UpdateTickMarks`, `AddTickMarks`), computed from the current state.
 
 use super::grid::{draw_distorted_line, Grid};
-use super::tick_mark::{draw_ticks, Alignment, TickMark};
+use crate::paint::helpers::tick_mark::{draw_ticks, TextAlignment, TickMark};
 use crate::paint::PaintContext;
 use crate::renderer::{Pen, Renderer};
 use kinovea_geometry::PointF;
@@ -12,6 +12,8 @@ use kinovea_metadata::drawing::Plane;
 /// Sliding lines closer than this to an end hide the end tick on that side.
 const NEAR_START: f32 = 0.1;
 const NEAR_END: f32 = 0.9;
+/// `textMargin` of `DrawingPlane`: distance between a tick and its label.
+const TICK_TEXT_MARGIN: f32 = 20.0;
 
 /// Port of `DrawingPlane.DrawSlidingLines`. Only the calibration drawing shows them.
 pub fn draw_sliding_lines(
@@ -31,7 +33,7 @@ pub fn draw_sliding_lines(
     }
     let calibrator = ctx.metadata.calibration.calibrator();
     let ticks = tick_marks(d, grid, calibrator);
-    draw_ticks(r, pen, &ticks, decimal_places, ctx);
+    draw_ticks(r, pen, &ticks, decimal_places, TICK_TEXT_MARGIN, ctx);
 }
 
 fn draw_lines(r: &mut dyn Renderer, pen: &Pen, grid: &Grid, d: &Plane, ctx: &PaintContext) {
@@ -89,12 +91,12 @@ fn add_ticks(
         ticks.push(TickMark {
             value,
             image_location: grid.mapper.forward(top),
-            alignment: Alignment::Top,
+            alignment: TextAlignment::Top,
         });
         ticks.push(TickMark {
             value,
             image_location: grid.mapper.forward(bottom),
-            alignment: Alignment::Bottom,
+            alignment: TextAlignment::Bottom,
         });
     } else {
         let left = PointF::new(0.0, coord);
@@ -103,12 +105,12 @@ fn add_ticks(
         ticks.push(TickMark {
             value,
             image_location: grid.mapper.forward(left),
-            alignment: Alignment::Left,
+            alignment: TextAlignment::Left,
         });
         ticks.push(TickMark {
             value,
             image_location: grid.mapper.forward(right),
-            alignment: Alignment::Right,
+            alignment: TextAlignment::Right,
         });
     }
 }

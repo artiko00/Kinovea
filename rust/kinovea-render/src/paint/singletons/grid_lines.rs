@@ -3,7 +3,7 @@
 //! differ only in the axis the lines run along, which `Walk` describes.
 
 use super::grid::{CoordinateSystemGrid, GridLine};
-use super::tick::{TextAlignment, TickMark};
+use crate::paint::helpers::tick_mark::{TextAlignment, TickMark};
 use kinovea_geometry::{clip_line, clip_segment, PointF, Quadrilateral, RectangleF, SizeF};
 use kinovea_measurement::CalibratorPlane;
 
@@ -140,7 +140,7 @@ pub fn create_lines(
                 {
                     grid.tick_marks.push(TickMark {
                         value: t + walk.offset(frame.calibrator.offset),
-                        location: a,
+                        image_location: a,
                         alignment,
                     });
                 }

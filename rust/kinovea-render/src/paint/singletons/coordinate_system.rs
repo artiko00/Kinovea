@@ -4,11 +4,14 @@
 
 use super::grid::GridLine;
 use super::grid_finder::find;
+use crate::paint::helpers::decimal::DEFAULT_DECIMAL_PLACES;
 use crate::paint::helpers::frame::to_viewport;
+use crate::paint::helpers::tick_mark::{draw_tick_mark, TickLabel};
 use crate::paint::PaintContext;
 use crate::renderer::{Pen, Renderer};
 use crate::style::colors::with_alpha;
 use crate::style::StyleData;
+use kinovea_geometry::PointF;
 use kinovea_measurement::CalibratorType;
 use kinovea_metadata::singletons::CoordinateSystem;
 use kinovea_metadata::style::DashStyle;
@@ -54,8 +57,15 @@ pub fn paint_coordinate_system(d: &CoordinateSystem, ctx: &PaintContext, r: &mut
         let back = style.background_brush(LABELS_ALPHA);
         let fore = style.foreground_brush(255);
         let font = style.font(1.0);
+        let label = TickLabel {
+            fill: &back,
+            text: &fore,
+            font: &font,
+            decimal_places: DEFAULT_DECIMAL_PLACES,
+        };
+        let distort = |p: PointF| ctx.distorter.map_or(p, |distorter| distorter.distort(p));
         for tick in &grid.tick_marks {
-            tick.paint(ctx, r, &back, &fore, &font, TEXT_MARGIN);
+            draw_tick_mark(r, tick, &label, ctx, &distort, TEXT_MARGIN);
         }
     }
 }

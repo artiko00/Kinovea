@@ -1,5 +1,8 @@
 //! Drawing helpers shared by several painters.
 
+pub mod angle_helper;
+#[cfg(test)]
+mod angle_helper_test;
 pub mod arrow;
 #[cfg(test)]
 mod arrow_test;
@@ -23,3 +26,6 @@ pub mod squiggly;
 mod squiggly_test;
 #[cfg(test)]
 pub(crate) mod support_test;
+pub mod tick_mark;
+#[cfg(test)]
+mod tick_mark_test;

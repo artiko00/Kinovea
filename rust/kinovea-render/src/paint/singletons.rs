@@ -20,9 +20,6 @@ mod range_test;
 mod test_grid;
 #[cfg(test)]
 mod test_grid_test;
-mod tick;
-#[cfg(test)]
-mod tick_test;
 
 pub use coordinate_system::paint_coordinate_system;
 pub use test_grid::paint_test_grid;

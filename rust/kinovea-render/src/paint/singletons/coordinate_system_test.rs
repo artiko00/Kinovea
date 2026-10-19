@@ -6,6 +6,7 @@ use super::coordinate_system::paint_coordinate_system;
 use super::fixture_test::{crossed_plane, flat_plane};
 use crate::backend::recording::Call;
 use crate::paint::helpers::frame::scene::{Scene, COLOR};
+use crate::paint::{Distorter, PaintContext};
 use crate::renderer::{LineCap, LineJoin, Pen, Transform};
 use crate::viewport::Point;
 use kinovea_geometry::PointF;
@@ -77,6 +78,38 @@ fn axes_come_first_then_the_dashed_grid_at_half_alpha() {
         stroke((40.0, 110.0), (40.0, 10.0), pen(127, DashStyle::Dash)),
     ];
     assert_eq!(paint(&scene(flat_plane()), &d)[..4], expected[..]);
+}
+
+/// Moves every point one pixel of the image right of its place (`Distorter`).
+struct Shift;
+
+impl Distorter for Shift {
+    fn distort(&self, p: PointF) -> PointF {
+        PointF::new(p.x + 10.0, p.y)
+    }
+}
+
+#[test]
+fn origin_graduation_is_anchored_on_its_distorted_point() {
+    // The origin graduation sits at (20, 110); distorted by +10 in x it is at (30, 110), and the
+    // BottomRight label starts at (30 + 8, 110 + 8).
+    let fixture = scene(flat_plane());
+    let d = visible_system();
+    let calls = fixture.record(0, |ctx, r| {
+        let ctx = PaintContext {
+            distorter: Some(&Shift),
+            ..ctx
+        };
+        paint_coordinate_system(&d, &ctx, r)
+    });
+    let first_label = calls.iter().find_map(|c| match c {
+        Call::DrawText(text, _, _, origin, _) => Some((text.clone(), *origin)),
+        _ => None,
+    });
+    assert_eq!(
+        first_label,
+        Some(("0".to_string(), PointF::new(38.0, 118.0)))
+    );
 }
 
 #[test]

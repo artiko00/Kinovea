@@ -9,9 +9,6 @@ mod grid_test;
 pub mod sliding;
 #[cfg(test)]
 mod sliding_test;
-pub mod tick_mark;
-#[cfg(test)]
-mod tick_mark_test;
 
 pub use distortion_grid::paint_distortion_grid;
 

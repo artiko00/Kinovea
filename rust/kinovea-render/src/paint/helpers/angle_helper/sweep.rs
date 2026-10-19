@@ -1,11 +1,12 @@
-//! Port of `SweepAngle.Update` (`Measurement/Geometry/SweepAngle.cs`) for the zero radius that
-//! `AngleHelper` always passes. Start and sweep are GDI+ degrees (clockwise from +x, y down).
+//! Port of `SweepAngle.Update` (`Measurement/Geometry/SweepAngle.cs`). Start and sweep are GDI+ degrees
+//! (clockwise from +x, y down). A non-positive radius is counted from the end of the smallest leg and
+//! also places the arrow; a positive radius only gives the bounding box.
 
 use crate::paint::helpers::frame::point_box_f;
 use kinovea_geometry::helpers::{degrees_f64, distance, radians};
 use kinovea_geometry::{PointF, RectangleF, Vector};
 
-/// `Math.Min(radius, -10)`: the smallest leg is inset by this much for the arrow.
+/// `Math.Min(radius, -10)`: the smallest leg is inset by this much.
 const INSET: f32 = 10.0;
 /// `Math.Min(smallest, 10)`: the radius when the inset would leave no room.
 const MAX_RADIUS: f32 = 10.0;
@@ -33,8 +34,8 @@ impl Sweep {
         }
     }
 
-    /// `SweepAngle.Update(o, a, b, 0, signed, ccw)`: from the first leg to the second one.
-    pub fn update(o: PointF, a: PointF, b: PointF, signed: bool, ccw: bool) -> Self {
+    /// `SweepAngle.Update(o, a, b, radius, signed, ccw)`: from the first leg to the second one.
+    pub fn update(o: PointF, a: PointF, b: PointF, radius: f32, signed: bool, ccw: bool) -> Self {
         let (oa, ob) = if ccw {
             (absolute_angle(o, b), absolute_angle(o, a))
         } else {
@@ -48,14 +49,22 @@ impl Sweep {
             sweep = 360.0 - sweep;
             neg = true;
         }
-        let (bounding_box, arrow_start, arrow_end) = arrow_geometry(o, a, b, ccw, neg);
-        Sweep {
+        let mut result = Sweep {
             start,
             sweep,
-            bounding_box,
-            arrow_start,
-            arrow_end,
+            bounding_box: RectangleF::EMPTY,
+            arrow_start: PointF::EMPTY,
+            arrow_end: PointF::EMPTY,
+        };
+        if radius > 0.0 {
+            result.bounding_box = point_box_f(o, radius as i32);
+        } else {
+            let (bounding_box, arrow_start, arrow_end) = arrow_geometry(o, a, b, radius, ccw, neg);
+            result.bounding_box = bounding_box;
+            result.arrow_start = arrow_start;
+            result.arrow_end = arrow_end;
         }
+        result
     }
 }
 
@@ -70,22 +79,18 @@ fn absolute_angle(o: PointF, p: PointF) -> f32 {
     degrees_f64(pie) as f32
 }
 
-/// `UpdateBoundingBox` for the zero radius. The arrow end sits on the measure leg; the arrow start
-/// is `ARROW_LENGTH` along the tangent, from a point one degree further round the circle.
+/// `UpdateBoundingBox` for a non-positive radius. The arrow end sits on the measure leg; the arrow
+/// start is `ARROW_LENGTH` along the tangent, from a point one degree further round the circle.
 fn arrow_geometry(
     o: PointF,
     a: PointF,
     b: PointF,
+    radius: f32,
     ccw: bool,
     neg: bool,
 ) -> (RectangleF, PointF, PointF) {
     let smallest = distance(o, a).min(distance(o, b));
-    let radius = if smallest - INSET > 0.0 {
-        smallest - INSET
-    } else {
-        smallest.min(MAX_RADIUS)
-    };
-    let radius = radius.trunc();
+    let radius = negative_radius(smallest, radius).trunc();
 
     let to_b = Vector::from_points(o, b).normalized();
     let arrow_end = o + to_b * radius;
@@ -103,4 +108,14 @@ fn arrow_geometry(
     let arrow_start = arrow_end + tangent * ARROW_LENGTH;
 
     (point_box_f(o, radius as i32), arrow_start, arrow_end)
+}
+
+/// The radius counted from the smallest leg: `smallest + min(radius, -10)` while it stays positive.
+fn negative_radius(smallest: f32, radius: f32) -> f32 {
+    let inset = radius.min(-INSET);
+    if smallest + inset > 0.0 {
+        smallest + inset
+    } else {
+        smallest.min(MAX_RADIUS)
+    }
 }

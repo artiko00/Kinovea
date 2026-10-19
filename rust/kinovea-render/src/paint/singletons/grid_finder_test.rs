@@ -10,7 +10,7 @@
 use super::fixture_test::flat_plane;
 use super::grid::GridLine;
 use super::grid_finder::find;
-use super::tick::{TextAlignment, TickMark};
+use crate::paint::helpers::tick_mark::{TextAlignment, TickMark};
 use kinovea_geometry::PointF;
 
 fn line(a: (f32, f32), b: (f32, f32)) -> GridLine {
@@ -42,7 +42,7 @@ fn flat_plane_graduations_are_labelled_in_world_units() {
     let grid = find(&flat_plane());
     let tick = |value: f32, location: (f32, f32), alignment| TickMark {
         value,
-        location: PointF::new(location.0, location.1),
+        image_location: PointF::new(location.0, location.1),
         alignment,
     };
     assert_eq!(
