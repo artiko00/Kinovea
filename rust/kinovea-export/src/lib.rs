@@ -1,9 +1,41 @@
-//! Kinovea `export` crate. Behavior is added by later OpenSpec changes.
+//! Kinovea `export` crate: importers (OpenPose, TRC, SRT) and the measured-data collector with the
+//! writers that serialize it.
 
 pub mod rtf;
 
+pub mod collect;
+mod collect_drawings;
+mod collect_series;
+pub mod json;
+mod json_render;
+mod json_series;
+pub mod measure;
+pub mod measured_data;
+
+#[cfg(test)]
+mod case;
+#[cfg(test)]
+mod case_test;
+#[cfg(test)]
+mod collect_drawings_test;
+#[cfg(test)]
+mod collect_series_test;
+#[cfg(test)]
+mod collect_test;
+#[cfg(test)]
+mod json_render_test;
+#[cfg(test)]
+mod json_series_test;
+#[cfg(test)]
+mod json_test;
 #[cfg(test)]
 mod lib_test;
+#[cfg(test)]
+mod measure_angle_test;
+#[cfg(test)]
+mod measure_test;
+#[cfg(test)]
+mod measured_data_test;
 
 pub mod import;
 #[cfg(test)]
