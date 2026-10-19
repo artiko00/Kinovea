@@ -11,7 +11,7 @@
 ## 2. Crate skeleton and dependencies
 
 - [x] 2.1 After approval, add `quick-xml`, `roxmltree`, `uuid` (features v4) to `rust/kinovea-metadata/Cargo.toml` and `proptest` as dev-dependency; depend on `kinovea-core`, `kinovea-geometry`, `kinovea-fixtures` (dev); verify `cd rust && make verify` passes with the existing placeholder test. Deviation: only `uuid` was added; XML goes through the existing `kinovea-core` DOM and properties use seeded loops, so `quick-xml`, `roxmltree` and `proptest` were not needed (see design D3, D5, D10).
-- [ ] 2.2 Create modules `rust/kinovea-metadata/src/{ids,xml,fading,style,drawing,keyframe,metadata,kva,migration,history,posture}.rs` with `lib.rs` re-exports and one `*_test.rs` per module asserting module presence; verify `npx testlens check --fail` is green.
+- [x] 2.2 Create modules `rust/kinovea-metadata/src/{ids,xml,fading,style,drawing,keyframe,metadata,kva,migration,history,posture}.rs` with `lib.rs` re-exports and one `*_test.rs` per module asserting module presence; verify `npx testlens check --fail` is green. Deviation: the numeric XML helpers live in `kinovea-core::xml`, so there is no `xml` module here.
 
 ## 3. Ids, fading and style
 
@@ -43,7 +43,7 @@
 
 ## 7. Undo history
 
-- [ ] 7.1 Write `src/history_test.rs` (push clears redo, undo/redo of each memento kind restores KVA serialization and content hash); implement `src/history.rs` with `HistoryStack` and `Memento`; verify tests pass.
+- [x] 7.1 Write `src/history_test.rs` (push clears redo, undo/redo of each memento kind restores KVA serialization and content hash); implement `src/history.rs` with `HistoryStack` and `Memento`; verify tests pass. Undo and redo are checked on the whole KVA document, which covers every content hash.
 
 ## 8. Generic posture
 
