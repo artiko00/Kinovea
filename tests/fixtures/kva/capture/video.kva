@@ -185,7 +185,13 @@
     </DrawingStyle>
   </NumberSequence>
   <Trackability>
-    <TrackableDrawing id="00000000-0000-4000-8000-000000000009" name="Goniometer 1">
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000009" name="Coordinate system 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>0</ReferenceTimestamp>
+        <ReferenceValue>320;240</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000010" name="Goniometer 1">
       <TrackablePoint key="0">
         <ReferenceTimestamp>400</ReferenceTimestamp>
         <ReferenceValue>100;100</ReferenceValue>
@@ -199,7 +205,7 @@
         <ReferenceValue>180;70</ReferenceValue>
       </TrackablePoint>
     </TrackableDrawing>
-    <TrackableDrawing id="00000000-0000-4000-8000-000000000010" name="Polyline 1">
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000011" name="Polyline 1">
       <TrackablePoint key="0">
         <ReferenceTimestamp>400</ReferenceTimestamp>
         <ReferenceValue>400;100</ReferenceValue>
@@ -213,7 +219,7 @@
         <ReferenceValue>500;100</ReferenceValue>
       </TrackablePoint>
     </TrackableDrawing>
-    <TrackableDrawing id="00000000-0000-4000-8000-000000000011" name="Line 1">
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000012" name="Line 1">
       <TrackablePoint key="a">
         <ReferenceTimestamp>400</ReferenceTimestamp>
         <ReferenceValue>50;300</ReferenceValue>
@@ -223,13 +229,13 @@
         <ReferenceValue>250;320</ReferenceValue>
       </TrackablePoint>
     </TrackableDrawing>
-    <TrackableDrawing id="00000000-0000-4000-8000-000000000012" name="Marker 1">
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000013" name="Marker 1">
       <TrackablePoint key="0">
         <ReferenceTimestamp>400</ReferenceTimestamp>
         <ReferenceValue>100;400</ReferenceValue>
       </TrackablePoint>
     </TrackableDrawing>
-    <TrackableDrawing id="00000000-0000-4000-8000-000000000013" name="Elbow">
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000014" name="Elbow">
       <TrackablePoint key="o">
         <ReferenceTimestamp>400</ReferenceTimestamp>
         <ReferenceValue>200;200</ReferenceValue>
@@ -243,7 +249,7 @@
         <ReferenceValue>200;100</ReferenceValue>
       </TrackablePoint>
     </TrackableDrawing>
-    <TrackableDrawing id="00000000-0000-4000-8000-000000000014" name="Perspective grid 1">
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000015" name="Perspective grid 1">
       <TrackablePoint key="0">
         <ReferenceTimestamp>400</ReferenceTimestamp>
         <ReferenceValue>50;50</ReferenceValue>

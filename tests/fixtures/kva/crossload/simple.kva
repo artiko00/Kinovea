@@ -27,7 +27,7 @@
         <A>256;192</A>
         <B>356;192</B>
       </Segment>
-      <Origin>0;100</Origin>
+      <Origin>-256;-92</Origin>
       <Offset>0;0</Offset>
       <Axis>LineHorizontal</Axis>
     </CalibrationLine>
@@ -72,7 +72,7 @@
       </Drawings>
     </Keyframe>
   </Keyframes>
-  <CoordinateSystem id="00000000-0000-4000-8000-000000000003" name="">
+  <CoordinateSystem id="00000000-0000-4000-8000-000000000003" name="Coordinate system 1">
     <Position>0;0</Position>
     <ReferenceTimestamp>-1</ReferenceTimestamp>
     <Visible>false</Visible>
@@ -84,7 +84,7 @@
       </Color>
     </DrawingStyle>
   </CoordinateSystem>
-  <TestGrid id="00000000-0000-4000-8000-000000000004" name="">
+  <TestGrid id="00000000-0000-4000-8000-000000000004" name="Camera test grid 1">
     <Visible>false</Visible>
     <ShowHorizontalAxis>true</ShowHorizontalAxis>
     <ShowVerticalAxis>true</ShowVerticalAxis>

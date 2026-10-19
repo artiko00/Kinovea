@@ -375,9 +375,9 @@
       </FontSize>
     </DrawingStyle>
   </NumberSequence>
-  <CoordinateSystem id="00000000-0000-4000-8000-000000000016" name="">
-    <Position>0;0</Position>
-    <ReferenceTimestamp>-1</ReferenceTimestamp>
+  <CoordinateSystem id="00000000-0000-4000-8000-000000000016" name="Coordinate system 1">
+    <Position>627;327</Position>
+    <ReferenceTimestamp>0</ReferenceTimestamp>
     <Visible>false</Visible>
     <ShowGrid>true</ShowGrid>
     <ShowGraduations>true</ShowGraduations>
@@ -387,7 +387,7 @@
       </Color>
     </DrawingStyle>
   </CoordinateSystem>
-  <TestGrid id="00000000-0000-4000-8000-000000000017" name="">
+  <TestGrid id="00000000-0000-4000-8000-000000000017" name="Camera test grid 1">
     <Visible>false</Visible>
     <ShowHorizontalAxis>true</ShowHorizontalAxis>
     <ShowVerticalAxis>true</ShowVerticalAxis>
@@ -400,6 +400,12 @@
     </DrawingStyle>
   </TestGrid>
   <Trackability>
+    <TrackableDrawing id="00000000-0000-4000-8000-000000000016" name="Coordinate system 1">
+      <TrackablePoint key="0">
+        <ReferenceTimestamp>0</ReferenceTimestamp>
+        <ReferenceValue>627;327</ReferenceValue>
+      </TrackablePoint>
+    </TrackableDrawing>
     <TrackableDrawing id="00000000-0000-4000-8000-000000000004" name="Angle 1">
       <TrackablePoint key="o">
         <ReferenceTimestamp>74308</ReferenceTimestamp>

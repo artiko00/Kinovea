@@ -27,14 +27,14 @@
         <A>320;240</A>
         <B>420;240</B>
       </Segment>
-      <Origin>0;100</Origin>
+      <Origin>-320;-140</Origin>
       <Offset>0;0</Offset>
       <Axis>LineHorizontal</Axis>
     </CalibrationLine>
     <CalibrationDrawingId>00000000-0000-0000-0000-000000000000</CalibrationDrawingId>
     <Unit Abbreviation="px">Pixels</Unit>
   </Calibration>
-  <CoordinateSystem id="00000000-0000-4000-8000-000000000001" name="">
+  <CoordinateSystem id="00000000-0000-4000-8000-000000000001" name="Coordinate system 1">
     <Position>0;0</Position>
     <ReferenceTimestamp>-1</ReferenceTimestamp>
     <Visible>false</Visible>
@@ -46,7 +46,7 @@
       </Color>
     </DrawingStyle>
   </CoordinateSystem>
-  <TestGrid id="00000000-0000-4000-8000-000000000002" name="">
+  <TestGrid id="00000000-0000-4000-8000-000000000002" name="Camera test grid 1">
     <Visible>false</Visible>
     <ShowHorizontalAxis>true</ShowHorizontalAxis>
     <ShowVerticalAxis>true</ShowVerticalAxis>
