@@ -8,13 +8,13 @@
 ## 2. Crate skeleton and dependencies
 
 - [ ] 2.1 After approval, add `tiny-skia`, `fontdue`, `png` to `rust/kinovea-render/Cargo.toml`, bundle `assets/LiberationSans-Regular.ttf`, `assets/LiberationSans-Bold.ttf` and their license, depend on `kinovea-metadata`, `kinovea-geometry`, `kinovea-core`, `kinovea-fixtures` (dev); verify `cd rust && make verify`.
-- [ ] 2.2 Create modules `src/{renderer,paint,viewport,style,hit,compose,backend/recording,backend/cpu}.rs` with `*_test.rs` placeholders; verify `npx testlens check --fail`.
+- [x] 2.2 Create modules `src/{renderer,paint,viewport,style,hit,compose,backend/recording,backend/cpu}.rs` with `*_test.rs` placeholders; verify `npx testlens check --fail`. The crate depends only on internal crates until the external ones are approved.
 
 ## 3. Trait, viewport and recording backend
 
 - [x] 3.1 Write `src/viewport_test.rs` (transform/untransform round trip, distance and rectangle transforms vs values computed from `ImageToViewportTransformer.cs`), implement `src/viewport.rs`; verify tests pass.
-- [ ] 3.2 Write `src/renderer_test.rs` for `Pen`, `Brush`, `Font` value types and `src/style_test.rs` for style-to-paint mapping (width scaling, dash patterns, alpha from opacity, font scaling); implement `src/renderer.rs` (trait) and `src/style.rs`; verify tests pass.
-- [ ] 3.3 Implement `src/backend/recording.rs` (logs every call) with `recording_test.rs`; verify tests pass.
+- [x] 3.2 Write `src/renderer_test.rs` for `Pen`, `Brush`, `Font` value types and `src/style_test.rs` for style-to-paint mapping (width scaling, dash patterns, alpha from opacity, font scaling); implement `src/renderer.rs` (trait) and `src/style.rs`; verify tests pass.
+- [x] 3.3 Implement `src/backend/recording.rs` (logs every call) with `recording_test.rs`; verify tests pass.
 
 ## 4. Painter
 
