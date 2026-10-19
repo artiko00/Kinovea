@@ -14,7 +14,7 @@
 
 ## 3. Circle tracking
 
-- [ ] 3.1 Write `src/hough_test.rs`: a single rendered disc is detected at the right center and radius within 1 px; two discs at different radii are separated; uniform image yields none; implement `src/hough.rs` (gradient Hough at a fixed radius with vote threshold); verify tests pass.
+- [x] 3.1 Write `src/hough_test.rs`: a single rendered disc is detected at the right center and radius within 1 px; two discs at different radii are separated; uniform image yields none; implement `src/hough.rs` (gradient Hough at a fixed radius with vote threshold); verify tests pass.
 - [ ] 3.2 Write `src/circle_test.rs` (reference radius averaging bounded by the last reference time, descending vote threshold, failure keeps point and radius, radius stored on the point) then implement `src/circle.rs` (`CircleTracker`); verify tests pass.
 
 ## 4. Trackability
