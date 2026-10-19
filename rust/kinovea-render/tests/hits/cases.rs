@@ -1,7 +1,9 @@
 //! The render cases with hit tables: `hitScales`, `hitStep`, `hitTimestamp` and `kva` are read from
-//! `tests/cases/render/<name>.json`. The JSON is scanned as text: the test crate has no JSON parser.
+//! the `inputs` of `tests/cases/render/<name>.json`. `hitStep` and `hitTimestamp` default to 4 and 0
+//! when absent, as `RenderArea.Hits.cs` does.
 
 use super::load::repo;
+use serde_json::Value;
 
 /// One case: its KVA, the viewport scales probed, the grid step and the time of detached drawings.
 #[derive(Debug, Clone, PartialEq)]
@@ -19,36 +21,25 @@ pub const HIT_CASES: [&str; 4] = ["geometry", "simple", "complete", "all-drawing
 pub fn load(name: &'static str) -> Case {
     let path = repo().join(format!("tests/cases/render/{name}.json"));
     let text = std::fs::read_to_string(path).expect("case json");
+    parse(name, &text)
+}
+
+/// The case described by the JSON `text`.
+pub fn parse(name: &'static str, text: &str) -> Case {
+    let json: Value = serde_json::from_str(text).expect("case json parses");
+    let inputs = &json["inputs"];
     Case {
         name,
-        kva: string_value(&text, "kva"),
-        scales: numbers(raw(&text, "hitScales")).into_iter().collect(),
-        step: numbers(raw(&text, "hitStep"))[0] as i32,
-        detached_timestamp: numbers(raw(&text, "hitTimestamp"))[0] as i64,
+        kva: inputs["kva"].as_str().expect("kva").to_owned(),
+        scales: inputs["hitScales"]
+            .as_array()
+            .expect("hitScales")
+            .iter()
+            .map(|v| v.as_f64().expect("scale"))
+            .collect(),
+        step: inputs["hitStep"].as_i64().unwrap_or(4) as i32,
+        detached_timestamp: inputs["hitTimestamp"].as_i64().unwrap_or(0),
     }
-}
-
-/// The text after `"key":`, up to the end of an array, string, or scalar.
-fn raw<'a>(text: &'a str, key: &str) -> &'a str {
-    let start = text.find(&format!("\"{key}\":")).expect("key") + key.len() + 3;
-    let rest = text[start..].trim_start();
-    let end = match rest.as_bytes()[0] {
-        b'[' => rest.find(']').map(|i| i + 1),
-        b'"' => rest[1..].find('"').map(|i| i + 2),
-        _ => rest.find([',', '}', '\n']),
-    };
-    &rest[..end.unwrap_or(rest.len())]
-}
-
-fn string_value(text: &str, key: &str) -> String {
-    raw(text, key).trim_matches('"').to_owned()
-}
-
-fn numbers(text: &str) -> Vec<f64> {
-    text.trim_matches(|c| c == '[' || c == ']')
-        .split(',')
-        .map(|t| t.trim().parse().expect("number"))
-        .collect()
 }
 
 #[cfg(test)]

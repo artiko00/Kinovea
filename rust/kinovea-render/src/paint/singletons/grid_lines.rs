@@ -4,7 +4,7 @@
 
 use super::grid::{CoordinateSystemGrid, GridLine};
 use crate::paint::helpers::tick_mark::{TextAlignment, TickMark};
-use kinovea_geometry::{clip_line, clip_segment, PointF, Quadrilateral, RectangleF, SizeF};
+use kinovea_geometry::{clip_infinite_line, clip_line, PointF, Quadrilateral, RectangleF, SizeF};
 use kinovea_measurement::CalibratorPlane;
 
 /// What the walk needs from the calibration: the plane, the image clip, the extended plane in
@@ -120,7 +120,9 @@ pub fn create_lines(
                 let va = frame.calibrator.untransform(walk.point(t, backward));
                 clip_line(frame.clip, va, b, 0.0, f64::MAX)
             }
-            None => clip_segment(frame.clip, a, b),
+            // No visible vanishing point: the infinite line through a and b, clipped to the image
+            // (CoordinateSystemGridFinder.cs:167 and :240, LiangBarsky.cs:83-86). Not the segment.
+            None => clip_infinite_line(frame.clip, a, b),
         };
         partly_visible = result.visible;
         if partly_visible {

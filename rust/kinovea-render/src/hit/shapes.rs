@@ -2,15 +2,25 @@
 
 use super::common::{box_around, line_size, nearly_coincide, opacity, trackable_opacity};
 use super::context::{Hit, HitContext};
+use super::label::hit_mini_label;
 use super::{hit_path, hit_point, GraphicsPath};
+use crate::paint::circle::label_text as circle_text;
+use crate::paint::crossmark::label_text as crossmark_text;
 use kinovea_geometry::PointF;
 use kinovea_metadata::drawing::{Circle, CrossMark, Rectangle};
+use kinovea_metadata::measure_label::MeasureLabelType;
 
-/// `DrawingCircle.HitTest` (DrawingCircle.cs:319-338) without the measure label (handle 2). Handle 1
-/// is the outline (`IsPointOnHandler`, `GetHitPath` with the ellipse box), body the filled disc.
+/// `DrawingCircle.HitTest` (DrawingCircle.cs:319-338): the measure label is handle 2, handle 1 is the
+/// outline (`IsPointOnHandler`, `GetHitPath` with the ellipse box), body the filled disc.
 pub fn hit_circle(d: &Circle, p: PointF, ctx: &HitContext) -> Hit {
     if opacity(&d.header, ctx) <= 0.0 {
         return Hit::Miss;
+    }
+    if d.measure_label_type != MeasureLabelType::None {
+        let text = circle_text(d, ctx.metadata, ctx.timestamp);
+        if hit_mini_label(&d.label, &d.header, &text, p, ctx) {
+            return Hit::Handle(2);
+        }
     }
     let mut outline = GraphicsPath::new();
     outline.add_ellipse(box_around(d.center, d.radius));
@@ -23,10 +33,16 @@ pub fn hit_circle(d: &Circle, p: PointF, ctx: &HitContext) -> Hit {
     Hit::Miss
 }
 
-/// `DrawingCrossMark.HitTest` (DrawingCrossMark.cs:208-221) without the measure label (handle 1).
+/// `DrawingCrossMark.HitTest` (DrawingCrossMark.cs:208-221): the measure label is handle 1, the point body.
 pub fn hit_crossmark(d: &CrossMark, p: PointF, ctx: &HitContext) -> Hit {
     if trackable_opacity(&d.header, ctx) <= 0.0 {
         return Hit::Miss;
+    }
+    if d.measure_label_type != MeasureLabelType::None {
+        let text = crossmark_text(d, ctx.metadata, ctx.timestamp);
+        if hit_mini_label(&d.label, &d.header, &text, p, ctx) {
+            return Hit::Handle(1);
+        }
     }
     if hit_point(p, d.center, ctx.viewport) {
         return Hit::Body;

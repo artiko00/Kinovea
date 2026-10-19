@@ -3,6 +3,7 @@ use super::strokes::*;
 use super::Hit;
 use kinovea_geometry::PointF;
 use kinovea_metadata::drawing::{Line, Pencil, Polyline};
+use kinovea_metadata::measure_label::{MeasureLabel, MeasureLabelType};
 
 fn p(x: f32, y: f32) -> PointF {
     PointF::new(x, y)
@@ -43,4 +44,18 @@ fn polyline_handles_are_numbered_from_one() {
     assert_eq!(hit_polyline(&poly, p(100.0, 100.0), &ctx), Hit::Handle(3));
     assert_eq!(hit_polyline(&poly, p(55.0, 10.0), &ctx), Hit::Body);
     assert_eq!(hit_polyline(&poly, p(50.0, 50.0), &ctx), Hit::Miss);
+}
+
+#[test]
+fn line_measure_label_is_handle_three_before_the_ends() {
+    let scene = Scene::at_scale(1.0);
+    let ctx = scene.ctx(0);
+    let mut line = Line::new(p(100.0, 100.0), p(300.0, 100.0));
+    line.measure_label_type = MeasureLabelType::Name;
+    line.header.name = "Name".into();
+    // The label hangs 20 px left and 50 px above the middle of the segment, (200, 100).
+    line.label = MeasureLabel::new(p(200.0, 100.0));
+    assert_eq!(hit_line(&line, p(181.0, 51.0), &ctx), Hit::Handle(3));
+    line.measure_label_type = MeasureLabelType::None;
+    assert_eq!(hit_line(&line, p(181.0, 51.0), &ctx), Hit::Miss);
 }

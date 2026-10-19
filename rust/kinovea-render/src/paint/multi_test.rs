@@ -5,20 +5,15 @@ use crate::renderer::{Brush, Path, Pen, Transform};
 use kinovea_geometry::{PointF, RectangleF};
 use kinovea_metadata::multi::{Spotlight, Spotlights};
 use kinovea_metadata::style::DashStyle;
-use kinovea_metadata::{Color, Fading};
+use kinovea_metadata::Color;
 use uuid::Uuid;
 
-#[test]
-fn multi_painters_are_declared() {
-    assert!(module_path!().contains("multi"));
-}
-
-/// Fading of 20 frames of 10 timestamps: opacity falls to 0 at 200 after the reference.
-fn fading() -> Fading {
-    Fading {
-        average_timestamps_per_frame: 10.0,
-        ..Fading::default()
-    }
+/// A scene of a video with 10 timestamps per frame: items fade over 20 frames (200 timestamps) from
+/// their reference, with the player's default fading.
+fn scene_at(origin: (i32, i32), scale: f64) -> Scene {
+    let mut scene = Scene::new(origin, scale);
+    scene.metadata.video.average_timestamps_per_frame = 10.0;
+    scene
 }
 
 fn spot(timestamp: i64, x: f32, radius: i32) -> Spotlight {
@@ -31,10 +26,10 @@ fn spot(timestamp: i64, x: f32, radius: i32) -> Spotlight {
 }
 
 fn spotlights(items: Vec<Spotlight>) -> Spotlights {
-    let mut d = Spotlights::default();
-    d.header.fading = fading();
-    d.items = items;
-    d
+    Spotlights {
+        items,
+        ..Spotlights::default()
+    }
 }
 
 /// Ring of `DrawingSpotlightItem.Draw`: white, 2 px, dashed.
@@ -48,7 +43,7 @@ fn ring_pen(alpha: u8) -> Pen {
 #[test]
 fn spots_are_holes_in_a_dim_layer_outlined_by_dashed_rings() {
     // Spot at (100, 100) radius 20 at full opacity: layer alpha 160 over the clip (0, 0, 800, 600).
-    let scene = Scene::new((0, 0), 1.0);
+    let scene = scene_at((0, 0), 1.0);
     let mut r = surface();
     paint_spotlights(&spotlights(vec![spot(0, 100.0, 20)]), &scene.ctx(0), &mut r);
     let mut mask = Path::default();
@@ -71,7 +66,7 @@ fn spots_are_holes_in_a_dim_layer_outlined_by_dashed_rings() {
 #[test]
 fn the_layer_follows_the_strongest_spot_and_faded_spots_are_left_out() {
     // Spot at 1000 is 1000 after the reference: opacity 0, so it is neither a hole nor a ring.
-    let scene = Scene::new((0, 0), 1.0);
+    let scene = scene_at((0, 0), 1.0);
     let mut r = surface();
     paint_spotlights(
         &spotlights(vec![spot(0, 100.0, 20), spot(1000, 300.0, 20)]),
@@ -85,7 +80,7 @@ fn the_layer_follows_the_strongest_spot_and_faded_spots_are_left_out() {
 #[test]
 fn a_half_faded_spot_halves_the_layer_and_the_ring() {
     // 100 after the reference: opacity 1 - 100 / 200 = 0.5. Layer alpha int(80) = 80, ring int(127.5) = 127.
-    let scene = Scene::new((0, 0), 1.0);
+    let scene = scene_at((0, 0), 1.0);
     let mut r = surface();
     paint_spotlights(
         &spotlights(vec![spot(0, 100.0, 20)]),
@@ -101,7 +96,7 @@ fn a_half_faded_spot_halves_the_layer_and_the_ring() {
 #[test]
 fn spots_are_scaled_by_the_viewport_and_the_ring_keeps_its_width() {
     // Origin (10, 10), scale 2: centre (210, 210), radius 40, so the ellipse is (170, 170, 80, 80).
-    let scene = Scene::new((10, 10), 2.0);
+    let scene = scene_at((10, 10), 2.0);
     let mut r = surface();
     paint_spotlights(&spotlights(vec![spot(0, 100.0, 20)]), &scene.ctx(0), &mut r);
     assert!(matches!(&r.calls[1], Call::StrokeEllipse(rect, p, _)
@@ -110,7 +105,7 @@ fn spots_are_scaled_by_the_viewport_and_the_ring_keeps_its_width() {
 
 #[test]
 fn no_spots_paint_nothing() {
-    let scene = Scene::new((0, 0), 1.0);
+    let scene = scene_at((0, 0), 1.0);
     let mut r = surface();
     paint_spotlights(&spotlights(vec![]), &scene.ctx(0), &mut r);
     assert!(r.calls.is_empty());

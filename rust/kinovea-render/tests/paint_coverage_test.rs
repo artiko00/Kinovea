@@ -1,9 +1,10 @@
 //! Primitive coverage over the `all-drawings` case (task 4.4): every drawing of every container
 //! paints something at a time where it is visible, and the scene as a whole exercises the main
-//! primitives of the `Renderer` trait. Pixel parity is checked separately by the snapshots.
+//! primitives of the `Renderer` trait. Pixel parity is not checked here: the snapshot comparisons
+//! (tasks 5.x) are not implemented yet.
 
 use kinovea_fixtures::fixtures_root;
-use kinovea_metadata::{header_metadata, read_kva, Fading, Metadata};
+use kinovea_metadata::{load_kva, Fading, Metadata};
 use kinovea_render::backend::recording::{Call, RecordingRenderer};
 use kinovea_render::paint::multi::{paint_numbers, paint_spotlights};
 use kinovea_render::paint::singletons::{paint_coordinate_system, paint_test_grid};
@@ -14,9 +15,7 @@ use kinovea_render::viewport::{ImageToViewport, Point};
 fn load() -> Metadata {
     let path = fixtures_root().join("../cases/kva/inputs/all-drawings.kva");
     let xml = std::fs::read_to_string(path).unwrap();
-    let mut m = header_metadata(&xml);
-    read_kva(&mut m, &xml).unwrap();
-    m
+    load_kva(&xml).unwrap()
 }
 
 /// Records what `paint` draws at `timestamp`, with the default fading of the render cases.

@@ -55,17 +55,6 @@ fn parse_row(line: &str) -> Row {
     }
 }
 
-/// Distinct drawings in order of first appearance, with the timestamp they were probed at.
-pub fn drawings(rows: &[Row]) -> Vec<(DrawingKey, i64)> {
-    let mut out: Vec<(DrawingKey, i64)> = Vec::new();
-    for r in rows {
-        if !out.iter().any(|(k, _)| *k == r.key) {
-            out.push((r.key.clone(), r.timestamp));
-        }
-    }
-    out
-}
-
 /// The recorded results of `key` at `scale`.
 pub fn expected(rows: &[Row], key: &DrawingKey, scale: f64) -> Expected {
     let mut e = Expected::default();

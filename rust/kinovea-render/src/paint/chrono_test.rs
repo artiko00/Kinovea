@@ -7,11 +7,6 @@ use kinovea_metadata::drawing::Chrono;
 use kinovea_metadata::style::{StyleValue, ToggleVariant};
 use kinovea_metadata::{Color, StyleElements};
 
-#[test]
-fn chrono_helpers_are_declared() {
-    assert!(module_path!().contains("chrono"));
-}
-
 const DARK: Color = Color::argb(255, 10, 20, 30);
 const WHITE: Color = Color::argb(255, 255, 255, 255);
 

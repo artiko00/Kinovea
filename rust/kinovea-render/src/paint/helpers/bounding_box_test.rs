@@ -5,11 +5,6 @@ use crate::renderer::{Brush, Pen, Transform};
 use kinovea_geometry::RectangleF;
 use kinovea_metadata::Color;
 
-#[test]
-fn bounding_box_helper_is_declared() {
-    assert!(module_path!().contains("bounding_box"));
-}
-
 /// `BoundingBox.Draw` for rect (10, 20, 100, 50) and `widen` 3: the outline, then four handles
 /// centred on the corners (diameter `2 * widen`, so each ellipse starts `widen` before the corner).
 #[test]

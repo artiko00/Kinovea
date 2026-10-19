@@ -1,6 +1,6 @@
 //! `HitTest` of the grids: the plane (`DrawingPlane`) and the distortion grid (`DrawingDistortionGrid`).
 
-use super::common::{opacity, toggle_on, trackable_opacity};
+use super::common::{opacity, trackable_opacity};
 use super::context::{Hit, HitContext};
 use super::{hit_line, hit_point};
 use kinovea_geometry::{PointF, ProjectiveMapper, Quadrilateral, RectangleF};
@@ -45,15 +45,10 @@ pub fn hit_plane(d: &Plane, p: PointF, ctx: &HitContext) -> Hit {
     }
 }
 
-/// `DrawingPlane.Draw` keeps `projectiveMapping` only when it is not `drawEdgesOnly`. Without it the
-/// original throws on a sliding line; this port skips the sliding lines instead.
+/// The projective mapping of the grid. `UpdateMapping` builds it on the calibration change that follows
+/// the video setup, and `HitTest` reads it whatever the grid's style: the port always has it. Before the
+/// setup the original threw on the sliding lines of edges-only grids (a mapping never built).
 fn grid_mapping(d: &Plane) -> Option<ProjectiveMapper> {
-    let perspective = toggle_on(&d.header, "perspective");
-    let convex = perspective || d.quad.is_convex();
-    let edges_only = !convex || (!perspective && !d.quad.is_axis_aligned_rectangle());
-    if edges_only {
-        return None;
-    }
     let plane = Quadrilateral::from_rect(RectangleF::new(0.0, 0.0, PLANE_SIZE, PLANE_SIZE));
     ProjectiveMapper::new(&plane, &d.quad).ok()
 }

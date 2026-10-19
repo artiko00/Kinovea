@@ -6,11 +6,6 @@ use kinovea_geometry::{PointF, RectangleF};
 use kinovea_metadata::drawing::Label;
 use kinovea_metadata::{Color, StyleElements, StyleValue};
 
-#[test]
-fn label_painters_are_declared() {
-    assert!(module_path!().contains("label"));
-}
-
 /// Dark background, so the text is white (`GetForegroundColor`). Font 12 pt is 16 px at 96 DPI.
 fn label(text: &str, background: Color) -> Label {
     let mut d = Label::new(text, PointF::new(10.0, 20.0));

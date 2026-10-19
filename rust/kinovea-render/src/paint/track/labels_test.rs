@@ -8,11 +8,6 @@ use kinovea_metadata::drawing::{KeyframeLabel, Track};
 use kinovea_metadata::measure_label::MeasureLabel;
 use kinovea_metadata::{Color, Keyframe};
 
-#[test]
-fn labels_are_declared() {
-    assert!(module_path!().contains("labels"));
-}
-
 /// Bold 16 px label font of `MiniLabel` (its font size is the track's, 12 pt).
 fn label_font() -> Font {
     Font {

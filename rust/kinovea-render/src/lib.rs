@@ -1,12 +1,9 @@
 //! Headless rendering of Kinovea annotations: a backend-neutral `Renderer` trait, one painter
-//! per drawing kind, scene composition, hit testing and backends (recording, CPU).
+//! per drawing kind, hit testing and the recording backend.
 
 pub mod backend;
 #[cfg(test)]
 mod backend_test;
-pub mod compose;
-#[cfg(test)]
-mod compose_test;
 pub mod hit;
 #[cfg(test)]
 mod hit_test;

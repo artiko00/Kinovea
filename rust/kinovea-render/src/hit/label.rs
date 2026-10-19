@@ -5,9 +5,11 @@
 use super::common::{box_around, line_size, opacity};
 use super::context::{Hit, HitContext};
 use super::{hit_path, GraphicsPath};
+use crate::paint::helpers::mini_label::label_box;
 use crate::style::StyleData;
 use kinovea_geometry::{PointF, RectangleF, SizeF};
 use kinovea_metadata::drawing::Label;
+use kinovea_metadata::measure_label::MeasureLabel;
 
 /// `DrawingText.HitTest` (DrawingText.cs:290-317): the arrow end is handle 2 (a disc of three line
 /// sizes), the arrow is body, then the background with its hidden bottom-right resizer as handle 1.
@@ -28,6 +30,19 @@ pub fn hit_label(d: &Label, p: PointF, ctx: &HitContext) -> Hit {
     }
     let rect = text_background(d.position, &d.text, &d.header, ctx);
     background_hit(rect, hidden_radius(&d.header, ctx), p)
+}
+
+/// `MiniLabel.HitTest`: the label box, as `Draw` left it (the text of `text` at the font size of
+/// `header`, untransformed), contains `p`. The label is the one the owner anchored for drawing.
+pub fn hit_mini_label(
+    label: &MeasureLabel,
+    header: &kinovea_metadata::Header,
+    text: &str,
+    p: PointF,
+    ctx: &HitContext,
+) -> bool {
+    let font_size = StyleData::from_elements(&header.style).font_size;
+    label_box(ctx.text, label, text, font_size, ctx.viewport).contains(p)
 }
 
 /// `lblBackground` / `background.Rectangle` after `Draw`: the text measured at the viewport stretch,

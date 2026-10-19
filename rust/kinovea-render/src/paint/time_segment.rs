@@ -1,12 +1,14 @@
 //! Owner: P2. Painter ported from `DrawingTimeSegment.Draw`.
 
-use super::helpers::mini_label::{anchor_to, draw_mini_label};
+use super::helpers::frame::attach_label;
+use super::helpers::mini_label::draw_mini_label;
 use super::PaintContext;
 use crate::renderer::{Pen, Renderer};
 use crate::style::StyleData;
 use kinovea_geometry::helpers::mix_points;
 use kinovea_geometry::PointF;
 use kinovea_metadata::drawing::TimeSegment;
+use kinovea_metadata::Metadata;
 
 /// Port of `DrawingTimeSegment.Draw`: the segment and a tick at A, both 1 px wide at any zoom, then
 /// the mini label anchored at the fraction of the segment with the time at that fraction.
@@ -37,22 +39,22 @@ pub fn paint_time_segment(d: &TimeSegment, ctx: &PaintContext, r: &mut dyn Rende
         &pen,
     );
 
-    let label = anchor_to(&d.label, mix_points(d.a, d.b, d.fraction));
-    let text = fraction_text(d, ctx);
+    let label = attach_label(&d.label, mix_points(d.a, d.b, d.fraction));
+    let text = fraction_text(d, ctx.metadata);
     draw_mini_label(r, &label, &text, style.color, style.font_size, opacity, ctx);
 }
 
 /// `GetFractionTime`: the time at `fraction` of the frame holding the reference timestamp, measured
 /// from the time origin, through the metadata timecode. The frame duration in timestamps stands in
 /// for the baseline interval, so the text is not the original's formatting for every preference.
-fn fraction_text(d: &TimeSegment, ctx: &PaintContext) -> String {
-    let frame = ctx.metadata.video.average_timestamps_per_frame;
-    let origin = ctx.metadata.video.time_origin;
+pub(crate) fn fraction_text(d: &TimeSegment, metadata: &Metadata) -> String {
+    let frame = metadata.video.average_timestamps_per_frame;
+    let origin = metadata.video.time_origin;
     let reference = d.header.fading.reference_timestamp;
     let frames = if frame != 0.0 {
         ((reference - origin) as f64 / frame).round_ties_even()
     } else {
         0.0
     };
-    (ctx.metadata.timecode)(((frames + f64::from(d.fraction)) * frame).round() as i64)
+    (metadata.timecode)(((frames + f64::from(d.fraction)) * frame).round() as i64)
 }

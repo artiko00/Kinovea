@@ -1,8 +1,5 @@
-//! Renderer implementations: a recording backend for tests and the CPU backend.
+//! Renderer implementations: the recording backend, which keeps the calls for tests.
 
-pub mod cpu;
-#[cfg(test)]
-mod cpu_test;
 pub mod recording;
 #[cfg(test)]
 mod recording_test;

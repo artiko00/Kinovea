@@ -6,11 +6,6 @@ use crate::viewport::{Point, Rectangle};
 use kinovea_geometry::{PointF, RectangleF};
 use kinovea_metadata::Color;
 
-#[test]
-fn rounded_rect_helper_is_declared() {
-    assert!(module_path!().contains("rounded_rect"));
-}
-
 fn pt(x: f32, y: f32) -> PointF {
     PointF::new(x, y)
 }

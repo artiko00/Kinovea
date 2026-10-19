@@ -23,3 +23,8 @@ mod test_grid_test;
 
 pub use coordinate_system::paint_coordinate_system;
 pub use test_grid::paint_test_grid;
+
+// Geometry shared with the hit tests of the same singletons.
+pub(crate) use grid::GridLine;
+pub(crate) use grid_finder::find;
+pub(crate) use test_grid::image_lines;

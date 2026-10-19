@@ -4,16 +4,29 @@ use super::common::{
     box_around, line_size, nearly_coincide, opacity, toggle_on, trackable_opacity,
 };
 use super::context::{Hit, HitContext};
+use super::label::hit_mini_label;
 use super::{hit_path, hit_point, GraphicsPath};
+use crate::paint::helpers::frame::attach_label;
+use crate::paint::line::label_text;
+use kinovea_geometry::helpers::middle_point;
 use kinovea_geometry::PointF;
 use kinovea_metadata::drawing::{Line, Pencil, Polyline};
+use kinovea_metadata::measure_label::MeasureLabelType;
 use kinovea_metadata::Header;
 
-/// `DrawingLine.HitTest` (DrawingLine.cs:278-295) without the measure label (handle 3). Handles 1
-/// and 2 are the ends; `IsPointInObject` (DrawingLine.cs:591-611) is the stroke of the segment.
+/// `DrawingLine.HitTest` (DrawingLine.cs:278-295): the measure label, anchored to the middle of the
+/// segment, is handle 3. Handles 1 and 2 are the ends; `IsPointInObject` (DrawingLine.cs:591-611) is
+/// the stroke of the segment.
 pub fn hit_line(d: &Line, p: PointF, ctx: &HitContext) -> Hit {
     if trackable_opacity(&d.header, ctx) <= 0.0 {
         return Hit::Miss;
+    }
+    if d.measure_label_type != MeasureLabelType::None {
+        let label = attach_label(&d.label, middle_point(d.a, d.b));
+        let text = label_text(d, ctx.metadata);
+        if hit_mini_label(&label, &d.header, &text, p, ctx) {
+            return Hit::Handle(3);
+        }
     }
     if hit_point(p, d.a, ctx.viewport) {
         return Hit::Handle(1);

@@ -7,11 +7,6 @@ use kinovea_measurement::DistortionParameters;
 use kinovea_metadata::drawing::Plane;
 use kinovea_metadata::StyleValue;
 
-#[test]
-fn plane_painters_are_declared() {
-    assert!(module_path!().contains("plane"));
-}
-
 fn p(x: f32, y: f32) -> PointF {
     PointF::new(x, y)
 }

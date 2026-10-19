@@ -1,5 +1,6 @@
 use crate::backend::recording::Call;
-use crate::paint::helpers::mini_label::{anchor_to, draw_mini_label};
+use crate::paint::helpers::frame::attach_label;
+use crate::paint::helpers::mini_label::draw_mini_label;
 use crate::paint::helpers::support_test::{surface, Scene};
 use crate::renderer::{
     Brush, Font, FontFamily, LineCap, LineJoin, Path, PathSegment, Pen, Transform,
@@ -157,9 +158,9 @@ fn zero_opacity_paints_nothing() {
 }
 
 #[test]
-fn anchor_to_moves_the_label_with_its_attach_point() {
+fn attach_moves_the_label_with_its_attach_point() {
     // Relative offset (-20, -50) is kept when the attach point moves to (120, 100).
-    let moved = anchor_to(&label(), pt(120.0, 100.0));
+    let moved = attach_label(&label(), pt(120.0, 100.0));
     assert_eq!(
         (moved.attach, moved.position),
         (pt(120.0, 100.0), pt(100.0, 50.0))

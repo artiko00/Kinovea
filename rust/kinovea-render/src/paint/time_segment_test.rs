@@ -7,11 +7,6 @@ use kinovea_metadata::drawing::TimeSegment;
 use kinovea_metadata::measure_label::MeasureLabel;
 use kinovea_metadata::{Color, StyleElements, StyleValue};
 
-#[test]
-fn time_segment_painters_are_declared() {
-    assert!(module_path!().contains("time_segment"));
-}
-
 /// Segment from (10, 20) to (110, 20) at fraction 0.5, reference at 80, 40 timestamps per frame.
 fn segment() -> TimeSegment {
     let mut d = TimeSegment::new(PointF::new(10.0, 20.0), PointF::new(110.0, 20.0));

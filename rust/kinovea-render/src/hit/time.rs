@@ -1,20 +1,27 @@
 //! `HitTest` of the time drawings: the time segment (with its sliding time point) and the time
-//! polyline. The mini label of the time segment (handle 4) is not ported yet.
+//! polyline.
 
 use super::common::opacity;
 use super::context::{Hit, HitContext};
 use super::hit_point;
+use super::label::hit_mini_label;
 use super::strokes::{polyline_area, segment_area};
+use crate::paint::helpers::frame::attach_label;
+use crate::paint::time_segment::fraction_text;
 use kinovea_geometry::{helpers::mix_points, PointF};
 use kinovea_metadata::drawing::{TimePolyline, TimeSegment};
 
-/// `DrawingTimeSegment.HitTest` (DrawingTimeSegment.cs:159-177): the time point is handle 3, the
-/// ends 1 and 2, then the segment as body. The mini label (handle 4) is not hit here.
+/// `DrawingTimeSegment.HitTest` (DrawingTimeSegment.cs:159-177): the mini label is handle 4 and wins
+/// over everything, the time point is handle 3, the ends 1 and 2, then the segment as body.
 pub fn hit_time_segment(d: &TimeSegment, p: PointF, ctx: &HitContext) -> Hit {
     if opacity(&d.header, ctx) <= 0.0 {
         return Hit::Miss;
     }
     let time_point = mix_points(d.a, d.b, d.fraction);
+    let label = attach_label(&d.label, time_point);
+    if hit_mini_label(&label, &d.header, &fraction_text(d, ctx.metadata), p, ctx) {
+        return Hit::Handle(4);
+    }
     if hit_point(p, time_point, ctx.viewport) {
         return Hit::Handle(3);
     }

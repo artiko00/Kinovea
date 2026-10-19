@@ -20,13 +20,17 @@ pub fn paint_test_grid(d: &TestGrid, ctx: &PaintContext, r: &mut dyn Renderer) {
     let size = SizeF::new(image.width as f32, image.height as f32);
     // `styleData.GetPen(255)`: width 1, not stretched by the viewport.
     let pen = StyleData::from_elements(&d.header.style).marker_pen(255);
-    for (a, b) in normalized_lines(d) {
-        r.stroke_line(
-            to_viewport(ctx, map(a, size)),
-            to_viewport(ctx, map(b, size)),
-            &pen,
-        );
+    for (a, b) in image_lines(d, size) {
+        r.stroke_line(to_viewport(ctx, a), to_viewport(ctx, b), &pen);
     }
+}
+
+/// The enabled lines in image coordinates: the painter strokes them, the hit test widens them.
+pub(crate) fn image_lines(d: &TestGrid, size: SizeF) -> Vec<(PointF, PointF)> {
+    normalized_lines(d)
+        .into_iter()
+        .map(|(a, b)| (map(a, size), map(b, size)))
+        .collect()
 }
 
 /// `Map`: normalized coordinates to image coordinates.

@@ -6,11 +6,6 @@ use kinovea_geometry::{PointF, RectangleF};
 use kinovea_metadata::drawing::{Bitmap, Svg};
 use kinovea_metadata::Color;
 
-#[test]
-fn media_painters_are_declared() {
-    assert!(module_path!().contains("media"));
-}
-
 /// Placeholder font: 16 px Arial, regular.
 fn font() -> Font {
     Font {

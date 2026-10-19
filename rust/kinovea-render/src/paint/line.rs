@@ -10,6 +10,7 @@ use crate::style::colors::alpha_of;
 use crate::style::StyleData;
 use kinovea_geometry::helpers::middle_point;
 use kinovea_metadata::drawing::Line;
+use kinovea_metadata::Metadata;
 use kinovea_metadata::measure_label::MeasureLabelType;
 use kinovea_metadata::style::{DashStyle, LineEnding, LineShape};
 
@@ -54,12 +55,17 @@ pub fn paint_line(d: &Line, ctx: &PaintContext, r: &mut dyn Renderer) {
     }
 
     if d.measure_label_type != MeasureLabelType::None {
-        let text = match d.measure_label_type {
-            MeasureLabelType::Name => d.header.name.clone(),
-            _ => ctx.metadata.calibration.length_text(d.a, d.b, true),
-        };
+        let text = label_text(d, ctx.metadata);
         let label = attach_label(&d.label, middle_point(d.a, d.b));
         draw_mini_label(r, &label, &text, style.color, style.font_size, factor, ctx);
+    }
+}
+
+/// The measure text of the mini label: the name, or the length of the segment.
+pub(crate) fn label_text(d: &Line, metadata: &Metadata) -> String {
+    match d.measure_label_type {
+        MeasureLabelType::Name => d.header.name.clone(),
+        _ => metadata.calibration.length_text(d.a, d.b, true),
     }
 }
 

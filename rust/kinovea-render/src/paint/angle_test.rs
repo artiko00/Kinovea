@@ -8,11 +8,6 @@ use kinovea_metadata::drawing::Angle;
 use kinovea_metadata::style::DashStyle;
 use kinovea_metadata::Color;
 
-#[test]
-fn angle_painters_are_declared() {
-    assert!(module_path!().contains("angle"));
-}
-
 pub(super) fn close(a: f32, b: f32) -> bool {
     (a - b).abs() < 1e-3
 }

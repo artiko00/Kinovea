@@ -9,6 +9,7 @@ use crate::style::StyleData;
 use kinovea_geometry::PointF;
 use kinovea_metadata::drawing::CrossMark;
 use kinovea_metadata::measure_label::MeasureLabelType;
+use kinovea_metadata::Metadata;
 
 /// `DrawingCrossMark.defaultRadius`: arm length of the cross, in viewport pixels.
 const ARM: i32 = 3;
@@ -46,7 +47,7 @@ pub fn paint_crossmark(d: &CrossMark, ctx: &PaintContext, r: &mut dyn Renderer) 
     }
 
     if d.measure_label_type != MeasureLabelType::None {
-        let text = label_text(d, ctx);
+        let text = label_text(d, ctx.metadata, ctx.timestamp);
         draw_mini_label(
             r,
             &d.label,
@@ -60,12 +61,12 @@ pub fn paint_crossmark(d: &CrossMark, ctx: &PaintContext, r: &mut dyn Renderer) 
 }
 
 /// Port of `DrawingCrossMark.GetMeasureLabelText`.
-fn label_text(d: &CrossMark, ctx: &PaintContext) -> String {
-    let calibration = &ctx.metadata.calibration;
+pub(crate) fn label_text(d: &CrossMark, metadata: &Metadata, timestamp: i64) -> String {
+    let calibration = &metadata.calibration;
     match d.measure_label_type {
         MeasureLabelType::Name => d.header.name.clone(),
         MeasureLabelType::Distance => calibration.length_text(calibration.origin(), d.center, true),
-        MeasureLabelType::Position => calibration.point_text(d.center, true, ctx.timestamp),
+        MeasureLabelType::Position => calibration.point_text(d.center, true, timestamp),
         _ => String::new(),
     }
 }

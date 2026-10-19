@@ -67,17 +67,38 @@ fn invalid_plane_paints_nothing() {
     assert!(paint(&scene(crossed_plane()), &visible_system()).is_empty());
 }
 
+/// The lines are the infinite lines clipped to the image (CoordinateSystemGridFinder.cs:167 and :240,
+/// LiangBarsky.cs:83-86): the axes run from the bottom edge (y 120) to the top edge (y 0), the
+/// horizontal one the full width. Clipped ends carry double rounding (about 1e-14 px), so the calls
+/// are compared at 1e-3 px.
 #[test]
 fn axes_come_first_then_the_dashed_grid_at_half_alpha() {
     let mut d = visible_system();
     d.show_graduations = false;
     let expected = [
-        stroke((20.0, 110.0), (20.0, 10.0), pen(255, DashStyle::Solid)),
-        stroke((20.0, 110.0), (220.0, 110.0), pen(255, DashStyle::Solid)),
-        stroke((0.0, 110.0), (0.0, 10.0), pen(127, DashStyle::Dash)),
-        stroke((40.0, 110.0), (40.0, 10.0), pen(127, DashStyle::Dash)),
+        stroke((20.0, 120.0), (20.0, 0.0), pen(255, DashStyle::Solid)),
+        stroke((0.0, 110.0), (240.0, 110.0), pen(255, DashStyle::Solid)),
+        stroke((0.0, 120.0), (0.0, 0.0), pen(127, DashStyle::Dash)),
+        stroke((40.0, 120.0), (40.0, 0.0), pen(127, DashStyle::Dash)),
     ];
-    assert_eq!(paint(&scene(flat_plane()), &d)[..4], expected[..]);
+    assert_eq!(settled(paint(&scene(flat_plane()), &d))[..4], expected[..]);
+}
+
+/// Rounds the points of the recorded lines to 1e-3 px.
+fn settled(calls: Vec<Call>) -> Vec<Call> {
+    let snap = |p: PointF| {
+        PointF::new(
+            (p.x * 1000.0).round() / 1000.0,
+            (p.y * 1000.0).round() / 1000.0,
+        )
+    };
+    calls
+        .into_iter()
+        .map(|c| match c {
+            Call::StrokeLine(a, b, pen, t) => Call::StrokeLine(snap(a), snap(b), pen, t),
+            other => other,
+        })
+        .collect()
 }
 
 /// Moves every point one pixel of the image right of its place (`Distorter`).

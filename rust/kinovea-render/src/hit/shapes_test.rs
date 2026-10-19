@@ -3,6 +3,7 @@ use super::shapes::*;
 use super::Hit;
 use kinovea_geometry::{PointF, Quadrilateral, RectangleF};
 use kinovea_metadata::drawing::{Circle, CrossMark, Rectangle};
+use kinovea_metadata::measure_label::{MeasureLabel, MeasureLabelType};
 
 fn p(x: f32, y: f32) -> PointF {
     PointF::new(x, y)
@@ -54,4 +55,43 @@ fn rectangle_handles_are_corners_then_edges() {
     assert_eq!(hit_rectangle(&r, p(110.0, 60.0), &ctx), Hit::Handle(6));
     assert_eq!(hit_rectangle(&r, p(60.0, 60.0), &ctx), Hit::Body);
     assert_eq!(hit_rectangle(&r, p(200.0, 200.0), &ctx), Hit::Miss);
+}
+
+/// A label reading "Name" on the centre of the circle: its box holds the centre, so the label
+/// (handle 2) wins over the outline and the disc, and only a measured drawing has it.
+fn measured_circle(measure: MeasureLabelType) -> Circle {
+    let mut c = Circle::new(p(100.0, 100.0), 50);
+    c.measure_label_type = measure;
+    c.header.name = "Name".into();
+    c.label = MeasureLabel {
+        position: p(100.0, 100.0),
+        ..MeasureLabel::default()
+    };
+    c
+}
+
+#[test]
+fn circle_measure_label_is_handle_two_before_the_disc() {
+    let scene = Scene::at_scale(1.0);
+    let ctx = scene.ctx(0);
+    let c = measured_circle(MeasureLabelType::Name);
+    assert_eq!(hit_circle(&c, p(101.0, 101.0), &ctx), Hit::Handle(2));
+    let plain = measured_circle(MeasureLabelType::None);
+    assert_eq!(hit_circle(&plain, p(101.0, 101.0), &ctx), Hit::Body);
+}
+
+#[test]
+fn cross_mark_measure_label_is_handle_one_before_the_point() {
+    let scene = Scene::at_scale(1.0);
+    let ctx = scene.ctx(0);
+    let mut c = CrossMark::new(p(100.0, 100.0));
+    c.measure_label_type = MeasureLabelType::Name;
+    c.header.name = "Name".into();
+    c.label = MeasureLabel {
+        position: p(100.0, 100.0),
+        ..MeasureLabel::default()
+    };
+    assert_eq!(hit_crossmark(&c, p(101.0, 101.0), &ctx), Hit::Handle(1));
+    c.measure_label_type = MeasureLabelType::None;
+    assert_eq!(hit_crossmark(&c, p(101.0, 101.0), &ctx), Hit::Body);
 }

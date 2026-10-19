@@ -1,8 +1,3 @@
-#[test]
-fn style_module_is_declared() {
-    assert!(module_path!().contains("style"));
-}
-
 mod resolving {
     use crate::renderer::{FontFamily, LineCap, LineJoin};
     use crate::style::*;

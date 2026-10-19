@@ -4,15 +4,15 @@ use crate::paint::multi::paint_numbers;
 use crate::renderer::{Brush, Font, FontFamily, LineCap, LineJoin, Pen, Transform};
 use kinovea_geometry::PointF;
 use kinovea_metadata::multi::{AutoNumber, NumberSequence};
-use kinovea_metadata::{Color, Fading};
+use kinovea_metadata::Color;
 use uuid::Uuid;
 
-/// Fading of 20 frames of 10 timestamps: opacity falls to 0 at 200 after the reference.
-fn fading() -> Fading {
-    Fading {
-        average_timestamps_per_frame: 10.0,
-        ..Fading::default()
-    }
+/// A scene of a video with 10 timestamps per frame: items fade over 20 frames (200 timestamps) from
+/// their reference, with the player's default fading.
+fn scene_at(origin: (i32, i32), scale: f64) -> Scene {
+    let mut scene = Scene::new(origin, scale);
+    scene.metadata.video.average_timestamps_per_frame = 10.0;
+    scene
 }
 
 fn number(timestamp: i64, value: i32) -> AutoNumber {
@@ -25,16 +25,16 @@ fn number(timestamp: i64, value: i32) -> AutoNumber {
 }
 
 fn numbers(items: Vec<AutoNumber>) -> NumberSequence {
-    let mut d = NumberSequence::default();
-    d.header.fading = fading();
-    d.items = items;
-    d
+    NumberSequence {
+        items,
+        ..NumberSequence::default()
+    }
 }
 
 #[test]
 fn number_is_a_contoured_box_with_the_value_in_white_on_black() {
     // Default style: black background, 18 pt = 24 px. "3": 0.55 * 24 = 13.2 -> 13 wide, 28 high.
-    let scene = Scene::new((0, 0), 1.0);
+    let scene = scene_at((0, 0), 1.0);
     let mut r = surface();
     paint_numbers(&numbers(vec![number(0, 3)]), &scene.ctx(0), &mut r);
     let font = Font {
@@ -66,7 +66,7 @@ fn number_is_a_contoured_box_with_the_value_in_white_on_black() {
 fn each_number_fades_from_its_own_timestamp() {
     // At 200, the number at 0 is 200 after its own reference: opacity 1 - 200 / 200 = 0, so it is
     // left out. The number at 200 is at its reference: opacity 1, so only "2" is drawn.
-    let scene = Scene::new((0, 0), 1.0);
+    let scene = scene_at((0, 0), 1.0);
     let mut r = surface();
     paint_numbers(
         &numbers(vec![number(0, 1), number(200, 2)]),

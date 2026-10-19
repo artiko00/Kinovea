@@ -17,7 +17,7 @@ pub(super) fn stroke_hit(points: &[PointF], closed: bool, half: f32, p: PointF) 
     let segments = if closed { n } else { n.saturating_sub(1) };
     let in_segment = (0..segments).any(|i| {
         let (a, b) = (points[i], points[(i + 1) % n]);
-        segment_quad(a, b, half).is_some_and(|q| convex_contains(&q, p))
+        segment_quad(a, b, half).is_some_and(|q| convex_contains(&q, p) && !on_open_side(&q, p))
     });
     if in_segment {
         return true;
@@ -66,6 +66,30 @@ fn unit_normal(a: PointF, b: PointF) -> Option<PointF> {
     (len > 0.0).then(|| PointF::new(-dy / len, dx / len))
 }
 
+/// Whether `p` lies exactly on a long side of a segment piece that the fill leaves open: the bottom or
+/// right side, as the top-left rule of `RectangleF.Contains` does. The flat ends stay closed.
+/// Seen in `geometry` k0#3: a 2 px rectangle edge at y 120 with the 10 px enlarger has its band from 114
+/// to 126, and the oracle hits y 114 but not y 126.
+fn on_open_side(q: &Quad, p: PointF) -> bool {
+    let sign = if signed_area(q) >= 0.0 { 1.0 } else { -1.0 };
+    [0, 2].iter().any(|&i| {
+        let (a, b) = (q[i], q[(i + 1) % 4]);
+        let (dx, dy) = (b.x - a.x, b.y - a.y);
+        let on_line = dx * (p.y - a.y) - dy * (p.x - a.x) == 0.0;
+        let top_or_left = dy * sign < 0.0 || (dy == 0.0 && dx * sign > 0.0);
+        on_line && !top_or_left
+    })
+}
+
+fn signed_area(q: &Quad) -> f32 {
+    (0..4)
+        .map(|i| {
+            let (a, b) = (q[i], q[(i + 1) % 4]);
+            a.x * b.y - b.x * a.y
+        })
+        .sum()
+}
+
 /// Point inside a convex quad (either winding), boundary included. A flat quad has no inside.
 fn convex_contains(q: &Quad, p: PointF) -> bool {
     let side = |i: usize| {
@@ -78,11 +102,5 @@ fn convex_contains(q: &Quad, p: PointF) -> bool {
 }
 
 fn is_flat(q: &Quad) -> bool {
-    let area: f32 = (0..4)
-        .map(|i| {
-            let (a, b) = (q[i], q[(i + 1) % 4]);
-            a.x * b.y - b.x * a.y
-        })
-        .sum();
-    area.abs() < 1e-6
+    signed_area(q).abs() < 1e-6
 }

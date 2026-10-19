@@ -1,7 +1,15 @@
 //! The oracle's probe grid (`WriteHits`) and the comparison of a Rust hit function against it.
+//! Agreement is measured over the box of each drawing, not over the whole image.
 
 use super::table::Expected;
 use kinovea_geometry::PointF;
+
+/// Agreement required per drawing and scale (spec: "at least 99 percent").
+pub const MIN_PERCENT: f64 = 99.0;
+/// Margin, in image pixels, that the box of a drawing adds around the probes where it answers.
+pub const BOX_MARGIN: i32 = 16;
+/// Radius, in image pixels, around a mismatch in which Rust must change its answer.
+pub const BOUNDARY_RADIUS: i32 = 2;
 
 /// `for (y = 0; y < h; y += step) for (x = 0; x < w; x += step)`, the probes of `WriteHits`.
 pub fn probes(width: i32, height: i32, step: i32) -> Vec<(i32, i32)> {
@@ -11,109 +19,110 @@ pub fn probes(width: i32, height: i32, step: i32) -> Vec<(i32, i32)> {
         .collect()
 }
 
-/// A probe where Rust and the oracle disagree.
-#[derive(Debug, Clone, PartialEq)]
-pub struct Mismatch {
+/// One probe of the grid: the oracle's answer, Rust's, and for a mismatch whether it lies off a
+/// Rust boundary (the second half of the rule).
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct Probe {
     pub x: i32,
     pub y: i32,
     pub expected: i32,
     pub got: i32,
+    pub off_boundary: bool,
 }
 
-/// Agreement over a whole grid for one drawing at one scale.
-#[derive(Debug, Default)]
-pub struct Score {
-    pub total: usize,
-    pub matches: usize,
-    /// Probes where the oracle or Rust hits (code other than -1), and where both agree on a hit.
-    pub active: usize,
-    pub active_matches: usize,
-    pub mismatches: Vec<Mismatch>,
-}
-
-impl Score {
-    /// Percentage of probes where Rust and the oracle agree.
-    pub fn percent(&self) -> f64 {
-        if self.total == 0 {
-            return 100.0;
-        }
-        100.0 * self.matches as f64 / self.total as f64
-    }
-
-    /// Diagnostic only: agreement over the probes where either side reports a hit.
-    pub fn active_percent(&self) -> f64 {
-        if self.active == 0 {
-            return 100.0;
-        }
-        100.0 * self.active_matches as f64 / self.active as f64
-    }
-}
-
-/// Compares `hit` (Rust, image coordinates) with `expected` over every probe of the grid. Probes
-/// that the oracle does not list are expected to be misses (-1).
-pub fn score(
+/// Every probe of the grid, compared with `expected`. Probes not listed are misses (-1).
+pub fn grid(
     expected: &Expected,
     width: i32,
     height: i32,
     step: i32,
     hit: impl Fn(PointF) -> i32,
-) -> Score {
-    let mut out = Score::default();
-    for (x, y) in probes(width, height, step) {
-        let want = expected.hits.get(&(x, y)).copied().unwrap_or(-1);
-        let got = hit(PointF::new(x as f32, y as f32));
-        out.total += 1;
-        if want != -1 || got != -1 {
-            out.active += 1;
-        }
-        if want == got {
-            out.matches += 1;
-            if want != -1 {
-                out.active_matches += 1;
-            }
-        } else {
-            out.mismatches.push(Mismatch {
+) -> Vec<Probe> {
+    probes(width, height, step)
+        .into_iter()
+        .map(|(x, y)| {
+            let want = expected.hits.get(&(x, y)).copied().unwrap_or(-1);
+            let got = hit(PointF::new(x as f32, y as f32));
+            let off_boundary = want != got && !near_rust_boundary((x, y), BOUNDARY_RADIUS, &hit);
+            Probe {
                 x,
                 y,
                 expected: want,
                 got,
-            });
-        }
-    }
-    out
+                off_boundary,
+            }
+        })
+        .collect()
 }
 
-/// Mismatches whose probe is not within `radius` pixels of a change in the Rust answer. Zero means
-/// every disagreement lies on a Rust boundary, the second half of the spec's rule.
-pub fn outside_boundary(score: &Score, radius: i32, hit: impl Fn(PointF) -> i32) -> usize {
-    score
-        .mismatches
+/// Agreement of one drawing at one scale, over the box of its probes.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct Verdict {
+    /// Percentage of the probes in the box where Rust and the oracle agree.
+    pub percent: f64,
+    /// Mismatches in the box that are not within `BOUNDARY_RADIUS` of a Rust boundary.
+    pub off_boundary: usize,
+}
+
+/// The box of a drawing, inclusive corners `(x0, y0, x1, y1)`: the probes where either side answers
+/// (not a miss), grown by `BOX_MARGIN` and clipped to the image. `None` when neither side answers.
+pub fn probe_box(probes: &[Probe], width: i32, height: i32) -> Option<(i32, i32, i32, i32)> {
+    let active = probes.iter().filter(|p| p.expected != -1 || p.got != -1);
+    let (mut x0, mut y0, mut x1, mut y1) = (i32::MAX, i32::MAX, i32::MIN, i32::MIN);
+    for p in active {
+        x0 = x0.min(p.x);
+        y0 = y0.min(p.y);
+        x1 = x1.max(p.x);
+        y1 = y1.max(p.y);
+    }
+    let (xs, ys) = ((x0, x1), (y0, y1));
+    (x0 <= x1).then(|| {
+        let (lo_x, hi_x) = clip(xs, width);
+        let (lo_y, hi_y) = clip(ys, height);
+        (lo_x, lo_y, hi_x, hi_y)
+    })
+}
+
+/// The span grown by `BOX_MARGIN` on both sides and clipped to `[0, size - 1]`.
+fn clip(span: (i32, i32), size: i32) -> (i32, i32) {
+    let (lo, hi) = span;
+    (0.max(lo - BOX_MARGIN), (size - 1).min(hi + BOX_MARGIN))
+}
+
+/// The verdict of a drawing over its box. A probe where either side answers one of `exempt` (the
+/// text zone of the drawing) leaves both the numerator and the denominator. An empty box agrees
+/// everywhere: both sides miss.
+pub fn verdict(probes: &[Probe], width: i32, height: i32, exempt: &[i32]) -> Verdict {
+    let Some((x0, y0, x1, y1)) = probe_box(probes, width, height) else {
+        return Verdict {
+            percent: 100.0,
+            off_boundary: 0,
+        };
+    };
+    let (mut total, mut matches, mut off) = (0usize, 0usize, 0usize);
+    let inside = probes
         .iter()
-        .filter(|m| !near_rust_boundary((m.x, m.y), radius, &hit))
-        .count()
-}
-
-/// Distance from `p` to the nearest probe, within `max_radius`, where Rust answers differently than at
-/// `p`, sampled on a 1 px grid. `None` when Rust does not change within the radius.
-pub fn boundary_distance(
-    p: (i32, i32),
-    max_radius: i32,
-    hit: impl Fn(PointF) -> i32,
-) -> Option<f32> {
-    let here = hit(PointF::new(p.0 as f32, p.1 as f32));
-    let mut best: Option<f32> = None;
-    for dy in -max_radius..=max_radius {
-        for dx in -max_radius..=max_radius {
-            let d2 = (dx * dx + dy * dy) as f32;
-            if d2 == 0.0 || d2 > (max_radius * max_radius) as f32 {
-                continue;
-            }
-            if hit(PointF::new((p.0 + dx) as f32, (p.1 + dy) as f32)) != here {
-                best = Some(best.map_or(d2.sqrt(), |b| b.min(d2.sqrt())));
-            }
+        .filter(|p| (x0..=x1).contains(&p.x) && (y0..=y1).contains(&p.y));
+    for p in inside {
+        if exempt.contains(&p.expected) || exempt.contains(&p.got) {
+            continue;
+        }
+        total += 1;
+        if p.expected == p.got {
+            matches += 1;
+        } else if p.off_boundary {
+            off += 1;
         }
     }
-    best
+    let percent = if total == 0 {
+        100.0
+    } else {
+        100.0 * matches as f64 / total as f64
+    };
+    Verdict {
+        percent,
+        off_boundary: off,
+    }
 }
 
 /// Whether Rust changes its answer within `radius` pixels of `p` (`p` is at a boundary of the Rust

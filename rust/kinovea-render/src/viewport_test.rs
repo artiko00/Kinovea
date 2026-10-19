@@ -2,11 +2,6 @@
 use crate::viewport::*;
 use kinovea_geometry::PointF;
 
-#[test]
-fn viewport_module_is_declared() {
-    assert!(module_path!().contains("viewport"));
-}
-
 // ImageToViewportTransformer.cs:65 Transform(Point) with Extensions.cs:41 Scale(double) (truncation).
 #[test]
 fn integer_point_scales_then_truncates_then_translates() {

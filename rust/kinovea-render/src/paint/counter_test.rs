@@ -7,11 +7,6 @@ use kinovea_metadata::drawing::Counter;
 use kinovea_metadata::measure_label::MeasureLabelType;
 use kinovea_metadata::{Color, StyleElements, StyleValue};
 
-#[test]
-fn counter_painters_are_declared() {
-    assert!(module_path!().contains("counter"));
-}
-
 /// Beats at 1000, 1200 and 1500: at 1300 two beats have passed (index 1, `GetBeatIndexInterval`).
 fn counter(kind: MeasureLabelType) -> Counter {
     let mut d = Counter::new(PointF::new(10.0, 20.0));

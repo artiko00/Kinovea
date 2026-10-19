@@ -10,6 +10,7 @@ use kinovea_geometry::PointF;
 use kinovea_metadata::drawing::Circle;
 use kinovea_metadata::measure_label::MeasureLabelType;
 use kinovea_metadata::style::{DashStyle, PenShape};
+use kinovea_metadata::Metadata;
 
 /// `DrawingCircle.crossSize / 2`: arm length of the centre mark.
 const CENTER_ARM: f32 = 7.5;
@@ -50,7 +51,7 @@ pub fn paint_circle(d: &Circle, ctx: &PaintContext, r: &mut dyn Renderer) {
             MeasureLabelType::Diameter => r.stroke_line(left, right, &pen),
             _ => {}
         }
-        let text = label_text(d, ctx);
+        let text = label_text(d, ctx.metadata, ctx.timestamp);
         draw_mini_label(
             r,
             &d.label,
@@ -84,14 +85,14 @@ fn draw_center(r: &mut dyn Renderer, pen: &Pen, center: PointF) {
 }
 
 /// Port of `DrawingCircle.GetMeasureLabelText` (the image-plane points).
-fn label_text(d: &Circle, ctx: &PaintContext) -> String {
+pub(crate) fn label_text(d: &Circle, metadata: &Metadata, timestamp: i64) -> String {
     let radius = d.radius as f32;
     let left = PointF::new(d.center.x - radius, d.center.y);
     let right = PointF::new(d.center.x + radius, d.center.y);
-    let calibration = &ctx.metadata.calibration;
+    let calibration = &metadata.calibration;
     match d.measure_label_type {
         MeasureLabelType::Name => d.header.name.clone(),
-        MeasureLabelType::Center => calibration.point_text(d.center, true, ctx.timestamp),
+        MeasureLabelType::Center => calibration.point_text(d.center, true, timestamp),
         MeasureLabelType::Radius => calibration.length_text(d.center, right, true),
         MeasureLabelType::Diameter => calibration.length_text(left, right, true),
         MeasureLabelType::Circumference => calibration.circumference_text(d.center, right, true),

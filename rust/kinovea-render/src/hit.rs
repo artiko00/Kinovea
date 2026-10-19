@@ -19,6 +19,9 @@ mod label_test;
 pub mod media;
 #[cfg(test)]
 mod media_test;
+pub mod multi;
+#[cfg(test)]
+mod multi_test;
 mod path;
 #[cfg(test)]
 mod path_test;
@@ -36,6 +39,9 @@ mod region_test;
 pub mod shapes;
 #[cfg(test)]
 mod shapes_test;
+pub mod singletons;
+#[cfg(test)]
+mod singletons_test;
 mod stroke;
 #[cfg(test)]
 mod stroke_test;

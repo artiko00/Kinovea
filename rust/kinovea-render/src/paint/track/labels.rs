@@ -1,7 +1,8 @@
 //! Owner: P2. Mini labels of a track: the main label on the current point (`DrawMainLabel`) and one
 //! label per keyframe (`DrawKeyframesLabels`), attached to the trajectory point at their time.
 
-use super::super::helpers::mini_label::{anchor_to, draw_mini_label};
+use super::super::helpers::frame::attach_label;
+use super::super::helpers::mini_label::draw_mini_label;
 use super::super::PaintContext;
 use crate::renderer::Renderer;
 use crate::style::StyleData;
@@ -33,7 +34,7 @@ pub fn paint_keyframe_labels(
         }
         let opacity = base * if future { FUTURE } else { PAST };
         let attach = point_at_time(d, points, kfl.label.timestamp).unwrap_or(kfl.label.attach);
-        let label = anchor_to(&kfl.label, attach);
+        let label = attach_label(&kfl.label, attach);
         let keyframe = ctx
             .metadata
             .keyframes
@@ -60,7 +61,7 @@ pub fn paint_main_label(
     r: &mut dyn Renderer,
 ) {
     let text = measure_text(d, d.closest_point(ctx.timestamp), ctx);
-    let label = anchor_to(&d.main_label, main_attach(d, points, ctx.timestamp));
+    let label = attach_label(&d.main_label, main_attach(d, points, ctx.timestamp));
     draw_mini_label(r, &label, &text, style.color, style.font_size, 1.0, ctx);
 }
 

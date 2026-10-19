@@ -9,7 +9,7 @@ use crate::style::StyleData;
 use kinovea_geometry::RectangleF;
 use kinovea_metadata::multi::{AutoNumber, NumberSequence, Spotlight, Spotlights};
 use kinovea_metadata::style::DashStyle;
-use kinovea_metadata::{Color, Fading};
+use kinovea_metadata::{Color, Fading, Metadata};
 
 /// `defaultBackgroundAlpha`: alpha of the dim layer at full opacity.
 const DIM_ALPHA: f64 = 160.0;
@@ -21,7 +21,7 @@ pub fn paint_spotlights(d: &Spotlights, ctx: &PaintContext, r: &mut dyn Renderer
     let spots: Vec<(&Spotlight, f64)> = d
         .items
         .iter()
-        .map(|s| (s, opacity_from(&d.header.fading, s.timestamp, ctx)))
+        .map(|s| (s, opacity_from(s.timestamp, ctx)))
         .filter(|(_, o)| *o > 0.0)
         .collect();
     let Some(max) = spots.iter().map(|(_, o)| *o).reduce(f64::max) else {
@@ -50,19 +50,13 @@ pub fn paint_spotlights(d: &Spotlights, ctx: &PaintContext, r: &mut dyn Renderer
 pub fn paint_numbers(d: &NumberSequence, ctx: &PaintContext, r: &mut dyn Renderer) {
     let style = StyleData::from_elements(&d.header.style);
     for n in &d.items {
-        paint_number(n, &d.header.fading, &style, ctx, r);
+        paint_number(n, &style, ctx, r);
     }
 }
 
 /// `DrawingNumberSequenceItem.Draw`: the value in a box whose contour is a 2 px foreground pen.
-fn paint_number(
-    n: &AutoNumber,
-    fading: &Fading,
-    style: &StyleData,
-    ctx: &PaintContext,
-    r: &mut dyn Renderer,
-) {
-    let opacity = opacity_from(fading, n.timestamp, ctx);
+fn paint_number(n: &AutoNumber, style: &StyleData, ctx: &PaintContext, r: &mut dyn Renderer) {
+    let opacity = opacity_from(n.timestamp, ctx);
     if opacity <= 0.0 {
         return;
     }
@@ -86,14 +80,20 @@ fn paint_number(
     );
 }
 
-/// Opacity of an item that fades from its own `reference` timestamp: each spot and number has its
-/// own `InfosFading` in the original, with the frame duration and fading frames of the container.
-fn opacity_from(fading: &Fading, reference: i64, ctx: &PaintContext) -> f64 {
+/// Opacity of an item at the current time, from its own reference timestamp.
+fn opacity_from(reference: i64, ctx: &PaintContext) -> f64 {
+    item_fading(reference, ctx.metadata, ctx.default_fading).opacity_factor(ctx.timestamp, ctx.default_fading)
+}
+
+/// The fading of one item (`new InfosFading(timestamp, averageTimeStampsPerFrame)`, with the player's
+/// values through `FromInfosFading`): its reference timestamp, the frame duration of the video and the
+/// default fading otherwise. Items have no `InfosFading` element in the KVA.
+pub(crate) fn item_fading(reference: i64, metadata: &Metadata, default: &Fading) -> Fading {
     Fading {
         reference_timestamp: reference,
-        ..fading.clone()
+        average_timestamps_per_frame: metadata.video.average_timestamps_per_frame,
+        ..default.clone()
     }
-    .opacity_factor(ctx.timestamp, ctx.default_fading)
 }
 
 /// Viewport box of a spot: `center.Box(transform(radius))`.

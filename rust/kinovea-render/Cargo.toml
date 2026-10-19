@@ -15,6 +15,7 @@ uuid.workspace = true
 
 [dev-dependencies]
 kinovea-fixtures = { path = "../kinovea-fixtures" }
+serde_json.workspace = true
 
 [lints]
 workspace = true

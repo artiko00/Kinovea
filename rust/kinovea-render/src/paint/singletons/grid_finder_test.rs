@@ -20,21 +20,47 @@ fn line(a: (f32, f32), b: (f32, f32)) -> GridLine {
     }
 }
 
+/// Clipped ends carry the rounding of the line parameter (about 1e-14 px at y 0), as the original's
+/// doubles do; the comparison is at 1e-3 px.
+fn settled(l: GridLine) -> GridLine {
+    let snap = |p: PointF| {
+        PointF::new(
+            (p.x * 1000.0).round() / 1000.0,
+            (p.y * 1000.0).round() / 1000.0,
+        )
+    };
+    GridLine {
+        start: snap(l.start),
+        end: snap(l.end),
+    }
+}
+
+// CoordinateSystemGridFinder.cs:167 and :240 clip the line through the two projected ends with
+// `LiangBarsky.ClipLine(clipWindow, a, b)` (LiangBarsky.cs:83-86, the overload that clips the infinite
+// line). The ends are at image y 110 and 10 for the vertical walk, so the line runs over the whole
+// image height: from y 120 (bottom edge) to y 0 (top edge). The horizontal line runs the full width.
 #[test]
-fn flat_plane_axes_span_the_image_through_the_origin() {
+fn flat_plane_axes_run_across_the_image_through_the_origin() {
     let grid = find(&flat_plane());
-    assert_eq!(grid.vertical_axis, Some(line((20.0, 110.0), (20.0, 10.0))));
     assert_eq!(
-        grid.horizontal_axis,
-        Some(line((20.0, 110.0), (220.0, 110.0)))
+        grid.vertical_axis.map(settled),
+        Some(line((20.0, 120.0), (20.0, 0.0)))
+    );
+    assert_eq!(
+        grid.horizontal_axis.map(settled),
+        Some(line((0.0, 110.0), (240.0, 110.0)))
     );
 }
 
+// The same infinite clip applies to every grid line (CoordinateSystemGridFinder.cs:167 and :240).
 #[test]
 fn flat_plane_grid_lines_step_outwards_from_the_origin() {
     let grid = find(&flat_plane());
-    assert_eq!(grid.grid_lines[0], line((0.0, 110.0), (0.0, 10.0)));
-    assert_eq!(grid.grid_lines[1], line((40.0, 110.0), (40.0, 10.0)));
+    assert_eq!(settled(grid.grid_lines[0]), line((0.0, 120.0), (0.0, 0.0)));
+    assert_eq!(
+        settled(grid.grid_lines[1]),
+        line((40.0, 120.0), (40.0, 0.0))
+    );
 }
 
 #[test]
