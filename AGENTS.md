@@ -51,6 +51,7 @@ CI: `.github/workflows/build.yml` builds the C# solution on `windows-latest`; `r
 - `Refs/` — vendored native SDKs. `Installer/` — NSIS + signing scripts. `Tools/` — XSLT, drawing tools, helpers.
 - `rust/` — Cargo workspace: `kinovea-{core,geometry,kinematics,measurement,metadata,render,video,tracking,export,fixtures}` + `kinovea` bin. Tests live next to sources as `src/<file>_test.rs` (what `testlens` recognizes).
   `kinovea-metadata` holds the annotation model (drawings, keyframes, styles, trackability, generic postures with their constraint engine, undo history) and the KVA 2.x reader/writer with legacy 1.3–1.5 migration; its `tests/` compare bytes with `tests/fixtures/kva/*` and `tests/fixtures/posture/*`.
+  `kinovea-render` holds the backend-neutral `Renderer` trait, one painter per drawing kind (ported from each `Draw`), the image-to-viewport transform, hit testing (`HitTester` geometry plus per-drawing `HitTest`) and a recording backend; `tests/hits_test.rs` compares hits with `tests/fixtures/render/*/hits.csv`. Its `paint` modules are declared through a macro, so check them with `rustfmt --check` directly.
 - `Kinovea.FixtureGen/` — C# console that generates parity fixtures. `tests/cases/` inputs, `tests/fixtures/` generated outputs (see `tests/README.md`). `tools/oracle/` — provision/build/pull scripts for the Windows host.
 - `openspec/` — spec-driven changes. `.agent/` — this harness (init, progress log, features).
 

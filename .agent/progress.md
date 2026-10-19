@@ -136,3 +136,11 @@ Chronological. Newest entry last. Never delete entries; correct a wrong decision
 - Discovered: a non-perspective `Plane` never builds its projective mapping, so its original `HitTest` throws with a sliding line visible (recorded as an `exception` row); `HitPath` widens with a pen of `lineSize + enlarger`, so the tolerance per side is half of that.
 - Blocked: tasks 5.x and 7.1 need `tiny-skia`, `fontdue`, `png` and Liberation Sans (asked, no answer yet; AGENTS.md requires approval).
 - Next: painters P1/P2 and per-drawing hit testing in parallel, then integration, primitive-coverage test, Hermes review.
+
+## 2026-10-19 — add-headless-renderer (apply, without the CPU backend)
+
+- Agent: Claude Code (Opus 5.5) orchestrating Haiku subagents (`haiku-rust-dev`, effort xhigh): R1 trait/style/recording, R2 viewport/hit geometry, P1–P4 painters, unification of AngleHelper/TickMark, H per-drawing hit testing. Each diff validated (scope, removed test lines, test-name counts) and re-verified on the branch.
+- Done (13/18 tasks): oracle `render` area and fixtures; `Renderer` trait, style mapping, recording backend; viewport; painters for all kinds plus singletons and multi-drawings; primitive coverage over `all-drawings`; per-drawing hit testing against `hits.csv` with two explicit, staleness-checked lists (text-metric zones pending a font rasterizer; capped Pencil/posture probes). `make verify` 890 tests green.
+- Fixes found during integration: label leaders shortened by `UpdateStartEnd` like the original; `StyleData.LineSize` bound by key; two orphan `_test.rs` files that satisfied `testlens` but were never compiled (one did not parse) are now declared; decimal places carried in `PaintContext`.
+- Tooling gap (not fixed, decision pending): `cargo fmt --check` skips modules declared inside macros (120 files across five crates, plus `kinovea-render/src/paint`, which is checked with `rustfmt --check` by hand).
+- Blocked: tasks 2.1, 5.1–5.3, 7.1 need `tiny-skia`, `fontdue`, `png` and Liberation Sans (asked twice, no answer; AGENTS.md requires approval). The change cannot be archived until then.
