@@ -6,6 +6,12 @@ mod lib_test;
 pub mod capabilities;
 #[cfg(test)]
 mod capabilities_test;
+pub mod decoding;
+#[cfg(test)]
+mod decoding_test;
+pub mod enumerate;
+#[cfg(test)]
+mod enumerate_test;
 pub mod fit_helper;
 #[cfg(test)]
 mod fit_helper_test;
@@ -19,12 +25,37 @@ pub mod info;
 #[cfg(test)]
 mod info_test;
 pub mod pipeline;
+pub mod reader;
+#[cfg(test)]
+mod reader_test;
+pub mod registry;
+#[cfg(test)]
+mod registry_test;
+pub mod relation;
+#[cfg(test)]
+mod relation_test;
 pub mod results;
 #[cfg(test)]
 mod results_test;
 pub mod state;
 #[cfg(test)]
 mod state_test;
+pub mod summary;
+#[cfg(test)]
+mod summary_test;
+pub mod synthetic;
+pub mod synthetic_reader;
+#[cfg(test)]
+mod synthetic_reader_test;
+#[cfg(test)]
+mod synthetic_test;
+#[cfg(test)]
+mod temp_dir;
+#[cfg(test)]
+mod temp_dir_test;
+pub mod wildcard;
+#[cfg(test)]
+mod wildcard_test;
 
 /// Returns the crate name as declared in `Cargo.toml`.
 pub fn crate_name() -> &'static str {
