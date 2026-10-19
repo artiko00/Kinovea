@@ -10,7 +10,8 @@ namespace Kinovea.FixtureGen.Areas
         /// <summary>
         /// `hits.csv`: every probe of a `hitStep` grid over the image whose `HitTest` result is not
         /// -1, for each viewport scale. Keyframe drawings are probed at their keyframe time, detached
-        /// ones at `hitTimestamp`; a frame is painted first at that time and scale because several
+        /// ones (chronos, tracks, then the singletons: spotlights, number sequence, coordinate system,
+        /// test grid, in `SingletonDrawingsManager` order) at `hitTimestamp`; a frame is painted first at that time and scale because several
         /// drawings compute their screen boxes while drawing. Probes not listed are misses; a drawing
         /// whose `HitTest` throws gets a single `exception` row at the failing probe.
         /// </summary>
@@ -38,6 +39,8 @@ namespace Kinovea.FixtureGen.Areas
                     Probe(rows, "chronos", i, m.ChronoManager.Drawings[i], detachedTime, scale, step, m.ImageSize, distorter, transformer);
                 for (int i = 0; i < m.TrackManager.Drawings.Count; i++)
                     Probe(rows, "tracks", i, m.TrackManager.Drawings[i], detachedTime, scale, step, m.ImageSize, distorter, transformer);
+                for (int i = 0; i < m.SingletonDrawingsManager.Drawings.Count; i++)
+                    Probe(rows, "singletons", i, m.SingletonDrawingsManager.Drawings[i], detachedTime, scale, step, m.ImageSize, distorter, transformer);
             }
             string[] header = { "container", "index", "element", "timestamp", "scale", "x", "y", "result" };
             Oracle.WriteCsv(Path.Combine(outDir, "hits.csv"), header, rows);
