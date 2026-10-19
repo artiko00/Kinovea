@@ -15,7 +15,7 @@
 ## 3. Circle tracking
 
 - [x] 3.1 Write `src/hough_test.rs`: a single rendered disc is detected at the right center and radius within 1 px; two discs at different radii are separated; uniform image yields none; implement `src/hough.rs` (gradient Hough at a fixed radius with vote threshold); verify tests pass.
-- [ ] 3.2 Write `src/circle_test.rs` (reference radius averaging bounded by the last reference time, descending vote threshold, failure keeps point and radius, radius stored on the point) then implement `src/circle.rs` (`CircleTracker`); verify tests pass.
+- [x] 3.2 Write `src/circle_test.rs` (reference radius averaging bounded by the last reference time, descending vote threshold, failure keeps point and radius, radius stored on the point) then implement `src/circle.rs` (`CircleTracker`); verify tests pass.
 
 ## 4. Trackability
 
@@ -25,8 +25,8 @@
 
 ## 5. Oracle parity
 
-- [ ] 5.1 Add `tests/cases/tracking/{template-square,template-subpixel,template-lost,template-mask,circle-disc,circle-lost}.json` and document the frame formula in `tests/cases/tracking/README.md`; implement `Kinovea.FixtureGen/Areas/TrackingArea.cs` (formula renderer into locked bits, tracker runs, `track.csv`, `truth.csv`) and register it; run `tools/oracle/fixtures.sh --verify`; verify identical trees.
-- [ ] 5.2 Write `tests/tracking_parity_test.rs` replaying each case on the Rust trackers with the tolerances of design D6; verify `cargo test -p kinovea-tracking` passes and the test fails when a tolerance is tightened to 0 in a scratch run.
+- [x] 5.1 Add `tests/cases/tracking/{template-square,template-subpixel,template-lost,template-mask,circle-disc,circle-lost}.json` and document the frame formula in `tests/cases/tracking/README.md`; implement `Kinovea.FixtureGen/Areas/TrackingArea.cs` (formula renderer into locked bits, tracker runs, `track.csv`, `truth.csv`) and register it; run `tools/oracle/fixtures.sh --verify`; verify identical trees.
+- [x] 5.2 Write `tests/tracking_parity_test.rs` replaying each case on the Rust trackers with the tolerances of design D6; verify `cargo test -p kinovea-tracking` passes and the test fails when a tolerance is tightened to 0 in a scratch run.
 
 ## 6. Integration
 
