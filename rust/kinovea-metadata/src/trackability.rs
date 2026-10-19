@@ -131,11 +131,20 @@ impl TrackabilityManager {
     /// Reads a `Trackability` block: known ids are replaced in place, new ones appended.
     pub fn read_kva(&mut self, e: &Element) {
         for c in e.children.iter().filter(|c| c.name == "TrackableDrawing") {
-            let tracker = DrawingTracker::read_kva(c);
-            match self.trackers.iter().position(|t| t.drawing_id == tracker.drawing_id) {
-                Some(i) => self.trackers[i] = tracker,
-                None => self.trackers.push(tracker),
-            }
+            self.import_tracker(DrawingTracker::read_kva(c));
+        }
+    }
+
+    /// `ImportTracker`: installs a tracker built by an importer; a tracker already registered for
+    /// the same drawing is replaced in place.
+    pub fn import_tracker(&mut self, tracker: DrawingTracker) {
+        match self
+            .trackers
+            .iter()
+            .position(|t| t.drawing_id == tracker.drawing_id)
+        {
+            Some(i) => self.trackers[i] = tracker,
+            None => self.trackers.push(tracker),
         }
     }
 
