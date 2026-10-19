@@ -81,7 +81,7 @@ namespace Kinovea.FixtureGen.Areas
         {
             // The containers keep their frames private; the dense cache exposes them, the prebuffer through reflection.
             IEnumerable<VideoFrame> frames = cache != null
-                ? cache.Frames
+                ? (IEnumerable<VideoFrame>)cache.Frames
                 : ((SortedList<long, VideoFrame>)typeof(PreBuffer2).GetField("frames", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(prebuffer)).Values;
             return string.Join(" ", frames.Select(f => f.Timestamp.ToString(Oracle.Culture)));
         }
