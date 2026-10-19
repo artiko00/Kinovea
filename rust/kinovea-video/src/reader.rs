@@ -2,6 +2,7 @@
 //! methods and the concrete helpers become default methods over `info()`. The C#
 //! `RequestFulfilled` event becomes a `Sender` installed through `set_request_sink`.
 
+use crate::cache::Cache;
 use crate::capabilities::{VideoCapabilities, VideoDecodingMode};
 use crate::enumerate::FrameEnumerator;
 use crate::frame::VideoFrame;
@@ -9,11 +10,13 @@ use crate::geometry::{VideoGeometry, VideoGeometryRequest};
 use crate::info::VideoInfo;
 use crate::relation::{self, TimestampRelation};
 use crate::results::OpenVideoResult;
-use crate::state::PlayerState;
+use crate::snapshot::CacheSnapshot;
+use crate::state::{PlayerState, WorkingZoneRequest};
 use crate::summary::VideoSummary;
 use kinovea_core::video_section::VideoSection;
 use kinovea_geometry::Size;
 use std::sync::mpsc::Sender;
+use std::sync::Arc;
 use std::time::Duration;
 
 /// `RequestFulfilledEventArgs`: reports how a player request ended.
@@ -55,6 +58,22 @@ pub trait VideoReader {
     fn update_video_geometry(&mut self, request: VideoGeometryRequest) -> bool;
     /// Installs the channel that receives `RequestFulfilled` events.
     fn set_request_sink(&mut self, sink: Sender<RequestFulfilled>);
+    /// Sections held by the reader's frame container, for the timeline.
+    fn cache_snapshot(&self) -> Arc<CacheSnapshot>;
+
+    /// The working zone frames when the reader holds them all (full cache).
+    fn working_zone_frames(&self) -> Option<&Cache> {
+        None
+    }
+
+    /// Allows or forbids skipping frames during playback when decoding falls behind.
+    fn update_allow_frame_skipping(&mut self, _allow: bool) {}
+
+    /// Loads the working zone (full cache, prebuffering or on demand, as the reader can).
+    fn working_zone_update_request(&mut self, _request: WorkingZoneRequest) {}
+
+    /// Restarts prebuffering from `start_timestamp` when the reader supports it.
+    fn restart_prebuffering(&mut self, _start_timestamp: i64) {}
 
     fn move_to(&mut self, timestamp: i64) -> bool {
         self.move_request(false, timestamp)

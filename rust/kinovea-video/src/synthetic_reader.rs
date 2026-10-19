@@ -7,12 +7,14 @@ use crate::geometry::{VideoGeometry, VideoGeometryRequest};
 use crate::info::VideoInfo;
 use crate::reader::{RequestFulfilled, VideoReader};
 use crate::results::OpenVideoResult;
+use crate::snapshot::CacheSnapshot;
 use crate::state::{PlayerAction, PlayerState};
 use crate::summary::{thumbnail_indices, thumbnail_size, VideoSummary};
 use crate::synthetic::SyntheticReader;
 use kinovea_core::video_section::VideoSection;
 use kinovea_geometry::Size;
 use std::sync::mpsc::Sender;
+use std::sync::Arc;
 
 impl VideoReader for SyntheticReader {
     fn current(&self) -> &VideoFrame {
@@ -121,5 +123,10 @@ impl VideoReader for SyntheticReader {
 
     fn set_request_sink(&mut self, sink: Sender<RequestFulfilled>) {
         self.sink = Some(sink);
+    }
+
+    /// Frames are generated on request, nothing is held.
+    fn cache_snapshot(&self) -> Arc<CacheSnapshot> {
+        Arc::new(CacheSnapshot::empty())
     }
 }

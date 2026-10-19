@@ -1,4 +1,13 @@
-//! Kinovea `video` crate. Behavior is added by later OpenSpec changes.
+//! Kinovea `video` crate: the [`reader::VideoReader`] contract every video source implements, its
+//! frame containers ([`cache::Cache`], dense, and [`prebuffer::PreBuffer`], bounded and fed by a
+//! decoding thread), the capture [`pipeline`] (ring buffer and batch consumers), the reader
+//! [`registry`] and a [`synthetic::SyntheticReader`] whose frames carry their own timestamp.
+//!
+//! Supersedes `Kinovea.Video` (`VideoReaders/{VideoReader,VideoTypeManager,VideoCapabilities,
+//! SupportedExtensionsAttribute}.cs`, `Caching/*`, `VideoGeometry/*`, `VideoInfo.cs`,
+//! `VideoSummary.cs`, `Fraction.cs`, `FitHelper.cs`, `WorkingZoneRequest.cs`, the result enums,
+//! `TimestampRelation.cs`, `Delegates.cs`) and all of `Kinovea.Pipeline`. The readers that decode
+//! files live in later changes.
 
 #[cfg(test)]
 mod lib_test;

@@ -1,7 +1,7 @@
 //! Tests for the `VideoReader` trait: open, navigation, relation, player requests and object
 //! safety, driven through `SyntheticReader`.
 
-use crate::capabilities::VideoDecodingMode;
+use crate::capabilities::{CacheLoadMode, VideoDecodingMode};
 use crate::reader::{RequestFulfilled, VideoReader};
 use crate::relation::TimestampRelation;
 use crate::results::OpenVideoResult;
@@ -130,4 +130,20 @@ fn trait_is_usable_as_a_trait_object() {
     assert_eq!(reader.open("clip.synthetic"), OpenVideoResult::Success);
     assert!(reader.move_to(2));
     assert_eq!(reader.current().timestamp, 2);
+}
+
+#[test]
+fn optional_members_default_like_the_base_class() {
+    // VideoReader.cs: WorkingZoneFrames returns null; UpdateAllowFrameSkipping, RestartPrebuffering
+    // and WorkingZoneUpdateRequest are empty virtuals. A source without a container has an empty snapshot.
+    let mut reader = opened(10);
+    assert!(reader.move_to(3));
+    reader.update_allow_frame_skipping(false);
+    reader.restart_prebuffering(0);
+    let zone = kinovea_core::video_section::VideoSection::new(0, 9);
+    let request = crate::state::WorkingZoneRequest::new(zone, CacheLoadMode::Keep, 0);
+    reader.working_zone_update_request(request);
+    assert!(reader.working_zone_frames().is_none());
+    assert_eq!(reader.cache_snapshot().version, -1);
+    assert_eq!(painted_timestamp(&reader), 3);
 }
