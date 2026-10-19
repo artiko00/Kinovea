@@ -35,7 +35,7 @@
 - [x] 5.2 Extend the reader and writer for chronos, tracks, spotlights, number sequence, coordinate system, test grid, trackability, video filters (verbatim), camera motion (verbatim); verify `complete` and `all-drawings` cases pass byte for byte.
 - [x] 5.3 Implement context remapping (`scaling`, `remap_timestamp`, same-context detection) in `src/kva/context.rs` with `context_test.rs` against the `kva/remap` fixture; verify within 1e-4.
 - [x] 5.4 Implement export flags (`Basics`, `Drawings`, `Calibration`, `VideoSpecific`, capture recording) with a test comparing the capture-recording output to a fixture produced by a new `tests/cases/kva/capture.json` case; verify byte parity.
-- [ ] 5.5 Add `tests/kva_fuzz_test.rs` loading the 20 fuzzed files and checking round trip against their fixture; add `proptest` property read(write(d)) == d for every drawing kind in `tests/kva_property_test.rs`; verify `make verify`.
+- [x] 5.5 Add `tests/kva_fuzz_test.rs` loading the 20 fuzzed files and checking round trip against their fixture; add `proptest` property read(write(d)) == d for every drawing kind in `tests/kva_property_test.rs`; verify `make verify`. Deviation: the property is seeded (`tests/kva_property/`, 64 seeds × 24 kinds, `write(read(write(d))) == write(d)`) instead of `proptest`.
 
 ## 6. Migration
 
