@@ -1,0 +1,111 @@
+{
+  "metadata": {
+    "producer": "Kinovea.0.0",
+    "fullPath": "all-drawings.mp4",
+    "originalFilename": "all-drawings",
+    "imageSize": {
+      "width": 640,
+      "height": 480
+    },
+    "captureFramerate": 50.0,
+    "videoFramerate": 25.0
+  },
+  "data": {
+    "keyframes": [
+      {
+        "name": "All kinds",
+        "timeUnit": "s",
+        "time": 0.0,
+        "comment": ""
+      }
+    ],
+    "positions": [
+      {
+        "name": "Marker 1",
+        "timeUnit": "s",
+        "dataUnit": "px",
+        "time": 0.0,
+        "value": [
+          -220.0,
+          -160.0
+        ]
+      }
+    ],
+    "distances": [
+      {
+        "name": "Line 1",
+        "timeUnit": "s",
+        "dataUnit": "px",
+        "time": 0.0,
+        "value": 200.997513
+      }
+    ],
+    "angles": [
+      {
+        "name": "Elbow",
+        "timeUnit": "s",
+        "dataUnit": "°",
+        "time": 0.0,
+        "value": -90.0
+      },
+      {
+        "name": "Goniometer 1",
+        "timeUnit": "s",
+        "dataUnit": "°",
+        "time": 0.0,
+        "value": 45.0
+      }
+    ],
+    "times": [
+      {
+        "name": "Sprint",
+        "timeUnit": "s",
+        "duration": 1.2,
+        "cumul": 1.2,
+        "start": 0.8,
+        "stop": 2.0
+      },
+      {
+        "name": "Advanced stopwatch 1 first",
+        "timeUnit": "s",
+        "duration": 0.4,
+        "cumul": 0.4,
+        "start": 0.8,
+        "stop": 1.2
+      }
+    ],
+    "timeseries": [
+      {
+        "name": "Trajectory 1",
+        "timeUnit": "s",
+        "dataUnit": "px",
+        "time": [
+          0.0,
+          0.04,
+          0.08,
+          0.12
+        ],
+        "data": {
+          "0": [
+            [
+              -220.0,
+              140.0
+            ],
+            [
+              -210.0,
+              135.0
+            ],
+            [
+              -199.0,
+              129.0
+            ],
+            [
+              -187.0,
+              122.0
+            ]
+          ]
+        }
+      }
+    ]
+  }
+}

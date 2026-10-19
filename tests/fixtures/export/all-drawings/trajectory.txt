@@ -1,0 +1,9 @@
+#Kinovea Trajectory data export
+#T X Y
+
+# Trajectory 1
+0 -220 140
+0.04 -210 135
+0.08 -199 129
+0.12 -187 122
+
