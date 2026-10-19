@@ -2,9 +2,9 @@
 
 ## 1. Parameters, timeline and pixel helpers
 
-- [ ] 1.1 Add path dependencies to `rust/kinovea-tracking/Cargo.toml` (`kinovea-core`, `kinovea-geometry`, `kinovea-video`, `kinovea-metadata`; filters in-crate, see "Decisions taken at apply time"); write `src/pixels_test.rs` (BGRA `FrameBuffer` → gray/HSV, ROI crop clamped to the image, median blur, Sobel, dilate/erode as OpenCV with default borders) then implement `src/pixels.rs`; verify `cargo test -p kinovea-tracking` passes.
-- [ ] 1.2 Check `kinovea_metadata::drawing::tracking_parameters` (`TrackingParameters`, `TrackingAlgorithm`, `HsvRange`) against the spec: defaults, clamping to 400, content hash, XML round trip with the exact element names, unknown element skipped; add the missing behavior there with tests; verify tests pass.
-- [ ] 1.3 Write `src/timeline_test.rs` (insert, closest from, last, trim, clear with disposer, enumerate order) then implement `src/timeline.rs`; verify tests pass.
+- [x] 1.1 Add path dependencies to `rust/kinovea-tracking/Cargo.toml` (`kinovea-core`, `kinovea-geometry`, `kinovea-video`, `kinovea-metadata`; filters in-crate, see "Decisions taken at apply time"); write `src/pixels_test.rs` (BGRA `FrameBuffer` → gray/HSV, ROI crop clamped to the image, median blur, Sobel, dilate/erode as OpenCV with default borders) then implement `src/pixels.rs`; verify `cargo test -p kinovea-tracking` passes.
+- [x] 1.2 Check `kinovea_metadata::drawing::tracking_parameters` (`TrackingParameters`, `TrackingAlgorithm`, `HsvRange`) against the spec: defaults, clamping to 400, content hash, XML round trip with the exact element names, unknown element skipped; add the missing behavior there with tests; verify tests pass.
+- [x] 1.3 Write `src/timeline_test.rs` (insert, closest from, last, trim, clear with disposer, enumerate order) then implement `src/timeline.rs`; verify tests pass.
 
 ## 2. Template matching
 
