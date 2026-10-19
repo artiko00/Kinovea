@@ -47,7 +47,7 @@ fn find_drawing_and_trackable_registration() {
     assert_eq!(m.attached_drawings().count(), 1);
     m.register_trackables();
     assert_eq!(m.trackability.reference_value(line_id, "b"), PointF::new(1.0, 10.0));
-    assert_eq!(m.trackability.trackers[0].points[0].1.reference_timestamp, m.keyframes[0].drawings[0].header().reference_timestamp);
+    assert_eq!(m.trackability.trackers.iter().next().unwrap().points[0].1.reference_timestamp, m.keyframes[0].drawings[0].header().reference_timestamp);
 }
 
 #[test]
@@ -62,6 +62,6 @@ fn only_original_trackable_kinds_and_spotlights_are_registered() {
     m.merge_insert_keyframe(kf);
     m.spotlights.items.push(Spotlight::new(5, PointF::new(3.0, 4.0), 10));
     m.register_trackables();
-    assert_eq!(m.trackability.trackers.len(), 2, "the time segment is not trackable in the original");
-    assert_eq!(m.trackability.trackers[1].name, "Spotlight");
+    assert_eq!(m.trackability.trackers.iter().count(), 2, "the time segment is not trackable in the original");
+    assert_eq!(m.trackability.trackers.iter().nth(1).unwrap().name, "Spotlight");
 }

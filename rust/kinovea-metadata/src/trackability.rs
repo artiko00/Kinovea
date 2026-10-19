@@ -7,6 +7,11 @@ use kinovea_core::preferences::dom::Element;
 use kinovea_geometry::PointF;
 use uuid::Uuid;
 
+mod slots;
+#[cfg(test)]
+mod slots_test;
+pub use slots::TrackerSlots;
+
 #[derive(Debug, Clone, PartialEq)]
 pub struct TrackablePoint {
     pub reference_timestamp: i64,
@@ -59,34 +64,60 @@ impl DrawingTracker {
     }
 }
 
-/// Registered trackers in registration order.
+/// Registered trackers, enumerated in the slot order of the original's dictionary.
 #[derive(Debug, Clone, PartialEq, Default)]
 pub struct TrackabilityManager {
-    pub trackers: Vec<DrawingTracker>,
+    pub trackers: TrackerSlots,
 }
 
 impl TrackabilityManager {
     /// Registers (or re-registers in place) a drawing with its current points as references.
+    /// A known key is reassigned: the drawing id becomes `drawing_id` (`Reassign`, DrawingTracker.cs:261).
     pub fn add(&mut self, drawing_id: Uuid, name: &str, timestamp: i64, points: &[(String, PointF)]) {
-        let tracker = DrawingTracker {
-            drawing_id,
-            name: name.to_owned(),
-            points: points.iter().map(|(k, p)| (k.clone(), TrackablePoint { reference_timestamp: timestamp, reference_value: *p, track_id: None })).collect(),
+        let tracker = self.registered(drawing_id, name, timestamp, points);
+        self.trackers.insert(drawing_id, tracker);
+    }
+
+    /// `UpdateOrigin` after the import (`AddPoint`, `Assign`): the name and reference values of a known tracker
+    /// follow the drawing, and the drawing id it was filed under is kept (no `Reassign`).
+    pub fn follow(&mut self, key: Uuid, name: &str, timestamp: i64, points: &[(String, PointF)]) {
+        let Some(filed) = self.trackers.get(key).map(|t| t.drawing_id) else {
+            return;
         };
-        match self.trackers.iter().position(|t| t.drawing_id == drawing_id) {
-            Some(i) => {
-                // Re-assignment keeps the track bindings.
-                let old = std::mem::replace(&mut self.trackers[i], tracker);
-                for (key, p) in &mut self.trackers[i].points {
-                    p.track_id = old.points.iter().find(|(k, _)| k == key).and_then(|(_, o)| o.track_id);
-                }
-            }
-            None => self.trackers.push(tracker),
-        }
+        let tracker = DrawingTracker { drawing_id: filed, ..self.registered(key, name, timestamp, points) };
+        self.trackers.insert(key, tracker);
+    }
+
+    /// Tracker for these points; a known key keeps the track bindings of its points.
+    fn registered(&self, drawing_id: Uuid, name: &str, timestamp: i64, points: &[(String, PointF)]) -> DrawingTracker {
+        let known = self.trackers.get(drawing_id);
+        let points = points
+            .iter()
+            .map(|(k, p)| {
+                let track_id = known.and_then(|t| t.points.iter().find(|(x, _)| x == k)).and_then(|(_, o)| o.track_id);
+                (k.clone(), TrackablePoint { reference_timestamp: timestamp, reference_value: *p, track_id })
+            })
+            .collect();
+        DrawingTracker { drawing_id, name: name.to_owned(), points }
     }
 
     pub fn remove(&mut self, drawing_id: Uuid) {
-        self.trackers.retain(|t| t.drawing_id != drawing_id);
+        self.trackers.remove(drawing_id);
+    }
+
+    /// `UpdateId`: the coordinate system takes the id of the KVA it is merged from. A known new id drops the
+    /// old entry. Otherwise the tracker is added under the new id before the old entry is removed. That copy
+    /// keeps its `drawingId` (DrawingTracker.cs sets it only in the constructors and `Reassign`), so the
+    /// writer skips it (see `write_kva`).
+    pub fn update_id(&mut self, old_id: Uuid, new_id: Uuid) {
+        if old_id == new_id || !self.trackers.contains(old_id) {
+            return;
+        }
+        if !self.trackers.contains(new_id) {
+            let moved = self.trackers.get(old_id).unwrap().clone();
+            self.trackers.insert(new_id, moved);
+        }
+        self.trackers.remove(old_id);
     }
 
     /// `ForgetTrack`: the points driven by the deleted track `track_id` are no longer bound to it.
@@ -99,7 +130,7 @@ impl TrackabilityManager {
     }
 
     pub fn tracker(&self, drawing_id: Uuid) -> Option<&DrawingTracker> {
-        self.trackers.iter().find(|t| t.drawing_id == drawing_id)
+        self.trackers.get(drawing_id)
     }
 
     /// `GetReferenceValue`: `PointF.Empty` for unknown drawings or keys.
@@ -107,18 +138,17 @@ impl TrackabilityManager {
         self.tracker(drawing_id).and_then(|t| t.points.iter().find(|(k, _)| k == key)).map_or(PointF::EMPTY, |(_, p)| p.reference_value)
     }
 
-    /// Reads a `Trackability` block: known ids are replaced in place, new ones appended.
+    /// Reads a `Trackability` block: known ids are replaced in place, new ones are added (`ReadTracker`).
     pub fn read_kva(&mut self, e: &Element) {
         for c in e.children.iter().filter(|c| c.name == "TrackableDrawing") {
             let tracker = DrawingTracker::read_kva(c);
-            match self.trackers.iter().position(|t| t.drawing_id == tracker.drawing_id) {
-                Some(i) => self.trackers[i] = tracker,
-                None => self.trackers.push(tracker),
-            }
+            self.trackers.insert(tracker.drawing_id, tracker);
         }
     }
 
+    /// `WriteXml`: every tracker is written by its drawing id (`WriteTracker(tracker.Id)`, TrackabilityManager.cs
+    /// 403-420). A tracker whose drawing id is no longer a key is skipped, as the original does.
     pub fn write_kva(&self) -> Vec<Element> {
-        self.trackers.iter().map(DrawingTracker::to_element).collect()
+        self.trackers.iter().filter(|t| self.trackers.contains(t.drawing_id)).map(DrawingTracker::to_element).collect()
     }
 }

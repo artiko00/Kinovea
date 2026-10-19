@@ -31,6 +31,8 @@ impl std::error::Error for KvaError {}
 
 /// Reads a 2.x document into `m`, which must already describe the current video.
 pub fn read_kva(m: &mut Metadata, xml: &str) -> Result<ImportContext, KvaError> {
+    // `BeforeKVAImport`: the file may bring another coordinate system id than the one registered at setup.
+    let memo_coordinate_system = m.coordinate_system.header.id;
     let mut root = Element::parse(xml).map_err(|e| KvaError::Xml(e.to_string()))?;
     if root.name != "KinoveaVideoAnalysis" {
         return Err(KvaError::NotKva(root.name));
@@ -146,7 +148,7 @@ pub fn read_kva(m: &mut Metadata, xml: &str) -> Result<ImportContext, KvaError> 
             }
         }
     }
-    after_import(m);
+    after_import(m, memo_coordinate_system);
     Ok(ctx)
 }
 
@@ -176,10 +178,12 @@ fn set_calibration_origin(m: &mut Metadata) {
     }
 }
 
-/// `AfterKVAImport`. `Assign`: every trackable drawing takes its current name and points as
-/// reference values. `UpdateOrigin`: the coordinate system origin comes from the calibration, and
-/// its tracker follows. `CleanUnassigned`: trackers without a trackable drawing are dropped.
-fn after_import(m: &mut Metadata) {
+/// `AfterKVAImport`. `UpdateId`: the coordinate system registered at setup takes the id read from the
+/// file. `Assign`: every trackable drawing takes its current name and points as reference values.
+/// `UpdateOrigin`: the coordinate system origin comes from the calibration, and its tracker follows.
+/// `CleanUnassigned`: trackers without a trackable drawing are dropped.
+fn after_import(m: &mut Metadata, memo_coordinate_system: uuid::Uuid) {
+    m.trackability.update_id(memo_coordinate_system, m.coordinate_system.header.id);
     m.update_trajectories_for_keyframes();
     for d in m.keyframes.iter().flat_map(|k| k.drawings.iter()) {
         register_drawing(&mut m.trackability, d);
@@ -187,9 +191,7 @@ fn after_import(m: &mut Metadata) {
     m.register_spotlights();
     m.coordinate_system.origin = m.calibration.origin();
     let cs = &m.coordinate_system;
-    if m.trackability.tracker(cs.header.id).is_some() {
-        m.trackability.add(cs.header.id, &cs.header.name, 0, &cs.trackable_points());
-    }
+    m.trackability.follow(cs.header.id, &cs.header.name, 0, &cs.trackable_points());
     let mut live: Vec<uuid::Uuid> = m
         .attached_drawings()
         .filter(|d| d.is_trackable() && !d.trackable_points().is_empty())
@@ -197,5 +199,5 @@ fn after_import(m: &mut Metadata) {
         .chain(m.spotlights.items.iter().map(|s| s.id))
         .collect();
     live.push(m.coordinate_system.header.id);
-    m.trackability.trackers.retain(|t| live.contains(&t.drawing_id));
+    m.trackability.trackers.retain(|key, _| live.contains(&key));
 }

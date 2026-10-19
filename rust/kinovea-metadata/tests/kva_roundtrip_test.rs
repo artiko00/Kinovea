@@ -122,18 +122,55 @@ fn export_flags_select_the_sections() {
 }
 
 #[test]
+fn trackers_without_coordinate_system_tracker_round_trip() {
+    // The coordinate system of this file has no TrackableDrawing: `UpdateId` files its tracker under the file id,
+    // and the original does not write that copy (`WriteXml` looks it up by its old drawing id).
+    let (m, _) = load("tests/cases/kva/inputs/trackers-no-cs.kva");
+    let want =
+        std::fs::read_to_string(fixtures_root().join("kva/trackers-no-cs/roundtrip.kva")).unwrap();
+    assert_same_text(
+        "trackers-no-cs",
+        &written(&m, false, ExportFlags::FULL),
+        &want,
+    );
+}
+
+/// Loading the Rust output of a sample and writing it again gives the original's output. For `simple` and
+/// `complete` that is not the input: the original moves the coordinate system after its drawings. The
+/// `AfterKVAImport` `UpdateId` (Metadata.cs:1884-1891) removes the entry registered at setup
+/// (TrackabilityManager.cs:118-136), which frees the first slot; the entry from the file was appended after the
+/// drawings, so the coordinate system is written last.
+#[test]
+fn crossload_reload_reproduces_the_original_output() {
+    for case in ["minimal", "simple", "complete"] {
+        let (m, _) = load(&format!("tests/cases/kva/crossload/{case}.kva"));
+        let want =
+            std::fs::read_to_string(fixtures_root().join(format!("kva/crossload/{case}.kva")))
+                .unwrap();
+        assert_same_text(case, &written(&m, false, ExportFlags::FULL), &want);
+    }
+}
+
+#[test]
 fn files_written_by_rust_are_a_fixed_point_of_the_original() {
+    // Only `minimal` is a fixed point: its output has no coordinate system reordering (see the reload test).
     let summary =
         std::fs::read_to_string(fixtures_root().join("kva/crossload/summary.json")).unwrap();
-    assert!(!summary.contains("\"identical\": false"), "{summary}");
+    assert!(
+        summary
+            .lines()
+            .any(|l| l.contains("minimal.kva") && l.contains("\"identical\": true")),
+        "{summary}"
+    );
+    let ours =
+        std::fs::read_to_string(repo().join("tests/cases/kva/crossload/minimal.kva")).unwrap();
+    let theirs =
+        std::fs::read_to_string(fixtures_root().join("kva/crossload/minimal.kva")).unwrap();
+    assert_same_text("minimal", &ours, &theirs);
     for case in ["minimal", "simple", "complete"] {
         let ours =
             std::fs::read_to_string(repo().join(format!("tests/cases/kva/crossload/{case}.kva")))
                 .unwrap();
-        let theirs =
-            std::fs::read_to_string(fixtures_root().join(format!("kva/crossload/{case}.kva")))
-                .unwrap();
-        assert_same_text(case, &ours, &theirs);
         let (m, _) = load(&format!("Tools/XML/Schema/samples/{case}.kva"));
         assert_same_text(case, &written(&m, false, ExportFlags::FULL), &ours);
     }

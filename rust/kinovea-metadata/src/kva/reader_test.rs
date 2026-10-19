@@ -26,9 +26,9 @@ fn keyframes_and_chronos_are_loaded_and_trackables_registered() {
     assert_eq!(m.keyframes.len(), 1);
     assert_eq!(m.chronos.len(), 1);
     let line = m.keyframes[0].drawings[0].id();
-    assert_eq!(m.trackability.trackers.len(), 1, "the orphan tracker is dropped");
+    assert_eq!(m.trackability.trackers.iter().count(), 1, "the orphan tracker is dropped");
     assert_eq!(m.trackability.reference_value(line, "b"), kinovea_geometry::PointF::new(3.0, 4.0));
-    assert_eq!(m.trackability.trackers[0].points[0].1.reference_timestamp, 10);
+    assert_eq!(m.trackability.trackers.iter().next().unwrap().points[0].1.reference_timestamp, 10);
     assert_eq!(m.video_filters.attribute("active"), Some("Kinogram"));
 }
 
@@ -73,4 +73,61 @@ fn legacy_track_keyframe_labels_follow_the_absolute_times() {
     assert_eq!(track.positions.iter().map(|p| p.t).collect::<Vec<_>>(), vec![100, 150]);
     assert_eq!(track.keyframe_labels.len(), 1);
     assert_eq!(track.keyframe_labels[0].attach_index, 1);
+}
+
+// A merged KVA whose coordinate system brings its own id: the setup registration (a random id) is replaced.
+const MERGED: &str = "<KinoveaVideoAnalysis><FormatVersion>2.1</FormatVersion><ImageSize>100;100</ImageSize><Keyframes><Keyframe id=\"00000000-0000-4000-8000-000000000001\"><Timestamp>10</Timestamp><Drawings><Line id=\"00000000-0000-4000-8000-000000000002\" name=\"L\"><Start>1;2</Start><End>3;4</End></Line></Drawings></Keyframe></Keyframes><CoordinateSystem id=\"00000000-0000-4000-8000-000000000003\" name=\"Coordinate system 1\"><Position>5;6</Position></CoordinateSystem><Trackability><TrackableDrawing id=\"00000000-0000-4000-8000-000000000003\" name=\"Coordinate system 1\"><TrackablePoint key=\"0\"><ReferenceTimestamp>0</ReferenceTimestamp><ReferenceValue>5;6</ReferenceValue></TrackablePoint></TrackableDrawing><TrackableDrawing id=\"00000000-0000-4000-8000-000000000002\" name=\"L\"><TrackablePoint key=\"a\"><ReferenceTimestamp>10</ReferenceTimestamp><ReferenceValue>1;2</ReferenceValue></TrackablePoint></TrackableDrawing></Trackability></KinoveaVideoAnalysis>";
+
+fn trackability_names(m: &Metadata) -> Vec<String> {
+    let doc = crate::kva::write_kva(m, "0.0", false, crate::kva::ExportFlags::FULL).to_document();
+    let block = doc
+        .split("<Trackability>")
+        .nth(1)
+        .unwrap()
+        .split("</Trackability>")
+        .next()
+        .unwrap();
+    block
+        .lines()
+        .filter_map(|l| l.split("name=\"").nth(1))
+        .map(|n| n.split('"').next().unwrap().to_owned())
+        .collect()
+}
+
+#[test]
+fn merged_coordinate_system_leaves_its_setup_slot_free_for_later_drawings() {
+    // `UpdateId` drops the setup registration, so the first slot is free: the next tracker added in the
+    // session is enumerated first, before the drawings read from the file.
+    let mut m = crate::kva::header_metadata(MERGED);
+    m.post_setup_video();
+    read_kva(&mut m, MERGED).unwrap();
+    assert_eq!(trackability_names(&m), ["L", "Coordinate system 1"]);
+    m.trackability.add(
+        uuid::Uuid::new_v4(),
+        "Late",
+        0,
+        &[("0".into(), kinovea_geometry::PointF::EMPTY)],
+    );
+    assert_eq!(trackability_names(&m), ["Late", "L", "Coordinate system 1"]);
+}
+
+const CS_TRACKABLE: &str = "<TrackableDrawing id=\"00000000-0000-4000-8000-000000000003\" name=\"Coordinate system 1\"><TrackablePoint key=\"0\"><ReferenceTimestamp>0</ReferenceTimestamp><ReferenceValue>5;6</ReferenceValue></TrackablePoint></TrackableDrawing>";
+
+#[test]
+fn coordinate_system_filed_without_its_trackable_is_written_after_a_second_setup() {
+    // Without a TrackableDrawing for the coordinate system, `UpdateId` files a copy under the file id. The copy
+    // keeps the setup `drawingId` (DrawingTracker.cs:130), so the writer skips it (TrackabilityManager.cs:403-420).
+    // A second `PostSetupVideo` registers the coordinate system again: `Add` reassigns the known entry
+    // (TrackabilityManager.cs:75-78, DrawingTracker.cs:261), which makes it writable under the current id.
+    let xml = MERGED.replace(CS_TRACKABLE, "");
+    assert!(
+        xml.len() < MERGED.len(),
+        "the coordinate system trackable is removed"
+    );
+    let mut m = crate::kva::header_metadata(&xml);
+    m.post_setup_video();
+    read_kva(&mut m, &xml).unwrap();
+    assert_eq!(trackability_names(&m), ["L"]);
+    m.post_setup_video();
+    assert_eq!(trackability_names(&m), ["L", "Coordinate system 1"]);
 }

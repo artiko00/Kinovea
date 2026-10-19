@@ -128,12 +128,13 @@ fn deleting_a_track_forgets_the_tracking_bound_to_it() {
     let mut m = Metadata::default();
     m.add_multi_item(MultiItem::Spotlight(Spotlight::new(5, PointF::EMPTY, 3)));
     m.register_spotlights();
+    let spotlight_id = m.spotlights.items[0].id;
     let track = Track::new(vec![TimedPoint::new(1.0, 2.0, 0)]);
     let track_id = track.header.id;
     m.tracks.push(Drawing::Track(track));
-    m.trackability.trackers[0].points[0].1.track_id = Some(track_id);
+    m.trackability.trackers.get_mut(spotlight_id).unwrap().points[0].1.track_id = Some(track_id);
 
     m.delete_drawing(Manager::Tracks, track_id).unwrap();
 
-    assert_eq!(m.trackability.trackers[0].points[0].1.track_id, None);
+    assert_eq!(m.trackability.tracker(spotlight_id).unwrap().points[0].1.track_id, None);
 }

@@ -20,7 +20,7 @@ fn the_first_setup_names_the_coordinate_system_and_the_test_grid() {
 fn the_coordinate_system_is_registered_first_at_timestamp_zero_with_its_origin() {
     let mut m = metadata();
     m.post_setup_video();
-    let first = &m.trackability.trackers[0];
+    let first = m.trackability.trackers.iter().next().unwrap();
     assert_eq!(first.drawing_id, m.coordinate_system.header.id);
     assert_eq!(first.name, "Coordinate system 1");
     assert_eq!(first.points[0].1.reference_timestamp, 0);
@@ -34,5 +34,5 @@ fn a_second_setup_keeps_the_names_and_a_single_registration() {
     m.post_setup_video();
     m.post_setup_video();
     assert_eq!(m.coordinate_system.header.name, "Coordinate system 1");
-    assert_eq!(m.trackability.trackers.len(), 1);
+    assert_eq!(m.trackability.trackers.iter().count(), 1);
 }
