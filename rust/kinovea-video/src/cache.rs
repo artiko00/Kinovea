@@ -2,7 +2,7 @@
 //! Single-threaded (UI thread): acquires are synchronous and nothing is evicted.
 
 use crate::closest::{find_closest, index_of, insert_sorted};
-use crate::container::{CacheAddResult, FramesContainer};
+use crate::container::{CacheAddResult, FramesContainer, WorkingZoneFrames};
 use crate::frame::VideoFrame;
 use crate::snapshot::{single_span, CacheSnapshot};
 use kinovea_core::video_section::VideoSection;
@@ -60,6 +60,12 @@ impl Cache {
 impl Default for Cache {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+impl WorkingZoneFrames for Cache {
+    fn frames(&self) -> &[VideoFrame] {
+        &self.frames
     }
 }
 

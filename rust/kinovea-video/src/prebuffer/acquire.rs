@@ -17,7 +17,9 @@ impl PreBuffer {
             return;
         }
         state.current = Some(state.frames[index].clone());
-        self.evict_around(&mut state, index);
+        if self.evict_around(&mut state, index) {
+            self.wake_adds();
+        }
     }
 
     /// Makes the frame after current the new current, evicting behind it. Without a current frame
@@ -32,15 +34,20 @@ impl PreBuffer {
             return false;
         }
         state.current = Some(state.frames[next].clone());
-        self.evict_around(&mut state, next);
+        if self.evict_around(&mut state, next) {
+            self.wake_adds();
+        }
         true
     }
 
-    /// `EvictBehind` at `pivot` with the configured retention, publishing when it ran.
-    pub(super) fn evict_around(&self, state: &mut State, pivot: usize) {
+    /// `EvictBehind` at `pivot` with the configured retention, publishing when it ran. Returns
+    /// whether it ran, which is when C# `removed != null` and the caller pulses.
+    pub(super) fn evict_around(&self, state: &mut State, pivot: usize) -> bool {
         let current = state.current.as_ref().map(|c| c.timestamp);
-        if evict_behind(&mut state.frames, current, pivot, self.config.retention).is_some() {
+        let ran = evict_behind(&mut state.frames, current, pivot, self.config.retention).is_some();
+        if ran {
             self.publish(state);
         }
+        ran
     }
 }

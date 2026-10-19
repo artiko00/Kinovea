@@ -1,5 +1,5 @@
 use crate::cache::Cache;
-use crate::container::{CacheAddResult, FramesContainer};
+use crate::container::{CacheAddResult, FramesContainer, WorkingZoneFrames};
 use crate::frame::VideoFrame;
 
 fn frame(ts: i64) -> VideoFrame {
@@ -95,8 +95,9 @@ fn clear_removes_current_and_publishes() {
     assert_eq!(cache.snapshot().version, 3);
 }
 
+/// `Cache.Shutdown` throws NotImplementedException (Cache.cs:204-207); design D3 clears instead.
 #[test]
-fn shutdown_only_clears_because_the_dense_cache_has_no_adds_to_refuse() {
+fn shutdown_clears_where_the_csharp_method_throws() {
     let mut cache = cache_with(&[0, 10]);
     cache.acquire_closest(0);
     cache.shutdown();
@@ -130,4 +131,14 @@ fn force_add_behaves_like_add() {
     assert_eq!(cache.force_add(frame(10)), CacheAddResult::Added);
     assert_eq!(cache.force_add(frame(10)), CacheAddResult::Duplicate);
     assert_eq!(cache.timestamps(), vec![0, 10]);
+}
+
+#[test]
+fn working_zone_frames_expose_the_frames_and_the_middle_one_as_representative() {
+    let cache = cache_with(&[0, 10, 30]);
+    let zone: &dyn WorkingZoneFrames = &cache;
+    let stamps: Vec<i64> = zone.frames().iter().map(|f| f.timestamp).collect();
+    assert_eq!(stamps, vec![0, 10, 30]);
+    assert_eq!(zone.representative().map(|f| f.timestamp), Some(10));
+    assert!(Cache::new().representative().is_none());
 }

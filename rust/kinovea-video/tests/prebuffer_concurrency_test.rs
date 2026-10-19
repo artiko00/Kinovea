@@ -8,7 +8,7 @@ use std::sync::{mpsc, Arc};
 use std::thread;
 use std::time::Duration;
 
-const STILL_BLOCKED: Duration = Duration::from_millis(100);
+const STILL_BLOCKED: Duration = Duration::from_millis(200);
 const WITHIN: Duration = Duration::from_secs(1);
 
 fn frame(ts: i64) -> VideoFrame {
@@ -51,6 +51,35 @@ fn add_waits_on_a_full_buffer_until_an_acquire_frees_room() {
     pb.acquire_closest(3);
     assert_eq!(rx.recv_timeout(WITHIN), Ok(CacheAddResult::Added));
     assert_eq!(pb.timestamps(), vec![2, 3, 4]);
+}
+
+/// `Purge` and `ForceAdd` never pulse (`PreBuffer2.cs:530-558`, `:299-319`), so a producer blocked
+/// in `Monitor.Wait` stays asleep until `Add`, `AcquireClosest`, `AcquireNext`, `InterruptAdd` or
+/// `Shutdown` pulses.
+#[test]
+fn purge_and_force_add_do_not_wake_a_blocked_add() {
+    let pb = full_buffer();
+    pb.acquire_closest(0);
+    let rx = spawn_add(&pb, 4);
+    assert!(
+        rx.recv_timeout(STILL_BLOCKED).is_err(),
+        "add must wait while full"
+    );
+
+    pb.purge();
+    assert!(
+        rx.recv_timeout(STILL_BLOCKED).is_err(),
+        "purge must not wake the add"
+    );
+
+    pb.force_add(frame(1));
+    assert!(
+        rx.recv_timeout(STILL_BLOCKED).is_err(),
+        "force_add must not wake the add"
+    );
+
+    pb.acquire_closest(1);
+    assert_eq!(rx.recv_timeout(WITHIN), Ok(CacheAddResult::Added));
 }
 
 #[test]

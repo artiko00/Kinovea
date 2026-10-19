@@ -69,3 +69,14 @@ pub trait FramesContainer {
     /// Removes every frame, including the current one. The dense cache only clears here.
     fn shutdown(&mut self);
 }
+
+/// `IWorkingZoneFramesContainer`: the frames of the working zone, as seen by video filters.
+pub trait WorkingZoneFrames {
+    /// The frames in ascending timestamp order.
+    fn frames(&self) -> &[VideoFrame];
+
+    /// `Cache.Representative`: the frame at `count / 2`, or `None` when there are no frames.
+    fn representative(&self) -> Option<&VideoFrame> {
+        self.frames().get(self.frames().len() / 2)
+    }
+}

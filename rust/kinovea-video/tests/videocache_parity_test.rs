@@ -7,7 +7,30 @@ use kinovea_fixtures::fixtures_root;
 use serde_json::Value;
 use videocache_replay::{replay, Row};
 
+/// The `tests/cases/videocache` directory: one `<name>.json` per case.
+fn cases_dir() -> std::path::PathBuf {
+    fixtures_root().join("../cases/videocache")
+}
+
+/// The case names, from the `.json` files of `cases_dir`.
 fn case_names() -> Vec<String> {
+    let mut names: Vec<String> = std::fs::read_dir(cases_dir())
+        .expect("videocache cases")
+        .map(|entry| entry.expect("case entry").path())
+        .filter(|path| path.extension().is_some_and(|ext| ext == "json"))
+        .map(|path| {
+            path.file_stem()
+                .expect("case name")
+                .to_string_lossy()
+                .into_owned()
+        })
+        .collect();
+    names.sort();
+    names
+}
+
+/// The fixture directories under `tests/fixtures/videocache`.
+fn fixture_names() -> Vec<String> {
     let mut names: Vec<String> = std::fs::read_dir(fixtures_root().join("videocache"))
         .expect("videocache fixtures")
         .map(|entry| {
@@ -24,9 +47,7 @@ fn case_names() -> Vec<String> {
 
 /// The `inputs` object of `tests/cases/videocache/<name>.json`.
 fn load_inputs(name: &str) -> Value {
-    let path = fixtures_root()
-        .join("../cases/videocache")
-        .join(format!("{name}.json"));
+    let path = cases_dir().join(format!("{name}.json"));
     let text = std::fs::read_to_string(&path).unwrap_or_else(|e| panic!("{}: {e}", path.display()));
     let case: Value = serde_json::from_str(&text).expect("case json");
     case["inputs"].clone()
@@ -64,13 +85,13 @@ fn compare(name: &str, steps_csv: &str, got: &[Row]) -> Vec<String> {
 }
 
 #[test]
+fn every_case_has_fixtures_and_no_fixture_is_orphaned() {
+    assert_eq!(fixture_names(), case_names());
+}
+
+#[test]
 fn every_case_replays_to_the_original_rows() {
-    let names = case_names();
-    assert!(
-        names.len() >= 4,
-        "expected the videocache cases, found {names:?}"
-    );
-    for name in names {
+    for name in case_names() {
         let got = replay(&load_inputs(&name));
         let problems = compare(&name, &load_steps(&name), &got);
         assert!(problems.is_empty(), "{}", problems.join("\n"));

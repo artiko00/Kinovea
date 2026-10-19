@@ -9,14 +9,10 @@ use std::fs;
 fn thumbnails_are_spaced_by_the_ceiling_step() {
     assert_eq!(thumbnail_indices(10, 4), vec![0, 3, 6, 9]);
     assert_eq!(thumbnail_indices(250, 3), vec![0, 84, 168]);
-}
-
-#[test]
-fn thumbnail_count_is_bounded_by_the_request() {
-    for (frames, thumbs) in [(10, 3), (3, 5), (1, 1), (7, 2)] {
-        assert!(thumbnail_indices(frames, thumbs).len() <= thumbs);
-    }
     assert_eq!(thumbnail_indices(3, 5), vec![0, 1, 2]);
+    assert_eq!(thumbnail_indices(10, 3), vec![0, 4, 8]);
+    assert_eq!(thumbnail_indices(7, 2), vec![0, 4]);
+    assert_eq!(thumbnail_indices(1, 1), vec![0]);
 }
 
 #[test]

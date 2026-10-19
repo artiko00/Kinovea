@@ -70,11 +70,13 @@ fn extensions_split_on_semicolons_tabs_and_spaces() {
 }
 
 #[test]
-fn is_supported_ignores_the_wildcard() {
+fn is_supported_counts_the_wildcard_key() {
+    // IsSupported is ContainsKey: the wildcard reader is a key too.
     let mut registry = ReaderRegistry::default();
     registry.register("*", factory(25.0));
     registry.register(".gif", factory(10.0));
     assert!(registry.is_supported(".GIF"));
+    assert!(registry.is_supported("*"));
     assert!(!registry.is_supported(".xyz"));
     assert!(!registry.is_supported("  "));
 }
@@ -111,6 +113,30 @@ fn most_recent_supported_file_matches_the_pattern() {
         registry.most_recent_supported(&first_only.to_string_lossy()),
         Some(older)
     );
+}
+
+#[test]
+fn most_recent_breaks_a_tie_by_name_order() {
+    // GetFiles promises no order: on equal write times the first name wins, as OrderByDescending does.
+    let dir = TempDir::new("tie");
+    touch(&dir.join("b.avi"), 1_000);
+    touch(&dir.join("a.avi"), 1_000);
+    let mut registry = ReaderRegistry::default();
+    registry.register(".avi", factory(25.0));
+    assert_eq!(
+        registry.most_recent_supported(&dir.join("*").to_string_lossy()),
+        Some(dir.join("a.avi"))
+    );
+}
+
+#[test]
+fn most_recent_returns_an_absolute_path_for_a_relative_pattern() {
+    // FileInfo.FullName is absolute. Cargo runs tests from the crate directory.
+    let mut registry = ReaderRegistry::default();
+    registry.register(".rs", factory(25.0));
+    let cwd = std::env::current_dir().expect("current dir");
+    let found = registry.most_recent_supported("src/lib.rs");
+    assert_eq!(found, Some(cwd.join("src/lib.rs")));
 }
 
 #[test]

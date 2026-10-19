@@ -66,7 +66,7 @@ struct State {
 pub struct PreBuffer {
     config: PreBufferConfig,
     state: Mutex<State>,
-    /// Wakes adds blocked on a full buffer whenever the frames change.
+    /// Wakes adds blocked on a full buffer, where the C# code pulses `sync`.
     ready: Condvar,
     /// Read without taking `state`, so the player never waits for the decoder's bookkeeping.
     published: Mutex<Arc<CacheSnapshot>>,
@@ -91,12 +91,17 @@ impl PreBuffer {
         self.state.lock().expect("prebuffer state lock")
     }
 
-    /// `UpdateCacheSnapshot`: bumps the version, publishes the sections and wakes blocked adds.
-    /// Called after every change that the C# code publishes.
+    /// `UpdateCacheSnapshot`: bumps the version and publishes the sections. Called after every
+    /// change that the C# code publishes. It does not wake blocked adds: only the callers that
+    /// pulse in C# do (`wake_adds`).
     fn publish(&self, state: &mut State) {
         state.version += 1;
         let snapshot = CacheSnapshot::new(state.version, contiguous_spans(&state.frames));
         *self.published.lock().expect("prebuffer snapshot lock") = Arc::new(snapshot);
+    }
+
+    /// `Monitor.PulseAll(sync)`: wakes the adds blocked on a full buffer.
+    fn wake_adds(&self) {
         self.ready.notify_all();
     }
 

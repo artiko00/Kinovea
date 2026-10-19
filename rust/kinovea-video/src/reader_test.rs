@@ -144,6 +144,7 @@ fn optional_members_default_like_the_base_class() {
     let request = crate::state::WorkingZoneRequest::new(zone, CacheLoadMode::Keep, 0);
     reader.working_zone_update_request(request);
     assert!(reader.working_zone_frames().is_none());
+    assert_eq!(reader.seek_progress().version, -1);
     assert_eq!(reader.cache_snapshot().version, -1);
     assert_eq!(painted_timestamp(&reader), 3);
 }

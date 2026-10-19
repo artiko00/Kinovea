@@ -22,10 +22,13 @@ impl PreBuffer {
         state.current = None;
         state.interrupt_add = true;
         self.publish(&mut state);
+        self.wake_adds();
     }
 
-    /// Removes every frame including current. The C# `PreBuffer2.Clear` throws; the trait
-    /// documents the intended behavior, so it is implemented here.
+    /// Removes every frame including current. The C# `PreBuffer2.Clear` throws
+    /// `NotImplementedException` (`PreBuffer2.cs:522-525`) and leaves the buffer untouched. As with
+    /// the dense cache's `shutdown` (design D3), the Rust port clears instead. The replay adapter
+    /// reports the C# exception without calling this.
     pub fn clear(&self) {
         let mut state = self.lock();
         state.frames.clear();

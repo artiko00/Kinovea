@@ -5,8 +5,10 @@
 
 use crate::reader::VideoReader;
 use crate::wildcard::wildcard_match;
+use std::cmp::Reverse;
 use std::fs;
 use std::path::{Path, PathBuf};
+use std::time::SystemTime;
 
 /// Builds a fresh reader. The C# registry stores the type and instantiates it on demand.
 pub type ReaderFactory = Box<dyn Fn() -> Box<dyn VideoReader>>;
@@ -39,7 +41,7 @@ impl ReaderRegistry {
             .map(|(_, factory)| factory)
     }
 
-    /// `IsSupported`: true when the extension is registered. The wildcard does not count.
+    /// `IsSupported`: true when the extension is a key, the wildcard key included (`ContainsKey`).
     pub fn is_supported(&self, extension: &str) -> bool {
         !extension.trim().is_empty() && self.exact(extension).is_some()
     }
@@ -57,7 +59,9 @@ impl ReaderRegistry {
     }
 
     /// `GetMostRecentSupportedVideo`: the newest supported file whose name matches the file-name
-    /// part of `pattern`, looked up in the directory part.
+    /// part of `pattern`, looked up in the directory part. The result is absolute, as `FullName`.
+    /// `GetFiles` promises no order, so the candidates are sorted by name first: with equal write
+    /// times the first name wins, as `OrderByDescending(...).FirstOrDefault()` does.
     pub fn most_recent_supported(&self, pattern: &str) -> Option<PathBuf> {
         let pattern = Path::new(pattern);
         let name_pattern = pattern.file_name()?.to_string_lossy().into_owned();
@@ -66,15 +70,19 @@ impl ReaderRegistry {
             _ => Path::new("."),
         };
 
-        fs::read_dir(dir)
+        let mut candidates: Vec<(SystemTime, PathBuf)> = fs::read_dir(dir)
             .ok()?
             .filter_map(Result::ok)
             .filter(|entry| entry.file_type().is_ok_and(|kind| kind.is_file()))
             .filter(|entry| wildcard_match(&name_pattern, &entry.file_name().to_string_lossy()))
             .filter(|entry| self.is_supported(&dotted_extension(&entry.path())))
             .filter_map(|entry| Some((entry.metadata().ok()?.modified().ok()?, entry.path())))
-            .max_by_key(|(modified, _)| *modified)
-            .map(|(_, path)| path)
+            .collect();
+        candidates.sort_by(|a, b| a.1.cmp(&b.1));
+        let (_, path) = candidates
+            .into_iter()
+            .min_by_key(|(modified, _)| Reverse(*modified))?;
+        std::path::absolute(path).ok()
     }
 }
 

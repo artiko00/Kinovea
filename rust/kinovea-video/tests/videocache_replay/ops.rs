@@ -19,10 +19,14 @@ impl Session {
                 Ok(String::new())
             }
             "acquireNext" => Ok(csharp_bool(self.store_mut().acquire_next())),
-            "clear" => {
-                self.store_mut().clear();
-                Ok(String::new())
-            }
+            // `PreBuffer2.Clear` throws and leaves the buffer untouched (PreBuffer2.cs:522-525).
+            "clear" => match &mut self.container {
+                Container::Dense(cache) => {
+                    cache.clear();
+                    Ok(String::new())
+                }
+                Container::Pre(_) => Err("NotImplementedException"),
+            },
             // The C# methods throw. The Rust dense cache clears on shutdown (design D3), so the
             // replay reports the original's row and leaves the state untouched.
             "shutdown" => match &mut self.container {

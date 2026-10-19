@@ -23,6 +23,24 @@ fn shutdown_on_the_dense_cache_reports_the_original_exception_and_keeps_state() 
 }
 
 #[test]
+fn clear_on_the_prebuffer_reports_the_original_exception_and_keeps_state() {
+    // PreBuffer2.Clear throws NotImplementedException (PreBuffer2.cs:522-525).
+    let out = rows(json!({
+        "container": "prebuffer", "ops": ["add 0", "clear"]
+    }));
+    assert_eq!(out[1][1], "exception:NotImplementedException");
+    assert_eq!(out[1][3], "1|[0;0]");
+    assert_eq!(out[1][4], "0");
+}
+
+#[test]
+fn clear_on_the_dense_cache_empties_it() {
+    let out = rows(json!({ "ops": ["add 0", "clear"] }));
+    assert_eq!(out[1][1], "");
+    assert_eq!(out[1][4], "");
+}
+
+#[test]
 fn prebuffer_only_ops_fail_on_the_dense_cache_like_a_null_reference() {
     let out = rows(json!({ "ops": ["relate 5", "purge"] }));
     assert_eq!(out[0][1], "exception:NullReferenceException");

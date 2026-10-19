@@ -40,6 +40,7 @@ impl PreBuffer {
             return Some(CacheAddResult::Duplicate);
         }
         self.publish(state);
+        self.wake_adds();
         Some(CacheAddResult::Added)
     }
 
@@ -73,7 +74,7 @@ impl PreBuffer {
     /// `InterruptAdd`: releases blocked adds, which report `Interrupted` until reset.
     pub fn interrupt_add(&self) {
         self.lock().interrupt_add = true;
-        self.ready.notify_all();
+        self.wake_adds();
     }
 
     /// `ResetInterruptAdd`.

@@ -2,8 +2,8 @@
 //! methods and the concrete helpers become default methods over `info()`. The C#
 //! `RequestFulfilled` event becomes a `Sender` installed through `set_request_sink`.
 
-use crate::cache::Cache;
 use crate::capabilities::{VideoCapabilities, VideoDecodingMode};
+use crate::container::WorkingZoneFrames;
 use crate::enumerate::FrameEnumerator;
 use crate::frame::VideoFrame;
 use crate::geometry::{VideoGeometry, VideoGeometryRequest};
@@ -11,7 +11,7 @@ use crate::info::VideoInfo;
 use crate::relation::{self, TimestampRelation};
 use crate::results::OpenVideoResult;
 use crate::snapshot::CacheSnapshot;
-use crate::state::{PlayerState, WorkingZoneRequest};
+use crate::state::{PlayerState, SeekProgress, WorkingZoneRequest};
 use crate::summary::VideoSummary;
 use kinovea_core::video_section::VideoSection;
 use kinovea_geometry::Size;
@@ -62,8 +62,13 @@ pub trait VideoReader {
     fn cache_snapshot(&self) -> Arc<CacheSnapshot>;
 
     /// The working zone frames when the reader holds them all (full cache).
-    fn working_zone_frames(&self) -> Option<&Cache> {
+    fn working_zone_frames(&self) -> Option<&dyn WorkingZoneFrames> {
         None
+    }
+
+    /// Progress of the current seek, for the timeline (`VideoReader.SeekProgress`).
+    fn seek_progress(&self) -> SeekProgress {
+        SeekProgress::empty()
     }
 
     /// Allows or forbids skipping frames during playback when decoding falls behind.

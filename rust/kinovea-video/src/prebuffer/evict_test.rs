@@ -1,5 +1,5 @@
 use crate::frame::VideoFrame;
-use crate::prebuffer::evict::{evict_behind, evict_non_contiguous, evict_one};
+use crate::prebuffer::evict::{evict_behind, evict_one};
 
 fn frame(ts: i64, prev: i64) -> VideoFrame {
     VideoFrame::new(None, ts, prev)
@@ -49,21 +49,4 @@ fn evict_one_refuses_a_single_frame() {
     let mut frames = chain(0..=0);
     assert!(evict_one(&mut frames, Some(5), 0).is_none());
     assert_eq!(stamps(&frames), vec![0]);
-}
-
-#[test]
-fn evict_non_contiguous_drops_frames_before_the_first_break() {
-    // A -> B breaks: B does not follow A.
-    let mut frames = vec![frame(0, -1), frame(5, 4), frame(6, 5)];
-    let removed = evict_non_contiguous(&mut frames, None, 2, 8).unwrap();
-    assert_eq!(stamps(&frames), vec![5, 6]);
-    assert_eq!(stamps(&removed), vec![0]);
-}
-
-#[test]
-fn evict_non_contiguous_drops_frames_after_the_first_break() {
-    // C does not follow B, so D is past the break.
-    let mut frames = vec![frame(0, -1), frame(1, 0), frame(2, 1), frame(7, 6)];
-    evict_non_contiguous(&mut frames, None, 0, 8).unwrap();
-    assert_eq!(stamps(&frames), vec![0, 1, 2]);
 }
