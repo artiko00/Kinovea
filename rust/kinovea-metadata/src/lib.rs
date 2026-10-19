@@ -25,6 +25,7 @@ declare!(
     singletons: singletons_test,
     trackability: trackability_test,
     fading: fading_test,
+    history: history_test,
     ids: ids_test,
     kva_io: kva_io_test,
     measure_label: measure_label_test,

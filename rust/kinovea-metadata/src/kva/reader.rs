@@ -5,8 +5,7 @@ use crate::color::Color;
 use crate::drawing::Drawing;
 use crate::keyframe::Keyframe;
 use crate::kva_io::{identity, parse_enum, Scale};
-use crate::metadata::Metadata;
-use crate::multi::Spotlight;
+use crate::metadata::{register_drawing, Metadata};
 use crate::migration::{migrate_legacy, needs_migration};
 use kinovea_core::preferences::dom::Element;
 use kinovea_core::xml::{parse_boolean, parse_size};
@@ -122,7 +121,7 @@ pub fn read_kva(m: &mut Metadata, xml: &str) -> Result<ImportContext, KvaError> 
                 let is_same = same_context(m, &ctx);
                 let video = m.video.clone();
                 m.spotlights.read_kva(c, scale, &|ts| ctx.remap(ts, &video, is_same));
-                register_spotlights(m);
+                m.register_spotlights();
             }
             "AutoNumbers" | "NumberSequence" => {
                 let is_same = same_context(m, &ctx);
@@ -155,18 +154,8 @@ pub fn read_kva(m: &mut Metadata, xml: &str) -> Result<ImportContext, KvaError> 
 
 /// What the player does when a keyframe's drawings are added: register the trackable ones.
 fn register_keyframe(m: &mut Metadata, keyframe: &Keyframe) {
-    for d in keyframe.drawings.iter().filter(|d| d.is_trackable()) {
-        let points = d.trackable_points();
-        if !points.is_empty() {
-            m.trackability.add(d.id(), &d.header().name, d.header().reference_timestamp, &points);
-        }
-    }
-}
-
-/// Spotlight items are trackable through their centre; their reference timestamp stays 0.
-fn register_spotlights(m: &mut Metadata) {
-    for s in &m.spotlights.items {
-        m.trackability.add(s.id, Spotlight::KVA_NAME, 0, &[("o".to_owned(), s.center)]);
+    for d in &keyframe.drawings {
+        register_drawing(&mut m.trackability, d);
     }
 }
 

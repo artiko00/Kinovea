@@ -11,6 +11,9 @@ use kinovea_core::preferences::dom::Element;
 use kinovea_geometry::Size;
 use uuid::Uuid;
 
+pub mod edit;
+#[cfg(test)]
+mod edit_test;
 mod query;
 #[cfg(test)]
 mod query_test;
@@ -152,21 +155,28 @@ impl Metadata {
     /// Registers every trackable drawing with its current points (the player does this when a
     /// drawing is added); the trackability manager then answers the writers' reference values.
     pub fn register_trackables(&mut self) {
-        let mut entries = Vec::new();
-        for kf in &self.keyframes {
-            for d in &kf.drawings {
-                let points = d.trackable_points();
-                if !points.is_empty() {
-                    entries.push((d.id(), d.header().name.clone(), d.header().reference_timestamp, points));
-                }
-            }
+        for d in self.keyframes.iter().flat_map(|k| k.drawings.iter()) {
+            register_drawing(&mut self.trackability, d);
         }
-        for (id, name, t, points) in entries {
-            self.trackability.add(id, &name, t, &points);
+        self.register_spotlights();
+    }
+
+    /// Spotlight items are trackable through their centre; their reference timestamp stays 0.
+    pub fn register_spotlights(&mut self) {
+        for s in &self.spotlights.items {
+            self.trackability.add(s.id, crate::multi::Spotlight::KVA_NAME, 0, &[("o".to_owned(), s.center)]);
         }
     }
 
     pub fn attached_drawings(&self) -> impl Iterator<Item = &Drawing> {
         self.keyframes.iter().flat_map(|k| k.drawings.iter())
+    }
+}
+
+/// Registers one drawing when its kind is trackable in the original (`ITrackable`).
+pub fn register_drawing(trackability: &mut TrackabilityManager, d: &Drawing) {
+    let points = d.trackable_points();
+    if d.is_trackable() && !points.is_empty() {
+        trackability.add(d.id(), &d.header().name, d.header().reference_timestamp, &points);
     }
 }

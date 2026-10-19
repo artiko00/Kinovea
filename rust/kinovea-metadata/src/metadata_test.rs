@@ -49,3 +49,19 @@ fn find_drawing_and_trackable_registration() {
     assert_eq!(m.trackability.reference_value(line_id, "b"), PointF::new(1.0, 10.0));
     assert_eq!(m.trackability.trackers[0].points[0].1.reference_timestamp, m.keyframes[0].drawings[0].header().reference_timestamp);
 }
+
+#[test]
+fn only_original_trackable_kinds_and_spotlights_are_registered() {
+    use crate::drawing::{Drawing, Line, TimeSegment};
+    use crate::multi::Spotlight;
+    use kinovea_geometry::PointF;
+    let mut m = Metadata::default();
+    let mut kf = crate::keyframe::Keyframe::new(0, "k");
+    kf.add_drawing(Drawing::Line(Line::new(PointF::EMPTY, PointF::new(1.0, 1.0))));
+    kf.add_drawing(Drawing::TimeSegment(TimeSegment::new(PointF::EMPTY, PointF::new(2.0, 0.0))));
+    m.merge_insert_keyframe(kf);
+    m.spotlights.items.push(Spotlight::new(5, PointF::new(3.0, 4.0), 10));
+    m.register_trackables();
+    assert_eq!(m.trackability.trackers.len(), 2, "the time segment is not trackable in the original");
+    assert_eq!(m.trackability.trackers[1].name, "Spotlight");
+}
