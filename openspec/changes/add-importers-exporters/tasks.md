@@ -10,10 +10,10 @@
 
 - [x] 2.1 Write failing tests in `rust/kinovea-export/src/measured_data_test.rs` loading `tests/fixtures/export/complete/measured.json` and asserting counts and values of each list; implement `rust/kinovea-export/src/measured_data.rs` (`MeasuredData` structs, `collect_measured_data(&Document, &ExportPrefs)`); verify `cargo test -p kinovea-export` green and `cd rust && make verify`.
 - [x] 2.2 Write `rust/kinovea-export/src/rtf_test.rs` (cases: plain, `\par`, `\'e9`, `\u233?`, nested groups) then `src/rtf.rs` `rtf_to_text`; verify tests pass and the keyframe comments of the three samples equal the `comment` fields of `measured.json`.
-- [ ] 2.3 Write `src/csv_test.rs` comparing `write_csv_trajectory` and `write_csv_chrono` output to `trajectory.csv` and `chrono.csv` byte for byte, plus a comma-separator case; implement `src/csv.rs` (`CsvFormat { decimal, list_separator }`, quoting, NaN → empty); verify tests pass.
-- [ ] 2.4 Write `src/txt_test.rs` against `trajectory.txt`, implement `src/txt.rs`; verify.
+- [x] 2.3 Write `src/csv_test.rs` comparing `write_csv_trajectory` and `write_csv_chrono` output to `trajectory.csv` and `chrono.csv` byte for byte, plus a comma-separator case; implement `src/csv.rs` (`CsvFormat { decimal, list_separator }`, quoting, NaN → empty); verify tests pass.
+- [x] 2.4 Write `src/txt_test.rs` against `trajectory.txt`, implement `src/txt.rs`; verify.
 - [x] 2.5 Write `src/json_test.rs` parsing both Rust output and `measured.json` into `serde_json::Value` and asserting equality with 1e-4 numeric tolerance and identical key order; implement `src/json.rs`; verify.
-- [ ] 2.6 Write `src/markdown_test.rs` against `report.md` (no images) and a case with three image paths; implement `src/markdown.rs`; verify.
+- [x] 2.6 Write `src/markdown_test.rs` against `report.md` (no images) and a case with three image paths; implement `src/markdown.rs`; verify.
 
 ## 3. Importers
 
