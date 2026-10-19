@@ -120,7 +120,12 @@ pub fn read_kva(m: &mut Metadata, xml: &str) -> Result<ImportContext, KvaError> 
                 let video = m.video.clone();
                 m.number_sequence.read_kva(c, scale, &|ts| ctx.remap(ts, &video, is_same));
             }
-            "CoordinateSystem" => m.coordinate_system.read_kva(c),
+            "CoordinateSystem" => {
+                m.coordinate_system.read_kva(c);
+                if m.video_set_up {
+                    set_calibration_origin(m);
+                }
+            }
             "TestGrid" => m.test_grid.read_kva(c),
             "Trackability" => m.trackability.read_kva(c),
             "VideoFilters" => m.video_filters = c.clone(),
@@ -154,6 +159,20 @@ fn format_version(root: &Element) -> Option<f64> {
 fn register_keyframe(m: &mut Metadata, keyframe: &Keyframe) {
     for d in &keyframe.drawings {
         register_drawing(&mut m.trackability, d);
+    }
+}
+
+/// `CoordinateSystem.ReadXml` ends with `CalibrationHelper.SetOrigin` once the calibration is live (the
+/// video was set up). That raises `CalibrationChanged`, which the circles listen to: the keyframes read so
+/// far re-anchor their measure labels (`DrawingCircle.ResetAttachPoint`).
+fn set_calibration_origin(m: &mut Metadata) {
+    let origin = m.coordinate_system.origin;
+    m.calibration.set_origin(origin);
+    let calibration = &m.calibration;
+    for d in m.keyframes.iter_mut().flat_map(|k| k.drawings.iter_mut()) {
+        if let Drawing::Circle(circle) = d {
+            circle.reset_attach_point(calibration);
+        }
     }
 }
 

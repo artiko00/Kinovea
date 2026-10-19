@@ -3,7 +3,7 @@
 
 use kinovea_fixtures::fixtures_root;
 use kinovea_metadata::ids::normalize_ids;
-use kinovea_metadata::{header_metadata, read_kva, write_kva, ExportFlags, Metadata};
+use kinovea_metadata::{load_kva, write_kva, ExportFlags, Metadata};
 use std::path::PathBuf;
 
 pub fn repo() -> PathBuf {
@@ -13,8 +13,7 @@ pub fn repo() -> PathBuf {
 pub fn load(input: &str) -> (Metadata, String) {
     let xml = std::fs::read_to_string(repo().join(input)).unwrap();
     let xml = xml.trim_start_matches('\u{feff}').to_owned();
-    let mut m = header_metadata(&xml);
-    read_kva(&mut m, &xml).unwrap();
+    let m = load_kva(&xml).unwrap();
     (m, xml)
 }
 

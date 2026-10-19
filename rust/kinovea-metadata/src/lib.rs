@@ -36,7 +36,7 @@ pub use color::Color;
 pub use drawing::{Drawing, Header, KvaDrawing};
 pub use fading::Fading;
 pub use keyframe::Keyframe;
-pub use kva::{header_metadata, read_kva, write_kva, ExportFlags, KvaError};
+pub use kva::{header_metadata, load_kva, read_kva, write_kva, ExportFlags, KvaError};
 pub use metadata::Metadata;
 pub use style::{StyleElement, StyleElements, StyleValue};
 

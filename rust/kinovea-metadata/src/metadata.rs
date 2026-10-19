@@ -19,6 +19,7 @@ mod multi_edit_test;
 mod query;
 #[cfg(test)]
 mod query_test;
+mod setup;
 
 crate::text_enum!(ImageAspectRatio [Auto, Force43, Force169, ForcedSquarePixels]);
 crate::text_enum!(ImageRotation [Rotate0, Rotate90, Rotate180, Rotate270]);
@@ -79,6 +80,9 @@ pub struct Metadata {
     pub coordinate_system: CoordinateSystem,
     pub test_grid: TestGrid,
     pub trackability: TrackabilityManager,
+    /// The video was set up (`PostSetupVideo`): the singletons are named and the coordinate system
+    /// origin comes from the calibration of the KVA.
+    pub video_set_up: bool,
     /// `VideoFilters` element (attributes and children) kept verbatim.
     pub video_filters: Element,
     /// `CameraMotion` element kept verbatim when present.
@@ -94,7 +98,7 @@ pub fn timestamp_text(timestamp: i64) -> String {
 
 impl Default for Metadata {
     fn default() -> Self {
-        Metadata { video: VideoContext::default(), global_title: String::new(), image_aspect: ImageAspectRatio::Auto, image_rotation: ImageRotation::Rotate0, mirrored: false, demosaicing: Demosaicing::None, deinterlacing: false, stabilization_track: Uuid::nil(), background_color: Color::argb(0, 255, 255, 255), context_string: String::new(), calibration: CalibrationHelper::without_tracking(Size::default(), Units::default(), 25.0), keyframes: Vec::new(), chronos: Vec::new(), tracks: Vec::new(), spotlights: Spotlights::default(), number_sequence: NumberSequence::default(), coordinate_system: CoordinateSystem::default(), test_grid: TestGrid::default(), trackability: TrackabilityManager::default(), video_filters: Element::new("VideoFilters"), camera_motion: None, timecode: timestamp_text }
+        Metadata { video_set_up: false, video: VideoContext::default(), global_title: String::new(), image_aspect: ImageAspectRatio::Auto, image_rotation: ImageRotation::Rotate0, mirrored: false, demosaicing: Demosaicing::None, deinterlacing: false, stabilization_track: Uuid::nil(), background_color: Color::argb(0, 255, 255, 255), context_string: String::new(), calibration: CalibrationHelper::without_tracking(Size::default(), Units::default(), 25.0), keyframes: Vec::new(), chronos: Vec::new(), tracks: Vec::new(), spotlights: Spotlights::default(), number_sequence: NumberSequence::default(), coordinate_system: CoordinateSystem::default(), test_grid: TestGrid::default(), trackability: TrackabilityManager::default(), video_filters: Element::new("VideoFilters"), camera_motion: None, timecode: timestamp_text }
     }
 }
 

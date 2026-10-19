@@ -6,7 +6,7 @@ use kinovea_fixtures::fixtures_root;
 use kinovea_metadata::drawing::Drawing;
 use kinovea_metadata::ids::normalize_ids;
 use kinovea_metadata::migration::migrate_legacy;
-use kinovea_metadata::{header_metadata, read_kva, write_kva, ExportFlags, Metadata};
+use kinovea_metadata::{load_kva, read_kva, write_kva, ExportFlags, Metadata};
 
 fn check(case: &str, input: &str, first_point_time: i64) {
     let repo = fixtures_root().join("../..");
@@ -15,8 +15,7 @@ fn check(case: &str, input: &str, first_point_time: i64) {
     let want_converted =
         std::fs::read_to_string(fixtures_root().join(format!("kva/{case}/converted.kva"))).unwrap();
     assert_eq!(converted, want_converted, "{case}: converted document");
-    let mut m = header_metadata(&xml);
-    read_kva(&mut m, &xml).unwrap();
+    let m = load_kva(&xml).unwrap();
     let got = normalize_ids(&write_kva(&m, "0.0", false, ExportFlags::FULL).to_document());
     let want =
         std::fs::read_to_string(fixtures_root().join(format!("kva/{case}/roundtrip.kva"))).unwrap();

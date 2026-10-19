@@ -27,6 +27,9 @@ impl Default for CoordinateSystem {
 }
 
 impl CoordinateSystem {
+    /// `ToolDisplayName`: the stem of the automatic name (`SetDrawingName`).
+    pub const TOOL_NAME: &'static str = "Coordinate system";
+
     pub const KVA_NAME: &'static str = "CoordinateSystem";
 
     pub fn read_kva(&mut self, e: &Element) {
@@ -91,6 +94,9 @@ impl Default for TestGrid {
 }
 
 impl TestGrid {
+    /// `ToolDisplayName`: the stem of the automatic name (`SetDrawingName`).
+    pub const TOOL_NAME: &'static str = "Camera test grid";
+
     pub const KVA_NAME: &'static str = "TestGrid";
 
     pub fn read_kva(&mut self, e: &Element) {

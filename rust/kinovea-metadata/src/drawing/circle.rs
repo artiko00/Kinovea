@@ -6,7 +6,9 @@ use crate::measure_label::{measure_label_block, MeasureLabel, MeasureLabelType};
 use crate::style::default_style;
 use kinovea_core::preferences::dom::Element;
 use kinovea_core::xml::{parse_boolean, write_boolean};
+use kinovea_geometry::helpers::middle_point;
 use kinovea_geometry::PointF;
+use kinovea_measurement::CalibrationHelper;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Circle {
@@ -31,6 +33,22 @@ impl Circle {
             filled: false,
             label,
         }
+    }
+
+    /// `DrawingCircle.ResetAttachPoint`, run on `CalibrationChanged`: the label follows its anchor on
+    /// the circle in image space (the centre, the middle of the radius or the end of the
+    /// circumference's diameter), keeping its place relative to that anchor.
+    pub fn reset_attach_point(&mut self, calibration: &CalibrationHelper) {
+        let (_, _, right) = calibration.ellipse_from_image_circle(self.center, self.radius as f32);
+        let anchor = match self.measure_label_type {
+            MeasureLabelType::Name | MeasureLabelType::Center | MeasureLabelType::Diameter => {
+                self.center
+            }
+            MeasureLabelType::Radius => middle_point(self.center, right),
+            MeasureLabelType::Circumference => right,
+            _ => return,
+        };
+        self.label.move_attach(anchor);
     }
 }
 
