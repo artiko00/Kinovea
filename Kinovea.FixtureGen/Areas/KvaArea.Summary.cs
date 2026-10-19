@@ -10,8 +10,9 @@ namespace Kinovea.FixtureGen.Areas
     public partial class KvaArea
     {
         /// <summary>
-        /// summary.json (counts) and drawings.json (element name, id and numeric content hash of
-        /// every drawing, per container, in storage order).
+        /// summary.json (counts) and drawings.json (element name, id and name of every drawing, per
+        /// container, in storage order). `ContentHash` is left out: it mixes per-process hashes
+        /// of strings and GDI+ objects, so it differs between two runs.
         /// </summary>
         private static void WriteSummary(Metadata metadata, string outDir)
         {
@@ -53,7 +54,7 @@ namespace Kinovea.FixtureGen.Areas
             {
                 AbstractDrawing d = drawings[i];
                 sb.Append(indent).Append("{ \"element\": \"").Append(ElementName(d)).Append("\", \"id\": \"").Append(d.Id)
-                  .Append("\", \"name\": \"").Append(d.Name.Replace("\"", "\\\"")).Append("\", \"hash\": ").Append(d.ContentHash).Append(" }")
+                  .Append("\", \"name\": \"").Append(d.Name.Replace("\"", "\\\"")).Append("\" }")
                   .Append(i + 1 < drawings.Count ? ",\n" : "\n");
             }
         }

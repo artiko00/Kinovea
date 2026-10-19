@@ -57,6 +57,13 @@ Rust `content_hash()` implements the same field combination as each C# `ContentH
 ### Legacy superseded
 Replaced by this change and deleted in `remove-dotnet-solution`: `Kinovea.ScreenManager/Metadata/Metadata.cs` (model part), `Metadata/DrawingManager/*`, `Metadata/Drawings/*.cs` data and serialization parts (painting parts are superseded by 06), `Metadata/Drawings/{Cadence,Chrono,CoordinateSystem,GenericPosture}/*`, `Metadata/Styling/**`, `Metadata/Serialization/{MetadataSerializer,DrawingSerializer,KeyframeSerializer,MultiDrawingItemSerializer,MetadataConverter,SerializationFilter}.cs`, `Metadata/Interfaces/*`, `Metadata/ToolManager.cs` (tool loading part), `UndoRedo/**`, `Tracking/Trackability/{TrackablePoint,TrackabilityManager}.cs` (state part), `Kinovea.Services/Types/{InfosFading,KVAExportFlags}.cs`, `Tools/XML/Kva to Kva/*.xsl` (kept as test inputs until then).
 
+### Deviations recorded during apply
+- XML: the `kinovea-core` DOM (`Element`) replaces `quick-xml`/`roxmltree`; it now normalizes `\r\n` to `\n` in text and keeps text edge spaces, like `XmlReader` with `IgnoreWhitespace`.
+- Properties: seeded loops replace `proptest`; no new dependency besides `uuid`.
+- Oracle: the original never sets `ParentMetadata` on the spotlight and number-sequence managers, so importing a KVA with `Spotlights` or `NumberSequence` throws and aborts the import at that element. `KvaArea` sets both before loading; Rust reproduces the fixed behaviour.
+- Fuzz corpus: `KvaFuzz` (seeded, 2.1 shapes) instead of the legacy 2.0 `KVAFuzzer`.
+- Validity: SVG and file bitmaps are dropped on import when the file is missing, as `IsValid` does; stickers and embedded bitmaps stay.
+
 ## Risks / Trade-offs
 
 - [Byte parity is brittle to float formatting] → port `R` formatting as shortest round-trip (`ryu`-style via `format!("{}")` matches for most values); a dedicated test over the fixture corpus catches mismatches; fall back to a declared tolerance only for `Measure` attributes computed from calibration.
