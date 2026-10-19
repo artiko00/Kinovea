@@ -54,4 +54,4 @@
 ## 9. Integration
 
 - [x] 9.1 Write Rust-produced KVA files for the three samples into `tests/cases/kva/crossload/` via a `cargo run --example write_samples -p kinovea-metadata`, add `tests/cases/kva/crossload.json`, extend `KvaArea.cs` to load them and write `summary.json` with counts and hashes; run `fixtures.sh`; add `tests/crossload_test.rs` asserting equality with Rust counts; verify it passes.
-- [ ] 9.2 Update `AGENTS.md` structure line for `kinovea-metadata`, append the `.agent/progress.md` entry, tick the roadmap item; verify `npm run lint` and `cd rust && make verify` are green and CI `rust.yml` passes on the branch.
+- [x] 9.2 Update `AGENTS.md` structure line for `kinovea-metadata`, append the `.agent/progress.md` entry, tick the roadmap item; verify `npm run lint` and `cd rust && make verify` are green and CI `rust.yml` passes on the branch.
