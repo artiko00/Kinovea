@@ -10,7 +10,7 @@ agentes no se recarga a mitad de sesión: hay que reiniciar Claude Code antes de
 
 - [x] Fixtures regeneradas con el oráculo corregido (focos con `ParentMetadata`, sin `ContentHash` en `drawings.json`)
 - [x] `tools/oracle/fixtures.sh --verify` determinista tras quitar el hash
-- [ ] Lanzar los tres agentes en worktrees aislados (`isolation: worktree`, `effort: xhigh`)
+- [x] Lanzar los tres agentes en worktrees aislados (`isolation: worktree`, `effort: xhigh`)
 - [ ] Aplicar los diffs en el checkout principal: primero A, luego B y C
 - [ ] Validar: `git diff --stat -- tests/fixtures tests/cases` vacío, revisar cada hunk de `*_test.rs`, `make verify`, `npm run lint`
 - [ ] Agente adversarial Hermes sobre el SHA final (worktree desechable en `/tmp/kinovea-hermes`)
