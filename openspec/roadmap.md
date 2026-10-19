@@ -24,7 +24,7 @@ Phase B, video
 - [ ] 09 `add-image-gif-svg-readers`
 
 Phase C, vision
-- [ ] 10 `add-tracking`
+- [x] 10 `add-tracking` (archived 2026-10-19)
 - [ ] 11 `add-camera-motion-and-lens-filters`
 
 Phase D, input/output and headless use

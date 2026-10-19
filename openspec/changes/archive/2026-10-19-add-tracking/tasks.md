@@ -31,7 +31,7 @@
 ## 6. Integration
 
 - [x] 6.1 Replace the placeholder in `rust/kinovea-tracking/src/lib.rs` with the module tree and docs; verify `cd rust && make verify` exits 0 and `npx testlens check` lists no untested Rust file.
-- [ ] 6.2 Append the `.agent/progress.md` entry (Hough divergences observed, chosen filter crate) and tick `10` in `openspec/roadmap.md` after archive; verify `npm run lint` passes.
+- [x] 6.2 Append the `.agent/progress.md` entry (Hough divergences observed, chosen filter crate) and tick `10` in `openspec/roadmap.md` after archive; verify `npm run lint` passes.
 
 ## Workflow follow-up
 
