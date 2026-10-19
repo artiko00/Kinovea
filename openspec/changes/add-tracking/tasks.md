@@ -8,8 +8,8 @@
 
 ## 2. Template matching
 
-- [ ] 2.1 Write `src/ncc_test.rs`: correlation coefficient map equals a brute-force reference on random images, is 1.0 at the exact location, masked variant ignores excluded pixels; implement `src/ncc.rs` with integral images; verify tests pass.
-- [ ] 2.2 Write `src/refine_test.rs` (closed-form parabola vertex equals the three-point polynomial fit; border and 1.0 cases skip) then implement `src/refine.rs`; verify tests pass.
+- [x] 2.1 Write `src/ncc_test.rs`: correlation coefficient map equals a brute-force reference on random images, is 1.0 at the exact location, masked variant ignores excluded pixels; implement `src/ncc.rs` with integral images; verify tests pass.
+- [x] 2.2 Write `src/refine_test.rs` (closed-form parabola vertex equals the three-point polynomial fit; border and 1.0 cases skip) then implement `src/refine.rs`; verify tests pass.
 - [ ] 2.3 Write `tests/support/synthetic.rs` rendering frames by the same integer formula as the oracle (gradient background, square or disc, speeds, sub-pixel sinus, optional colour); write `src/template_test.rs` (readiness, translated target within 0.5 px, lost target keeps position with score 0, half-pixel motion within 0.15 px, template update policy, mask with changing background, trim and clear); implement `src/template.rs` (`TemplateTracker`, `TrackingTemplate`, `StepResult`, `Tracker` trait in `src/tracker.rs` with `tracker_test.rs`); verify tests pass.
 
 ## 3. Circle tracking
