@@ -20,16 +20,20 @@ A drawing tracker SHALL be in one of three modes: object tracking (each trackabl
 - **WHEN** a point is bound to a track with a position at time 40 and the time 40 is requested
 - **THEN** the drawing receives the track position and the age 0
 
-#### Scenario: Fallback to camera tracking
-- **WHEN** the bound track has no position at the requested time and a camera transformer is initialized
+#### Scenario: Camera tracking without object tracking
+- **WHEN** object tracking is not initialized and a camera transformer is initialized
 - **THEN** the drawing receives the camera-transformed reference value
+
+#### Scenario: Object tracking without a sample
+- **WHEN** object tracking is initialized and the bound track has no position at the requested time
+- **THEN** that point is not updated (the original sends nothing for it, and no camera fallback applies)
 
 #### Scenario: No tracking
 - **WHEN** neither object tracking nor camera motion is available
-- **THEN** the drawing receives its reference value
+- **THEN** no position is sent to the drawing, and asking a point position at a time returns its reference value
 
 ### Requirement: Manager lifecycle
-The manager SHALL add a tracker for every trackable drawing, assign drawings loaded from a file to their tracker by id, forget trackers of deleted drawings, trim tracks after a time, report whether any drawing is actively tracking, and expose a content hash that changes with any binding.
+The manager SHALL add a tracker for every trackable drawing, assign drawings loaded from a file to their tracker by id, forget trackers of deleted drawings, trim tracks after a time, report whether any drawing is actively tracking, and expose a content hash that changes when object tracking is initialized for a drawing or a tracker is forgotten.
 
 #### Scenario: Assign after load
 - **WHEN** trackers are read from a file before their drawings and a drawing with a matching id is assigned
@@ -43,8 +47,8 @@ The manager SHALL add a tracker for every trackable drawing, assign drawings loa
 The manager SHALL write a `Trackers` section with one element per tracker holding the drawing id and its `TrackablePoint` entries (key, reference timestamp, reference value, bound track id when any) and SHALL read it back identically; tracking parameters SHALL serialize as `TrackerParameters` with the exact element names of the original format.
 
 #### Scenario: Round trip
-- **WHEN** a manager with two trackers is written and read back
-- **THEN** the content hash is unchanged
+- **WHEN** a manager with two trackers without object tracking is written and read back
+- **THEN** the content hash is unchanged (the object-tracking flag is part of the hash but not of the file, as in the original)
 
 #### Scenario: Sample files
 - **WHEN** the `Trackers` and `TrackerParameters` sections of the sample annotation files are parsed
