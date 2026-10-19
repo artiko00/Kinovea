@@ -24,6 +24,8 @@ mod ncc_unmasked_test;
 #[cfg(test)]
 mod refine_test;
 
+pub mod hough;
+
 /// Returns the crate name as declared in `Cargo.toml`.
 pub fn crate_name() -> &'static str {
     env!("CARGO_PKG_NAME")
