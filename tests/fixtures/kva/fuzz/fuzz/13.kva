@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+<FormatVersion>2.1</FormatVersion>
+<Producer>KvaFuzz</Producer>
+<OriginalFilename>abalGdzc</OriginalFilename>
+<GlobalTitle>6HhL5Gad6az1</GlobalTitle>
+<ImageSize>1807;525</ImageSize>
+<AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+<CaptureFramerate>286.6695</CaptureFramerate>
+<FirstTimeStamp>0</FirstTimeStamp>
+<SelectionStart>0</SelectionStart>
+<Keyframes>
+<Keyframe>
+<Timestamp>73389</Timestamp>
+<Name>FYgqzc8lcc</Name>
+<Drawings>
+<Label>
+<Text>WcwCNNf3yw</Text>
+<Position>1073.92;295.6889</Position>
+<ArrowEnd>1421.274;493.9033</ArrowEnd>
+<DrawingStyle>
+<Color Key="back color"><Value>212;60;213;19</Value></Color>
+<FontSize Key="font size"><Value>32</Value></FontSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>false</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>false</AlwaysVisible>
+<OpaqueFrames>4</OpaqueFrames>
+<Frames>42</Frames>
+</InfosFading>
+</Label>
+<Rectangle>
+<PointUpperLeft>10.22539;259.5859</PointUpperLeft>
+<PointUpperRight>1788.573;93.59887</PointUpperRight>
+<PointLowerRight>976.6965;409.1967</PointLowerRight>
+<PointLowerLeft>312.6344;380.7603</PointLowerLeft>
+<Filled>false</Filled>
+<DrawingStyle>
+<Color Key="color"><Value>71;226;167;243</Value></Color>
+<PenSize Key="pen size"><Value>3</Value></PenSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>false</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>false</AlwaysVisible>
+<OpaqueFrames>1</OpaqueFrames>
+<Frames>45</Frames>
+</InfosFading>
+</Rectangle>
+<Circle>
+<Origin>1272.573;325.792</Origin>
+<Radius>22</Radius>
+<Filled>true</Filled>
+<DrawingStyle>
+<Color Key="color"><Value>241;53;246;181</Value></Color>
+<PenSize Key="pen size"><Value>6</Value></PenSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>false</AlwaysVisible>
+<OpaqueFrames>9</OpaqueFrames>
+<Frames>66</Frames>
+</InfosFading>
+</Circle>
+</Drawings>
+</Keyframe>
+</Keyframes>
+<Chronos>
+<Chrono>
+<Position>1463.478;130.3497</Position>
+<Values>
+<Visible>65511</Visible>
+<Invisible>69834</Invisible>
+<StartCounting>65627</StartCounting>
+<StopCounting>68225</StopCounting>
+<ClockOrigin>-1</ClockOrigin>
+</Values>
+<Label>
+<Text>gqP7K3</Text>
+<Show>false</Show>
+</Label>
+<DrawingStyle>
+<Color Key="color"><Value>8;122;111;102</Value></Color>
+<FontSize Key="font size"><Value>36</Value></FontSize>
+</DrawingStyle>
+</Chrono>
+</Chronos>
+<Tracks>
+<Track>
+<TimePosition>9193</TimePosition>
+<Visible>9193</Visible>
+<Invisible>-1</Invisible>
+<ExtraData>TotalDistance</ExtraData>
+<TrackPointList Count="12">
+<TrackPoint>1559.088;218.8242;9193</TrackPoint>
+<TrackPoint>1561.86;210.1505;9194</TrackPoint>
+<TrackPoint>1558.097;200.265;9195</TrackPoint>
+<TrackPoint>1552.312;204.6133;9196</TrackPoint>
+<TrackPoint>1548.16;206.1292;9197</TrackPoint>
+<TrackPoint>1541.699;198.1534;9198</TrackPoint>
+<TrackPoint>1538.462;203.7619;9199</TrackPoint>
+<TrackPoint>1541.173;198.9306;9200</TrackPoint>
+<TrackPoint>1543.004;195.92;9201</TrackPoint>
+<TrackPoint>1541.861;189.3661;9202</TrackPoint>
+<TrackPoint>1539.106;185.8984;9203</TrackPoint>
+<TrackPoint>1531.014;189.4175;9204</TrackPoint>
+</TrackPointList>
+<DrawingStyle>
+<Color Key="color"><Value>231;196;223;190</Value></Color>
+<LineSize Key="line size"><Value>1</Value></LineSize>
+<TrackShape Key="track shape"><Value>Solid;true</Value></TrackShape>
+</DrawingStyle>
+<MainLabel Text="oVpgBn">
+<SpacePosition>1101.731;24.35371</SpacePosition>
+<TimePosition>0</TimePosition>
+</MainLabel>
+</Track>
+</Tracks>
+<Spotlights>
+<Spotlight>
+<Time>65709</Time>
+<Center>1333.369;453.4301</Center>
+<Radius>61</Radius>
+</Spotlight>
+<Spotlight>
+<Time>29308</Time>
+<Center>1544.087;198.0714</Center>
+<Radius>14</Radius>
+</Spotlight>
+</Spotlights>
+<NumberSequence>
+<DrawingStyle>
+<Color Key="back color"><Value>75;167;128;10</Value></Color>
+<FontSize Key="font size"><Value>14</Value></FontSize>
+</DrawingStyle>
+<AutoNumber>
+<Time>68638</Time>
+<Location>92.03787;286.2987</Location>
+<Value>1</Value>
+</AutoNumber>
+</NumberSequence>
+</KinoveaVideoAnalysis>

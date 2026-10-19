@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+  <FormatVersion>2.0</FormatVersion>
+  <Producer>Kinovea XSLT Converter (1.5 to 2.0)</Producer>
+  <OriginalFilename>legacy13.avi</OriginalFilename>
+  <ImageSize>640;480</ImageSize>
+  <AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+  <FirstTimeStamp>0</FirstTimeStamp>
+  <SelectionStart>0</SelectionStart>
+  <Calibration>
+    <CalibrationLine>
+      <Origin></Origin>
+      <Scale>0.5</Scale>
+    </CalibrationLine>
+    <Unit Abbreviation="cm">Centimeters</Unit>
+  </Calibration>
+  <Keyframes>
+    <Keyframe>
+      <Position UserTime="0:00:00:00">10</Position>
+      <Title>First</Title>
+      <Comment>Old comment</Comment>
+      <Drawings>
+        <Line>
+          <Start>100;100</Start>
+          <End>300;120</End>
+          <ExtraData>TotalDistance</ExtraData>
+          <MeasureLabel>
+            <SpacePosition>100;100</SpacePosition>
+            <TimePosition>0</TimePosition>
+          </MeasureLabel>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>255;0;0</Value>
+            </Color>
+            <LineSize Key="line size">
+              <Value>3</Value>
+            </LineSize>
+            <LineShape Key="line shape">
+              <Value>Solid</Value>
+            </LineShape>
+            <Arrows Key="arrows">
+              <Value>EndArrow</Value>
+            </Arrows>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>True</Enabled>
+            <Frames>20</Frames>
+            <AlwaysVisible>False</AlwaysVisible>
+            <UseDefault>True</UseDefault>
+          </InfosFading>
+        </Line>
+        <Angle>
+          <PointO>200;200</PointO>
+          <PointA>300;200</PointA>
+          <PointB>200;100</PointB>
+          <Signed>false</Signed>
+          <CCW>true</CCW>
+          <Supplementary>false</Supplementary>
+          <DrawingStyle>
+            <Color Key="line color">
+              <Value>0;128;255</Value>
+            </Color>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>True</Enabled>
+            <Frames>20</Frames>
+            <AlwaysVisible>False</AlwaysVisible>
+            <UseDefault>True</UseDefault>
+          </InfosFading>
+        </Angle>
+        <Circle>
+          <Origin>400;300</Origin>
+          <Radius>40</Radius>
+          <ExtraData>None</ExtraData>
+          <MeasureLabel>
+            <SpacePosition>400;300</SpacePosition>
+            <TimePosition>0</TimePosition>
+          </MeasureLabel>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>0;255;0</Value>
+            </Color>
+            <PenSize Key="pen size">
+              <Value>2</Value>
+            </PenSize>
+            <PenShape Key="pen shape">
+              <Value>Solid</Value>
+            </PenShape>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>True</Enabled>
+            <Frames>20</Frames>
+            <AlwaysVisible>False</AlwaysVisible>
+            <UseDefault>True</UseDefault>
+          </InfosFading>
+        </Circle>
+        <CrossMark>
+          <CenterPoint>50;400</CenterPoint>
+          <ExtraData>Position</ExtraData>
+          <MeasureLabel>
+            <SpacePosition>50;400</SpacePosition>
+            <TimePosition>0</TimePosition>
+          </MeasureLabel>
+          <DrawingStyle>
+            <Color Key="back color">
+              <Value>0;0;255</Value>
+            </Color>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>True</Enabled>
+            <Frames>20</Frames>
+            <AlwaysVisible>False</AlwaysVisible>
+            <UseDefault>True</UseDefault>
+          </InfosFading>
+        </CrossMark>
+        <Pencil>
+          <PointList Count="3">
+            <Point>10;10</Point>
+            <Point>20;20</Point>
+            <Point>30;10</Point>
+          </PointList>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>10;20;30</Value>
+            </Color>
+            <PenSize Key="pen size">
+              <Value>4</Value>
+            </PenSize>
+            <PenShape Key="pen shape">
+              <Value>Solid</Value>
+            </PenShape>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>True</Enabled>
+            <Frames>20</Frames>
+            <AlwaysVisible>False</AlwaysVisible>
+            <UseDefault>True</UseDefault>
+          </InfosFading>
+        </Pencil>
+        <Label name="Old label">
+          <Text>Old label</Text>
+          <Position>20;20</Position>
+          <ArrowVisible>false</ArrowVisible>
+          <ArrowEnd>20;20</ArrowEnd>
+          <DrawingStyle>
+            <Color Key="back color">
+              <Value>30;60;90</Value>
+            </Color>
+            <FontSize Key="font size">
+              <Value>16</Value>
+            </FontSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>True</Enabled>
+            <Frames>20</Frames>
+            <AlwaysVisible>False</AlwaysVisible>
+            <UseDefault>True</UseDefault>
+          </InfosFading>
+        </Label>
+      </Drawings>
+    </Keyframe>
+    <Keyframe>
+      <Position UserTime="0:00:00:02">50</Position>
+    </Keyframe>
+  </Keyframes>
+  <Chronos>
+    <Chrono>
+      <Position>500;400</Position>
+      <Values>
+        <Visible>10</Visible>
+        <Invisible>-1</Invisible>
+        <StartCounting>20</StartCounting>
+        <StopCounting>40</StopCounting>
+      </Values>
+      <Label>
+        <Text>old chrono</Text>
+        <Show>True</Show>
+      </Label>
+    </Chrono>
+  </Chronos>
+  <Tracks>
+    <Track name="old track">
+      <TimePosition>10</TimePosition>
+      <Mode>Complete</Mode>
+      <ExtraData>TotalDistance</ExtraData>
+      <TrackPointList Count="3" UserUnitLength="cm">
+        <TrackPoint UserX="0" UserXInvariant="0" UserY="0" UserYInvariant="0" UserTime="0">100;100;0</TrackPoint>
+        <TrackPoint UserX="1" UserXInvariant="1" UserY="1" UserYInvariant="1" UserTime="1">110;105;1</TrackPoint>
+        <TrackPoint UserX="2" UserXInvariant="2" UserY="2" UserYInvariant="2" UserTime="2">121;111;2</TrackPoint>
+      </TrackPointList>
+      <MainLabel Text="old track">
+        <SpacePosition>120;60</SpacePosition>
+        <TimePosition>0</TimePosition>
+      </MainLabel>
+      <DrawingStyle>
+        <Color Key="color">
+          <Value>255;128;0</Value>
+        </Color>
+        <LineSize Key="line size">
+          <Value>2</Value>
+        </LineSize>
+        <TrackShape Key="track shape">
+          <Value>Solid;false</Value>
+        </TrackShape>
+      </DrawingStyle>
+    </Track>
+  </Tracks>
+  <Trackability />
+</KinoveaVideoAnalysis>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+<FormatVersion>2.1</FormatVersion>
+<Producer>KvaFuzz</Producer>
+<OriginalFilename>1wiwWSgM</OriginalFilename>
+<GlobalTitle>8D8T5w9dI49G</GlobalTitle>
+<ImageSize>1856;811</ImageSize>
+<AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+<CaptureFramerate>171.4314</CaptureFramerate>
+<FirstTimeStamp>0</FirstTimeStamp>
+<SelectionStart>0</SelectionStart>
+<Keyframes>
+<Keyframe>
+<Timestamp>15027</Timestamp>
+<Name>tvDgj6yjmV</Name>
+<Drawings>
+<Circle>
+<Origin>160.3936;89.50035</Origin>
+<Radius>142</Radius>
+<Filled>false</Filled>
+<DrawingStyle>
+<Color Key="color"><Value>60;22;90;160</Value></Color>
+<PenSize Key="pen size"><Value>10</Value></PenSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>false</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>9</OpaqueFrames>
+<Frames>11</Frames>
+</InfosFading>
+</Circle>
+<Label>
+<Text>RByqntdBp0</Text>
+<Position>878.4776;16.71235</Position>
+<ArrowEnd>155.3919;655.0427</ArrowEnd>
+<DrawingStyle>
+<Color Key="back color"><Value>133;36;236;109</Value></Color>
+<FontSize Key="font size"><Value>36</Value></FontSize>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>3</OpaqueFrames>
+<Frames>20</Frames>
+</InfosFading>
+</Label>
+</Drawings>
+</Keyframe>
+<Keyframe>
+<Timestamp>82088</Timestamp>
+<Name>nGrF6nmc62</Name>
+<Drawings>
+<Plane>
+<PointUpperLeft>343.2419;71.67435</PointUpperLeft>
+<PointUpperRight>1245.246;313.6295</PointUpperRight>
+<PointLowerRight>983.7286;511.1021</PointLowerRight>
+<PointLowerLeft>685.7985;505.4594</PointLowerLeft>
+<ShowGrid>false</ShowGrid>
+<DrawingStyle>
+<Color Key="color"><Value>84;139;185;71</Value></Color>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>2</OpaqueFrames>
+<Frames>56</Frames>
+</InfosFading>
+</Plane>
+<Line>
+<Start>1292.75;128.2327</Start>
+<End>371.5356;41.76157</End>
+<DrawingStyle>
+<Color Key="color"><Value>176;6;138;133</Value></Color>
+<LineSize Key="line size"><Value>1</Value></LineSize>
+<Arrows Key="arrows"><Value>DoubleArrow</Value></Arrows>
+</DrawingStyle>
+<InfosFading>
+<Enabled>true</Enabled>
+<UseDefault>true</UseDefault>
+<AlwaysVisible>true</AlwaysVisible>
+<OpaqueFrames>4</OpaqueFrames>
+<Frames>75</Frames>
+</InfosFading>
+</Line>
+</Drawings>
+</Keyframe>
+</Keyframes>
+<Chronos>
+<Chrono>
+<Position>1715.994;212.1648</Position>
+<Values>
+<Visible>74628</Visible>
+<Invisible>77598</Invisible>
+<StartCounting>74712</StartCounting>
+<StopCounting>75690</StopCounting>
+<ClockOrigin>-1</ClockOrigin>
+</Values>
+<Label>
+<Text>cJ49Io</Text>
+<Show>false</Show>
+</Label>
+<DrawingStyle>
+<Color Key="color"><Value>226;182;232;93</Value></Color>
+<FontSize Key="font size"><Value>16</Value></FontSize>
+</DrawingStyle>
+</Chrono>
+<Chrono>
+<Position>1207.98;607.5873</Position>
+<Values>
+<Visible>75203</Visible>
+<Invisible>77284</Invisible>
+<StartCounting>75810</StartCounting>
+<StopCounting>76658</StopCounting>
+<ClockOrigin>-1</ClockOrigin>
+</Values>
+<Label>
+<Text>GTSClo</Text>
+<Show>true</Show>
+</Label>
+<DrawingStyle>
+<Color Key="color"><Value>93;133;127;150</Value></Color>
+<FontSize Key="font size"><Value>14</Value></FontSize>
+</DrawingStyle>
+</Chrono>
+</Chronos>
+<Tracks>
+<Track>
+<TimePosition>18088</TimePosition>
+<Visible>18088</Visible>
+<Invisible>-1</Invisible>
+<ExtraData>Name</ExtraData>
+<TrackPointList Count="13">
+<TrackPoint>218.5954;507.7556;18088</TrackPoint>
+<TrackPoint>217.7953;503.9504;18089</TrackPoint>
+<TrackPoint>225.0742;496.7657;18090</TrackPoint>
+<TrackPoint>216.5964;497.2187;18091</TrackPoint>
+<TrackPoint>221.0905;501.0027;18092</TrackPoint>
+<TrackPoint>223.2328;493.9941;18093</TrackPoint>
+<TrackPoint>225.2561;496.4147;18094</TrackPoint>
+<TrackPoint>223.9385;495.3453;18095</TrackPoint>
+<TrackPoint>231.1725;489.0464;18096</TrackPoint>
+<TrackPoint>232.1149;490.6527;18097</TrackPoint>
+<TrackPoint>229.9667;493.6072;18098</TrackPoint>
+<TrackPoint>232.9382;487.5858;18099</TrackPoint>
+<TrackPoint>237.0846;480.728;18100</TrackPoint>
+</TrackPointList>
+<DrawingStyle>
+<Color Key="color"><Value>75;80;246;47</Value></Color>
+<LineSize Key="line size"><Value>2</Value></LineSize>
+<TrackShape Key="track shape"><Value>Dash;false</Value></TrackShape>
+</DrawingStyle>
+<MainLabel Text="EI87rn">
+<SpacePosition>1625.06;465.2901</SpacePosition>
+<TimePosition>0</TimePosition>
+</MainLabel>
+</Track>
+</Tracks>
+<Spotlights>
+<Spotlight>
+<Time>66412</Time>
+<Center>956.2064;518.6205</Center>
+<Radius>77</Radius>
+</Spotlight>
+</Spotlights>
+<NumberSequence>
+<DrawingStyle>
+<Color Key="back color"><Value>230;247;247;126</Value></Color>
+<FontSize Key="font size"><Value>12</Value></FontSize>
+</DrawingStyle>
+<AutoNumber>
+<Time>23137</Time>
+<Location>1647.746;438.816</Location>
+<Value>1</Value>
+</AutoNumber>
+</NumberSequence>
+</KinoveaVideoAnalysis>

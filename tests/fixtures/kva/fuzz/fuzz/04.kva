@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+<FormatVersion>2.1</FormatVersion>
+<Producer>KvaFuzz</Producer>
+<OriginalFilename>2eRrIGSp</OriginalFilename>
+<GlobalTitle>WaqKHjAs7Ex9</GlobalTitle>
+<ImageSize>1541;300</ImageSize>
+<AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+<CaptureFramerate>455.3186</CaptureFramerate>
+<FirstTimeStamp>0</FirstTimeStamp>
+<SelectionStart>0</SelectionStart>
+<Tracks>
+<Track>
+<TimePosition>58831</TimePosition>
+<Visible>58831</Visible>
+<Invisible>-1</Invisible>
+<ExtraData>Name</ExtraData>
+<TrackPointList Count="13">
+<TrackPoint>1483.421;50.15628;58831</TrackPoint>
+<TrackPoint>1488.97;40.97814;58832</TrackPoint>
+<TrackPoint>1486.573;49.30206;58833</TrackPoint>
+<TrackPoint>1491.479;57.4217;58834</TrackPoint>
+<TrackPoint>1489.138;51.9157;58835</TrackPoint>
+<TrackPoint>1494.676;49.50579;58836</TrackPoint>
+<TrackPoint>1485.102;43.75305;58837</TrackPoint>
+<TrackPoint>1489.85;35.12059;58838</TrackPoint>
+<TrackPoint>1486.156;29.86731;58839</TrackPoint>
+<TrackPoint>1486.451;36.7738;58840</TrackPoint>
+<TrackPoint>1479.606;30.30943;58841</TrackPoint>
+<TrackPoint>1484.848;38.22966;58842</TrackPoint>
+<TrackPoint>1490.691;34.52938;58843</TrackPoint>
+</TrackPointList>
+<DrawingStyle>
+<Color Key="color"><Value>199;12;191;178</Value></Color>
+<LineSize Key="line size"><Value>2</Value></LineSize>
+<TrackShape Key="track shape"><Value>Solid;false</Value></TrackShape>
+</DrawingStyle>
+<MainLabel Text="Udl9EH">
+<SpacePosition>245.8824;72.8242</SpacePosition>
+<TimePosition>0</TimePosition>
+</MainLabel>
+</Track>
+</Tracks>
+<Spotlights>
+<Spotlight>
+<Time>39783</Time>
+<Center>874.293;80.41708</Center>
+<Radius>62</Radius>
+</Spotlight>
+<Spotlight>
+<Time>59160</Time>
+<Center>1134.034;261.6292</Center>
+<Radius>32</Radius>
+</Spotlight>
+</Spotlights>
+<NumberSequence>
+<DrawingStyle>
+<Color Key="back color"><Value>69;48;205;29</Value></Color>
+<FontSize Key="font size"><Value>8</Value></FontSize>
+</DrawingStyle>
+<AutoNumber>
+<Time>41749</Time>
+<Location>419.8499;264.4212</Location>
+<Value>1</Value>
+</AutoNumber>
+<AutoNumber>
+<Time>24894</Time>
+<Location>100.4815;41.1616</Location>
+<Value>2</Value>
+</AutoNumber>
+</NumberSequence>
+</KinoveaVideoAnalysis>

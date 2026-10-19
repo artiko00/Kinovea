@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+<FormatVersion>2.1</FormatVersion>
+<Producer>KvaFuzz</Producer>
+<OriginalFilename>0hf1mMWP</OriginalFilename>
+<GlobalTitle>V3og1NcEH8DU</GlobalTitle>
+<ImageSize>897;750</ImageSize>
+<AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+<CaptureFramerate>208.4534</CaptureFramerate>
+<FirstTimeStamp>0</FirstTimeStamp>
+<SelectionStart>0</SelectionStart>
+<Chronos>
+<Chrono>
+<Position>377.1376;25.76398</Position>
+<Values>
+<Visible>15274</Visible>
+<Invisible>24210</Invisible>
+<StartCounting>16083</StartCounting>
+<StopCounting>20690</StopCounting>
+<ClockOrigin>-1</ClockOrigin>
+</Values>
+<Label>
+<Text>xL1KwN</Text>
+<Show>true</Show>
+</Label>
+<DrawingStyle>
+<Color Key="color"><Value>237;9;235;147</Value></Color>
+<FontSize Key="font size"><Value>10</Value></FontSize>
+</DrawingStyle>
+</Chrono>
+<Chrono>
+<Position>635.3019;269.9528</Position>
+<Values>
+<Visible>84563</Visible>
+<Invisible>94299</Invisible>
+<StartCounting>85407</StartCounting>
+<StopCounting>90128</StopCounting>
+<ClockOrigin>-1</ClockOrigin>
+</Values>
+<Label>
+<Text>RQSPdZ</Text>
+<Show>false</Show>
+</Label>
+<DrawingStyle>
+<Color Key="color"><Value>67;224;52;240</Value></Color>
+<FontSize Key="font size"><Value>8</Value></FontSize>
+</DrawingStyle>
+</Chrono>
+</Chronos>
+<Spotlights>
+<Spotlight>
+<Time>36070</Time>
+<Center>569.5332;287.4034</Center>
+<Radius>30</Radius>
+</Spotlight>
+<Spotlight>
+<Time>37484</Time>
+<Center>466.2659;362.1476</Center>
+<Radius>6</Radius>
+</Spotlight>
+</Spotlights>
+<NumberSequence>
+<DrawingStyle>
+<Color Key="back color"><Value>146;127;10;230</Value></Color>
+<FontSize Key="font size"><Value>18</Value></FontSize>
+</DrawingStyle>
+<AutoNumber>
+<Time>50011</Time>
+<Location>242.0547;724.8176</Location>
+<Value>1</Value>
+</AutoNumber>
+<AutoNumber>
+<Time>31843</Time>
+<Location>90.58251;421.137</Location>
+<Value>2</Value>
+</AutoNumber>
+</NumberSequence>
+</KinoveaVideoAnalysis>

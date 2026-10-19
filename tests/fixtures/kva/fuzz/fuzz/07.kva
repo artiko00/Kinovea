@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+<FormatVersion>2.1</FormatVersion>
+<Producer>KvaFuzz</Producer>
+<OriginalFilename>eqLR1VIH</OriginalFilename>
+<GlobalTitle>JrPdOEjOt9mT</GlobalTitle>
+<ImageSize>685;674</ImageSize>
+<AverageTimeStampsPerFrame>1</AverageTimeStampsPerFrame>
+<CaptureFramerate>80.51543</CaptureFramerate>
+<FirstTimeStamp>0</FirstTimeStamp>
+<SelectionStart>0</SelectionStart>
+<Chronos>
+<Chrono>
+<Position>320.5058;584.0556</Position>
+<Values>
+<Visible>33394</Visible>
+<Invisible>37034</Invisible>
+<StartCounting>33652</StartCounting>
+<StopCounting>35291</StopCounting>
+<ClockOrigin>-1</ClockOrigin>
+</Values>
+<Label>
+<Text>3A7tB3</Text>
+<Show>true</Show>
+</Label>
+<DrawingStyle>
+<Color Key="color"><Value>155;43;186;158</Value></Color>
+<FontSize Key="font size"><Value>9</Value></FontSize>
+</DrawingStyle>
+</Chrono>
+</Chronos>
+<Tracks>
+<Track>
+<TimePosition>6061</TimePosition>
+<Visible>6061</Visible>
+<Invisible>-1</Invisible>
+<ExtraData>Speed</ExtraData>
+<TrackPointList Count="15">
+<TrackPoint>579.1608;204.2092;6061</TrackPoint>
+<TrackPoint>582.5168;212.6472;6062</TrackPoint>
+<TrackPoint>590.8047;209.4681;6063</TrackPoint>
+<TrackPoint>590.7999;207.1405;6064</TrackPoint>
+<TrackPoint>581.9215;213.5473;6065</TrackPoint>
+<TrackPoint>577.291;212.5159;6066</TrackPoint>
+<TrackPoint>577.6414;210.7788;6067</TrackPoint>
+<TrackPoint>569.4604;214.2271;6068</TrackPoint>
+<TrackPoint>573.4589;221.4407;6069</TrackPoint>
+<TrackPoint>577.8267;226.0735;6070</TrackPoint>
+<TrackPoint>572.1143;228.5752;6071</TrackPoint>
+<TrackPoint>564.6989;219.4451;6072</TrackPoint>
+<TrackPoint>557.5138;214.3473;6073</TrackPoint>
+<TrackPoint>559.1453;216.8111;6074</TrackPoint>
+<TrackPoint>552.2712;225.7807;6075</TrackPoint>
+</TrackPointList>
+<DrawingStyle>
+<Color Key="color"><Value>248;159;105;5</Value></Color>
+<LineSize Key="line size"><Value>30</Value></LineSize>
+<TrackShape Key="track shape"><Value>Solid;false</Value></TrackShape>
+</DrawingStyle>
+<MainLabel Text="m8FLYd">
+<SpacePosition>558.8569;140.0394</SpacePosition>
+<TimePosition>0</TimePosition>
+</MainLabel>
+</Track>
+</Tracks>
+<Spotlights>
+<Spotlight>
+<Time>72030</Time>
+<Center>144.3719;138.381</Center>
+<Radius>6</Radius>
+</Spotlight>
+</Spotlights>
+</KinoveaVideoAnalysis>

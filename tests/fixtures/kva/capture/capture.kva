@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KinoveaVideoAnalysis>
+  <FormatVersion>2.1</FormatVersion>
+  <Producer>Kinovea.0.0</Producer>
+  <CaptureRecording>true</CaptureRecording>
+  <ImageSize>640;480</ImageSize>
+  <Aspect>Auto</Aspect>
+  <Rotation>Rotate0</Rotation>
+  <Mirror>false</Mirror>
+  <Demosaicing>None</Demosaicing>
+  <Deinterlacing>false</Deinterlacing>
+  <StabilizationTrack>00000000-0000-0000-0000-000000000000</StabilizationTrack>
+  <BackgroundColor>0;255;255;255</BackgroundColor>
+  <AverageTimeStampsPerFrame>40</AverageTimeStampsPerFrame>
+  <CaptureFramerate>50</CaptureFramerate>
+  <VideoFramerate>25</VideoFramerate>
+  <TimeOrigin>400</TimeOrigin>
+  <Calibration>
+    <CalibrationLine>
+      <Length>100</Length>
+      <Segment>
+        <A>320;240</A>
+        <B>420;240</B>
+      </Segment>
+      <Origin>0;100</Origin>
+      <Offset>0;0</Offset>
+      <Axis>LineHorizontal</Axis>
+    </CalibrationLine>
+    <CalibrationDrawingId>00000000-0000-0000-0000-000000000000</CalibrationDrawingId>
+    <Unit Abbreviation="px">Pixels</Unit>
+  </Calibration>
+  <Keyframes>
+    <Keyframe id="00000000-0000-4000-8000-000000000001">
+      <Timestamp>400</Timestamp>
+      <Name>All kinds</Name>
+      <Color>51;152;255</Color>
+      <Drawings>
+        <Plane id="00000000-0000-4000-8000-000000000002" name="Perspective grid 1">
+          <PointUpperLeft>50;50</PointUpperLeft>
+          <PointUpperRight>250;60</PointUpperRight>
+          <PointLowerRight>260;200</PointLowerRight>
+          <PointLowerLeft>40;190</PointLowerLeft>
+          <ReferenceTimestamp>400</ReferenceTimestamp>
+          <ShowGrid>true</ShowGrid>
+          <ShowXLine>true</ShowXLine>
+          <ShowYLine>false</ShowYLine>
+          <XLineCoord>0.25</XLineCoord>
+          <YLineCoord>0.75</YLineCoord>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>255;64;64;64</Value>
+            </Color>
+            <Int Key="cols">
+              <Value>10</Value>
+            </Int>
+            <Int Key="rows">
+              <Value>10</Value>
+            </Int>
+            <Toggle Key="perspective">
+              <Value>false</Value>
+              <Variant>Perspective</Variant>
+            </Toggle>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>false</UseDefault>
+            <AlwaysVisible>true</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </Plane>
+        <Angle id="00000000-0000-4000-8000-000000000003" name="Elbow">
+          <PointO>200;200</PointO>
+          <PointA>300;200</PointA>
+          <PointB>200;100</PointB>
+          <ReferenceTimestamp>400</ReferenceTimestamp>
+          <Signed>true</Signed>
+          <CCW>false</CCW>
+          <Supplementary>true</Supplementary>
+          <ShowCircle>true</ShowCircle>
+          <DrawingStyle>
+            <Color Key="line color">
+              <Value>255;0;128;255</Value>
+            </Color>
+            <FontSize Key="font size">
+              <Value>12</Value>
+            </FontSize>
+            <Int Key="DecimalPlaces">
+              <Value>0</Value>
+            </Int>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>false</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>3</OpaqueFrames>
+            <Frames>12</Frames>
+          </InfosFading>
+        </Angle>
+        <Circle id="00000000-0000-4000-8000-000000000004" name="Circle 1">
+          <Origin>320;240</Origin>
+          <Radius>45</Radius>
+          <ExtraData>Circumference</ExtraData>
+          <MeasureLabel>
+            <SpacePosition>330;180</SpacePosition>
+            <TimePosition>0</TimePosition>
+          </MeasureLabel>
+          <ShowCenter>false</ShowCenter>
+          <Filled>true</Filled>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>255;255;0;0</Value>
+            </Color>
+            <PenSize Key="pen size">
+              <Value>6</Value>
+            </PenSize>
+            <PenShape Key="pen shape">
+              <Value>Dash</Value>
+            </PenShape>
+            <FontSize Key="Font">
+              <Value>10</Value>
+            </FontSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </Circle>
+        <CrossMark id="00000000-0000-4000-8000-000000000005" name="Marker 1">
+          <CenterPoint>100;400</CenterPoint>
+          <ReferenceTimestamp>400</ReferenceTimestamp>
+          <ExtraData>Position</ExtraData>
+          <ShowAsDot>true</ShowAsDot>
+          <MeasureLabel>
+            <SpacePosition>120;360</SpacePosition>
+            <TimePosition>0</TimePosition>
+          </MeasureLabel>
+          <DrawingStyle>
+            <Color Key="back color">
+              <Value>255;0;255;0</Value>
+            </Color>
+            <FontSize Key="Font">
+              <Value>10</Value>
+            </FontSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </CrossMark>
+        <Label id="00000000-0000-4000-8000-000000000006" name="Text 1">
+          <Text>Hello</Text>
+          <Position>20;20</Position>
+          <BackgroundVisible>false</BackgroundVisible>
+          <ArrowVisible>true</ArrowVisible>
+          <CircleVisible>true</CircleVisible>
+          <ArrowEnd>90;90</ArrowEnd>
+          <DrawingStyle>
+            <Color Key="back color">
+              <Value>255;30;60;90</Value>
+            </Color>
+            <FontSize Key="font size">
+              <Value>24</Value>
+            </FontSize>
+            <LineSize Key="LineSize">
+              <Value>2</Value>
+            </LineSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </Label>
+        <Line id="00000000-0000-4000-8000-000000000007" name="Line 1">
+          <Start>50;300</Start>
+          <End>250;320</End>
+          <ReferenceTimestamp>400</ReferenceTimestamp>
+          <ExtraData>None</ExtraData>
+          <MeasureLabel>
+            <SpacePosition>140;280</SpacePosition>
+            <TimePosition>0</TimePosition>
+          </MeasureLabel>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>255;0;0;255</Value>
+            </Color>
+            <LineSize Key="line size">
+              <Value>4</Value>
+            </LineSize>
+            <LineShape Key="line shape">
+              <Value>Squiggle</Value>
+            </LineShape>
+            <Arrows Key="arrows">
+              <Value>DoubleArrow</Value>
+            </Arrows>
+            <FontSize Key="Font">
+              <Value>10</Value>
+            </FontSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </Line>
+        <Pencil id="00000000-0000-4000-8000-000000000008" name="Pencil 1">
+          <PointList Count="3">
+            <Point>10;10</Point>
+            <Point>20;15</Point>
+            <Point>30;30</Point>
+          </PointList>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>255;10;20;30</Value>
+            </Color>
+            <PenSize Key="pen size">
+              <Value>3</Value>
+            </PenSize>
+            <PenShape Key="pen shape">
+              <Value>Solid</Value>
+            </PenShape>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </Pencil>
+        <Polyline id="00000000-0000-4000-8000-000000000009" name="Polyline 1">
+          <PointList Count="3">
+            <Point key="0">400;100</Point>
+            <Point key="1">450;150</Point>
+            <Point key="2">500;100</Point>
+          </PointList>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>255;200;100;50</Value>
+            </Color>
+            <LineSize Key="line size">
+              <Value>2</Value>
+            </LineSize>
+            <LineShape Key="line shape">
+              <Value>Solid</Value>
+            </LineShape>
+            <Arrows Key="arrows">
+              <Value>None</Value>
+            </Arrows>
+            <Toggle Key="curved">
+              <Value>false</Value>
+              <Variant>Curved</Variant>
+            </Toggle>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </Polyline>
+        <Rectangle id="00000000-0000-4000-8000-000000000010" name="Rectangle 1">
+          <PointUpperLeft>400;300</PointUpperLeft>
+          <PointUpperRight>500;300</PointUpperRight>
+          <PointLowerRight>500;380</PointLowerRight>
+          <PointLowerLeft>400;380</PointLowerLeft>
+          <Filled>true</Filled>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>255;0;100;200</Value>
+            </Color>
+            <LineSize Key="line size">
+              <Value>2</Value>
+            </LineSize>
+            <PenShape Key="pen shape">
+              <Value>Solid</Value>
+            </PenShape>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </Rectangle>
+        <TimeSegment id="00000000-0000-4000-8000-000000000011" name="Time segment 1">
+          <Start>60;450</Start>
+          <End>260;450</End>
+          <Fraction>0.25</Fraction>
+          <MeasureLabel>
+            <SpacePosition>160;420</SpacePosition>
+            <TimePosition>0</TimePosition>
+          </MeasureLabel>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>255;120;120;0</Value>
+            </Color>
+            <FontSize Key="Font">
+              <Value>8</Value>
+            </FontSize>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </TimeSegment>
+        <TimePolyline id="00000000-0000-4000-8000-000000000012" name="Trajectory curve 1">
+          <PointList Count="3">
+            <Point key="0">300;400</Point>
+            <Point key="1">340;440</Point>
+            <Point key="2">380;400</Point>
+          </PointList>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>255;0;0;0</Value>
+            </Color>
+            <LineSize Key="line size">
+              <Value>2</Value>
+            </LineSize>
+            <LineShape Key="line shape">
+              <Value>Solid</Value>
+            </LineShape>
+            <Arrows Key="arrows">
+              <Value>None</Value>
+            </Arrows>
+            <Toggle Key="curved">
+              <Value>false</Value>
+              <Variant>Curved</Variant>
+            </Toggle>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </TimePolyline>
+        <Bitmap id="00000000-0000-4000-8000-000000000013" name="Bitmap Image 1">
+          <File />
+          <BoundingBox>500;20;64;64</BoundingBox>
+          <Sticker>true</Sticker>
+          <StickerReference>_1f389</StickerReference>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </Bitmap>
+        <GenericPosture id="00000000-0000-4000-8000-000000000014" name="Goniometer 1">
+          <ToolId>00000000-0000-4000-8000-000000000015</ToolId>
+          <Positions>
+            <Point>100;100</Point>
+            <Point>150;100</Point>
+            <Point>200;100</Point>
+            <Point>180;70</Point>
+          </Positions>
+          <DrawingStyle>
+            <Color Key="line color">
+              <Value>255;85;107;47</Value>
+            </Color>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </GenericPosture>
+        <DistortionGrid id="00000000-0000-4000-8000-000000000016" name="Distortion grid 1">
+          <Points>
+            <Point>100;100</Point>
+            <Point>200;100</Point>
+            <Point>300;100</Point>
+            <Point>100;200</Point>
+            <Point>200;200</Point>
+            <Point>300;200</Point>
+            <Point>100;300</Point>
+            <Point>200;300</Point>
+            <Point>300;300</Point>
+          </Points>
+          <DrawingStyle>
+            <Color Key="color">
+              <Value>255;255;0;255</Value>
+            </Color>
+          </DrawingStyle>
+          <InfosFading>
+            <Enabled>true</Enabled>
+            <UseDefault>true</UseDefault>
+            <AlwaysVisible>false</AlwaysVisible>
+            <MasterFactor>1</MasterFactor>
+            <OpaqueFrames>1</OpaqueFrames>
+            <Frames>20</Frames>
+          </InfosFading>
+        </DistortionGrid>
+      </Drawings>
+    </Keyframe>
+  </Keyframes>
+  <CoordinateSystem id="00000000-0000-4000-8000-000000000017" name="">
+    <Position>0;0</Position>
+    <ReferenceTimestamp>-1</ReferenceTimestamp>
+    <Visible>true</Visible>
+    <ShowGrid>false</ShowGrid>
+    <ShowGraduations>true</ShowGraduations>
+    <DrawingStyle>
+      <Color Key="line color">
+        <Value>255;0;255;255</Value>
+      </Color>
+    </DrawingStyle>
+  </CoordinateSystem>
+  <TestGrid id="00000000-0000-4000-8000-000000000018" name="">
+    <Visible>true</Visible>
+    <ShowHorizontalAxis>false</ShowHorizontalAxis>
+    <ShowVerticalAxis>true</ShowVerticalAxis>
+    <ShowFraming>false</ShowFraming>
+    <ShowThirds>true</ShowThirds>
+    <DrawingStyle>
+      <Color Key="color">
+        <Value>255;255;255;0</Value>
+      </Color>
+    </DrawingStyle>
+  </TestGrid>
+</KinoveaVideoAnalysis>
