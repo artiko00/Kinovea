@@ -1,5 +1,7 @@
 //! Kinovea `export` crate. Behavior is added by later OpenSpec changes.
 
+pub mod rtf;
+
 #[cfg(test)]
 mod lib_test;
 
